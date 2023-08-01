@@ -2,29 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-/* :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
-}
-
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
-} */
+  background: #F6F6F6;
+} 
 
 @layer components {
   .header_top__icon_wrapper {
@@ -52,4 +33,62 @@ body {
   .navbar__link:hover::after {
     scale: 1;
   }
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.button {
+  position: absolute;
+  bottom: 0;
+  left: 0; 
+  top: 0;
+  z-index: 1;
+
+  display: flex;
+  width: 15%;
+  align-items: center; 
+  justify-content: center;
+  
+  border: 0;
+  background: none;
+  padding: 0;
+
+  text-align: center;
+  color: black;
+  opacity: 0.5;
+
+  transition: opacity 150ms cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.button:hover {
+  color: black;
+  text-decoration: none;
+  opacity: 0.9;
+  outline: none; 
+} 
+
+.button:focus {
+  color: black;
+  text-decoration: none;
+  opacity: 0.9;
+  outline: none;
+}
+.button:focus-visible {
+  transition: none;
+}
+
+.prev {
+  background: #eee;
+  position: absolute;
+  left:0;
+}
+
+.next {
+  background: #007bff;
+  color: #fff;
+  position: absolute;
+  right:0;
 }

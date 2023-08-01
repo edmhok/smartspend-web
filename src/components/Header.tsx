@@ -5,13 +5,20 @@ import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
 import { Container } from '@mui/material';
+import Image from 'next/image';
+import logo from '../assets/logo.png'
 
 const Header = () => {
   return (
-    <Container className="border-b border-gray-200 py-6">
-        <div className="bg-white  sm:flex justify-between items-center">
-            <div className="font-bold text-4xl text-center pb-4 sm:pb-0 text-blackish">
-            SmartSpend
+    <div className=" w-full bg-white py-3">
+        <Container className="bg-white  sm:flex justify-between items-center">
+            <div className="p-4 sm:pb-0 items-center">
+             <Image
+                src={logo}
+                width={188}
+                height={86}
+                alt="Picture of the author"
+                />
             </div> 
             <div className="hidden lg:flex gap-4 text-gray-500 text-[30px]">
             <div className="relative">
@@ -25,8 +32,8 @@ const Header = () => {
                 <MenuRoundedIcon />
             </div>
             </div>
-        </div>
-    </Container>
+        </Container>
+    </div>
   )
 }
 
