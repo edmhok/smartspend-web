@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
+/* :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
@@ -24,4 +24,32 @@ body {
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
+} */
+
+@layer components {
+  .header_top__icon_wrapper {
+    @apply bg-gray-200 rounded-md p-[6px] text-[14px] cursor-pointer hover:bg-purple-500 hover:text-white;
+  }
+
+  .navbar__link:hover {
+    color: #CF60F5;
+    transition: all 0.4s;
+  }
+
+  .navbar__link::after {
+    position: absolute;
+    content: "";
+    background-color: #CF60F5;
+    height: 3px;
+    width: 100%;
+    bottom: -5px;
+    left: 0;
+    scale: 0;
+    transform-origin: left;
+    transition: all 0.4s;
+  }
+
+  .navbar__link:hover::after {
+    scale: 1;
+  }
 }
