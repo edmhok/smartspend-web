@@ -1,3 +1,4 @@
+import Bestseller from '@/components/Bestseller'
 import Category from '@/components/Category'
 import Footer from '@/components/Footer'
 import Header from '@/components/Header'
@@ -9,6 +10,7 @@ export default function Home() {
     <main className='place-content-center'>
     <Header />
     <Hero />
+    <Bestseller />
     <Category />
     <NewProducts />
     <Footer />

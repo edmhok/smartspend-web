@@ -16,6 +16,11 @@ module.exports = {
         accent: "#FF8F9C",
         blackish: "#1b1b1b",
       },
+      fontFamily: {
+        'sans': ['ui-sans-serif', 'Poppins'],
+        'serif': ['ui-serif', 'Poppins'],
+      },
+  
     },
   },
   plugins: [],
