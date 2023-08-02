@@ -1,68 +1,115 @@
 'use client'
 
 import React from 'react'
-import FacebookOutlinedIcon from '@mui/icons-material/FacebookOutlined';
-import GoogleIcon from '@mui/icons-material/Google';
-import WhatsAppIcon from '@mui/icons-material/WhatsApp';
-
+import Image from 'next/image';
+import  FbIcon  from '../../public/facebook.svg';
+import Twitter from '../../public/twitter.svg';
+import LinkeIn from '../../public/linkedin.svg';
+import { useState, useEffect } from 'react';
+import { Fab } from '@mui/material';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 
 const Footer = () => {
+  const [hovered, setHovered] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  };
+  
+  useEffect(() => {
+    const toggleVisibility = () => {
+      if (window.pageYOffset > 500) {
+        setIsVisible(true);
+      } else {
+        setIsVisible(false);
+      }
+    };
+
+    window.addEventListener('scroll', toggleVisibility);
+    return () => window.removeEventListener('scroll', toggleVisibility);
+  }, []);
+
   return (
-    <div className='bottom-0 w-full'> 
-        <div className="w-full bg-black text-center text-white py-1 md:pb-2"> 
-        <p>SmartSpend offers free-shipping.</p>
+  <div className='bottom-0 w-full h-[150px]'> 
+    <div className='absolute flex right-0 justify-end pr-5 mt-50'>
+      {isVisible && 
+        <div 
+          className="bg-gray-300 text-white p-2 rounded-lg cursor-pointer"
+          onClick={scrollToTop}  
+        >
+          Scroll to Top
         </div>
-        <div className='grid grid-flow-col gap-2 justify-items-center mt-4'>
-            <div className='ps-20'>
-                <div className="py-2 text-base font-bold">SmartSpend</div>
-                    <div className="py-1 text-sm">Davao City, Philippines</div>
-                    <div className="py-1 space-x-2">
-                    <FacebookOutlinedIcon/>
-                    <GoogleIcon />
-                    <WhatsAppIcon />
-                    <div className='py-5 text-sm'>© 2023 SmartSpend Company</div>
-                </div>
-            </div>
-            <div className='pe-3'>
-                <div><h1>Shop</h1>
-                <ul className='py-3'>
-                    <li className='text-sm'>Categories</li>
-                    <li className='text-sm'>Best Seller</li>
-                    <li className='text-sm'>Promo</li>
-                    </ul>
-                </div>
-            </div>
-            <div className='pe-3'>
-                <div><h1>Dashboard</h1>
-                <ul className='py-3'>
-                    <li className='text-sm'>Teams</li>
-                    <li className='text-sm'>Forum</li>
-                    <li className='text-sm'>Leaderboard</li>
-                </ul>
-                </div>
-            </div>
-            <div className='pe-10'>
-                <div><h1>About</h1>
-                <ul className='py-3'>
-                    <li className='text-sm'>Company</li>
-                    <li className='text-sm'>Policies</li>
-                    <li className='text-sm'>Careers</li>
-                    <li className='text-sm'>Blogs</li>
-                </ul>
-                </div>
-            </div>
-            <div className='pe-10'>
-                <div><h1>Help</h1>
-                <ul className='py-3'>
-                    <li className='text-sm'>FAQ</li>
-                    <li className='text-sm'>Privacy</li>
-                    <li className='text-sm'>Trust and Safety</li>
-                </ul>
-                </div>
-            </div>
-     </div>
-       
+      }
+
+        <Fab 
+         onMouseEnter={() => setHovered(true)} 
+         onMouseLeave={() => setHovered(false)}
+        color="secondary" 
+        size="small"
+        onClick={scrollToTop}
+        style={{display: isVisible ? 'flex' : 'none'}}
+        >
+        <KeyboardArrowUpIcon />
+        </Fab>
     </div>
+
+    <div className="w-full bg-black text-center text-white py-2 md:pb-2"> 
+        <p>SmartSpend offers free-shipping.</p>
+    </div>
+    
+    <div className='grid grid-flow-col gap-x-[150px] justify-center pt-[50px] '>
+      <div className='text-sm'>
+          <div className="mb-[28px] text-base font-bold">SmartSpend</div>
+            <div className="text-sm mb-[20px]">Davao City<br/> Philippines</div>
+            <div className="mb-[70px] flex direction-row space-x-2">
+                <Image src={FbIcon} width={32} height={32} alt="icon"/>
+                <Image src={Twitter} width={32} height={32} alt="icon"/>
+                <Image src={LinkeIn} width={32} height={32} alt="icon"/>
+            </div>
+          </div>
+          
+          <div><h1 className='font-bold mb-[28px]'>Shop</h1>
+          <ul>
+              <li className='text-sm mb-[20px]'>Categories</li>
+              <li className='text-sm mb-[20px]'>Best Seller</li>
+              <li className='text-sm mb-[20px]'>Promo</li>
+              </ul>
+          </div>
+
+          <div><h1 className='font-bold mb-[28px]'>Dashboard</h1>
+          <ul>
+              <li className='text-sm mb-[20px]'>Teams</li>
+              <li className='text-sm mb-[20px]'>Forum</li>
+              <li className='text-sm mb-[20px]'>Leaderboard</li>
+          </ul>
+          </div>
+          <div><h1 className='font-bold mb-[28px]'>About</h1>
+              <ul>
+              <li className='text-sm mb-[20px]'>Company</li>
+              <li className='text-sm mb-[20px]'>Careers</li>
+              <li className='text-sm mb-[20px]'>Blogs</li>
+              </ul>
+          </div>
+          <div><h1 className='font-bold mb-[28px]'>Help</h1>
+          <ul>
+              <li className='text-sm mb-[20px]'>FAQ</li>
+              <li className='text-sm mb-[20px]'>Privacy</li>
+              <li className='text-sm mb-[20px]'>Trust and Safety</li>
+          </ul>
+          </div>
+      </div>
+      <div className='pb-[50px] pl-[180px]'>
+        <ul className='flex direction-row space-x-20'>
+          <li className='text-sm'>© 2023 SmartSpend Company</li>
+          <li className='text-sm'>Terms of Use</li>
+          <li className='text-sm'>License</li>
+          <li className='text-sm'>Policy</li>
+        </ul>
+      </div>
+  </div>
   )
 }
 
