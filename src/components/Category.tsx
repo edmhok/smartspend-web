@@ -1,69 +1,94 @@
 'use client'
 
 import React, { useState } from 'react';
-import { Container, Typography } from '@mui/material';
+import { Container, Typography, Button } from '@mui/material';
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 interface Item {
-  imgPath: string;
-  title: string;
-}
-
-const items: Item[] = [
+    imgPath: string;
+    title: string;
+  }
+  
+const items = [
   {
-    imgPath: '/cats.jpg',
+    imgPath: '/mug-cat.jpg',
     title: 'Apparel',   
   },
   {
-    imgPath: '/cats.jpg', 
-    title: 'Shoes',
+    imgPath: '/mug-cat.jpg',
+    title: 'Toys',   
   },
   {
-    imgPath: '/cats.jpg',
-    title: 'Health Vita',
+    imgPath: '/mug-cat.jpg',
+    title: 'House',   
   },
   {
-    imgPath: '/cats.jpg',
-    title: 'Rentals',
+    imgPath: '/mug-cat.jpg',
+    title: 'Adhesive',   
   },
   {
-    imgPath: '/cats.jpg',
-    title: 'Technology',
+    imgPath: '/mug-cat.jpg',
+    title: 'Skin Care',   
+  },
+  {
+    imgPath: '/mug-cat.jpg',
+    title: 'Phones',   
+  },
+  {
+    imgPath: '/mug-cat.jpg',
+    title: 'Apparel',   
+  },
+  {
+    imgPath: '/mug-cat.jpg',
+    title: 'Shoes',   
   },
 ];
 
-const Category: React.FC = () => {
+
+const Category = () => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  
+  const visibleItems = 5;
+  
+  const handleNext = () => {
+    setCurrentIndex(prevIndex => 
+      (prevIndex + 1) % items.length
+    );
+  }
+
+  const handlePrev = () => {
+    setCurrentIndex(prevIndex =>
+      (prevIndex - 1 + items.length) % items.length  
+    );
+  }
+
   return (
-    <div className="relative px-10 py-10 w-full">
-        <div className='flex direction-row space-x-1'>
-            {items.map(item => (
-                <Item key={item.title} item={item} />
-            ))}
-            
+    <div className="container pt-8 relative flex">
+        <div>
+        <h2 className="font-medium text-fuchsia-400 text-2xl pb-4">Category</h2>
         </div>
-  </div>
- );
-}
-
-const Item = ({ item }: { item: Item }) => {
-   const [current, setCurrent] = useState(0);
-
-    const handleNext = () => {
-        setCurrent(current => (current + 1) % items.length);
-      };
-
-    const handlePrev = () => {
-    setCurrent(current => (current - 1 + items.length) % items.length);
-    };
-return (
-  <Container className='align-center flex direction-row px-5 py-5 border border-gray-200 rounded-xl max-w-[200px] max-h-[200px] text-center mt-10'>
-    <img src={item.imgPath} alt={item.title} className='border border-gray-200 w-25 h-25 item-center' />
-    <Typography variant="h6">{item.title}</Typography>    
-    <div className="button">
-        <button className="prev" onClick={handlePrev}>Prev</button> 
-        <button className="next" onClick={handleNext}>Next</button>
+         <div className='flex direction-row space-x-[43px]'>
+          {items.slice(currentIndex, currentIndex + visibleItems).map(item => (
+              <Item key={item.title} item={item} /> 
+              ))}
+        </div>
+        <Button className='absolute left-0 mt-40' onClick={handlePrev}>
+            <ArrowBackIosIcon color='primary'/>
+        </Button>  
+        <Button className='absolute right-0 mt-40' onClick={handleNext}>
+            <ArrowForwardIosIcon />
+        </Button>
     </div>
-  </Container>
- );
+  );
 }
+
+const Item = ({ item }: { item: Item }) => (
+    <div className='flex-col justify-center flex bg-white drop-shadow-md hover:drop-shadow-xl space-y-[61px] px-5 py-5 border border-gray-200 rounded-xl max-w-[290px] max-h-[290px] text-center mt-20'>
+    <img src={item.imgPath} alt={item.title}/>
+    <Typography>{item.title}</Typography>
+    </div>
+);
+
 
 export default Category;
