@@ -56,3 +56,10 @@ body {
   position: absolute;
   right:0;
 }
+.link {
+  text-decoration: none;
+}
+
+.link:hover {
+  text-decoration: none; 
+}

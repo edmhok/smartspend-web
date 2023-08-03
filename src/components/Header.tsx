@@ -7,6 +7,7 @@ import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
 import { Container } from '@mui/material';
 import Image from 'next/image';
 import logo from '../assets/logo.png'
+import Link from 'next/link';
 
 const Header = () => {
   return (
@@ -27,7 +28,9 @@ const Header = () => {
                 0
                 </div>
             </div>
-            <PersonOutlineOutlinedIcon className="w-8 h-8 space-x-2 mt-2"/>
+            <Link href="/login">
+                <PersonOutlineOutlinedIcon className="w-8 h-8 space-x-2 mt-2"/>
+            </Link>
             <div className="relative">
                 <MenuRoundedIcon className='w-8 h-8 space-x-2'/>
             </div>

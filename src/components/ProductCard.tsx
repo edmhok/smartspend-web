@@ -23,6 +23,7 @@ const ProductCard: React.FC<propsType> = ({
   rating,
   price,
 }) => {
+  
   const [value, setValue] = React.useState<number | null>(2);
 
   return (
