@@ -64,14 +64,13 @@ const Category = () => {
   }
 
   return (
-    <div className="container pt-8 relative flex">
-        <div>
-        <h2 className="font-medium text-fuchsia-400 text-2xl pb-4">Category</h2>
-        </div>
-         <div className='flex direction-row space-x-[43px]'>
+    <>
+    <div className="container align-start font-medium text-fuchsia-400 text-2xl pt-10">Category</div>
+      <div className="container pt-3 relative flex">
+         <div className='container flex direction-row justify-around'>
           {items.slice(currentIndex, currentIndex + visibleItems).map(item => (
-              <Item key={item.title} item={item} /> 
-              ))}
+            <Item key={item.title} item={item} /> 
+            ))}
         </div>
         <Button className='absolute left-0 mt-40' onClick={handlePrev}>
             <ArrowBackIosIcon color='primary'/>
@@ -80,11 +79,12 @@ const Category = () => {
             <ArrowForwardIosIcon />
         </Button>
     </div>
+    </>
   );
 }
 
 const Item = ({ item }: { item: Item }) => (
-    <div className='flex-col justify-center flex bg-white drop-shadow-md hover:drop-shadow-xl space-y-[61px] px-5 py-5 border border-gray-200 rounded-xl max-w-[290px] max-h-[290px] text-center mt-20'>
+    <div className='flex-col justify-center flex bg-white drop-shadow-md hover:drop-shadow-xl space-y-[61px] px-5 py-5 border border-gray-200 rounded-xl max-w-[290px] max-h-[290px] text-center pt-5'>
     <img src={item.imgPath} alt={item.title}/>
     <Typography>{item.title}</Typography>
     </div>
