@@ -1,0 +1,39 @@
+.addProducts {
+  background-color: #f6f6f6;
+  background-size: cover;
+  padding: 28px 61px 67px 61px;
+}
+.content {
+  background-color: #f0f0f0;
+  width: 100%;
+  padding: 40px 85px;
+  border-width: 1px;
+  border-color: #000;
+}
+.title {
+  font-size: 24px;
+  font-weight: 600;
+  color: #cf60f5;
+  margin-bottom: 30px;
+}
+.computed {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: row;
+  gap: 50px;
+}
+.text {
+  font-size: 16px;
+}
+.hoverButton {
+  padding: 10px 20px;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.hoverButton:hover {
+  background-color: #2980b9;
+}
