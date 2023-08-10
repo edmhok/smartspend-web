@@ -24,7 +24,6 @@ const ProductCard: React.FC<propsType> = ({
   price,
 }) => {
   
-  const [value, setValue] = React.useState<number | null>(2);
 
   return (
     <div className=" bg-white drop-shadow-md hover:drop-shadow-xl backdrop:px-5 max-w-[312px] max-h-[418px]">

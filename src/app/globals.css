@@ -2,14 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap'); 
 
-
+@layer base {
 body {
   color: rgb(var(--foreground-rgb));
   background: #F6F6F6;
   font-family:  'Poppins', sans-serif;
 } 
+}
 
 @layer components {
   .header_top__icon_wrapper {
@@ -39,27 +39,3 @@ body {
   }
 }
 
-.buttons {
-  display: flex;
-  justify-content: space-between;
-}
-
-.prev {
-  background: #eee;
-  position: absolute;
-  left:0;
-}
-
-.next {
-  background: #007bff;
-  color: #fff;
-  position: absolute;
-  right:0;
-}
-.link {
-  text-decoration: none;
-}
-
-.link:hover {
-  text-decoration: none; 
-}

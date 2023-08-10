@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import { Button } from '@mui/material';
+import { Button, InputLabel, Link, MenuItem, OutlinedInput, Select, SelectChangeEvent, Theme, useTheme } from '@mui/material';
 import Checkbox from '@mui/material/Checkbox';
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
@@ -18,12 +18,6 @@ import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 
 
-
-interface RegisterProps {
-  onLogin: (username: string, password: string) => void;
-}
-const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
-
 export default function Register() {
     const [value, setValue] = useState('+63');
    
@@ -31,13 +25,27 @@ export default function Register() {
         setValue(newValue);
       }
 
+      const theme = useTheme();
+      const [roleName, setRoleName] = React.useState<string[]>([]);
+
+      const handleRoleChange = (event: SelectChangeEvent<typeof roleName>) => {
+        const {
+          target: { value },
+        } = event;
+        setRoleName(
+          // On autofill we get a stringified value.
+          typeof value === 'string' ? value.split(',') : value,
+        );
+      };
+
 return (
     <div className="w-full h-full flex justify-center py-[100px]">
       <div className=" bg-white shadow-2xl flex flex-col content-center p-[50px] space-y-5">
         <p className="text-2xl text-center pb-3">
-        Create an Account
+        Create a Merchant Account
         </p>
         <div className="flex flex-col justify-center space-y-5">
+
         <TextField 
         label="Email Address"
         // value={}
@@ -73,7 +81,7 @@ return (
             className="w-[300px] mt-2"
             />
         </div>
-        <FormControl className="flex flex-row space-x-10">
+        {/* <FormControl className="flex flex-row space-x-10">
         <FormLabel className="mt-2 pl-2" >Gender</FormLabel>
         <RadioGroup
             aria-labelledby="gender"
@@ -84,7 +92,7 @@ return (
             <FormControlLabel value="female" control={<Radio />} label="Female" />
             <FormControlLabel value="male" control={<Radio />} label="Male" />
         </RadioGroup>
-        </FormControl>
+        </FormControl> */}
         <TextField 
         label="Address"
         // value={}
@@ -129,7 +137,9 @@ return (
         />
         
         <div className='flex justify-center mt-30'>
+          <Link href={'/dashboard/mer'}>
             <Button className="text-white rounded-lg hover:bg-fuchsia-200 hover:text-fuchsia-500 bg-fuchsia-500 font-bold px-10 py-4">Register</Button>
+          </Link>
         </div>
         </div>
       </div>

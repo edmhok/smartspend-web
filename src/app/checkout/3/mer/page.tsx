@@ -40,7 +40,7 @@ useEffect(() => {
     <HeaderTop />
     <HeaderSub />
     
-    <Confirmation src={'/gcash.jpg'} alt={''} width={300} height={300}  />
+    <Confirmation img={'/gcash.jpg'} alt={''} width={300} height={300}  />
     
     <Footer />
     </>

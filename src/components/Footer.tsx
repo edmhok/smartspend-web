@@ -34,7 +34,14 @@ const Footer = () => {
 
   return (
   <div className='bottom-0 w-full h-[150px]'> 
-    <div className='absolute right-0 top-100'>
+    
+
+    <div className="w-full bg-black text-center text-white py-2 md:pb-2"> 
+        <p>SmartSpend offers free-shipping.</p>
+    </div>
+    
+    <div className='grid grid-flow-col gap-x-[150px] justify-center pt-[50px] relative'>
+    <div className='absolute right-0 bottom-10'>
       {isVisible && 
         <div 
           className="text-gray p-2 cursor-pointer"
@@ -43,7 +50,6 @@ const Footer = () => {
           Scroll to Top
         </div>
       }
-
         <Fab 
          onMouseEnter={() => setHovered(true)} 
          onMouseLeave={() => setHovered(false)}
@@ -55,12 +61,6 @@ const Footer = () => {
         <KeyboardArrowUpIcon />
         </Fab>
     </div>
-
-    <div className="w-full bg-black text-center text-white py-2 md:pb-2"> 
-        <p>SmartSpend offers free-shipping.</p>
-    </div>
-    
-    <div className='grid grid-flow-col gap-x-[150px] justify-center pt-[50px] relative'>
       <div className='text-sm'>
           <div className="mb-[28px] text-base font-bold">SmartSpend</div>
             <div className="text-sm mb-[18px]">Davao City<br/> Philippines</div>
@@ -72,6 +72,7 @@ const Footer = () => {
           </div>
           
           <div><h1 className='font-bold mb-[28px]'>Shop</h1>
+          
           <ul>
               <li className='text-sm mb-[18px]'>Categories</li>
               <li className='text-sm mb-[18px]'>Best Seller</li>
@@ -109,6 +110,7 @@ const Footer = () => {
           <li className='text-sm'>License</li>
           <li className='text-sm'>Policy</li>
         </ul>
+     
       </div>
   </div>
   )

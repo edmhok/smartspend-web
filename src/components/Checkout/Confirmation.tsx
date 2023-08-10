@@ -8,8 +8,8 @@ import { Box, Fade, FormControl, FormControlLabel, FormLabel, Grid, Paper, Radio
 import { AccountCircle } from '@mui/icons-material';
 import Image from 'next/image';
 
-interface ImageProps {
-    src: string;
+interface PaymentProps {
+    img: string;
     alt: string;
     width: number;
     height: number;
@@ -17,7 +17,7 @@ interface ImageProps {
 
   
 
-const Confirmation = (props: ImageProps) => {
+const Confirmation = (props: PaymentProps) => {
     const [deliveryMethod, setDeliveryMethod] = useState('');
   
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -69,7 +69,7 @@ const Confirmation = (props: ImageProps) => {
                         <div className='pb-5 pt-[10px] '>
                         <div className='ps-[70px]'>PLEASE SCAN TO PAY</div>
                            <Image 
-                            src={props.src}
+                            src={props.img}
                             alt={props.alt}
                             width={props.width} 
                             height={props.height}
@@ -81,7 +81,7 @@ const Confirmation = (props: ImageProps) => {
                     {deliveryMethod === 'bank' &&
                         <div className='pb-8 pt-[10px] '>
                         <Image 
-                         src={props.src}
+                         src={props.img}
                          alt={props.alt}
                          width={props.width} 
                          height={props.height}

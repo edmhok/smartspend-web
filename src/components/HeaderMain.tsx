@@ -9,17 +9,19 @@ import Image from 'next/image';
 import logo from '../assets/logo.png'
 import Link from 'next/link';
 
-const Header = () => {
+const HeaderMain = () => {
   return (
-    <div className=" w-full h-[92px] bg-white">
+    <div className=" w-full bg-white sm:pb-0">
         <Container className="sm:flex justify-between items-center">
             <div className="sm:pb-0 sm:justify-self-center">
-             <Image
-                src={logo}
-                width={188}
-                height={86}
-                alt="Picture of the author"
-                />
+             <Link href={'/'} >
+                <Image
+                    src={logo}
+                    width={188}
+                    height={86}
+                    alt="Picture of the author"
+                    />
+             </Link>
             </div> 
             <div className="hidden lg:flex gap-4 text-gray-500 text-[30px]">
             <div className="relative">
@@ -28,11 +30,11 @@ const Header = () => {
                 0
                 </div>
             </div>
-            <Link href="/login">
+            <Link href="/login/usr">
                 <PersonOutlineOutlinedIcon className="w-8 h-8 space-x-2 mt-2"/>
             </Link>
             <div className="relative">
-                <MenuRoundedIcon className='w-8 h-8 space-x-2'/>
+                <MenuRoundedIcon className='w-8 h-8 space-x-2 flex '/>
             </div>
             </div>
         </Container>
@@ -40,4 +42,4 @@ const Header = () => {
   )
 }
 
-export default Header
+export default HeaderMain
