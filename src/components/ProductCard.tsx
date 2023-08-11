@@ -5,7 +5,7 @@ import React from "react";
 import IconButton from '@mui/material/IconButton';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import Rating from '@mui/material/Rating';
-import { Stack } from "@mui/material";
+import { Link, Stack } from "@mui/material";
 
 
 interface propsType {
@@ -33,6 +33,7 @@ const ProductCard: React.FC<propsType> = ({
             <FavoriteIcon />
           </IconButton>
         </div>
+        <Link href="/login/usr">
         <Image
           className="w-full h-auto"
           src={img}
@@ -40,6 +41,7 @@ const ProductCard: React.FC<propsType> = ({
           height={250}
           alt={title}
         />
+        </Link>
       </div>
       
       <div className="space-y-2 py-2 ps-4">

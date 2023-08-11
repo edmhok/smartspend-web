@@ -1,7 +1,7 @@
 'use client'
 
 import NewProducts from '@/components/NewProducts'
-import * as React from 'react';
+import React, { PropsWithChildren } from 'react'
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
@@ -20,6 +20,7 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import { Collapse, Menu, MenuItem, Stack } from '@mui/material';
 import { AccountCircle, ExpandLess, ExpandMore } from '@mui/icons-material';
+// import { useRouter } from 'next/router';
 
 
 const drawerWidth = 240;
@@ -85,10 +86,10 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 }));
 
 
-export default function MerDash() {
+export default function MemberLayout({ children }: PropsWithChildren) {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
-
+  // const router = useRouter();
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -106,6 +107,9 @@ export default function MerDash() {
   const handleClose = () => {
     setAnchorEl(null);
   };
+  // const handleLogout = () => {
+  //   router.push('/'); 
+  // };
 
   const [openGroups, setOpenGroups] = React.useState<Record<string, boolean>>({});
 
@@ -113,32 +117,33 @@ export default function MerDash() {
       setOpenGroups({
         ...openGroups,
         [id]: !openGroups[id]
+
       });
     };
   
     const groups: SidebarNavGroup[] = [
-      // {
-      //   id: 1,
-      //   title: 'Membership',
-      //   href: '/',
-      //   items:[]
-      // },
+      {
+        id: 0,
+        title: 'Membership',
+        href: '/',
+        items:[]
+      },
       {
         id: 1,
         title: 'Geneology',
-        href: '/hoome',
+        href: '/',
         items: [
           { 
             title: 'Unilevel',
-            href: '/unilevel',
+            href: '/',
           },
           { 
             title: 'Matrix Level',
-            href: '/matrix',
+            href: '/',
           },
           { 
             title: '3Tier Level',
-            href: '/3tier',
+            href: '/',
           },
         ]
       },
@@ -160,7 +165,7 @@ export default function MerDash() {
             <MenuIcon />
           </IconButton>
           <Typography color="secondary" variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            User
+            Dashboard
           </Typography>
           {auth && (
             <div>
@@ -191,6 +196,7 @@ export default function MerDash() {
               >
                 <MenuItem onClick={handleClose}>Profile</MenuItem>
                 <MenuItem onClick={handleClose}>My account</MenuItem>
+                <MenuItem onClick={handleClose}>Log-out</MenuItem>
               </Menu>
             </div>
           )}
@@ -220,8 +226,8 @@ export default function MerDash() {
         <Divider />
         <List>
           {[
-              {text: 'Home', href: '/'},
-              {text: 'Membership', href: '/membership'},
+              {text: 'Home', href: '/dashboard'},
+              {text: 'Membership', href: '/'},
               {text: 'My Info', href: '/myinfo'}
             ].map((item) => (
               <ListItem sx={{textAlign: 'center'}} key={item.text}>
@@ -234,7 +240,7 @@ export default function MerDash() {
         <Divider />
         <List>
           {[
-              {text: 'Shop', href: '/'},
+              {text: 'Shop', href: '/shop'},
               {text: 'Order History', href: '/membership'},
               {text: 'My Team', href: '/info'},
               {text: 'My Enroller', href: '/enroller'},
@@ -258,7 +264,7 @@ export default function MerDash() {
               </ListItemButton>
               
               <Collapse in={openGroups[group.id]} timeout="auto" unmountOnExit>
-                <List component="div" disablePadding>
+                <List component="div">
                   {group.items.map(item => (
                     <ListItemButton sx={{ pl: 4 }}>
                       <ListItemText  sx={{textAlign: 'center'}}>{item.title}</ListItemText>
@@ -283,9 +289,9 @@ export default function MerDash() {
         <Divider />
           <List>
           {[
-              {text: 'FAQ', href: '/'},
-              {text: 'Contact Us', href: '/'},
-              {text: 'Log-out', href: '/logout'}
+              {text: 'FAQ', href: '/faq'},
+              {text: 'Contact Us', href: '/contac'},
+              {text: 'Log-out', href: '/'}
             ].map((item) => (
               <ListItem sx={{textAlign: 'center'}} key={item.text}>
               <ListItemButton component="a" href={item.href}>
@@ -299,10 +305,8 @@ export default function MerDash() {
       </Drawer>
       <Main open={open}>
       <DrawerHeader />
-      
-      <NewProducts />
-        
-        
+      {/* <NewProducts /> */}
+      {children}
         <footer className=" border-top py-2">
         <div className="w-full flex-row flex justify-between">
           <div>

@@ -1,154 +1,92 @@
 'use client'
 
-import { useRouter } from "next/navigation";
-import React, { useState } from "react";
-import Box from '@mui/material/Box';
+import React, { useEffect, useState } from "react";
 import TextField from '@mui/material/TextField';
-import { Button, InputLabel, Link, MenuItem, OutlinedInput, Select, SelectChangeEvent, Theme, useTheme } from '@mui/material';
-import Checkbox from '@mui/material/Checkbox';
-import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { Button } from '@mui/material';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
+import {  DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import { MuiTelInput } from 'mui-tel-input'
-import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import FormControl from '@mui/material/FormControl';
-import FormLabel from '@mui/material/FormLabel';
+import Swal from 'sweetalert2'
+import { format } from "date-fns";
 
 interface FormData {
-  email: string;
-  first_name: string;
-  middle_name: string;
-  last_name: string;
-  birthdate: Date | null;
-  phone: string;
-  address: string;
-  city: string;
-  state: string;
-  country: string;
-  password: string;
-  confirmPassword: string;
-  // affiliateId: string;
+  birthdate: any;
+  affiliate_id: number;
 }
 
-export default function MerchantRegister() {
-  const [value, setValue] = useState('+63');
-  const theme = useTheme();
-  const token = localStorage.getItem('acess_token');
-    if (!token) { 
-      window.location.href = '/';
-      return false;
-    } 
-  const [isEdit, setIsEdit] = useState(false);
-  const [responseData, setResponseData] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
-  const [pageTitle, setPageTitle] = useState('Add new Merchant User');
+export default function MerRegister() {
+  const [error, setError] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [first_name, setFirstName] = useState('');
+  const [middle_name, setMiddleName] = useState('');
+  const [last_name, setLastName] = useState('');
+  const [phone, setPhone] = useState('');
+  const [address, setAddress] = useState('');
+  const [city, setCity] = useState('');
+  const [state, setState] = useState('');
+  const [country, setCountry] = useState('');
+  const [zipcode, setZipcode] = useState('');
   const [formData, setFormData] = useState<FormData>({
-    email: "",
-    first_name: "",
-    middle_name: "",
-    last_name: "",
-    birthdate: null,
-    phone: "",
-    address: "", 
-    city: "",
-    state: "",
-    country: "",
-    password: "",
-    confirmPassword: "",
-    // affiliateId: ""
-    
+    birthdate: new Date(),
+    affiliate_id: 0,
   });
-  const urlParams = new URLSearchParams(window.location.search);
-      
+
+  const handleDateChange = (value:any) => {
+    const tempFormData = formData;
+    tempFormData.birthdate = new Date(value);
+
+    setFormData(tempFormData);
+  }
+
   const handleChange = (event:any) => {
-    console.log('called')
     setFormData({
       ...formData,
       [event.target.name]: event.target.value,
     });
-    console.log({formData})
   };
-  const handleDateChange = (date: Date | null) => {
-    setFormData({
-      ...formData,
-      birthdate: date
-    });
-  };
+
+
   const addMerchant = async () => {
-    setIsLoading(true);
+    const tempFormData = {...formData};
+    const selectedDate = new Date(tempFormData.birthdate);
+    tempFormData.birthdate = format(selectedDate, 'yyyy-MM-dd').toString();
 
-    if(urlParams.get('isEdit')) {
-      const id = urlParams.get('id');
-      try {
-        await fetch(`http://localhost:4000/merchant/${id}`, {
-          method: 'PATCH',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(formData),
-        });
-        setIsLoading(false);
-        window.location.href="/patron";
-
-      } catch (error) {
-        console.error('Error fetching data:', error);
-        setIsLoading(false);
-      }
-    }
-    else {
-      try {
-        const response = await fetch('http://localhost:4000/merchant', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(formData),
-        });
-        const jsonData = await response.json();
-        window.location.href="/merchant";
-
-        setIsLoading(false);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-        setIsLoading(false);
-      }
-    }
-  };
-
-  const fetchData = async (id:number) => {
-    setIsLoading(true);
-
-    try {
-      const response = await fetch('http://localhost:8000/merchant/'+id);
-      if (!response.ok) {
-        throw new Error('Failed to fetch data');
-      }
-      const jsonData = await response.json();
-      setFormData({
-        email: jsonData.email,
-        first_name: jsonData.first_name,
-        middle_name: jsonData.middle_name,
-        last_name: jsonData.last_name,
-        birthdate: jsonData.birthdate,
-        phone: jsonData.phone,
-        address: jsonData.address,
-        city: jsonData.city,
-        state: jsonData.state,
-        country: jsonData.country,
-        password: jsonData.password,
-        confirmPassword: jsonData.confirmPassword,
-        // affiliate_id: jsonData.affiliate.length > 0 ? jsonData.affiliate[0].id : 0
+    const response = await fetch('http://localhost:4000/patrons', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        email,
+        password,
+        first_name, 
+        middle_name,
+        last_name,
+        phone,
+        address,
+        city,
+        state,
+        country,
+        zipcode,
+        birthdate: selectedDate,
+        // affiliate_id,
+      }),
+    });
+    console.log(response);
+    if (response.ok) {
+      window.location.href = '/login/pat';
+      Swal.fire({
+        title: 'Registration',
+        text: 'Successfully registered',
+        icon: 'info' 
       });
-      
-    } catch (error) {
-      console.error('Error fetching data:', error);
-    } finally {
-      setIsLoading(false);
+    } else {
+      setError('Invalid Registration');
     }
   };
+
+
 
 
 return (
@@ -158,115 +96,107 @@ return (
         Create a Patron Account
         </p>
         <div className="flex flex-col justify-center space-y-5">
-            <TextField
-            name="email"
-            label="Email Address"
-            value={formData.email}
-            onChange={handleChange} 
-          />
 
+        <TextField 
+        label="Email Address"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        />
         <div className="flex flex-row space-x-5">
-            <TextField
-            name="firstName"
+            <TextField 
             label="First Name"
-            value={formData.first_name}
-            onChange={handleChange}
-          />
-
-          <TextField
-            name="middleName" 
+            value={first_name}
+            onChange={(e) => setFirstName(e.target.value)}
+            />
+            <TextField 
             label="Middle Name"
-            value={formData.middle_name}
-            onChange={handleChange}
-          />
-
-          <TextField
-            name="lastName"
+            value={middle_name}
+            onChange={(e) => setMiddleName(e.target.value)}
+            />
+            <TextField 
             label="Last Name"
-            value={formData.last_name}
-            onChange={handleChange}
-          />
+            value={last_name}
+            onChange={(e) => setLastName(e.target.value)}
+            />
         </div>
         <div className="flex flex-row content-center space-x-9 ">
-            <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <DemoContainer components={['DatePicker']}>
+            <LocalizationProvider dateAdapter={AdapterDateFns}>
                     <DatePicker 
                     label="Birth Date" 
+                    className="w-[290px]"
                     value={formData.birthdate}
                     onChange={handleDateChange}
-                    className="w-[290px]"
                      />
-                </DemoContainer>
             </LocalizationProvider>
             <MuiTelInput
-            value={formData.phone}
+            value={phone}
             label="Phone Number"
-            onChange={handleChange}
+            onChange={(e) => setPhone(e)}
             className="w-[300px] mt-2"
             />
         </div>
-        {/* <FormControl className="flex flex-row space-x-10">
-        <FormLabel className="mt-2 pl-2" >Gender</FormLabel>
-        <RadioGroup
-            aria-labelledby="gender"
-            defaultValue="female"
-            name="radio-buttons-group"
-            className="flex flex-row"
-        >
-            <FormControlLabel value="female" control={<Radio />} label="Female" />
-            <FormControlLabel value="male" control={<Radio />} label="Male" />
-        </RadioGroup>
-        </FormControl> */}
         <TextField 
         label="Address"
-        value={formData.address}
-        onChange={handleChange}
+        value={address}
+        onChange={(e) => setAddress(e.target.value)}
         />
         <div className="flex flex-row justify-between">
             <TextField 
             className="w-[300px]"
             label="City"
-            value={formData.city}
-            onChange={handleChange}
+            value={city}
+            onChange={(e) => setCity(e.target.value)}
             />
             <TextField 
             className="w-[300px]"
             label="State/Province"
-            value={formData.state}
-            onChange={handleChange}
+            value={state}
+            onChange={(e) => setState(e.target.value)}
             />
         </div>
+        <div className="flex flex-row justify-between">
         <TextField 
+        className="w-[300px]"
         label="Country"
-        value={formData.country}
-        onChange={handleChange}
+        value={country}
+        onChange={(e) => setCountry(e.target.value)}
+        />
+         <TextField 
+        className="w-[300px]"
+        label="Zipcode"
+        value={zipcode}
+        onChange={(e) => setZipcode(e.target.value)}
+        />
+        </div>
+        <TextField
+        label="Password"
+        type="password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}  
         />
         <TextField
-              label="Password"
-              type="password"
-              value={formData.password}
-              onChange={handleChange}  
+        label="Confirm Password"
+        type="confirm_password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}  
         />
         <TextField
-              label="Confirm Password"
-              type="confirm_password"
-              value={formData.confirmPassword}
-              onChange={handleChange}  
+        label="Referred by"
+        type="affiliate_id"
+        value={formData.affiliate_id}
+        onChange={handleChange}  
         />
-        <TextField
-              label="Referred by"
-              type="affiliate_id"
-              // value={formData.affiliate_id}
-              // onChange={handleChange}  
-        />
+       {error && <div className='flex self-center text-lg text-fuchsia-500'>{error}</div>}
         
-        <div className='flex justify-center mt-30'>
-          <Link href={'/dashboard/mer'}>
-            <Button className="text-white rounded-lg hover:bg-fuchsia-200 hover:text-fuchsia-500 bg-fuchsia-500 font-bold px-10 py-4">Register</Button>
-          </Link>
+        <div className='flex justify-center mt-30 '>
+            
+            <Button variant="contained" size="medium" onClick={addMerchant} className="text-white rounded-lg hover:bg-fuchsia-200 hover:text-fuchsia-500 bg-fuchsia-500 font-bold px-10 py-4">Register</Button>
+        
         </div>
         </div>
       </div>
     </div>
   );
 }
+
+

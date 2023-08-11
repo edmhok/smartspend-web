@@ -1,14 +1,14 @@
 import React from 'react'
 import type { NextPage } from 'next'
-import { AdminLayout } from '@/layout'
+import { MemberLayout } from '@/memberlayout'
 import ProductDetails from '@/components/ProductDetails'
 
-const Products: NextPage = () => (
-    <AdminLayout>
+const ProductsMer: NextPage = () => (
+    <MemberLayout>
       <ProductDetails />
       
-    </AdminLayout>
+    </MemberLayout>
   )
 
 
-export default Products
+export default ProductsMer
