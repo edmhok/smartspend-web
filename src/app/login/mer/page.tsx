@@ -5,6 +5,7 @@ import Link from 'next/link';
 import React, { useState } from 'react';
 import GoogleIcon from '@mui/icons-material/Google';
 import FacebookIcon from '@mui/icons-material/Facebook';
+import Swal from 'sweetalert2';
 
 
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
@@ -25,7 +26,11 @@ const MerchantLogin = () => {
     });
 
     if (response.ok) {
-      window.location.href = '/dashboard/mer';
+      window.location.href = '/dashboard';
+      Swal.fire(
+        'Good job!',
+        'Login successful',
+      )
     } else {
       setError('Invalid access token');
     }

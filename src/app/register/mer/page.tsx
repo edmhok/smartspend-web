@@ -11,12 +11,12 @@ import { format } from "date-fns";
 
 interface FormData {
   birthdate: any;
-  affiliate_id: number;
+  affiliate_id: string;
 }
 
 export default function MerRegister() {
   const [error, setError] = useState('');
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [first_name, setFirstName] = useState('');
   const [middle_name, setMiddleName] = useState('');
@@ -29,7 +29,7 @@ export default function MerRegister() {
   const [zipcode, setZipcode] = useState('');
   const [formData, setFormData] = useState<FormData>({
     birthdate: new Date(),
-    affiliate_id: 0,
+    affiliate_id: '',
   });
 
   const handleDateChange = (value:any) => {
@@ -58,7 +58,7 @@ export default function MerRegister() {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        username,
+        email,
         password,
         first_name, 
         middle_name,
@@ -75,7 +75,7 @@ export default function MerRegister() {
     });
     console.log(response);
     if (response.ok) {
-      window.location.href = '/dashboard/mer';
+      window.location.href = '/login/mer';
       Swal.fire({
         title: 'Registration',
         text: 'Successfully registered',
@@ -99,8 +99,8 @@ return (
 
         <TextField 
         label="Email Address"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
         />
         <div className="flex flex-row space-x-5">
             <TextField 
@@ -121,18 +121,18 @@ return (
         </div>
         <div className="flex flex-row content-center space-x-9 ">
             <LocalizationProvider dateAdapter={AdapterDateFns}>
-                    <DatePicker 
-                    label="Birth Date" 
-                    className="w-[290px]"
-                    value={formData.birthdate}
-                    onChange={handleDateChange}
-                     />
+              <DatePicker 
+              label="Birth Date" 
+              className="w-[290px]"
+              value={formData.birthdate}
+              onChange={handleDateChange}
+                />
             </LocalizationProvider>
             <MuiTelInput
             value={phone}
             label="Phone Number"
             onChange={(e) => setPhone(e)}
-            className="w-[300px] mt-2"
+            className="w-[300px]"
             />
         </div>
         <TextField 
@@ -156,11 +156,13 @@ return (
         </div>
         <div className="flex flex-row justify-between">
         <TextField 
+        className="w-[300px]"
         label="Country"
         value={country}
         onChange={(e) => setCountry(e.target.value)}
         />
          <TextField 
+        className="w-[300px]"
         label="Zipcode"
         value={zipcode}
         onChange={(e) => setZipcode(e.target.value)}
@@ -181,7 +183,7 @@ return (
         <TextField
         label="Referred by"
         type="affiliate_id"
-        value={formData.affiliate_id}
+        value={'not yet implemented'}
         onChange={handleChange}  
         />
        {error && <div className='flex self-center text-lg text-fuchsia-500'>{error}</div>}

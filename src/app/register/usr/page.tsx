@@ -75,7 +75,7 @@ export default function MerRegister() {
     });
     console.log(response);
     if (response.ok) {
-      window.location.href = '/dashboard/mer';
+      window.location.href = '/login/usr';
       Swal.fire({
         title: 'Registration',
         text: 'Successfully registered',

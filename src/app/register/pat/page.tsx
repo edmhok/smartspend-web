@@ -16,7 +16,7 @@ interface FormData {
 
 export default function MerRegister() {
   const [error, setError] = useState('');
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [first_name, setFirstName] = useState('');
   const [middle_name, setMiddleName] = useState('');
@@ -52,13 +52,13 @@ export default function MerRegister() {
     const selectedDate = new Date(tempFormData.birthdate);
     tempFormData.birthdate = format(selectedDate, 'yyyy-MM-dd').toString();
 
-    const response = await fetch('http://localhost:4000/merchants', {
+    const response = await fetch('http://localhost:4000/patrons', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        username,
+        email,
         password,
         first_name, 
         middle_name,
@@ -75,7 +75,7 @@ export default function MerRegister() {
     });
     console.log(response);
     if (response.ok) {
-      window.location.href = '/dashboard/mer';
+      window.location.href = '/login/pat';
       Swal.fire({
         title: 'Registration',
         text: 'Successfully registered',
@@ -99,8 +99,8 @@ return (
 
         <TextField 
         label="Email Address"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
         />
         <div className="flex flex-row space-x-5">
             <TextField 
@@ -156,11 +156,13 @@ return (
         </div>
         <div className="flex flex-row justify-between">
         <TextField 
+        className="w-[300px]"
         label="Country"
         value={country}
         onChange={(e) => setCountry(e.target.value)}
         />
          <TextField 
+        className="w-[300px]"
         label="Zipcode"
         value={zipcode}
         onChange={(e) => setZipcode(e.target.value)}

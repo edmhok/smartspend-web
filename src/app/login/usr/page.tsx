@@ -5,9 +5,10 @@ import React, { useState } from "react";
 import TextField from '@mui/material/TextField';
 import { Button, Link, Typography } from '@mui/material';
 import Checkbox from '@mui/material/Checkbox';
+import Swal from "sweetalert2";
 
 
-const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
+// const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
 const UserLogin = () => {
   const [error, setError] = useState('');
@@ -32,14 +33,36 @@ const UserLogin = () => {
       });
 
       if (response.ok) {
-        window.location.href = '/';
+        window.location.href = '/dashboard';
+        Swal.fire(
+          'Good job!',
+          'Login successful',
+        )
       } else {
-        setError('Invalid access token');
+        setError('Invalid Access');
       }
     } catch (error) {
       setError('Error logging in');  
     }
   }
+
+    const handleChange = () => {
+      return Swal.fire({
+        title: 'Choose option',
+        showDenyButton: true,
+        showConfirmButton: true,
+        confirmButtonText: 'Patron', 
+        denyButtonText: 'Merchant'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          window.location.href = '/register/pat';
+          Swal.fire('You chose Patron');
+        } else if (result.isDenied) {
+          window.location.href = '/register/mer';
+          Swal.fire('You chose Merchant');
+        }
+      });
+    }
 
 return (
 
@@ -72,13 +95,14 @@ return (
               value={password}
               onChange={(e) => setPassword(e.target.value)} 
             />
-             {error && <div>{error}</div>}
+             {error && <div className='flex self-center text-lg text-fuchsia-500'>{error}</div>}
+
               <Link href={'/'} className='text-black hover:text-fuchsia-500 link' >Forgot your password?</Link>
               
-              <div className="flex flex-row content-center">
+              {/* <div className="flex flex-row content-center">
                 <Checkbox {...label} /> 
                 <p className="flex self-center pt-2">Remember Me</p>
-              </div>
+              </div> */}
               
             <div className='flex justify-center pb-5'>
             <Button type="submit" onClick={handleLogin} className="text-fuchsia-500 rounded-lg hover:bg-fuchsia-100 bg-fuchsia-200 font-bold px-10 py-4"> SignIn</Button>
@@ -99,9 +123,7 @@ return (
             Sign up and discover a great amount of new opportunities!
             </p>
             <div className='flex justify-center'>
-              <Link href="/register/usr">
-              <Button className="text-fuchsia-500 rounded-xl p-5 hover:bg-white bg-fuchsia-200 font-bold">Register</Button>
-              </Link>
+              <Button onClick={handleChange} className="text-fuchsia-500 rounded-xl p-5 hover:bg-white bg-fuchsia-200 font-bold">Register</Button>
             </div>
         </div>
 

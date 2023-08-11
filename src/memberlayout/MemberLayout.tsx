@@ -1,9 +1,7 @@
 'use client'
 
 import NewProducts from '@/components/NewProducts'
-import React, {
-    PropsWithChildren, useCallback, useEffect, useState,
-  } from 'react'
+import React, { PropsWithChildren } from 'react'
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
@@ -22,6 +20,7 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import { Collapse, Menu, MenuItem, Stack } from '@mui/material';
 import { AccountCircle, ExpandLess, ExpandMore } from '@mui/icons-material';
+// import { useRouter } from 'next/router';
 
 
 const drawerWidth = 240;
@@ -90,7 +89,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 export default function MemberLayout({ children }: PropsWithChildren) {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
-
+  // const router = useRouter();
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -108,6 +107,9 @@ export default function MemberLayout({ children }: PropsWithChildren) {
   const handleClose = () => {
     setAnchorEl(null);
   };
+  // const handleLogout = () => {
+  //   router.push('/'); 
+  // };
 
   const [openGroups, setOpenGroups] = React.useState<Record<string, boolean>>({});
 
@@ -163,7 +165,7 @@ export default function MemberLayout({ children }: PropsWithChildren) {
             <MenuIcon />
           </IconButton>
           <Typography color="secondary" variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            User
+            Dashboard
           </Typography>
           {auth && (
             <div>
@@ -194,6 +196,7 @@ export default function MemberLayout({ children }: PropsWithChildren) {
               >
                 <MenuItem onClick={handleClose}>Profile</MenuItem>
                 <MenuItem onClick={handleClose}>My account</MenuItem>
+                <MenuItem onClick={handleClose}>Log-out</MenuItem>
               </Menu>
             </div>
           )}
@@ -223,7 +226,7 @@ export default function MemberLayout({ children }: PropsWithChildren) {
         <Divider />
         <List>
           {[
-              {text: 'Home', href: '/'},
+              {text: 'Home', href: '/dashboard'},
               {text: 'Membership', href: '/'},
               {text: 'My Info', href: '/myinfo'}
             ].map((item) => (
@@ -237,7 +240,7 @@ export default function MemberLayout({ children }: PropsWithChildren) {
         <Divider />
         <List>
           {[
-              {text: 'Shop', href: '/'},
+              {text: 'Shop', href: '/shop'},
               {text: 'Order History', href: '/membership'},
               {text: 'My Team', href: '/info'},
               {text: 'My Enroller', href: '/enroller'},
@@ -286,9 +289,9 @@ export default function MemberLayout({ children }: PropsWithChildren) {
         <Divider />
           <List>
           {[
-              {text: 'FAQ', href: '/'},
-              {text: 'Contact Us', href: '/'},
-              {text: 'Log-out', href: '/logout'}
+              {text: 'FAQ', href: '/faq'},
+              {text: 'Contact Us', href: '/contac'},
+              {text: 'Log-out', href: '/'}
             ].map((item) => (
               <ListItem sx={{textAlign: 'center'}} key={item.text}>
               <ListItemButton component="a" href={item.href}>

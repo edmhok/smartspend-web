@@ -5,6 +5,7 @@ import Link from 'next/link';
 import React, { useState } from 'react';
 import GoogleIcon from '@mui/icons-material/Google';
 import FacebookIcon from '@mui/icons-material/Facebook';
+import Swal from 'sweetalert2';
 
 
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
@@ -24,7 +25,11 @@ const PatronLogin = () => {
     });
 
     if (response.ok) {
-      window.location.href = '/dashboard/pat';
+      window.location.href = '/dashboard';
+      Swal.fire(
+        'Good job!',
+        'Login successful',
+      )
     } else {
       setError('Invalid access');
     }
@@ -114,7 +119,7 @@ const PatronLogin = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)} 
             />
-            {error && <div>{error}</div>}
+            {error && <div className='flex self-center text-lg text-fuchsia-500'>{error}</div>}
 
               <Link href={'/'} className='text-black hover:text-fuchsia-500 link' >Forgot your password?</Link>
               
@@ -144,7 +149,9 @@ const PatronLogin = () => {
             Sign up and discover a great amount of new opportunities!
             </p>
             <div className='flex justify-center'>
-              <Button type="submit" onClick={handleLogin} className="text-fuchsia-500 rounded-xl p-5 hover:bg-white bg-fuchsia-200 font-bold">Register</Button>
+            <Link href="/register/pat">
+              <Button type="submit" className="text-fuchsia-500 rounded-xl p-5 hover:bg-white bg-fuchsia-200 font-bold">Register</Button>
+            </Link>
             </div>
         </div>
 
