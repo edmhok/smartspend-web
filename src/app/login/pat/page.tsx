@@ -9,55 +9,26 @@ import FacebookIcon from '@mui/icons-material/Facebook';
 
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
-
 const PatronLogin = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-
-  // const handleSubmit = async () => {
-
-  //   const response = await fetch('http://localhost:4000/auth/patron/login', {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/x-www-form-urlencoded'
-  //     },
-  //     body: urlencoded,
-  //   });
-    
-  //   const data = await response.json();
-
-  //   if (data.access_token) {
-  //     window.location.href = '/dashboard/pat'; 
-
-  //   } else {
-  //     setError('Invalid username or password'); 
-  //   }
-  // }
-  const handleSubmit = async () => {
-    const urlencoded = new URLSearchParams();
-    urlencoded.append("email", email);
-    urlencoded.append("password", password);
-    
-
-    const response = await fetch("http://localhost:4000/auth/patron/login", {
-      method: "POST",
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  
+  const handleLogin = async () => {
+    const response = await fetch('http://localhost:4000/auth/patron/login', {
+      method: 'POST',
       headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
+        'Content-Type': 'application/json',
       },
-      body: urlencoded,
+      body: JSON.stringify({username, password}),
     });
-    console.log(response);
-  };
 
-
-
-
-
-
-
-
-
+    if (response.ok) {
+      window.location.href = '/dashboard/pat';
+    } else {
+      setError('Invalid access');
+    }
+  }
 
 //   window.addEventListener('load', () => {
 //     // Initialize Google & Facebook SDKs
@@ -133,8 +104,8 @@ const PatronLogin = () => {
             <div className="flex flex-col justify-center py-10 space-y-5">
             <TextField 
             label="Username"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)} 
+            value={username}
+            onChange={(e) => setUsername(e.target.value)} 
             />
             
             <TextField
@@ -153,7 +124,7 @@ const PatronLogin = () => {
               </div>
               
             <div className='flex justify-center pb-5'>
-              <Button type="submit" onClick={handleSubmit} className="text-fuchsia-500 rounded-lg hover:bg-fuchsia-100 bg-fuchsia-200 font-bold px-10 py-4">
+              <Button type="submit" onClick={handleLogin} className="text-fuchsia-500 rounded-lg hover:bg-fuchsia-100 bg-fuchsia-200 font-bold px-10 py-4">
                 Sign-In
               </Button>
             </div>
@@ -173,9 +144,7 @@ const PatronLogin = () => {
             Sign up and discover a great amount of new opportunities!
             </p>
             <div className='flex justify-center'>
-              <Link href="/register/pat">
-              <Button type="submit" className="text-fuchsia-500 rounded-xl p-5 hover:bg-white bg-fuchsia-200 font-bold">Register</Button>
-              </Link>
+              <Button type="submit" onClick={handleLogin} className="text-fuchsia-500 rounded-xl p-5 hover:bg-white bg-fuchsia-200 font-bold">Register</Button>
             </div>
         </div>
 

@@ -1,13 +1,13 @@
 import React from 'react'
 import type { NextPage } from 'next'
-import { AdminLayout } from '@/layout'
+import { MemberLayout } from '@/memberlayout'
 import ProductDetails from '@/components/ProductDetails'
 
 const ProductPat: NextPage = () => (
-    <AdminLayout>
+    <MemberLayout>
       <ProductDetails />
       
-    </AdminLayout>
+    </MemberLayout>
   )
 
 

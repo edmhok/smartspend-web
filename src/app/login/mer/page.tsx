@@ -6,65 +6,31 @@ import React, { useState } from 'react';
 import GoogleIcon from '@mui/icons-material/Google';
 import FacebookIcon from '@mui/icons-material/Facebook';
 
-interface LoginProps {
-  onLogin: (token: string) => void;
-}
+
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
 
-const MerchantLogin: React.FC<LoginProps> = ({ onLogin }) => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+const MerchantLogin = () => {
   const [error, setError] = useState('');
-
-  const handleUsernameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(event.target.value);
-  };
-
-  const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setPassword(event.target.value);
-  };
-
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  
   const handleLogin = async () => {
     const response = await fetch('http://localhost:4000/auth/merchant/login', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
-      body: JSON.stringify({
-        email,
-        password  
-      })
+      body: JSON.stringify({username, password}),
     });
-    
-    const data = await response.json();
 
-    // if (data.status === 400) {
-    //   setError('Invalid username or password');
-    //   return;
-    // }
-    
-    if (data.access_token) {
-      onLogin(data.access_token);
-      window.location.href = '/dashboard/mer'; 
+    if (response.ok) {
+      window.location.href = '/dashboard/mer';
     } else {
-      setError('Invalid username or password'); 
+      setError('Invalid access token');
     }
+   
   }
-//   const response = await fetch('http://localhost:4000/auth/merchant/login', {email, password})
-
-//   if (response.data.access_token) {
-//     window.location.href="/dashboard"
-// }
-// else {
-//     setIsError(true);
-// }
-
-// }
-
- 
-
-
 //   window.addEventListener('load', () => {
 //     // Initialize Google & Facebook SDKs
 //     const googleButton = document.getElementById('google-login');
@@ -139,15 +105,15 @@ const MerchantLogin: React.FC<LoginProps> = ({ onLogin }) => {
             <div className="flex flex-col justify-center py-10 space-y-5">
             <TextField 
             label="Username"
-            value={email}
-            onChange={handleUsernameChange} 
+            value={username}
+            onChange={(e) => setUsername(e.target.value)} 
             />
             
             <TextField
               label="Password"
               type="password"
               value={password}
-              onChange={handlePasswordChange}
+              onChange={(e) => setPassword(e.target.value)} 
             />
             {error && <div className='flex self-center text-lg text-fuchsia-500'>{error}</div>}
 
