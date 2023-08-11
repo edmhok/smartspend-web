@@ -160,7 +160,7 @@ return (
            <div className="container p-10">
               <div className="grid grid-cols-1 place-items-center sm:place-items-start sm:grid-cols-2 lg:grid-col-3 xl:grid-cols-4 gap-10 xl:gap-x-20 xl:gap-y-10">
                 {productsData.favorites.map((item, index) => (
-                 <Link href={`/product/mer/${item.id}`} key={index}> 
+                 <Link href={`/product/${item.id}`} key={index}> 
                  <ProductCard
                     key={index}
                     img={item.img}
@@ -181,7 +181,7 @@ return (
           <div className="container p-10">
             <div className="grid grid-cols-1 place-items-center sm:place-items-start sm:grid-cols-2 lg:grid-col-3 xl:grid-cols-4 gap-10 xl:gap-x-20 xl:gap-y-10">
               {productsData.new.map((item, index) => (
-                <Link href={`/product/mer/${item.title}`} key={index}> 
+                <Link href={`/product/${item.id}`} key={index}> 
                 <ProductCard
                   key={index}
                   img={item.img}

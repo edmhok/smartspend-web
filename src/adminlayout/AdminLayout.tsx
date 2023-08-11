@@ -128,7 +128,7 @@ export default function AdminLayout({ children }: PropsWithChildren) {
       {
         id: 1,
         title: 'Geneology',
-        href: '/hoome',
+        href: '/home',
         items: [
           { 
             title: 'Unilevel',
@@ -162,7 +162,7 @@ export default function AdminLayout({ children }: PropsWithChildren) {
             <MenuIcon />
           </IconButton>
           <Typography color="secondary" variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            User
+            Admin
           </Typography>
           {auth && (
             <div>
@@ -222,9 +222,9 @@ export default function AdminLayout({ children }: PropsWithChildren) {
         <Divider />
         <List>
           {[
-              {text: 'Home', href: '/'},
-              {text: 'Membership', href: '/membership'},
-              {text: 'My Info', href: '/myinfo'}
+              {text: 'Admin Info', href: '/'},
+              {text: 'Members Table ', href: '/membership'},
+              {text: 'Dashboard', href: '/myinfo'}
             ].map((item) => (
               <ListItem sx={{textAlign: 'center'}} key={item.text}>
               <ListItemButton component="a" href={item.href}>
@@ -236,12 +236,12 @@ export default function AdminLayout({ children }: PropsWithChildren) {
         <Divider />
         <List>
           {[
-              {text: 'Shop', href: '/'},
-              {text: 'Order History', href: '/membership'},
-              {text: 'My Team', href: '/info'},
-              {text: 'My Enroller', href: '/enroller'},
-              {text: 'My Earning', href: '/earning'},
-              {text: 'Leaderboard', href: '/leaderboard'},
+              {text: 'Add Products', href: '/admin/product/add'},
+              {text: 'View Products', href: '/admin/product/view'},
+              {text: 'Order History', href: '/admin/order'},
+              {text: 'Leaderboard', href: '/admin/leaderboard'},
+              {text: 'Statistic', href: '/admin/statistic'},
+              {text: 'Coupon', href: '/admin/coupon'},
             ].map((item) => (
               <ListItem sx={{textAlign: 'center'}} key={item.text}>
               <ListItemButton component="a" href={item.href}>
@@ -271,9 +271,11 @@ export default function AdminLayout({ children }: PropsWithChildren) {
             </>
           ))}
         </List>  
+        <Divider />
         <List>
           {[
-              {text: 'Affiliates', href: '/affiliates'}
+              {text: 'Compensation', href: '/admin/compensation'},
+              {text: 'Affiliates', href: '/admin/affiliates'}
             ].map((item) => (
               <ListItem  sx={{textAlign: 'center'}} key={item.text}>
               <ListItemButton component="a" href={item.href}>
@@ -283,21 +285,6 @@ export default function AdminLayout({ children }: PropsWithChildren) {
           ))}
           </List>
         <Divider />
-          <List>
-          {[
-              {text: 'FAQ', href: '/'},
-              {text: 'Contact Us', href: '/'},
-              {text: 'Log-out', href: '/logout'}
-            ].map((item) => (
-              <ListItem sx={{textAlign: 'center'}} key={item.text}>
-              <ListItemButton component="a" href={item.href}>
-                <ListItemText primary={item.text} sx={{textAlign: 'center'}}  />
-              </ListItemButton>
-            </ListItem>  
-          ))}
-          </List>
-        <Divider />
-       
       </Drawer>
       <Main open={open}>
       <DrawerHeader />

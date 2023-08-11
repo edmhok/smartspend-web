@@ -10,7 +10,7 @@ import ShoppingBasketOutlinedIcon from '@mui/icons-material/ShoppingBasketOutlin
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 
 interface propsType {
-  // id: number;
+  id: number;
   img: string; 
   title: string;
   variant: string;
@@ -23,7 +23,7 @@ interface propsType {
 }
 
 const ProductBigCard: React.FC<propsType> = ({ 
-  // id,
+  id,
   img,
   title,
   variant,
@@ -59,7 +59,7 @@ const ProductBigCard: React.FC<propsType> = ({
         <div className="text-black font-thin text-lg pb-[69px]">{tags}</div>
 
         <div className="text-black font-thin pb-[50px] flex self-center gap-3">
-            <Link href={'/cart'} >
+            <Link href={'/checkout/1'} >
             <button className="bg-black p-4 rounded-lg text-white flex gap-3">
                 <ShoppingBasketOutlinedIcon/>
                 Add to Cart
