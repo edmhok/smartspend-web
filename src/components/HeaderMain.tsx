@@ -24,19 +24,22 @@ const HeaderMain = () => {
              </Link>
             </div> 
             <div className="hidden lg:flex gap-4 text-gray-500 text-[30px]">
+            <Link href="/login/usr">
             <div className="relative">
                 <ShoppingCartOutlinedIcon className='w-8 h-8 space-x-2' />
                 <div className="bg-fuchsia-500 rounded-full absolute top-0 right-0 w-[18px] h-[18px] text-[12px] text-white grid place-items-center translate-x-1 -translate-y-1">
                 0
                 </div>
             </div>
-            <Link href="/login/usr">
+            </Link>
+
+            {/* <Link href="/login/usr">
                 <PersonOutlineOutlinedIcon className="w-8 h-8 space-x-2 mt-2"/>
             </Link>
             <div className="relative">
                 <MenuRoundedIcon className='w-8 h-8 space-x-2 flex '/>
-            </div>
-            </div>
+            </div> */}
+             </div>
         </Container>
     </div>
   )

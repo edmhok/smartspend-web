@@ -1,13 +1,15 @@
 import React from 'react'
 import type { NextPage } from 'next'
-import { AdminLayout } from '@/layout'
+import { MemberLayout } from '@/memberlayout'
 import NewProducts from '@/components/NewProducts'
+import IntroMessage from '@/components/Dashboard/Intro'
 
 const Dashboard: NextPage = () => (
-    <AdminLayout>
+    <MemberLayout>
+      <IntroMessage />
       <NewProducts />
-      
-    </AdminLayout>
+
+    </MemberLayout>
   )
 
 

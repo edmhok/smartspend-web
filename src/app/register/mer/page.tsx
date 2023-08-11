@@ -1,42 +1,93 @@
 'use client'
 
-import { useRouter } from "next/navigation";
-import React, { useState } from "react";
-import Box from '@mui/material/Box';
+import React, { useEffect, useState } from "react";
 import TextField from '@mui/material/TextField';
-import { Button, InputLabel, Link, MenuItem, OutlinedInput, Select, SelectChangeEvent, Theme, useTheme } from '@mui/material';
-import Checkbox from '@mui/material/Checkbox';
-import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { Button } from '@mui/material';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
+import {  DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import { MuiTelInput } from 'mui-tel-input'
-import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import FormControl from '@mui/material/FormControl';
-import FormLabel from '@mui/material/FormLabel';
+import Swal from 'sweetalert2'
+import { format } from "date-fns";
+
+interface FormData {
+  birthdate: any;
+  affiliate_id: string;
+}
+
+export default function MerRegister() {
+  const [error, setError] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [first_name, setFirstName] = useState('');
+  const [middle_name, setMiddleName] = useState('');
+  const [last_name, setLastName] = useState('');
+  const [phone, setPhone] = useState('');
+  const [address, setAddress] = useState('');
+  const [city, setCity] = useState('');
+  const [state, setState] = useState('');
+  const [country, setCountry] = useState('');
+  const [zipcode, setZipcode] = useState('');
+  const [formData, setFormData] = useState<FormData>({
+    birthdate: new Date(),
+    affiliate_id: '',
+  });
+
+  const handleDateChange = (value:any) => {
+    const tempFormData = formData;
+    tempFormData.birthdate = new Date(value);
+
+    setFormData(tempFormData);
+  }
+
+  const handleChange = (event:any) => {
+    setFormData({
+      ...formData,
+      [event.target.name]: event.target.value,
+    });
+  };
 
 
-export default function Register() {
-    const [value, setValue] = useState('+63');
-   
-    const handleChange = (newValue: React.SetStateAction<string>) => {
-        setValue(newValue);
-      }
+  const addMerchant = async () => {
+    const tempFormData = {...formData};
+    const selectedDate = new Date(tempFormData.birthdate);
+    tempFormData.birthdate = format(selectedDate, 'yyyy-MM-dd').toString();
 
-      const theme = useTheme();
-      const [roleName, setRoleName] = React.useState<string[]>([]);
+    const response = await fetch('http://localhost:4000/merchants', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        email,
+        password,
+        first_name, 
+        middle_name,
+        last_name,
+        phone,
+        address,
+        city,
+        state,
+        country,
+        zipcode,
+        birthdate: selectedDate,
+        // affiliate_id,
+      }),
+    });
+    console.log(response);
+    if (response.ok) {
+      window.location.href = '/login/mer';
+      Swal.fire({
+        title: 'Registration',
+        text: 'Successfully registered',
+        icon: 'info' 
+      });
+    } else {
+      setError('Invalid Registration');
+    }
+  };
 
-      const handleRoleChange = (event: SelectChangeEvent<typeof roleName>) => {
-        const {
-          target: { value },
-        } = event;
-        setRoleName(
-          // On autofill we get a stringified value.
-          typeof value === 'string' ? value.split(',') : value,
-        );
-      };
+
+
 
 return (
     <div className="w-full h-full flex justify-center py-[100px]">
@@ -48,101 +99,104 @@ return (
 
         <TextField 
         label="Email Address"
-        // value={}
-        // onChange={}
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
         />
         <div className="flex flex-row space-x-5">
             <TextField 
             label="First Name"
-            // value={}
-            // onChange={}
+            value={first_name}
+            onChange={(e) => setFirstName(e.target.value)}
             />
             <TextField 
             label="Middle Name"
-            // value={}
-            // onChange={}
+            value={middle_name}
+            onChange={(e) => setMiddleName(e.target.value)}
             />
             <TextField 
             label="Last Name"
-            // value={}
-            // onChange={}
+            value={last_name}
+            onChange={(e) => setLastName(e.target.value)}
             />
         </div>
         <div className="flex flex-row content-center space-x-9 ">
-            <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <DemoContainer components={['DatePicker']}>
-                    <DatePicker label="Birth Date" className="w-[290px]" />
-                </DemoContainer>
+            <LocalizationProvider dateAdapter={AdapterDateFns}>
+              <DatePicker 
+              label="Birth Date" 
+              className="w-[290px]"
+              value={formData.birthdate}
+              onChange={handleDateChange}
+                />
             </LocalizationProvider>
             <MuiTelInput
-            value={value}
+            value={phone}
             label="Phone Number"
-            onChange={handleChange}
-            className="w-[300px] mt-2"
+            onChange={(e) => setPhone(e)}
+            className="w-[300px]"
             />
         </div>
-        {/* <FormControl className="flex flex-row space-x-10">
-        <FormLabel className="mt-2 pl-2" >Gender</FormLabel>
-        <RadioGroup
-            aria-labelledby="gender"
-            defaultValue="female"
-            name="radio-buttons-group"
-            className="flex flex-row"
-        >
-            <FormControlLabel value="female" control={<Radio />} label="Female" />
-            <FormControlLabel value="male" control={<Radio />} label="Male" />
-        </RadioGroup>
-        </FormControl> */}
         <TextField 
         label="Address"
-        // value={}
-        // onChange={}
+        value={address}
+        onChange={(e) => setAddress(e.target.value)}
         />
         <div className="flex flex-row justify-between">
             <TextField 
             className="w-[300px]"
             label="City"
-            // value={}
-            // onChange={}
+            value={city}
+            onChange={(e) => setCity(e.target.value)}
             />
             <TextField 
             className="w-[300px]"
             label="State/Province"
-            // value={}
-            // onChange={}
+            value={state}
+            onChange={(e) => setState(e.target.value)}
             />
         </div>
+        <div className="flex flex-row justify-between">
         <TextField 
+        className="w-[300px]"
         label="Country"
-        // value={}
-        // onChange={}
+        value={country}
+        onChange={(e) => setCountry(e.target.value)}
+        />
+         <TextField 
+        className="w-[300px]"
+        label="Zipcode"
+        value={zipcode}
+        onChange={(e) => setZipcode(e.target.value)}
+        />
+        </div>
+        <TextField
+        label="Password"
+        type="password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}  
         />
         <TextField
-              label="Password"
-              type="password"
-              // value={}
-              // onChange={}  
+        label="Confirm Password"
+        type="confirm_password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}  
         />
         <TextField
-              label="Confirm Password"
-              type="confirm_password"
-              // value={}
-              // onChange={}  
+        label="Referred by"
+        type="affiliate_id"
+        value={'not yet implemented'}
+        onChange={handleChange}  
         />
-        <TextField
-              label="Referred by"
-              type="affiliate_id"
-              // value={}
-              // onChange={}  
-        />
+       {error && <div className='flex self-center text-lg text-fuchsia-500'>{error}</div>}
         
-        <div className='flex justify-center mt-30'>
-          <Link href={'/dashboard/mer'}>
-            <Button className="text-white rounded-lg hover:bg-fuchsia-200 hover:text-fuchsia-500 bg-fuchsia-500 font-bold px-10 py-4">Register</Button>
-          </Link>
+        <div className='flex justify-center mt-30 '>
+            
+            <Button variant="contained" size="medium" onClick={addMerchant} className="text-white rounded-lg hover:bg-fuchsia-200 hover:text-fuchsia-500 bg-fuchsia-500 font-bold px-10 py-4">Register</Button>
+        
         </div>
         </div>
       </div>
     </div>
   );
 }
+
+

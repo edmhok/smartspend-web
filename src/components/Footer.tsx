@@ -33,7 +33,7 @@ const Footer = () => {
   }, []);
 
   return (
-  <div className='bottom-0 w-full h-[150px]'> 
+  <div className='w-full h-[150px] pt-10'> 
     
 
     <div className="w-full bg-black text-center text-white py-2 md:pb-2"> 
