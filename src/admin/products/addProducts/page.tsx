@@ -7,9 +7,13 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { Button } from "@mui/material";
 import style from "./addProducts.module.css";
+import { format } from "date-fns";
 
-function AddProducts() {
-  const [entryDate, setEntryDate] = useState("");
+interface FormData {
+  entryDate: any;
+}
+
+export default function AddProducts() {
   const [productName, setProductName] = useState("");
   const [brand, setBrand] = useState("");
   const [description, setDescription] = useState("");
@@ -18,29 +22,50 @@ function AddProducts() {
   const [qty, setQty] = useState("");
   const [points, setPoints] = useState("");
   const [discount, setDiscount] = useState("");
-  const [originalPrize, setOriginalPrice] = useState("");
+  const [originalPrice, setOriginalPrice] = useState("");
+  const [formData, setFormData] = useState<FormData>({
+    entryDate: new Date(),
+  });
+
+  const handleDateChange = (value: any) => {
+    const tempFormData = formData;
+    tempFormData.entryDate = new Date(value);
+    setFormData(tempFormData);
+  };
 
   const addProduct = async () => {
-    const urlencoded = new URLSearchParams();
-    // urlencoded.append("entryDate", entryDate);
-    urlencoded.append("productName", productName);
-    urlencoded.append("brand", brand);
-    urlencoded.append("description", description);
-    urlencoded.append("sku", sku);
-    urlencoded.append("price", price);
-    urlencoded.append("qty", qty);
-    urlencoded.append("points", points);
-    urlencoded.append("discount", discount);
-    urlencoded.append("originalPrice", originalPrize);
+    const tempFormData = { ...formData };
+    const selectedDate = new Date(tempFormData.entryDate);
+    tempFormData.entryDate = format(selectedDate, "yyyy-MM-dd").toString();
 
     const response = await fetch("http://localhost:4000/products", {
       method: "POST",
       headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
+        "Content-Type": "application/json",
       },
-      body: urlencoded,
+      body: JSON.stringify({
+        productName,
+        brand,
+        description,
+        sku,
+        price,
+        qty,
+        points,
+        discount,
+        originalPrice,
+        entryDate: selectedDate,
+      }),
     });
     console.log(response);
+    setProductName("");
+    setBrand("");
+    setDescription("");
+    setSku("");
+    setPrice("");
+    setQty("");
+    setPoints("");
+    setDiscount("");
+    setOriginalPrice("");
   };
 
   return (
@@ -54,7 +79,8 @@ function AddProducts() {
                 label="Entry Date"
                 slotProps={{ textField: { fullWidth: true } }}
                 className="w-[20px]"
-                // value={entryDate}
+                value={formData}
+                onChange={handleDateChange}
               />
             </LocalizationProvider>
             <TextField
@@ -125,7 +151,7 @@ function AddProducts() {
               label="Original Price"
               placeholder="Amount"
               onChange={(e) => setOriginalPrice(e.target.value)}
-              value={originalPrize}
+              value={originalPrice}
             />
           </div>
         </div>
@@ -147,5 +173,3 @@ function AddProducts() {
     </div>
   );
 }
-
-export default AddProducts;
