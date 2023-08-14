@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-// import style from "./../css/product.module.css";
+import style from "./../css/product.module.css";
 import { Button } from "@mui/material";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -13,6 +13,7 @@ import Paper from "@mui/material/Paper";
 import CreateIcon from "@mui/icons-material/Create";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import IconButton from "@mui/material/IconButton";
+import Link from "next/link";
 
 interface Data {
   id: number;
@@ -28,37 +29,51 @@ interface Data {
   discount: number;
 }
 
-export default function ViewProduct() {
+export default function ProductList() {
   const [productData, setProductData] = useState<Data[]>([]);
 
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const response = await fetch("http://localhost:4000/products");
-        console.log(response);
-        if (response.ok) {
-          const jsonData: Data[] = await response.json();
-          setProductData(jsonData);
-          // console.log(response);
-        } else {
-          console.error("Failed to fetch data");
-        }
-      } catch (error) {
-        console.error("Error:", error);
+  async function fetchData() {
+    try {
+      const response = await fetch("http://localhost:4000/products");
+      console.log(response);
+      if (response.ok) {
+        const jsonData: Data[] = await response.json();
+        setProductData(jsonData);
+        // console.log(response);
+      } else {
+        console.error("Failed to fetch data");
       }
+    } catch (error) {
+      console.error("Error:", error);
     }
-
+  }
+  useEffect(() => {
     fetchData();
   }, []);
 
+  const handleDelete = async (itemId: number) => {
+    try {
+      // Make DELETE request to your API
+      await fetch(`http://localhost:4000/products/${itemId}`, {
+        method: "DELETE",
+      });
+
+      // Update state to remove deleted item
+      // setProductData(data.filter(item => item.id !== itemId));
+      fetchData();
+    } catch (error) {
+      console.error("Error deleting item:", error);
+    }
+  };
+
   return (
-    <div className='productTable'>
-      <div className='content'>
-        <div className='titleAndBtn'>
+    <div className={style.productTable}>
+      <div className={style.content}>
+        <div className={style.titleAndBtn}>
           <div> List of Products</div>
-          <Button className='exportBtn'>Export</Button>
+          <Button className={style.exportBtn}>Export</Button>
         </div>
-        <div className='table'>
+        <div className={style.table}>
           <TableContainer component={Paper}>
             <Table
               sx={{ minWidth: 650, minHeight: 100 }}
@@ -66,15 +81,15 @@ export default function ViewProduct() {
             >
               <TableHead>
                 <TableRow>
-                  <TableCell className='headerText'>Name</TableCell>
-                  <TableCell className='headerText'>Brand</TableCell>
-                  <TableCell className='headerText'>
+                  <TableCell className={style.headerText}>Name</TableCell>
+                  <TableCell className={style.headerText}>Brand</TableCell>
+                  <TableCell className={style.headerText}>
                     Description
                   </TableCell>
-                  <TableCell className='headerText'>SKU</TableCell>
-                  <TableCell className='headerText'>Price</TableCell>
-                  <TableCell className='headerText'>Quantity</TableCell>
-                  <TableCell className='headerText'>Action</TableCell>
+                  <TableCell className={style.headerText}>SKU</TableCell>
+                  <TableCell className={style.headerText}>Price</TableCell>
+                  <TableCell className={style.headerText}>Quantity</TableCell>
+                  <TableCell className={style.headerText}>Action</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -87,17 +102,20 @@ export default function ViewProduct() {
                       {item.productName}
                     </TableCell>
                     <TableCell>{item.brand}</TableCell>
-                    <TableCell className='description'>
+                    <TableCell className={style.description}>
                       {item.description}
                     </TableCell>
                     <TableCell>{item.sku}</TableCell>
                     <TableCell>{item.price}</TableCell>
                     <TableCell>{item.qty}</TableCell>
-                    <TableCell className='action'>
+                    <TableCell className={style.action}>
                       <IconButton>
-                        <CreateIcon fontSize="small" />
+                        <Link href={`/`}>
+                          <CreateIcon fontSize="small" />
+                        </Link>
                       </IconButton>
-                      <IconButton>
+
+                      <IconButton onClick={() => handleDelete(item.id)}>
                         <DeleteOutlineIcon fontSize="small" />
                       </IconButton>
                     </TableCell>
