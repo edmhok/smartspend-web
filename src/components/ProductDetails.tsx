@@ -5,7 +5,7 @@ import ProductBigCard from './ProductBigCard'
 
 const products = [
   {
-    // id:1,
+    id:1,
     img: "/jacket-1.jpg",
     title: "Jacket",
     variant:"for Men and Women",
@@ -18,7 +18,7 @@ const products = [
     category:"Semi-formal"
   },
   {
-    // id:2,
+    id:2,
     img: "/skirt-1.jpg",
     title: "Skirt",
     variant:"for Women",
@@ -31,7 +31,7 @@ const products = [
     category:"outfit"
   },
   {
-    // id:3,
+    id:3,
     img: "/party-wear-1.jpg",
     title: "Party Wear",
     variant:"for Men and Women",
@@ -44,7 +44,7 @@ const products = [
     category:"outfit"
   },
   {
-    // id:4,
+    id:4,
     img: "/shirt-1.jpg",
     title: "Shirt",
     variant:"for Men and Women",
@@ -57,7 +57,7 @@ const products = [
     category:"outfit"
   },
   {
-    // id:5,
+    id:5,
     img: "/sports-1.jpg",
     title: "Sports",
     variant:"for Men and Women",
@@ -71,7 +71,7 @@ const products = [
 
   },
   {
-    // id:6,
+    id:6,
     img: "/watch-2.jpg",
     title: "Watches",
     variant:"for Men and Women",
@@ -84,7 +84,7 @@ const products = [
     category:"outfit"
   },
   {
-    // id:7,
+    id:7,
     img: "/watch-2.jpg",
     title: "Watches",
     variant:"for Men and Women",
@@ -97,7 +97,7 @@ const products = [
     category:"outfit"
   },
   {
-    // id:8,
+    id:8,
     img: "/shirt-1.jpg",
     title: "Shirt",
     variant:"for Men and Women",
@@ -115,10 +115,10 @@ export default function Products() {
   return (
     <>
     { products.map((item, index) => (
-    <div key={index}>
+    // <div key={index}>
     <ProductBigCard     
-        key={index}
-        // id={item.id}
+        // key={index}
+        id={item.id}
         img={item.img}
         title={item.title}
         desc={item.desc}
@@ -129,7 +129,7 @@ export default function Products() {
         price={item.price}
         category={item.category}   
      />
-    </div>
+    // </div>
      ))}
     </>
   )

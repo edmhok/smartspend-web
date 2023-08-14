@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { Box, Fade, FormControl, FormControlLabel, FormLabel, Grid, Paper, Radio, RadioGroup, Switch, TextField } from '@mui/material';
 import { AccountCircle } from '@mui/icons-material';
 import Image from 'next/image';
+import Swal from 'sweetalert2';
 
 interface PaymentProps {
     img: string;
@@ -23,6 +24,13 @@ const Confirmation = (props: PaymentProps) => {
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
       setDeliveryMethod((event.target as HTMLInputElement).value);
     };
+
+    const handleClick = () => {
+        window.location.href = '/dashboard';
+        Swal.fire(
+            'Thank You for your payment',
+          )
+      }
 
 
   return (
@@ -95,9 +103,7 @@ const Confirmation = (props: PaymentProps) => {
             </div>
          
             <div className='w-full flex justify-center mb-5'>
-                <Link href={'/'}>
-                <button className='px-9 py-2 text-black text-lg font-semibold bg-yellow-400'>PAYMENT VERIFICATION</button>
-                </Link>
+                <button onClick={handleClick} className='px-9 py-2 text-black text-lg font-semibold bg-yellow-400'>PAYMENT VERIFICATION</button>
             </div>
         </div>
        

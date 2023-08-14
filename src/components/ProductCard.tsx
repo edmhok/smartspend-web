@@ -33,7 +33,6 @@ const ProductCard: React.FC<propsType> = ({
             <FavoriteIcon />
           </IconButton>
         </div>
-        <Link href="/login/usr">
         <Image
           className="w-full h-auto"
           src={img}
@@ -41,7 +40,6 @@ const ProductCard: React.FC<propsType> = ({
           height={250}
           alt={title}
         />
-        </Link>
       </div>
       
       <div className="space-y-2 py-2 ps-4">
