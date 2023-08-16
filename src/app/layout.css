@@ -1489,3 +1489,16 @@ $header-brand-color: #4f5d73; */
     background-color: #2980b9;
   }
   
+  footer {
+    position: fixed;
+    bottom: 0;
+  }
+  .fixed {
+    flex-wrap: in-between;
+    width:100%;
+    padding-right: 50px;
+    padding-bottom: 20px;
+    
+  }
+
+

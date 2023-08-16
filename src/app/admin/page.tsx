@@ -2,20 +2,18 @@ import React from 'react'
 import type { NextPage } from 'next'
 import NewProducts from '@/components/NewProducts'
 import IntroMessage from '@/components/IntroMember'
-import { AdminLayout } from '@/adminlayout'
+import { AdminLayout } from '@/layout/admin'
+import { AuthCheckerInside } from '@/utils/checker-inside'
 
-const Dashboard: NextPage = () => (
-    <AdminLayout>
-      <IntroMessage />
-      <NewProducts 
-        
+console.log('asdfasdfasd')
+const Admin: NextPage = () => (
+  <AdminLayout>
+    <IntroMessage />
+    <NewProducts
+    />
 
-      
-      
-      />
-
-    </AdminLayout>
-  )
+  </AdminLayout>
+)
 
 
-export default Dashboard
+export default Admin

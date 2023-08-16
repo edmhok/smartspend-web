@@ -1,9 +1,6 @@
 'use client'
 
-import NewProducts from '@/components/NewProducts'
-import React, {
-    PropsWithChildren, useCallback, useEffect, useState,
-  } from 'react'
+import React, { PropsWithChildren } from 'react'
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
@@ -22,6 +19,7 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import { Collapse, Menu, MenuItem, Stack } from '@mui/material';
 import { AccountCircle, ExpandLess, ExpandMore } from '@mui/icons-material';
+import { AuthCheckerInside } from '@/utils/checker-inside';
 
 
 const drawerWidth = 240;
@@ -32,10 +30,9 @@ type SidebarNavItem = {
 };
 
 type SidebarNavGroup = {
-  id:number;
+  id: number;
   title: string;
-  href: string;
-  items: SidebarNavItem[]; 
+  items: SidebarNavItem[];
 };
 
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })<{
@@ -87,10 +84,12 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 }));
 
 
-export default function AdminLayout({ children }: PropsWithChildren) {
+export default function MemberLayout({ children }: PropsWithChildren) {
+  AuthCheckerInside();
+
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
-
+  // const router = useRouter();
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -106,47 +105,54 @@ export default function AdminLayout({ children }: PropsWithChildren) {
   };
 
   const handleClose = () => {
-    setAnchorEl(null);
+    localStorage.removeItem("token");
+    localStorage.removeItem("role");
+
+    window.location.href = '/'
   };
 
   const [openGroups, setOpenGroups] = React.useState<Record<string, boolean>>({});
 
-    const handleClick = (id: number) => {
-      setOpenGroups({
-        ...openGroups,
-        [id]: !openGroups[id]
-      });
-    };
-  
-    const groups: SidebarNavGroup[] = [
-      // {
-      //   id: 1,
-      //   title: 'Membership',
-      //   href: '/',
-      //   items:[]
-      // },
-      {
-        id: 1,
-        title: 'Geneology',
-        href: '/home',
-        items: [
-          { 
-            title: 'Unilevel',
-            href: '/unilevel',
-          },
-          { 
-            title: 'Matrix Level',
-            href: '/matrix',
-          },
-          { 
-            title: '3Tier Level',
-            href: '/3tier',
-          },
-        ]
-      },
-    ];
-  
-  
+  const handleClick = (id: number) => {
+    setOpenGroups({
+      ...openGroups,
+      [id]: !openGroups[id]
+
+    });
+  };
+
+  const groups: SidebarNavGroup[] = [
+    {
+      id: 0,
+      title: 'Points System',
+      items: [
+        {
+          title: 'Patron',
+          href: '/',
+        },
+      ]
+    },
+    {
+      id: 1,
+      title: 'Geneology',
+      items: [
+        {
+          title: 'Unilevel',
+          href: '/',
+        },
+        {
+          title: 'Matrix Level',
+          href: '/',
+        },
+        {
+          title: '3Tier Level',
+          href: '/',
+        },
+      ]
+    },
+  ];
+
+
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
@@ -162,7 +168,7 @@ export default function AdminLayout({ children }: PropsWithChildren) {
             <MenuIcon />
           </IconButton>
           <Typography color="secondary" variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Admin
+            Patron
           </Typography>
           {auth && (
             <div>
@@ -193,6 +199,7 @@ export default function AdminLayout({ children }: PropsWithChildren) {
               >
                 <MenuItem onClick={handleClose}>Profile</MenuItem>
                 <MenuItem onClick={handleClose}>My account</MenuItem>
+                <MenuItem onClick={handleClose}>Log-out</MenuItem>
               </Menu>
             </div>
           )}
@@ -212,9 +219,10 @@ export default function AdminLayout({ children }: PropsWithChildren) {
         open={open}
       >
         <DrawerHeader>
-        <Box sx={{ textAlign: 'center', p: 2 }}>
-          <strong>SmartSpend</strong>
-        </Box>
+          <Box sx={{ textAlign: 'center', p: 2 }}>
+            <strong className='text-lg text-[#218c20]'>SMART</strong>
+            <strong className='text-lg text-[#ffad1e]'>SPEND</strong>
+          </Box>
           <IconButton onClick={handleDrawerClose}>
             {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
           </IconButton>
@@ -222,89 +230,102 @@ export default function AdminLayout({ children }: PropsWithChildren) {
         <Divider />
         <List>
           {[
-              {text: 'Admin Info', href: '/'},
-              {text: 'Members Table ', href: '/membership'},
-              {text: 'Dashboard', href: '/myinfo'}
-            ].map((item) => (
-              <ListItem sx={{textAlign: 'center'}} key={item.text}>
+            { text: 'Home', href: '/dashboard' },
+            { text: 'Membership', href: '/' },
+            { text: 'My Info', href: '/myinfo' }
+          ].map((item) => (
+            <ListItem sx={{ textAlign: 'center' }} key={item.text}>
               <ListItemButton component="a" href={item.href}>
-                <ListItemText primary={item.text} sx={{textAlign: 'center'}} />
+                <ListItemText primary={item.text} sx={{ textAlign: 'center' }} />
               </ListItemButton>
-            </ListItem>  
+            </ListItem>
           ))}
-          </List>
+        </List>
         <Divider />
         <List>
           {[
-              {text: 'Add Products', href: '/admin/product/add'},
-              {text: 'View Products', href: '/admin/product/view'},
-              {text: 'Order History', href: '/admin/order'},
-              {text: 'Leaderboard', href: '/admin/leaderboard'},
-              {text: 'Statistic', href: '/admin/statistic'},
-              {text: 'Coupon', href: '/admin/coupon'},
-            ].map((item) => (
-              <ListItem sx={{textAlign: 'center'}} key={item.text}>
+            { text: 'Shop', href: '/shop' },
+            { text: 'Order History', href: '/membership' },
+            { text: 'My Team', href: '/info' },
+            { text: 'My Enroller', href: '/enroller' },
+            { text: 'My Earning', href: '/earning' },
+            { text: 'Leaderboard', href: '/leaderboard' },
+          ].map((item) => (
+            <ListItem sx={{ textAlign: 'center' }} key={item.text}>
               <ListItemButton component="a" href={item.href}>
-                <ListItemText sx={{textAlign: 'center'}} primary={item.text} />
+                <ListItemText sx={{ textAlign: 'center' }} primary={item.text} />
               </ListItemButton>
-            </ListItem>  
+            </ListItem>
           ))}
-          </List>
+        </List>
         <Divider />
         <List>
-            {groups.map(group => (
+          {groups.map(group => (
             <>
               <ListItemButton onClick={() => handleClick(group.id)}>
-                <ListItemText  sx={{textAlign: 'center'}}>{group.title}</ListItemText>
+                <ListItemText sx={{ textAlign: 'center' }}>{group.title}</ListItemText>
                 {openGroups[group.id] ? <ExpandLess /> : <ExpandMore />}
               </ListItemButton>
-              
+
               <Collapse in={openGroups[group.id]} timeout="auto" unmountOnExit>
-                <List component="div" disablePadding>
+                <List component="div">
                   {group.items.map(item => (
-                    <ListItemButton sx={{ pl: 4 }}>
-                      <ListItemText  sx={{textAlign: 'center'}}>{item.title}</ListItemText>
+                    <ListItemButton sx={{ pl: 4 }} component='a' href={item.href}>
+                      <ListItemText sx={{ textAlign: 'center' }}>{item.title}</ListItemText>
                     </ListItemButton>
                   ))}
                 </List>
               </Collapse>
             </>
           ))}
-        </List>  
+        </List>
+        <List>
+          {[
+            { text: 'Affiliates', href: '/affiliates' }
+          ].map((item) => (
+            <ListItem sx={{ textAlign: 'center' }} key={item.text}>
+              <ListItemButton component="a" href={item.href}>
+                <ListItemText primary={item.text} sx={{ textAlign: 'center' }} />
+              </ListItemButton>
+            </ListItem>
+          ))}
+        </List>
         <Divider />
         <List>
           {[
-              {text: 'Compensation', href: '/admin/compensation'},
-              {text: 'Affiliates', href: '/admin/affiliates'}
-            ].map((item) => (
-              <ListItem  sx={{textAlign: 'center'}} key={item.text}>
+            { text: 'FAQ', href: '/faq' },
+            { text: 'Contact Us', href: '/contac' },
+            { text: 'Log-out', href: '/' }
+          ].map((item) => (
+            <ListItem sx={{ textAlign: 'center' }} key={item.text}>
               <ListItemButton component="a" href={item.href}>
-                <ListItemText primary={item.text} sx={{textAlign: 'center'}} />
+                <ListItemText primary={item.text} sx={{ textAlign: 'center' }} />
               </ListItemButton>
-            </ListItem>  
+            </ListItem>
           ))}
-          </List>
+        </List>
         <Divider />
+
       </Drawer>
       <Main open={open}>
-      <DrawerHeader />
-      {/* <NewProducts /> */}
-      {children}
+        <DrawerHeader />
+        {/* <NewProducts /> */}
+        {children}
         <footer className=" border-top py-2">
-        <div className="w-full flex-row flex justify-between">
-          <div>
-            <a className="text-decoration-none" href="#">SmartSpend</a>
-            {' '}
-            © 2023
+          <div className="w-full flex-row flex justify-between">
+            <div>
+              <a className="text-decoration-none" href="#">SmartSpend</a>
+              {' '}
+              © 2023
+            </div>
+            <div className="ms-md-auto">
+              Powered by&nbsp;Artificers
+            </div>
           </div>
-          <div className="ms-md-auto">
-            Powered by&nbsp;Artificers
-          </div>
-        </div>
         </footer>
-    </Main>
-  </Box>
-  
+      </Main>
+    </Box>
+
   );
 }
 

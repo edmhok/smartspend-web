@@ -3,12 +3,7 @@
 import React, { useState } from "react";
 import ProductCard from "./ProductCard";
 import { Button, Link } from "@mui/material";
-// import { useRouter } from 'next/router'
-
-// interface ProductCardProps {
-//   id: number;
-//   // other product props 
-// }
+import FavoriteIcon from '@mui/icons-material/Favorite';
 
 const productsData = {
    favorites : [
@@ -121,34 +116,25 @@ const productsData = {
   ]
 };
 
-const NewProducts = () => {
+const NewProducts  = () => {
   const [tab, setTab] = useState("favorites");
-  // const router = useRouter();
-
-  // const handleClick = () => {
-  //   if(!isLoggedIn) {
-  //     router.push('/login');
-  //   } else {
-  //     router.push(`/product/${id}`);
-  //   }
-  // }
-  // const isLoggedIn = false; 
+  const isLoggedIn = false; 
   
 return (
   <div className="container space-x-1 pt-10 ">
     <div className="grid grid-cols-6 ps-1">
       <Button 
-        className={`font-bold text-fuchsia-400 text-lg rounded-t-lg
-        ${tab === "favorites" ? "bg-[#F1F1F1]" : "bg-[#F6F6F6]"}`}
+        className={`font-bold text-[#ffad1e] text-lg mb-0
+        ${tab === "favorites" ? "bg-[#F1F1F1]" : "bg-white"}`}
         onMouseEnter={() => setTab("favorites")}
         onClick={() => setTab("favorites")}
       >
-        Favorites
+        <FavoriteIcon />
       </Button>
 
       <Button
-        className={`text-lg font-bold text-fuchsia-400 rounded-t-lg
-         ${tab === "new" ? "bg-[#F1F1F1]" : "bg-[#F6F6F6]"}`}
+        className={`text-lg font-bold text-[#ffad1e] mb-0
+         ${tab === "new" ? "bg-[#F1F1F1]" : "bg-white"}`}
         onMouseEnter={() => setTab("new")}
         onClick={() => setTab("new")}
       >
@@ -160,7 +146,7 @@ return (
            <div className="container p-10">
               <div className="grid grid-cols-1 place-items-center sm:place-items-start sm:grid-cols-2 lg:grid-col-3 xl:grid-cols-4 gap-10 xl:gap-x-20 xl:gap-y-10">
                 {productsData.favorites.map((item, index) => (
-                 <Link href={`/product/${item.id}`} key={index}> 
+                 <Link href={!isLoggedIn ? '/login/adm' : `/product/${item.id}`} key={index}> 
                  <ProductCard
                     key={index}
                     img={item.img}
@@ -181,7 +167,7 @@ return (
           <div className="container p-10">
             <div className="grid grid-cols-1 place-items-center sm:place-items-start sm:grid-cols-2 lg:grid-col-3 xl:grid-cols-4 gap-10 xl:gap-x-20 xl:gap-y-10">
               {productsData.new.map((item, index) => (
-                <Link href={`/product/${item.id}`} key={index}> 
+                <Link href={!isLoggedIn ? '/login/adm' : `/product/${item.id}`} key={index}> 
                 <ProductCard
                   key={index}
                   img={item.img}

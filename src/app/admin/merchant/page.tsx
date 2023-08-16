@@ -1,11 +1,11 @@
 import React from 'react'
 import type { NextPage } from 'next'
 import { AdminLayout } from '@/layout/admin'
-import ThreeTierMatrix from '@/components/Admin/ThreeTierMatrix'
+import ViewPoints from '@/components/Admin/ViewPoints'
 
 const Dashboard: NextPage = () => (
     <AdminLayout>
-     <ThreeTierMatrix />
+     <ViewPoints />
 
     </AdminLayout>
   )

@@ -90,7 +90,7 @@ export default function MerRegister() {
 
 
 return (
-    <div className="w-full h-full flex justify-center py-[100px]">
+    <div className="w-full h-full flex justify-center py-[20px]">
       <div className=" bg-white shadow-2xl flex flex-col content-center p-[50px] space-y-5">
         <p className="text-2xl text-center pb-3">
         Create a User Account
