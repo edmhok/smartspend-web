@@ -1,14 +1,12 @@
-import React from 'react'
-import type { NextPage } from 'next'
-import { MemberLayout } from '@/memberlayout'
-import ProductDetails from '@/components/ProductDetails'
+import React from "react";
+import type { NextPage } from "next";
+import { MemberLayout } from "@/memberlayout";
+import ProductDetails from "@/components/ProductDetails";
 
 const Products: NextPage = () => (
-    <MemberLayout>
-      <ProductDetails />
-      
-    </MemberLayout>
-  )
+  <MemberLayout>
+    <ProductDetails />
+  </MemberLayout>
+);
 
-
-export default Products
+export default Products;

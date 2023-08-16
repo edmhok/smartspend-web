@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import style from "./../css/product.module.css";
+import styles from "./admin.module.css";
 import { Button } from "@mui/material";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -22,14 +22,14 @@ interface Data {
   brand: string;
   description: string;
   sku: string;
-  price: string;
+  price: number;
   qty: number;
   points: number;
   originalPrice: number;
   discount: number;
 }
 
-export default function ProductList() {
+export default function ViewProduct() {
   const [productData, setProductData] = useState<Data[]>([]);
 
   async function fetchData() {
@@ -67,13 +67,13 @@ export default function ProductList() {
   };
 
   return (
-    <div className={style.productTable}>
-      <div className={style.content}>
-        <div className={style.titleAndBtn}>
+    <div className={styles.productTable}>
+      <div className={styles.content}>
+        <div className={styles.titleAndBtn}>
           <div> List of Products</div>
-          <Button className={style.exportBtn}>Export</Button>
+          <Button className={styles.exportBtn}>Export</Button>
         </div>
-        <div className={style.table}>
+        <div className={styles.table}>
           <TableContainer component={Paper}>
             <Table
               sx={{ minWidth: 650, minHeight: 100 }}
@@ -81,15 +81,15 @@ export default function ProductList() {
             >
               <TableHead>
                 <TableRow>
-                  <TableCell className={style.headerText}>Name</TableCell>
-                  <TableCell className={style.headerText}>Brand</TableCell>
-                  <TableCell className={style.headerText}>
+                  <TableCell className={styles.headerText}>Name</TableCell>
+                  <TableCell className={styles.headerText}>Brand</TableCell>
+                  <TableCell className={styles.headerText}>
                     Description
                   </TableCell>
-                  <TableCell className={style.headerText}>SKU</TableCell>
-                  <TableCell className={style.headerText}>Price</TableCell>
-                  <TableCell className={style.headerText}>Quantity</TableCell>
-                  <TableCell className={style.headerText}>Action</TableCell>
+                  <TableCell className={styles.headerText}>SKU</TableCell>
+                  <TableCell className={styles.headerText}>Price</TableCell>
+                  <TableCell className={styles.headerText}>Quantity</TableCell>
+                  <TableCell className={styles.headerText}>Action</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -102,15 +102,15 @@ export default function ProductList() {
                       {item.productName}
                     </TableCell>
                     <TableCell>{item.brand}</TableCell>
-                    <TableCell className={style.description}>
+                    <TableCell className={styles.description}>
                       {item.description}
                     </TableCell>
                     <TableCell>{item.sku}</TableCell>
                     <TableCell>{item.price}</TableCell>
                     <TableCell>{item.qty}</TableCell>
-                    <TableCell className={style.action}>
+                    <TableCell className={styles.action}>
                       <IconButton>
-                        <Link href={`/`}>
+                        <Link href={`/admin/product/add/?id=${item.id}`}>
                           <CreateIcon fontSize="small" />
                         </Link>
                       </IconButton>
