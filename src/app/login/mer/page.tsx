@@ -20,24 +20,24 @@ const MerchantLogin = () => {
   const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
   };
-  
+
   const handleLogin = async () => {
     const response = await fetch('http://localhost:4000/auth/merchant/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({username, password}),
+      body: JSON.stringify({ username, password }),
     });
 
     if (response.ok) {
       const jsonData = await response.json();
       const token = jsonData.access_token;
-      
+
       // Store the token in localStorage
       localStorage.setItem('token', token);
       localStorage.setItem('role', jsonData.role);
-      
+
       window.location.href = '/merchant';
       Swal.fire(
         'Good job!',
@@ -46,7 +46,7 @@ const MerchantLogin = () => {
     } else {
       setError('Invalid access token');
     }
-   
+
   }
 
   return (
@@ -57,21 +57,21 @@ const MerchantLogin = () => {
             <p className="text-2xl pb-5 text-center"> Login to your Merchant Account</p>
             <p className="text-sm text-center">Login using your social</p>
             <div className="flex flex-row space-x-10 pt-3 pb-3 justify-center">
-            <Link href="https://www.google.com">
-              <GoogleIcon/> 
-            </Link>
-            <Link href="https://www.facebook.com">
-              <FacebookIcon />
-            </Link>
+              <Link href="https://www.google.com">
+                <GoogleIcon />
+              </Link>
+              <Link href="https://www.facebook.com">
+                <FacebookIcon />
+              </Link>
             </div>
             <div className="flex flex-col py-10 space-y-3">
-            <TextField 
-            sx={{ m: 1, width: '40ch' }}
-            label="Username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)} 
-            />
-             <FormControl sx={{ m: 1, width: '40ch' }} variant="outlined">
+              <TextField
+                sx={{ m: 1, width: '40ch' }}
+                label="Username"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+              />
+              <FormControl sx={{ m: 1, width: '40ch' }} variant="outlined">
                 <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
                 <OutlinedInput
                   id="outlined-adornment-password"
@@ -83,42 +83,42 @@ const MerchantLogin = () => {
                         onClick={handleClickShowPassword}
                         onMouseDown={handleMouseDownPassword}
                         edge="end"
-                        >
+                      >
                         {showPassword ? <VisibilityOff /> : <Visibility />}
                       </IconButton>
                     </InputAdornment>
                   }
                   label="Password"
                   value={password}
-                  onChange={(e) => setPassword(e.target.value)} 
-                  />
+                  onChange={(e) => setPassword(e.target.value)}
+                />
               </FormControl>
               {error && <div className='flex self-center text-lg text-[#218c20]'>{error}</div>}
               <Link href={'/'} className='text-black hover:text-[#218c20] link' >Forgot your password?</Link>
-              
-            <div className='flex justify-center pb-5'>
-              <Button type="submit" onClick={handleLogin} className="text-[#218c20] rounded-lg hover:bg-[#60df5e] bg-[#85f084] font-bold px-10 py-4">Sign-In</Button>
-            </div>
+
+              <div className='flex justify-center pb-5'>
+                <Button type="submit" onClick={handleLogin} className="text-[#218c20] rounded-lg hover:bg-[#60df5e] bg-[#85f084] font-bold px-10 py-4">Sign-In</Button>
+              </div>
             </div>
           </div>
         </div>
-        
-        <div className="w-[320px] pt-[100px] px-10 bg-[#218c20] text-white flex flex-col text-center space-y-10">
-            <p className="text-2xl font-medium">
-                New Here in
-            </p>
-            <p className="text-4xl font-medium">
-                Smartshop?
-            </p>
 
-            <p className="text-xl">
+        <div className="w-[320px] pt-[100px] px-10 bg-[#218c20] text-white flex flex-col text-center space-y-10">
+          <p className="text-2xl font-medium">
+            New Here in
+          </p>
+          <p className="text-4xl font-medium">
+            Smartshop?
+          </p>
+
+          <p className="text-xl">
             Sign up and discover a great amount of new opportunities!
-            </p>
-            <div className='flex justify-center'>
-              <Link href={'/register/mer'}>
-              <Button type="submit" className="text-[#218c20] rounded-xl p-2 hover:bg-white bg-[#85f084] font-bold">Register</Button>
-              </Link>
-            </div>
+          </p>
+          <div className='flex justify-center'>
+            <Link href={'/register/mer'}>
+              <Button className="text-[#218c20] rounded-xl p-5 hover:bg-white bg-[#85f084] font-bold">Register</Button>
+            </Link>
+          </div>
         </div>
 
       </div>

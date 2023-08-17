@@ -2,7 +2,7 @@
 
 import NewProducts from '@/components/NewProducts'
 import React, { PropsWithChildren } from 'react'
-import { styled, useTheme } from '@mui/material/styles';
+import { ThemeProvider, createTheme, styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -84,6 +84,23 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   ...theme.mixins.toolbar,
   justifyContent: 'flex-end',
 }));
+
+const themeTest = createTheme({
+  palette: {
+    primary: {
+      light: '#757ce8',
+      main: '#fff',
+      dark: '#002884',
+      contrastText: '#fff',
+    },
+    secondary: {
+      light: '#ff7961',
+      main: '#218c20',
+      dark: '#ba000d',
+      contrastText: '#000',
+    },
+  },
+});
 
 
 export default function MemberLayout({ children }: PropsWithChildren) {
@@ -174,94 +191,96 @@ export default function MemberLayout({ children }: PropsWithChildren) {
 
 
   return (
-    <Box sx={{ display: 'flex' }}>
-      <CssBaseline />
-      <AppBar position="fixed" open={open} className='bg-white'>
-        <Toolbar>
-          <IconButton
-            color="secondary"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            edge="start"
-            sx={{ mr: 2, ...(open && { display: 'none' }) }}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography color="secondary" variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Merchant
-          </Typography>
-          {auth && (
-            <div>
-              <IconButton
-                size="large"
-                aria-label="account of current user"
-                aria-controls="menu-appbar"
-                aria-haspopup="true"
-                onClick={handleMenu}
-                color="secondary"
-              >
-                <AccountCircle />
-              </IconButton>
-              <Menu
-                id="menu-appbar"
-                anchorEl={anchorEl}
-                anchorOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                open={Boolean(anchorEl)}
-                onClose={handleClose}
-              >
-                <MenuItem onClick={handleClose}>Profile</MenuItem>
-                <MenuItem onClick={handleClose}>My account</MenuItem>
-                <MenuItem onClick={handleClose}>Log-out</MenuItem>
-              </Menu>
-            </div>
-          )}
-        </Toolbar>
-      </AppBar>
-      <Drawer
-        sx={{
-          width: drawerWidth,
-          flexShrink: 0,
-          '& .MuiDrawer-paper': {
+    <ThemeProvider theme={themeTest}>
+
+      <Box sx={{ display: 'flex' }}>
+        <CssBaseline />
+        <AppBar position="fixed" open={open} className='bg-white'>
+          <Toolbar>
+            <IconButton
+              color="secondary"
+              aria-label="open drawer"
+              onClick={handleDrawerOpen}
+              edge="start"
+              sx={{ mr: 2, ...(open && { display: 'none' }) }}
+            >
+              <MenuIcon />
+            </IconButton>
+            <Typography color="secondary" variant="h6" component="div" sx={{ flexGrow: 1 }}>
+              Merchant
+            </Typography>
+            {auth && (
+              <div>
+                <IconButton
+                  size="large"
+                  aria-label="account of current user"
+                  aria-controls="menu-appbar"
+                  aria-haspopup="true"
+                  onClick={handleMenu}
+                  color="secondary"
+                >
+                  <AccountCircle />
+                </IconButton>
+                <Menu
+                  id="menu-appbar"
+                  anchorEl={anchorEl}
+                  anchorOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                  }}
+                  keepMounted
+                  transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                  }}
+                  open={Boolean(anchorEl)}
+                  onClose={handleClose}
+                >
+                  <MenuItem onClick={handleClose}>Profile</MenuItem>
+                  <MenuItem onClick={handleClose}>My account</MenuItem>
+                  <MenuItem onClick={handleClose}>Log-out</MenuItem>
+                </Menu>
+              </div>
+            )}
+          </Toolbar>
+        </AppBar>
+        <Drawer
+          sx={{
             width: drawerWidth,
-            boxSizing: 'border-box',
-          },
-        }}
-        variant="persistent"
-        anchor="left"
-        open={open}
-      >
-        <DrawerHeader>
-          <Box sx={{ textAlign: 'center', p: 2 }}>
-            <strong className='text-lg text-[#218c20]'>SMART</strong>
-            <strong className='text-lg text-[#ffad1e]'>SPEND</strong>
-          </Box>
-          <IconButton onClick={handleDrawerClose}>
-            {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
-          </IconButton>
-        </DrawerHeader>
-        <Divider />
-        <List>
-          {[
-            { text: 'Home', href: '/dashboard' },
-            { text: 'My Info', href: '/myinfo' }
-          ].map((item) => (
-            <ListItem sx={{ textAlign: 'center' }} key={item.text}>
-              <ListItemButton component="a" href={item.href}>
-                <ListItemText primary={item.text} sx={{ textAlign: 'center' }} />
-              </ListItemButton>
-            </ListItem>
-          ))}
-        </List>
-        <Divider />
-        {/* <List>
+            flexShrink: 0,
+            '& .MuiDrawer-paper': {
+              width: drawerWidth,
+              boxSizing: 'border-box',
+            },
+          }}
+          variant="persistent"
+          anchor="left"
+          open={open}
+        >
+          <DrawerHeader>
+            <Box sx={{ textAlign: 'center', p: 2 }}>
+              <strong className='text-lg text-[#218c20]'>SMART</strong>
+              <strong className='text-lg text-[#ffad1e]'>SPEND</strong>
+            </Box>
+            <IconButton onClick={handleDrawerClose}>
+              {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+            </IconButton>
+          </DrawerHeader>
+          <Divider />
+          <List>
+            {[
+              { text: 'Home', href: '/dashboard' },
+              { text: 'My Info', href: '/myinfo' }
+            ].map((item) => (
+              <ListItem sx={{ textAlign: 'center' }} key={item.text}>
+                <ListItemButton component="a" href={item.href}>
+                  <ListItemText primary={item.text} sx={{ textAlign: 'center' }} />
+                </ListItemButton>
+              </ListItem>
+            ))}
+          </List>
+          <Divider />
+          {/* <List>
           {[
             { text: 'Shop', href: '/shop' },
             { text: 'Order History', href: '/membership' },
@@ -278,40 +297,40 @@ export default function MemberLayout({ children }: PropsWithChildren) {
           ))}
         </List>
         <Divider /> */}
-        <List>
-          {groups.map(group => (
-            <>
-              <ListItemButton onClick={() => handleClick(group.id)}>
-                <ListItemText sx={{ textAlign: 'center' }}>{group.title}</ListItemText>
-                {openGroups[group.id] ? <ExpandLess /> : <ExpandMore />}
-              </ListItemButton>
+          <List>
+            {groups.map(group => (
+              <>
+                <ListItemButton onClick={() => handleClick(group.id)}>
+                  <ListItemText sx={{ textAlign: 'center' }}>{group.title}</ListItemText>
+                  {openGroups[group.id] ? <ExpandLess /> : <ExpandMore />}
+                </ListItemButton>
 
-              <Collapse in={openGroups[group.id]} timeout="auto" unmountOnExit>
-                <List component="div">
-                  {group.items.map(item => (
-                    <ListItemButton sx={{ pl: 4 }} component='a' href={item.href}>
-                      <ListItemText sx={{ textAlign: 'center' }}>{item.title}</ListItemText>
-                    </ListItemButton>
-                  ))}
-                </List>
-              </Collapse>
-            </>
-          ))}
-        </List>
-        <Divider />
+                <Collapse in={openGroups[group.id]} timeout="auto" unmountOnExit>
+                  <List component="div">
+                    {group.items.map(item => (
+                      <ListItemButton sx={{ pl: 4 }} component='a' href={item.href}>
+                        <ListItemText sx={{ textAlign: 'center' }}>{item.title}</ListItemText>
+                      </ListItemButton>
+                    ))}
+                  </List>
+                </Collapse>
+              </>
+            ))}
+          </List>
+          <Divider />
 
-        <List>
-          {[
-            { text: 'Points', href: '/points' }
-          ].map((item) => (
-            <ListItem sx={{ textAlign: 'center' }} key={item.text}>
-              <ListItemButton component="a" href={item.href}>
-                <ListItemText primary={item.text} sx={{ textAlign: 'center' }} />
-              </ListItemButton>
-            </ListItem>
-          ))}
-        </List>
-        {/* <List>
+          <List>
+            {[
+              { text: 'Points', href: '/points' }
+            ].map((item) => (
+              <ListItem sx={{ textAlign: 'center' }} key={item.text}>
+                <ListItemButton component="a" href={item.href}>
+                  <ListItemText primary={item.text} sx={{ textAlign: 'center' }} />
+                </ListItemButton>
+              </ListItem>
+            ))}
+          </List>
+          {/* <List>
           {[
             { text: 'FAQ', href: '/faq' },
             { text: 'Contact Us', href: '/contac' },
@@ -326,26 +345,26 @@ export default function MemberLayout({ children }: PropsWithChildren) {
         </List>
         <Divider /> */}
 
-      </Drawer>
-      <Main open={open}>
-        <DrawerHeader />
-        {/* <NewProducts /> */}
-        {children}
-        <footer className=" border-top py-2">
-          <div className="w-full flex-row flex justify-between">
-            <div>
-              <a className="text-decoration-none" href="#">SmartSpend</a>
-              {' '}
-              © 2023
+        </Drawer>
+        <Main open={open}>
+          <DrawerHeader />
+          {/* <NewProducts /> */}
+          {children}
+          <footer className=" border-top py-2">
+            <div className="w-full flex-row flex justify-between">
+              <div>
+                <a className="text-decoration-none" href="#">SmartSpend</a>
+                {' '}
+                © 2023
+              </div>
+              <div className="ms-md-auto">
+                Powered by&nbsp;Artificers
+              </div>
             </div>
-            <div className="ms-md-auto">
-              Powered by&nbsp;Artificers
-            </div>
-          </div>
-        </footer>
-      </Main>
-    </Box>
-
+          </footer>
+        </Main>
+      </Box>
+    </ThemeProvider>
   );
 }
 
