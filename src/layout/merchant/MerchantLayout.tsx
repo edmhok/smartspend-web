@@ -88,22 +88,16 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 const themeTest = createTheme({
   palette: {
     primary: {
-      light: '#757ce8',
       main: '#fff',
-      dark: '#002884',
-      contrastText: '#fff',
     },
     secondary: {
-      light: '#ff7961',
       main: '#218c20',
-      dark: '#ba000d',
-      contrastText: '#000',
     },
   },
 });
 
 
-export default function MemberLayout({ children }: PropsWithChildren) {
+export default function MerchantLayout({ children }: PropsWithChildren) {
   AuthCheckerInside();
 
   const theme = useTheme();

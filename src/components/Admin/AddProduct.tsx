@@ -69,105 +69,109 @@ export default function AddProducts() {
   };
 
   return (
-    <div className='addProducts'>
-      <div className='content'>
-        <div className='title'>Add Products</div>
-        <div className="w-full flex flex-row justify-between ">
-          <div className="w-[540px] space-y-5">
-            <LocalizationProvider dateAdapter={AdapterDateFns}>
-              <DatePicker
-                label="Entry Date"
-                slotProps={{ textField: { fullWidth: true } }}
-                className="w-[20px]"
-                value={formData}
-                onChange={handleDateChange}
-              />
-            </LocalizationProvider>
-            <TextField
-              fullWidth
-              label="Name"
-              placeholder="Name of Product"
-              value={productName}
-              onChange={(e) => setProductName(e.target.value)}
+    <div className='p-3'>
+      <div className='text-xl pb-3 text-[#218c20]'>Add Products</div>
+      <div className="flex flex-col bg-white p-10">
+        <div className="space-x-10 py-2 flex flex-row">
+          <LocalizationProvider dateAdapter={AdapterDateFns}>
+            <DatePicker
+              label="Entry Date"
+              slotProps={{ textField: { fullWidth: true } }}
+              className="w-[20px]"
+              value={formData}
+              onChange={handleDateChange}
             />
-            <TextField
-              fullWidth
-              label="Brand"
-              placeholder="Brand of Product"
-              onChange={(e) => setBrand(e.target.value)}
-              value={brand}
-            />
-            <TextField
-              fullWidth
-              label="Description"
-              placeholder="(maximum of 150 words)"
-              value={description}
-              multiline
-              rows={3}
-              maxRows={6}
-              onChange={(e) => setDescription(e.target.value)}
-            />
-
-            <TextField
-              fullWidth
-              label="SKU"
-              placeholder="Enter Code"
-              onChange={(e) => setSku(e.target.value)}
-              value={sku}
-            />
-
-            <TextField
-              fullWidth
-              label="Price"
-              onChange={(e) => setPrice(e.target.value)}
-              value={price}
-            />
-          </div>
-          <div className="w-[540px] space-y-5">
-            <TextField
-              fullWidth
-              label="Quantity"
-              placeholder="Quantity"
-              onChange={(e) => setQty(e.target.value)}
-              value={qty}
-            />
-            <TextField
-              fullWidth
-              label="Points"
-              placeholder="Points"
-              onChange={(e) => setPoints(e.target.value)}
-              value={points}
-            />
-
-            <TextField
-              fullWidth
-              label="Discount"
-              placeholder="Amount"
-              onChange={(e) => setDiscount(e.target.value)}
-              value={discount}
-            />
-            <TextField
-              fullWidth
-              label="Original Price"
-              placeholder="Amount"
-              onChange={(e) => setOriginalPrice(e.target.value)}
-              value={originalPrice}
-            />
-          </div>
+          </LocalizationProvider>
+          <TextField
+            fullWidth
+            label="Name"
+            placeholder="Name of Product"
+            value={productName}
+            onChange={(e) => setProductName(e.target.value)}
+          />
         </div>
-        <div className='computed'>
-          <div className='text'>Computed Price after Discount</div>
-          <div className='text'> 234.59</div>
+        <div className="space-x-10 py-2 flex flex-row">
+
+          <TextField
+            fullWidth
+            label="Brand"
+            placeholder="Brand of Product"
+            onChange={(e) => setBrand(e.target.value)}
+            value={brand}
+          />
+          <TextField
+            fullWidth
+            label="Description"
+            placeholder="(maximum of 150 words)"
+            value={description}
+            multiline
+            rows={3}
+            maxRows={6}
+            onChange={(e) => setDescription(e.target.value)}
+          />
         </div>
-        <div className="mt-20 flex justify-center">
-          <div className="flex justify-center pb-5">
-            <Button
-              onClick={addProduct}
-              className="text-white hover:bg-fuchsia-100 bg-fuchsia-500 font-bold px-10 py-4"
-            >
-              Add Me
-            </Button>
-          </div>
+        <div className="space-x-10 py-2 flex flex-row">
+
+          <TextField
+            fullWidth
+            label="SKU"
+            placeholder="Enter Code"
+            onChange={(e) => setSku(e.target.value)}
+            value={sku}
+          />
+
+          <TextField
+            fullWidth
+            label="Price"
+            onChange={(e) => setPrice(e.target.value)}
+            value={price}
+          />
+        </div>
+        <div className="space-x-10 py-2 flex flex-row">
+          <TextField
+            fullWidth
+            label="Quantity"
+            placeholder="Quantity"
+            onChange={(e) => setQty(e.target.value)}
+            value={qty}
+          />
+          <TextField
+            fullWidth
+            label="Points"
+            placeholder="Points"
+            onChange={(e) => setPoints(e.target.value)}
+            value={points}
+          />
+        </div>
+        <div className="space-x-10 py-2 flex flex-row">
+          <TextField
+            fullWidth
+            label="Discount"
+            placeholder="Amount"
+            onChange={(e) => setDiscount(e.target.value)}
+            value={discount}
+          />
+          <TextField
+            fullWidth
+            label="Original Price"
+            placeholder="Amount"
+            onChange={(e) => setOriginalPrice(e.target.value)}
+            value={originalPrice}
+          />
+        </div>
+      </div>
+      <div className='computed'>
+        <div className='text'>Computed Price after Discount</div>
+        <div className='text'> 234.59</div>
+      </div>
+      <div className="mt-20 flex justify-center">
+        <div className="flex justify-center pb-5">
+          <Button
+            onClick={addProduct}
+            className="text-white hover:bg-fuchsia-100 bg-fuchsia-500 font-bold px-10 py-4"
+          >
+            Add Me
+          </Button>
         </div>
       </div>
     </div>
