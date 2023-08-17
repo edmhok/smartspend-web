@@ -7,15 +7,15 @@
 body {
   color: rgb(var(--foreground-rgb));
   background: white;
-  font-family:  'Poppins', sans-serif;
+  /* font-family:  'Poppins', sans-serif; */
   } 
 }
 
-@layer utilities {
+/* @layer utilities {
   .primary {
     color: #218c20;
   }
-}
+} */
 
 
 

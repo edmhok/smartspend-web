@@ -23,7 +23,7 @@ const ProductCard: React.FC<propsType> = ({
   rating,
   price,
 }) => {
-  
+
 
   return (
     <div className=" bg-white drop-shadow-md hover:drop-shadow-xl backdrop:px-5 max-w-[312px] max-h-[418px]">
@@ -41,20 +41,20 @@ const ProductCard: React.FC<propsType> = ({
           alt={title}
         />
       </div>
-      
+
       <div className="space-y-2 py-2 ps-4">
-        <h2 className="text-purple-400 font-medium uppercase text-center">{title}</h2>
+        <h2 className="text-[#218c20] font-medium uppercase text-center link">{title}</h2>
         <p className="text-gray-500 max-w-[150px]">{desc}</p>
         <Stack spacing={1}>
           <Rating name="half-rating" defaultValue={2.5} precision={0.5} />
         </Stack>
-        <div className="font-bold flex gap-4">
+        <div className="font-bold flex gap-4 link">
           ${price}
           <del className="text-gray-500 font-normal">
             ${parseInt(price) + 50}.00
           </del>
         </div>
-        
+
       </div>
     </div>
   );

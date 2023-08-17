@@ -126,32 +126,50 @@ export default function MemberLayout({ children }: PropsWithChildren) {
   const groups: SidebarNavGroup[] = [
     {
       id: 0,
-      title: 'Points System',
+      title: 'Products',
       items: [
         {
-          title: 'Merchant',
+          title: 'Add',
+          href: '/',
+        },
+        {
+          title: 'View',
           href: '/',
         },
       ]
     },
     {
-      id: 1,
-      title: 'Geneology',
+      id: 0,
+      title: 'Order',
       items: [
+        // {
+        //   title: 'Add',
+        //   href: '/',
+        // },
         {
-          title: 'Unilevel',
-          href: '/',
-        },
-        {
-          title: 'Matrix Level',
-          href: '/',
-        },
-        {
-          title: '3Tier Level',
+          title: 'View',
           href: '/',
         },
       ]
     },
+    // {
+    //   id: 1,
+    //   title: 'Geneology',
+    //   items: [
+    //     {
+    //       title: 'Unilevel',
+    //       href: '/',
+    //     },
+    //     {
+    //       title: 'Matrix Level',
+    //       href: '/',
+    //     },
+    //     {
+    //       title: '3Tier Level',
+    //       href: '/',
+    //     },
+    //   ]
+    // },
   ];
 
 
@@ -233,7 +251,6 @@ export default function MemberLayout({ children }: PropsWithChildren) {
         <List>
           {[
             { text: 'Home', href: '/dashboard' },
-            { text: 'Membership', href: '/' },
             { text: 'My Info', href: '/myinfo' }
           ].map((item) => (
             <ListItem sx={{ textAlign: 'center' }} key={item.text}>
@@ -244,7 +261,7 @@ export default function MemberLayout({ children }: PropsWithChildren) {
           ))}
         </List>
         <Divider />
-        <List>
+        {/* <List>
           {[
             { text: 'Shop', href: '/shop' },
             { text: 'Order History', href: '/membership' },
@@ -260,7 +277,7 @@ export default function MemberLayout({ children }: PropsWithChildren) {
             </ListItem>
           ))}
         </List>
-        <Divider />
+        <Divider /> */}
         <List>
           {groups.map(group => (
             <>
@@ -281,9 +298,11 @@ export default function MemberLayout({ children }: PropsWithChildren) {
             </>
           ))}
         </List>
+        <Divider />
+
         <List>
           {[
-            { text: 'Affiliates', href: '/affiliates' }
+            { text: 'Points', href: '/points' }
           ].map((item) => (
             <ListItem sx={{ textAlign: 'center' }} key={item.text}>
               <ListItemButton component="a" href={item.href}>
@@ -292,8 +311,7 @@ export default function MemberLayout({ children }: PropsWithChildren) {
             </ListItem>
           ))}
         </List>
-        <Divider />
-        <List>
+        {/* <List>
           {[
             { text: 'FAQ', href: '/faq' },
             { text: 'Contact Us', href: '/contac' },
@@ -306,7 +324,7 @@ export default function MemberLayout({ children }: PropsWithChildren) {
             </ListItem>
           ))}
         </List>
-        <Divider />
+        <Divider /> */}
 
       </Drawer>
       <Main open={open}>
