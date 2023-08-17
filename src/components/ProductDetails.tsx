@@ -112,12 +112,13 @@ const products = [
 ];
 
 type Data = {
+  img: string;
   id: number;
   productName: string;
   brand: string;
   description: string;
   sku: string;
-  price: string;
+  price: number;
   qty: number;
   points: number;
   originalPrice: number;
@@ -128,14 +129,16 @@ export default function Products() {
   const searchParams = useSearchParams();
   const productId = searchParams.get("id");
   console.log({ productId });
+  const images = "/jacket-1.jpg";
 
   const [productData, setProductData] = useState<Data>({
     id: -1,
+    img: "/jacket-1.jpg",
     productName: "",
     brand: "",
     description: "",
     sku: "",
-    price: "0",
+    price: 0,
     qty: 0,
     points: 0,
     originalPrice: 0,
@@ -166,23 +169,24 @@ export default function Products() {
 
   return (
     <>
-      {products.map((item, index) => (
-        // <div key={index}>
-        <ProductBigCard
-          // key={index}
-          id={item.id}
-          img={item.img}
-          title={item.title}
-          desc={item.desc}
-          variant={item.variant}
-          size={item.size}
-          color={item.color}
-          tags={item.tags}
-          price={item.price}
-          category={item.category}
-        />
-        // </div>
-      ))}
+      {/* {products.map((item, index) => (
+        // <div key={index}> */}
+      <ProductBigCard
+        // key={index}
+        id={productData.id}
+        img={images}
+        title={productData.productName}
+        desc={productData.description}
+        price={productData.price}
+        // variant={productData.variant}
+        // size={productData.size}
+        // color={item.color}
+        // tags={item.tags}
+
+        // category={productData.category}
+      />
+      {/* // </div>
+      ))} */}
     </>
   );
 }
