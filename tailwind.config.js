@@ -13,12 +13,12 @@ module.exports = {
       },
 
       colors: {
-        accent: "#FF8F9C",
-        blackish: "#1b1b1b",
+        primary: "#ffad1e",
+        secondary: "#218c20",
       },
       fontFamily: {
-        'sans': ['ui-sans-serif', 'Poppins'],
-        'serif': ['ui-serif', 'Poppins'],
+        'sans': ['Poppins'],
+        'serif': ['Poppins'],
       },
   
     },
