@@ -1,12 +1,12 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle, IconButton, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField } from "@mui/material";
+import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, IconButton, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField } from "@mui/material";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 
 interface Data {
   id: number;
-  email: string;
+  username: string;
   first_name: string;
   last_name: string;
   address: string;
@@ -31,7 +31,7 @@ export default function ViewPoints() {
       try {
         const token = localStorage.getItem("token");
 
-        const response = await fetch("http://localhost:4000/", {
+        const response = await fetch("http://localhost:4000/merchants", {
           headers: {
             Authorization: `Bearer ${token}`
           }
@@ -88,7 +88,7 @@ export default function ViewPoints() {
         throw new Error('Failed to update patron');
       }
       // Close modal
-      handleClose();
+      setOpen(false);
       // Refetch patrons 
       fetchData();
 
@@ -99,6 +99,28 @@ export default function ViewPoints() {
   }
   function fetchData() {
     throw new Error("Function not implemented.");
+  }
+  // Add a deleteMerchant function
+  const deleteMerchant = async (id: number) => {
+    try {
+      const token = localStorage.getItem("token");
+
+      const response = await fetch(`http://localhost:4000/merchants/${id}`, {
+        method: 'DELETE',
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to delete merchant');
+      }
+      // Refetch merchants after delete
+      fetchData();
+
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   return (
@@ -127,30 +149,45 @@ export default function ViewPoints() {
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
                 <TableCell component="th" scope="row">{merchant.id}</TableCell>
-                <TableCell component="th" scope="row"> {merchant.email}</TableCell>
+                <TableCell component="th" scope="row"> {merchant.username}</TableCell>
                 <TableCell>{merchant.last_name}, {merchant.first_name}</TableCell>
                 <TableCell>{merchant.address}</TableCell>
                 <TableCell>{merchant.points}</TableCell>
                 <TableCell>
-                  <Button onClick={() => handleOpen(merchant)} className="bg-[#ffad1e] p-2 text-black">SEND Points</Button>
-                  <Dialog open={open} onClose={handleClose} sx={modalStyle}>
-                    <DialogTitle>Manage Points for {selectedMerchant?.first_name}</DialogTitle>
+                  <Button variant="outlined" color='secondary' onClick={() => handleOpen(merchant)}>
+                    Send Points
+                  </Button>
+                  <Dialog
+                    open={open}
+                    onClose={handleClose}
+                    aria-labelledby="alert-dialog-title"
+                    aria-describedby="alert-dialog-description"
+
+                  >
+                    <DialogTitle id="alert-dialog-title">
+                      Manage Points for {selectedMerchant?.first_name}
+                    </DialogTitle>
                     <DialogContent>
-                      <TextField
-                        label="Points"
-                        value={selectedMerchant?.points || ''}
-                        onChange={(e) => setSelectedMerchant({ ...selectedMerchant!, points: parseInt(e.target.value) })}
-                      />
+                      <DialogContentText id="alert-dialog-description">
+                        <TextField
+                          label="Points"
+                          value={selectedMerchant?.points || ''}
+                          onChange={(e) => setSelectedMerchant({ ...selectedMerchant!, points: parseInt(e.target.value) })}
+                        />
+                      </DialogContentText>
                     </DialogContent>
                     <DialogActions>
-                      <Button onClick={handleClose}>Cancel</Button>
-                      <Button onClick={handleSave}>Save</Button>
+                      <Button color='info' onClick={handleClose}>Cancel</Button>
+                      <Button color='info' onClick={handleSave} autoFocus>
+                        Save
+                      </Button>
                     </DialogActions>
                   </Dialog>
 
                 </TableCell>
                 <TableCell>
-                  <IconButton>
+                  <IconButton
+                    onClick={() => deleteMerchant(merchant.id)}>
                     <DeleteOutlineIcon fontSize="small" />
                   </IconButton>
                 </TableCell>
@@ -159,6 +196,7 @@ export default function ViewPoints() {
           </TableBody>
         </Table>
       </TableContainer>
+
     </div>
 
   );

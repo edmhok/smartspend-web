@@ -3,10 +3,11 @@
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import TextField from '@mui/material/TextField';
-import { Button, FormControl, IconButton, InputAdornment, InputLabel, Link, OutlinedInput, Typography } from '@mui/material';
+import { Button, FormControl, IconButton, InputAdornment, InputLabel, OutlinedInput, Typography } from '@mui/material';
 import Checkbox from '@mui/material/Checkbox';
 import Swal from "sweetalert2";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
+import Link from 'next/link';
 
 
 // const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
@@ -82,10 +83,10 @@ const UserLogin = () => {
             <p className="text-sm text-center">Choose your Account</p>
             <div className="flex flex-row space-x-10 pt-3 pb-3 justify-center">
 
-              <Link href="/login/mer" className="no-underline">
+              <Link href="/login/mer" className="no-underline" prefetch={false}>
                 <div className="text-lg text-black font-semibold hover:text-[#218c20]">Mechant</div>
               </Link>
-              <Link href="/login/pat" className="no-underline">
+              <Link href="/login/pat" className="no-underline" prefetch={false}>
                 <div className="text-lg text-black font-semibold hover:text-[#218c20]">Patron</div>
               </Link>
 
@@ -122,7 +123,7 @@ const UserLogin = () => {
 
               {error && <div className='flex self-center text-lg text-[#218c20]'>{error}</div>}
 
-              <Link href={'/'} className='text-black hover:text-[#218c20] link' >Forgot your password?</Link>
+              <Link href={'/'} className='text-black hover:text-[#218c20] link' prefetch={false}>Forgot your password?</Link>
 
               <div className='flex justify-center pb-5'>
                 <Button type="submit" onClick={handleLogin} className="text-[#218c20] rounded-lg hover:bg-[#60df5e] bg-[#85f084] font-bold px-10 py-4"> SignIn</Button>
@@ -143,7 +144,7 @@ const UserLogin = () => {
             Sign up and discover a great amount of new opportunities!
           </p>
           <div className='flex justify-center'>
-            <Link href={'/register/adm'}>
+            <Link href={'/register/adm'} prefetch={false}>
               <Button className="text-[#218c20] rounded-xl p-5 hover:bg-white bg-[#85f084] font-bold">Register</Button>
             </Link>
           </div>

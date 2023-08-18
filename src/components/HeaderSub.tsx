@@ -15,7 +15,7 @@ const HeaderSub = () => {
     <div className=" w-full bg-white pb-6 sm:pb-0">
       <Container className="sm:flex justify-between items-center">
         <div className="pb-6 sm:pb-0 sm:flex justify-self-center">
-          <Link href={"/"}>
+          <Link href={"/"} prefetch={false}>
             <Image
               src={logo}
               width={168}
@@ -43,11 +43,11 @@ const HeaderSub = () => {
               0
             </div>
           </div>
-          <Link href="/login">
+          <Link href="/login" prefetch={false}>
             <PersonOutlineOutlinedIcon className="w-8 h-8 space-x-2 mt-2" />
           </Link>
         </div>
-        <div className="sm:">
+        <div>
           <MenuRoundedIcon className="w-8 h-8 space-x-2 flex " />
         </div>
       </Container>

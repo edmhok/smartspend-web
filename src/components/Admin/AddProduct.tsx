@@ -176,9 +176,9 @@ export default function AddProducts() {
     <div className="addProducts">
       <div className="content">
         <div className="title">Add Products</div>
-        <div className="w-full flex flex-row justify-between ">
+        <div className="flex flex-row justify-between space-x-10">
           <>
-            <div className="w-[540px] space-y-5">
+            <div className="space-y-5">
               <LocalizationProvider dateAdapter={AdapterDateFns}>
                 <DatePicker
                   label="Entry Date"
@@ -288,7 +288,7 @@ export default function AddProducts() {
             <Link href={"/admin/product/view/"}>
               <Button
                 onClick={saveProduct}
-                className="text-white hover:bg-fuchsia-100 bg-fuchsia-500 font-bold px-10 py-4"
+                className="text-white hover:bg-fuchsia-100 bg-[#218c20] font-bold px-10 py-4"
               >
                 Add Me
               </Button>

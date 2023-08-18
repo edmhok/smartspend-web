@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import ProductBigCard from "./ProductBigCard";
+import ProductBigCard from "./Merchant/ProductBigCard";
 import { useSearchParams } from "next/navigation";
 
 const products = [
@@ -178,12 +178,12 @@ export default function Products() {
         title={productData.productName}
         desc={productData.description}
         price={productData.price}
-        // variant={productData.variant}
-        // size={productData.size}
-        // color={item.color}
-        // tags={item.tags}
+      // variant={productData.variant}
+      // size={productData.size}
+      // color={item.color}
+      // tags={item.tags}
 
-        // category={productData.category}
+      // category={productData.category}
       />
       {/* // </div>
       ))} */}

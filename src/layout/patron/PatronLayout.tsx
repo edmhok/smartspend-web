@@ -133,28 +133,28 @@ export default function MemberLayout({ children }: PropsWithChildren) {
   };
 
   const groups: SidebarNavGroup[] = [
+    // {
+    //   id: 0,
+    //   title: 'Products',
+    //   items: [
+    //     {
+    //       title: 'Add',
+    //       href: '/',
+    //     },
+    //     {
+    //       title: 'View',
+    //       href: '/',
+    //     },
+    //   ]
+    // },
     {
       id: 0,
-      title: 'Products',
+      title: 'Order',
       items: [
         {
           title: 'Add',
           href: '/',
         },
-        {
-          title: 'View',
-          href: '/',
-        },
-      ]
-    },
-    {
-      id: 0,
-      title: 'Order',
-      items: [
-        // {
-        //   title: 'Add',
-        //   href: '/',
-        // },
         {
           title: 'View',
           href: '/',
@@ -313,7 +313,7 @@ export default function MemberLayout({ children }: PropsWithChildren) {
           <Divider />
           <List>
             {[
-              { text: 'Points', href: '/points' },
+              { text: 'Points', href: '/patron/points' },
               // { text: 'Affiliates', href: '/affiliates' }
 
             ].map((item) => (
