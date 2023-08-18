@@ -103,18 +103,8 @@ const MerchantLogin = () => {
                   onChange={(e) => setPassword(e.target.value)}
                 />
               </FormControl>
-              {error && (
-                <div className="flex self-center text-lg text-[#218c20]">
-                  {error}
-                </div>
-              )}
-              <Link
-                prefetch={false}
-                href={"/"}
-                className="text-black hover:text-[#218c20] link"
-              >
-                Forgot your password?
-              </Link>
+              {error && <div className='flex self-center text-lg text-[#218c20]'>{error}</div>}
+              <Link href={'/'} className='text-black hover:text-[#218c20] link' prefetch={false} >Forgot your password?</Link>
 
               <div className="flex justify-center pb-5">
                 <Button

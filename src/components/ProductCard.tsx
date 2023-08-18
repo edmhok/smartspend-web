@@ -5,8 +5,7 @@ import React from "react";
 import IconButton from "@mui/material/IconButton";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import Rating from "@mui/material/Rating";
-import { Link, Stack } from "@mui/material";
-
+import { Stack } from "@mui/material";
 interface propsType {
   img: string;
   title: string;

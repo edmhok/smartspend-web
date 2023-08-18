@@ -48,7 +48,7 @@ const MerchantLogin = () => {
       localStorage.setItem("token", token);
       localStorage.setItem("role", jsonData.role);
 
-      window.location.href = "/patron/products";
+      window.location.href = "/patron";
       Swal.fire("Good job!", "Login successful");
     } else {
       setError("Invalid access token");

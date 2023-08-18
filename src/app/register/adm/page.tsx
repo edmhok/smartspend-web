@@ -2,13 +2,13 @@
 
 import React, { useEffect, useState } from "react";
 import TextField from '@mui/material/TextField';
-import { Button, Link } from '@mui/material';
+import { Button } from '@mui/material';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
 import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import { MuiTelInput } from 'mui-tel-input'
 import Swal from 'sweetalert2'
 import { format } from "date-fns";
-
+import Link from "next/link";
 interface FormData {
   birthdate: any;
   affiliate_id: number;
@@ -97,10 +97,10 @@ export default function MerRegister() {
         </p>
         <p className="text-sm text-center">Choose</p>
         <div className="flex flex-row space-x-10 py-2 justify-center">
-          <Link href="/register/mer" className="no-underline">
+          <Link href="/register/mer" className="no-underline" prefetch={false}>
             <div className="text-lg text-black font-semibold hover:text-amber-600">Mechant</div>
           </Link>
-          <Link href="/register/pat" className="no-underline">
+          <Link href="/register/pat" className="no-underline" prefetch={false}>
             <div className="text-lg text-black font-semibold hover:text-amber-600">Patron</div>
           </Link>
         </div>

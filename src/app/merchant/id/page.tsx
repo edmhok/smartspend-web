@@ -1,14 +1,17 @@
 import React from 'react'
 import type { NextPage } from 'next'
-import NewProducts from '@/components/NewProducts'
-import IntroMember from '@/components/IntroMember'
 import { MerchantLayout } from '@/layout/merchant'
+import ProductBigCard from '@/components/Merchant/ProductBigCard'
 
 const Merchant: NextPage = () => (
     <MerchantLayout>
-        <IntroMember />
-        <NewProducts
-        />
+        <ProductBigCard
+            id={0}
+            img={''}
+            title={''}
+            desc={''}
+            price={0} />
+
 
     </MerchantLayout>
 )

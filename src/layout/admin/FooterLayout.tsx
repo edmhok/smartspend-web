@@ -4,7 +4,7 @@ import React from 'react'
 export default function Footer() {
   return (
     <Container>
-      <div className="w-full flex justify-between">
+      <div className="w-full justify-between">
         <div>
           <a href="/">SmartSpend</a> © 2023
         </div>
