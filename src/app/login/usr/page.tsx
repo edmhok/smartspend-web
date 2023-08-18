@@ -33,7 +33,7 @@ const UserLogin = () => {
       });
 
       if (response.ok) {
-        window.location.href = '/dashboard';
+        window.location.href = '/admin';
         Swal.fire(
           'Good job!',
           'Login successful',
@@ -70,7 +70,7 @@ return (
       <div className="w-[845px] bg-white shadow-2xl flex flex-row content-center">
         <div className="w-[540px] py-3 space-y-3 border border-r-slate-300 flex flex-col">
           <div className="p-[50px] flex flex-col">
-            <p className="text-2xl pb-5 text-center">Login</p>
+            <p className="text-2xl pb-5 text-center">Welcome to Admin Login Page</p>
              <p className="text-sm text-center">Choose your Account Login</p>
             <div className="flex flex-row space-x-10 pt-3 pb-3 justify-center">
 

@@ -1,12 +1,14 @@
 import React from "react";
 import type { NextPage } from "next";
-import { AdminLayout } from "@/adminLayout";
-import AddProducts from "@/admin/products/addProducts/page";
+import NewProducts from "@/components/NewProducts";
+import IntroMessage from "@/components/IntroMember";
+import { AdminLayout } from "@/adminlayout";
 
-const Admin: NextPage = () => (
+const Dashboard: NextPage = () => (
   <AdminLayout>
-    <AddProducts />
+    <IntroMessage />
+    <NewProducts />
   </AdminLayout>
 );
 
-export default Admin;
+export default Dashboard;

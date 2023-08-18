@@ -119,7 +119,7 @@ const CartInfo:React.FC<propsType> = (
           
          
             <div className='w-full flex justify-end mb-5 space-x-4'>
-                <Link href={'/delivery'} >
+                <Link href={'/checkout/2'} >
                 <button className='px-4 py-2 text-white text-lg font-semibold bg-fuchsia-400'>Proceed to CheckOut</button>
                 </Link>
             </div>

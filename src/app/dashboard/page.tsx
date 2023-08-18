@@ -2,12 +2,17 @@ import React from 'react'
 import type { NextPage } from 'next'
 import { MemberLayout } from '@/memberlayout'
 import NewProducts from '@/components/NewProducts'
-import IntroMessage from '@/components/Dashboard/Intro'
+import IntroMember from '@/components/IntroMember'
 
 const Dashboard: NextPage = () => (
     <MemberLayout>
-      <IntroMessage />
-      <NewProducts />
+      <IntroMember />
+      <NewProducts 
+        
+
+      
+      
+      />
 
     </MemberLayout>
   )
