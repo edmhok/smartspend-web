@@ -1,11 +1,11 @@
 import React from 'react'
 import type { NextPage } from 'next'
-import { MemberLayout } from '@/memberlayout'
+import { PatronLayout } from '@/layout/patron'
 import NewProducts from '@/components/NewProducts'
 import IntroMember from '@/components/IntroMember'
 
-const Dashboard: NextPage = () => (
-    <MemberLayout>
+const Patron: NextPage = () => (
+    <PatronLayout>
       <IntroMember />
       <NewProducts 
         
@@ -14,8 +14,8 @@ const Dashboard: NextPage = () => (
       
       />
 
-    </MemberLayout>
+    </PatronLayout>
   )
 
 
-export default Dashboard
+export default Patron

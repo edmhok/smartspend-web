@@ -64,22 +64,22 @@ const Category = () => {
   }
 
   return (
-    <>
-    <div className="container align-start font-medium text-fuchsia-400 text-2xl pt-10">Category</div>
+    <div className='sm:block hidden'>
+    <div className="container align-start font-medium text-[#218c20] text-2xl pt-10">Category</div>
       <div className="container pt-3 relative flex">
          <div className='container flex direction-row justify-around'>
           {items.slice(currentIndex, currentIndex + visibleItems).map(item => (
             <Item key={item.title} item={item} /> 
             ))}
         </div>
-        <Button className='absolute left-0 mt-40' onClick={handlePrev}>
-            <ArrowBackIosIcon color='primary'/>
+        <Button className='absolute left-0 mt-20' onClick={handlePrev}>
+            <ArrowBackIosIcon color='secondary'/>
         </Button>  
-        <Button className='absolute right-0 mt-40' onClick={handleNext}>
-            <ArrowForwardIosIcon />
+        <Button className='absolute right-0 mt-20' onClick={handleNext}>
+            <ArrowForwardIosIcon color='secondary'/>
         </Button>
     </div>
-    </>
+    </div>
   );
 }
 

@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import TextField from '@mui/material/TextField';
-import { Button } from '@mui/material';
+import { Button, Link } from '@mui/material';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
 import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import { MuiTelInput } from 'mui-tel-input'
@@ -11,7 +11,7 @@ import { format } from "date-fns";
 
 interface FormData {
   birthdate: any;
-  affiliate_id: string;
+  affiliate_id: number;
 }
 
 export default function MerRegister() {
@@ -27,11 +27,9 @@ export default function MerRegister() {
   const [state, setState] = useState('');
   const [country, setCountry] = useState('');
   const [zipcode, setZipcode] = useState('');
-  const [points, setPoints] = useState('');
   const [formData, setFormData] = useState<FormData>({
     birthdate: new Date(),
-    affiliate_id: '',
-
+    affiliate_id: 0,
   });
 
   const handleDateChange = (value: any) => {
@@ -49,12 +47,12 @@ export default function MerRegister() {
   };
 
 
-  const addMerchant = async () => {
+  const addAdmin = async () => {
     const tempFormData = { ...formData };
     const selectedDate = new Date(tempFormData.birthdate);
     tempFormData.birthdate = format(selectedDate, 'yyyy-MM-dd').toString();
 
-    const response = await fetch('http://localhost:4000/merchants', {
+    const response = await fetch('http://localhost:4000/auth/register', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -72,13 +70,12 @@ export default function MerRegister() {
         country,
         zipcode,
         birthdate: selectedDate,
-        points,
         // affiliate_id,
       }),
     });
     console.log(response);
     if (response.ok) {
-      window.location.href = '/login/mer';
+      window.location.href = '/login/adm';
       Swal.fire({
         title: 'Registration',
         text: 'Successfully registered',
@@ -93,11 +90,20 @@ export default function MerRegister() {
 
 
   return (
-    <div className="w-full h-full flex justify-center py-[100px]">
+    <div className="w-full h-full flex justify-center py-[20px]">
       <div className=" bg-white shadow-2xl flex flex-col content-center p-[50px] space-y-5">
         <p className="text-2xl text-center pb-3">
-          Create a Merchant Account
+          Create a User Account
         </p>
+        <p className="text-sm text-center">Choose</p>
+        <div className="flex flex-row space-x-10 py-2 justify-center">
+          <Link href="/register/mer" className="no-underline">
+            <div className="text-lg text-black font-semibold hover:text-amber-600">Mechant</div>
+          </Link>
+          <Link href="/register/pat" className="no-underline">
+            <div className="text-lg text-black font-semibold hover:text-amber-600">Patron</div>
+          </Link>
+        </div>
         <div className="flex flex-col justify-center space-y-5">
 
           <TextField
@@ -135,7 +141,7 @@ export default function MerRegister() {
               value={phone}
               label="Phone Number"
               onChange={(e) => setPhone(e)}
-              className="w-[300px]"
+              className="w-[300px] mt-2"
             />
           </div>
           <TextField
@@ -165,7 +171,6 @@ export default function MerRegister() {
               onChange={(e) => setCountry(e.target.value)}
             />
             <TextField
-              className="w-[300px]"
               label="Zipcode"
               value={zipcode}
               onChange={(e) => setZipcode(e.target.value)}
@@ -184,22 +189,16 @@ export default function MerRegister() {
             onChange={(e) => setPassword(e.target.value)}
           />
           <TextField
-            label="Points Received"
-            type="points"
-            value={'1'}
-            onChange={(e) => setPoints(e.target.value)}
-          />
-          <TextField
             label="Referred by"
             type="affiliate_id"
-            value={'0'}
+            value={formData.affiliate_id}
             onChange={handleChange}
           />
           {error && <div className='flex self-center text-lg text-fuchsia-500'>{error}</div>}
 
           <div className='flex justify-center mt-30 '>
 
-            <Button variant="contained" size="medium" onClick={addMerchant} className="text-white rounded-lg hover:bg-[#8fe08d] bg-[#218c20] font-bold px-10 py-4">Register</Button>
+            <Button variant="contained" size="medium" onClick={addAdmin} className="text-white rounded-lg hover:bg-[#8fe08d] bg-[#218c20] font-bold px-10 py-4">Register</Button>
 
           </div>
         </div>
