@@ -130,7 +130,7 @@ export default function Products() {
   const productId = searchParams.get("id");
   console.log({ productId });
   const images = "/jacket-1.jpg";
-
+  console.log(productId);
   const [productData, setProductData] = useState<Data>({
     id: -1,
     img: "/jacket-1.jpg",

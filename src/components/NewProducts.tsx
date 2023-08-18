@@ -79,7 +79,7 @@ const productsData = {
   ],
   new: [
     {
-      id:  1,
+      id: 1,
       img: "/jacket-1.jpg",
       title: "Jacket",
       desc: "MEN Yarn Fleece Full-Zip Jacket",
@@ -87,7 +87,7 @@ const productsData = {
       price: "45.00",
     },
     {
-      id:  2,
+      id: 2,
       img: "/skirt-1.jpg",
       title: "Skirt",
       desc: "Black Floral Wrap Midi Skirt",
@@ -95,7 +95,7 @@ const productsData = {
       price: "55.00",
     },
     {
-      id:  3,
+      id: 3,
       img: "/party-wear-1.jpg",
       title: "Party Wear",
       desc: "Women's Party Wear Shoes",
@@ -103,7 +103,7 @@ const productsData = {
       price: "25.00",
     },
     {
-      id:  4,
+      id: 4,
       img: "/shirt-1.jpg",
       title: "Shirt",
       desc: "Pure Garment Dyed Cotton Shirt",
@@ -111,7 +111,7 @@ const productsData = {
       price: "45.00",
     },
     {
-      id:  5,
+      id: 5,
       img: "/sports-1.jpg",
       title: "Sports",
       desc: "Trekking & Running Shoes - Black",
@@ -217,7 +217,7 @@ const NewProducts = () => {
         <div className="container p-10">
           <div className="grid grid-cols-1 place-items-center sm:place-items-start sm:grid-cols-2 lg:grid-col-3 xl:grid-cols-4 gap-10 xl:gap-x-20 xl:gap-y-10">
             {productData.map((item, index) => (
-              <Link href={`/product/?id=${item.id}`}>
+              <Link href={`/patron/productdetails?id=${item.id}`}>
                 <ProductCard
                   key={index}
                   img={item.img}
