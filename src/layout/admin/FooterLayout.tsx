@@ -1,14 +1,15 @@
+import { Container } from '@mui/material';
 import React from 'react'
 
 export default function Footer() {
-    return (
-      <footer className="fixed ">
-        <div className="w-full flex justify-between">
-          <div>
-            <a href="#">SmartSpend</a> © 2023
-          </div>
-          <div>Powered by Artificers</div>  
+  return (
+    <Container>
+      <div className="w-full flex justify-between">
+        <div>
+          <a href="/">SmartSpend</a> © 2023
         </div>
-      </footer>
-    );
-  }
+        <div>Powered by Artificers</div>
+      </div>
+    </Container>
+  );
+}
