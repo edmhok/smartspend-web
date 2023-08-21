@@ -81,12 +81,16 @@ const Bestseller = () => {
             <Item key={item.title} item={item} />
           ))}
         </div>
-        <Button className='left-button' onClick={handlePrev}>
-          <ArrowBackIosIcon />
-        </Button>
-        <Button className='absolute right-0 mt-20' onClick={handleNext}>
-          <ArrowForwardIosIcon />
-        </Button>
+        <div className='absolute left-5 mt-20'>
+          <Button onClick={handlePrev}>
+            <ArrowBackIosIcon />
+          </Button>
+        </div>
+        <div className='absolute right-5 mt-20'>
+          <Button className='absolute right-0 mt-20' onClick={handleNext}>
+            <ArrowForwardIosIcon />
+          </Button>
+        </div>
       </div>
     </div>
   );

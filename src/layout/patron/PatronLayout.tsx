@@ -261,7 +261,7 @@ export default function MemberLayout({ children }: PropsWithChildren) {
           <Divider />
           <List>
             {[
-              { text: 'Home', href: '/dashboard' },
+              { text: 'Home', href: '/' },
               // { text: 'Membership', href: '/' },
               { text: 'My Info', href: '/myinfo' }
             ].map((item) => (

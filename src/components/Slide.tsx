@@ -30,7 +30,7 @@ const Slide: React.FC<propsType> = ({ img, title, mainTitle, price }) => {
         </div>
       </div>
 
-      <Link href='/login/adm' className='link'>
+      <Link href='/login/adm' className='link' prefetch={false}>
       <Image
         className="w-[100%] h-[300px] md:h-auto rounded-xl object-cover object-right md:object-left-bottom"
         src={img}

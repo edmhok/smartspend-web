@@ -75,7 +75,7 @@ const UserLogin = () => {
 
   return (
 
-    <div className="flex justify-center p-[10px]">
+    <div className="min-w-screen flex justify-center p-[10px]">
       <div className="bg-white shadow-2xl flex flex-row">
         <div className="py-3 space-y-3 border border-r-slate-300 flex flex-col">
           <div className="p-[30px] flex flex-col">
@@ -126,7 +126,7 @@ const UserLogin = () => {
               <Link href={'/'} className='text-black hover:text-[#218c20] link' prefetch={false}>Forgot your password?</Link>
 
               <div className='flex justify-center pb-5'>
-                <Button type="submit" onClick={handleLogin} className="text-[#218c20] rounded-lg hover:bg-[#60df5e] bg-[#85f084] font-bold px-10 py-4"> SignIn</Button>
+                <Button type="submit" onClick={handleLogin} className="text-[#218c20] rounded-lg hover:bg-[#60df5e] bg-[#85f084] font-bold px-10 py-4 link"> SignIn</Button>
               </div>
             </div>
           </div>

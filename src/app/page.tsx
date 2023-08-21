@@ -20,6 +20,7 @@ export default function Home() {
       <Bestseller />
       <Category />
       <NewProducts />
+
       <Footer />
     </main>
   )
