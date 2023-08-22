@@ -141,25 +141,21 @@ export default function MerchantLayout({ children }: PropsWithChildren) {
       items: [
         {
           title: 'Add',
-          href: '/',
+          href: '/merchant/product/add',
         },
         {
           title: 'View',
-          href: '/',
+          href: '/merchant/product/view',
         },
       ]
     },
     {
-      id: 0,
+      id: 1,
       title: 'Order',
       items: [
-        // {
-        //   title: 'Add',
-        //   href: '/',
-        // },
         {
-          title: 'View',
-          href: '/',
+          title: 'View Order',
+          href: '/merchant/order',
         },
       ]
     },

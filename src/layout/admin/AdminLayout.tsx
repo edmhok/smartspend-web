@@ -275,7 +275,7 @@ export default function AdminLayout({ children }: PropsWithChildren) {
           </List>
           <Divider />
           <List>
-            {groups.map(group => (
+            {/* {groups.map(group => (
               <>
                 <ListItemButton onClick={() => handleClick(group.id)}>
                   <ListItemText sx={{ textAlign: 'center' }}>{group.title}</ListItemText>
@@ -292,7 +292,7 @@ export default function AdminLayout({ children }: PropsWithChildren) {
                   </List>
                 </Collapse>
               </>
-            ))}
+            ))} */}
           </List>
           <Divider />
           {/* <List>

@@ -2,12 +2,13 @@
 
 import React, { useEffect, useState } from "react";
 import TextField from "@mui/material/TextField";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { LocalizationProvider } from "@mui/x-date-pickers";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { Button } from "@mui/material";
+// import { format } from "date-fns";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { useSearchParams } from "next/navigation";
-import { format } from "date-fns";
 import Link from "next/link";
 import styles from "./admin.module.css";
 
@@ -179,7 +180,7 @@ export default function AddProducts() {
         <div className="flex flex-row justify-between space-x-10">
           <>
             <div className="space-y-5">
-              <LocalizationProvider dateAdapter={AdapterDateFns}>
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DatePicker
                   label="Entry Date"
                   slotProps={{ textField: { fullWidth: true } }}

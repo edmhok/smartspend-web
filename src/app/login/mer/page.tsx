@@ -1,31 +1,41 @@
-'use client'
+"use client";
 
-import { Button, Checkbox, FormControl, IconButton, InputAdornment, InputLabel, OutlinedInput, TextField } from '@mui/material';
-import Link from 'next/link';
-import React, { useState } from 'react';
-import GoogleIcon from '@mui/icons-material/Google';
-import FacebookIcon from '@mui/icons-material/Facebook';
-import Swal from 'sweetalert2';
-import { Visibility, VisibilityOff } from '@mui/icons-material';
-
+import {
+  Button,
+  Checkbox,
+  FormControl,
+  IconButton,
+  InputAdornment,
+  InputLabel,
+  OutlinedInput,
+  TextField,
+} from "@mui/material";
+import Link from "next/link";
+import React, { useState } from "react";
+import GoogleIcon from "@mui/icons-material/Google";
+import FacebookIcon from "@mui/icons-material/Facebook";
+import Swal from "sweetalert2";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 
 const MerchantLogin = () => {
-  const [error, setError] = useState('');
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [error, setError] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = React.useState(false);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
-  const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const handleMouseDownPassword = (
+    event: React.MouseEvent<HTMLButtonElement>
+  ) => {
     event.preventDefault();
   };
 
   const handleLogin = async () => {
-    const response = await fetch('http://localhost:4000/auth/merchant/login', {
-      method: 'POST',
+    const response = await fetch("http://localhost:4000/auth/merchant/login", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({ username, password }),
     });
@@ -35,47 +45,48 @@ const MerchantLogin = () => {
       const token = jsonData.access_token;
 
       // Store the token in localStorage
-      localStorage.setItem('token', token);
-      localStorage.setItem('role', jsonData.role);
+      localStorage.setItem("token", token);
+      localStorage.setItem("role", jsonData.role);
+      localStorage.setItem("userId", jsonData.userId);
 
-      window.location.href = '/merchant';
-      Swal.fire(
-        'Good job!',
-        'Login successful',
-      )
+      window.location.href = "/merchant";
+      Swal.fire("Good job!", "Login successful");
     } else {
-      setError('Invalid access token');
+      setError("Invalid access token");
     }
-
-  }
+  };
 
   return (
     <div className="flex justify-center p-[10px]">
       <div className="bg-white shadow-2xl flex flex-row">
         <div className="py-3 space-y-3 border border-r-slate-300 flex flex-col">
           <div className="p-[30px] flex flex-col">
-            <p className="text-2xl pb-5 text-center"> Login to your Merchant Account</p>
+            <p className="text-2xl pb-5 text-center">
+              Login to your Merchant Account
+            </p>
             <p className="text-sm text-center">Login using your social</p>
             <div className="flex flex-row space-x-10 pt-3 pb-3 justify-center">
-              <Link href="https://www.google.com" prefetch={false}>
+              <Link prefetch={false} href="https://www.google.com">
                 <GoogleIcon />
               </Link>
-              <Link href="https://www.facebook.com" prefetch={false}>
+              <Link prefetch={false} href="https://www.facebook.com">
                 <FacebookIcon />
               </Link>
             </div>
             <div className="flex flex-col py-10 space-y-3">
               <TextField
-                sx={{ m: 1, width: '40ch' }}
+                sx={{ m: 1, width: "40ch" }}
                 label="Username"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
               />
-              <FormControl sx={{ m: 1, width: '40ch' }} variant="outlined">
-                <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+              <FormControl sx={{ m: 1, width: "40ch" }} variant="outlined">
+                <InputLabel htmlFor="outlined-adornment-password">
+                  Password
+                </InputLabel>
                 <OutlinedInput
                   id="outlined-adornment-password"
-                  type={showPassword ? 'text' : 'password'}
+                  type={showPassword ? "text" : "password"}
                   endAdornment={
                     <InputAdornment position="end">
                       <IconButton
@@ -96,34 +107,36 @@ const MerchantLogin = () => {
               {error && <div className='flex self-center text-lg text-[#218c20]'>{error}</div>}
               <Link href={'/'} className='text-black hover:text-[#218c20] link' prefetch={false} >Forgot your password?</Link>
 
-              <div className='flex justify-center pb-5'>
-                <Button type="submit" onClick={handleLogin} className="text-[#218c20] rounded-lg hover:bg-[#60df5e] bg-[#85f084] font-bold px-10 py-4">Sign-In</Button>
+              <div className="flex justify-center pb-5">
+                <Button
+                  type="submit"
+                  onClick={handleLogin}
+                  className="text-[#218c20] rounded-lg hover:bg-[#60df5e] bg-[#85f084] font-bold px-10 py-4"
+                >
+                  Sign-In
+                </Button>
               </div>
             </div>
           </div>
         </div>
 
         <div className="w-[320px] pt-[100px] px-10 bg-[#218c20] text-white flex flex-col text-center space-y-10">
-          <p className="text-2xl font-medium">
-            New Here in
-          </p>
-          <p className="text-4xl font-medium">
-            Smartshop?
-          </p>
+          <p className="text-2xl font-medium">New Here in</p>
+          <p className="text-4xl font-medium">Smartshop?</p>
 
           <p className="text-xl">
             Sign up and discover a great amount of new opportunities!
           </p>
-          <div className='flex justify-center'>
-            <Link href={'/register/mer'}>
-              <Button className="text-[#218c20] rounded-xl p-5 hover:bg-white bg-[#85f084] font-bold">Register</Button>
+          <div className="flex justify-center">
+            <Link href={"/register/mer"}>
+              <Button className="text-[#218c20] rounded-xl p-5 hover:bg-white bg-[#85f084] font-bold">
+                Register
+              </Button>
             </Link>
           </div>
         </div>
-
       </div>
     </div>
-
   );
 };
 

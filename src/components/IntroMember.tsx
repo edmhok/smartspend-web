@@ -14,13 +14,22 @@ export default function IntroMember() {
   const init = async () => {
     const token = localStorage.getItem('token')
     const role = localStorage.getItem('role')
+    const userId = localStorage.getItem('userId')
 
-    const api = role === 'patron' ? `http://localhost:4000/patrons/3` : `http://localhost:4000/merchants/3`
-    const response = await fetch(api, {
-      headers: { 'Authorization': `Bearer ${token}` }
-    })
-    const data = await response.json()
-    setDetails(data)
+    const api = role === 'patron' ? `http://localhost:4000/patrons/${userId}` : 
+      role === 'merchant' ? `http://localhost:4000/merchants/${userId}` : ''
+
+      if(api !== '') {
+        const response = await fetch(api, {
+          headers: { 'Authorization': `Bearer ${token}` }
+        })
+        const data = await response.json()
+        setDetails(data)
+      }
+      else {
+        setDetails('')
+      }
+    
   }
   useEffect(() => {
     init()
@@ -36,9 +45,11 @@ export default function IntroMember() {
 
           </Typography>
 
-          <Typography variant="h5" gutterBottom>
-            Points : <span>{details.points}</span>
-          </Typography>
+          {details && (
+            <Typography variant="h5" gutterBottom>
+              Points : <span>{details.points}</span>
+            </Typography>
+          )}
         </div>
 
 
