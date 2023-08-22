@@ -217,7 +217,7 @@ const NewProducts = () => {
         <div className="container p-10">
           <div className="grid grid-cols-1 place-items-center sm:place-items-start sm:grid-cols-2 lg:grid-col-3 xl:grid-cols-4 gap-10 xl:gap-x-20 xl:gap-y-10">
             {productData.map((item, index) => (
-              <Link href={`/product/?id=${item.id}`} prefetch={false}>
+              <Link href={`/patron/productdetails?id=${item.id}`} prefetch={false}>
                 <ProductCard
                   key={index}
                   img={item.img}

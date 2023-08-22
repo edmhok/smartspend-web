@@ -26,31 +26,31 @@ export default function ViewPoints() {
     }
   };
 
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const token = localStorage.getItem("token");
+  const fetchData = async () => {
+    try {
+      const token = localStorage.getItem("token");
 
-        const response = await fetch("http://localhost:4000/merchants", {
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
-        });
-        console.log(response);
-
-        if (response.ok) {
-          const jsonData: Data[] = await response.json();
-
-          setMerchantData(jsonData);
-          // console.log(response);
-        } else {
-          console.error("Failed to fetch data");
+      const response = await fetch("http://localhost:4000/merchants", {
+        headers: {
+          Authorization: `Bearer ${token}`
         }
-      } catch (error) {
-        console.error("Error:", error);
-      }
-    }
+      });
+      console.log(response);
 
+      if (response.ok) {
+        const jsonData: Data[] = await response.json();
+
+        setMerchantData(jsonData);
+        // console.log(response);
+      } else {
+        console.error("Failed to fetch data");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  }
+
+  useEffect(() => {
     fetchData();
   }, []);
 
@@ -70,10 +70,10 @@ export default function ViewPoints() {
     }
 
     try {
-      const tokenRes = await fetch('http://localhost:4000/auth/login');
-      const { token } = await tokenRes.json();
-
-      const response = await fetch(`http://localhost:4000/merchant/${selectedMerchant.id}`, {
+      // const tokenRes = await fetch('http://localhost:4000/auth/login');
+      // const { token } = await tokenRes.json();
+      const token = localStorage.getItem("token");
+      const response = await fetch(`http://localhost:4000/merchants/${selectedMerchant.id}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -97,9 +97,7 @@ export default function ViewPoints() {
     }
 
   }
-  function fetchData() {
-    throw new Error("Function not implemented.");
-  }
+  
   // Add a deleteMerchant function
   const deleteMerchant = async (id: number) => {
     try {

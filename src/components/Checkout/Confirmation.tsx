@@ -38,12 +38,13 @@ const Confirmation = (props: PaymentProps) => {
   const handleClick = async () => {
     const shop = JSON.parse(localStorage.getItem("shop") || "[]");
     const token = localStorage.getItem("token");
+    const userId = localStorage.getItem("userId");
 
     const result = await fetch(`http://localhost:4000/order`, {
       body: JSON.stringify({
         products_Id: shop[0],
-        patron_Id: 1,
-        merchant_Id: 1,
+        patron_Id: userId,
+        merchant_Id: 5,
       }),
       method: "POST",
       headers: {
@@ -60,7 +61,7 @@ const Confirmation = (props: PaymentProps) => {
       Swal.fire("Thank You for your payment.");
     }
     setTimeout(() => {
-      window.location.href = "/patron/products";
+      window.location.href = "/patron";
     }, 2000);
   };
 

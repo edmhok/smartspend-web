@@ -50,7 +50,7 @@ const UserLogin = () => {
         // Store the token in localStorage
         localStorage.setItem("token", token);
         localStorage.setItem("role", jsonData.role);
-
+        localStorage.setItem("userId", jsonData.userId);
         window.location.href = "/admin";
         Swal.fire("Good job!", "Login successful");
       } else {
