@@ -4,12 +4,14 @@ import React, { useEffect, useState } from 'react'
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import Link from 'next/link';
-import { Button, IconButton, Tooltip } from '@mui/material';
+import { Button, IconButton, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Tooltip } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { Delete, Edit } from '@mui/icons-material';
 
-interface CartItem {
+interface OrderItem {
     id: number;
     thumbnail: string;
+    productName: string;
     description: string;
     qty: number;
     price: number;
@@ -18,18 +20,20 @@ interface CartItem {
     deleteItem: (id: number) => void;
 }
 
-const CartInfo = () => {
-    const [cartItems, setCartItems] = useState<CartItem[]>([]);
+const OrderList = () => {
+    const [orders, setOrders] = useState<OrderItem[]>([]);
     const [updateQty, setUpdateQty] = useState(null);
+    const [isLoading, setIsLoading] = useState(false);
+    const images = "/jacket-1.jpg";
 
     async function fetchData() {
         try {
-            const response = await fetch("http://localhost:4000/order");
+            const response = await fetch("http://localhost:4000/products");
             console.log(response);
             if (response.ok) {
-                const jsonData: CartItem[] = await response.json();
-                setCartItems(jsonData);
-                // console.log(response);
+                const jsonData: OrderItem[] = await response.json();
+                setOrders(jsonData);
+                //   console.log(response);
             } else {
                 console.error("Failed to fetch data");
             }
@@ -41,29 +45,39 @@ const CartInfo = () => {
         fetchData();
     }, []);
 
-    const handleDelete = async (itemId: number) => {
+    const handleDelete = async (id: number) => {
         try {
             // Make DELETE request to your API
-            await fetch(`http://localhost:4000/order/${itemId}`, {
+            await fetch('http://localhost:4000/order/' + id, {
                 method: "DELETE",
+                headers: {
+                    'Content-Type': 'application/json',
+                },
             });
+            setTimeout(function () {
+                setIsLoading(false);
+            }, 1000)
 
-            // Update state to remove deleted item
-            // setProductData(data.filter(item => item.id !== itemId));
-            fetchData();
         } catch (error) {
-            console.error("Error deleting item:", error);
+            console.error('Error fetching data:', error);
+            setTimeout(function () {
+                setIsLoading(false);
+            }, 1000)
         }
     };
 
+    const grandTotal = orders.reduce((total, item) => {
+        return total + item.qty * item.price;
+    }, 0);
+
     const handleQtyChange = (itemId: number, newQty: number) => {
 
-        const updatedItem = cartItems.find(item => item.id === itemId);
+        const updatedItem = orders.find(item => item.id === itemId);
         if (updatedItem) {
             updatedItem.qty = newQty;
         }
 
-        setCartItems([...cartItems]);
+        setOrders([...orders]);
 
         return {
             // Return updated item to re-render component
@@ -89,66 +103,75 @@ const CartInfo = () => {
                 </div>
             </div>
             <div>
-                <div className="bg-white drop-shadow-md w-[1040px] h-auto mb-5 pb-5">
-                    <div className='text-2xl text-black ps-10 py-7'>Order Summary</div>
+                <div className="container pb-5">
+                    <div className='text-2xl text-black ps-10 py-5'>Order Summary</div>
                     <div className='flex-col flex space-y-2 ps-4'>
-                        <div className='bg-[#F6F6F6] p-[20px] w-[98%] pb-2'>
-                            <ul className='flex flex-row text-thin justify-start gap-[110px] '>
-                                <li>Thumbnail</li>
-                                <li>Description</li>
-                                <li>Quantity</li>
-                                <li>Unit Price</li>
-                                <li>SubTotal Price</li>
-                            </ul>
-                        </div>
-                        <div className='bg-[#F6F6F6] p-[20px] w-[98%] pb-1 text-center'>
-                            <ul>
-                                {cartItems.map(item => (
-                                    <li key={item.id} className='flex flex-row text-thin justify-start gap-[120px]'>
-                                        <li><img src={item.thumbnail} style={{ width: 50, height: 50 }} /></li>
-                                        <li className='ps-6'>{item.description}</li>
-                                        <li className='ps-3'>
-                                            <div className=''>
-                                                <Button size="small" onClick={() => { handleQtyChange(item.id, item.qty - 1) }}>-</Button>
-                                                <span>{item.qty}</span>
-                                                <Button size="small" onClick={() => { handleQtyChange(item.id, item.qty + 1) }}>+</Button>
-                                            </div>
-                                        </li>
-                                        <li>{item.price}</li>
-                                        <li>{cartItems.reduce((total, item) => {
-                                            return total + item.qty * item.price
-                                        }, 0)}
-                                        </li>
-                                        <li className='ps-5'>
-                                            <Tooltip title="Delete">
-                                                <IconButton onClick={() => handleDelete(item.id)}>
-                                                    <DeleteIcon fontSize="small" />
-                                                </IconButton>
-                                            </Tooltip>
-                                        </li>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
+
+                        <TableContainer component={Paper}>
+                            <Table aria-label="MuiTableSample">
+                                <TableHead>
+                                    <TableRow sx={{ padding: '20px' }}>
+                                        <TableCell>Thumbnail</TableCell>
+                                        <TableCell>Name</TableCell>
+                                        <TableCell>Description</TableCell>
+                                        <TableCell>Quantity</TableCell>
+                                        <TableCell>UnitPrice</TableCell>
+                                        <TableCell>SubTotal</TableCell>
+                                        <TableCell>Action</TableCell>
+
+                                    </TableRow>
+                                </TableHead>
+                                <TableBody >
+                                    {orders.map(order => (
+                                        <TableRow key={order.id}>
+                                            <TableCell>
+                                                <img
+                                                    // src={`/api/images/${order.thumbnail}`}
+                                                    src={images}
+                                                    alt={order.productName}
+                                                    className="w-[20px] h-[20px]"
+                                                />
+                                            </TableCell>
+                                            <TableCell>{order.productName}</TableCell>
+                                            <TableCell>{order.description}</TableCell>
+
+                                            <TableCell>
+                                                <Button size="small" onClick={() => { handleQtyChange(order.id, order.qty - 1) }}>-</Button>
+                                                {order.qty}
+                                                <Button size="small" onClick={() => { handleQtyChange(order.id, order.qty + 1) }}>+</Button>
+                                            </TableCell>
+
+                                            <TableCell>{order.price}</TableCell>
+                                            <TableCell>{order.total}</TableCell>
+                                            <TableCell>
+                                                <Tooltip title="Delete">
+                                                    <IconButton onClick={() => handleDelete(order.id)}>
+                                                        <DeleteIcon fontSize="small" />
+                                                    </IconButton>
+                                                </Tooltip>
+                                            </TableCell>
+                                        </TableRow>
+                                    ))}
+                                </TableBody>
+                            </Table>
+                        </TableContainer>
                     </div>
-                    <div className='px-4 py-3 flex justify-end mr-[100px] font-semibold'>
-                        Grand Total : ₱{' total'}
-                    </div>
-
                 </div>
-
-
-                <div className='w-full flex justify-end mb-5 space-x-4'>
-                    <Link href={'/checkout/2'} prefetch={false}>
-                        <button className='px-4 py-2 text-white text-lg font-semibold bg-[#218c20]'>Proceed to CheckOut</button>
-                    </Link>
+                <div className='flex justify-end pe-5 font-semibold'>
+                    Grand Total : ₱{grandTotal}
                 </div>
+            </div>
+
+            <div className='m-7 flex justify-end w-full pe-[200px]'>
+                <Link href={'/checkout/2'} prefetch={false}>
+                    <button className='px-4 py-2 text-white text-lg font-semibold bg-[#218c20]'>Proceed to CheckOut</button>
+                </Link>
             </div>
         </div>
     )
 }
 
-export default CartInfo
+export default OrderList
 
 
 
