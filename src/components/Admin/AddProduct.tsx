@@ -21,7 +21,12 @@ type Data = {
   brand: string;
   description: string;
   sku: string;
-  price: string;
+  category: string;
+  variant: string;
+  size: string;
+  color: string;
+  tags: string;
+  price: number;
   qty: number;
   points: number;
   originalPrice: number;
@@ -34,12 +39,17 @@ export default function AddProducts() {
   console.log({ productId });
 
   const [productData, setProductData] = useState<Data>({
-    id: -1,
+    id: 0,
     productName: "",
     brand: "",
     description: "",
     sku: "",
-    price: "0",
+    category: "",
+    variant: "",
+    size: "",
+    color: "",
+    tags: "",
+    price: 0,
     qty: 0,
     points: 0,
     originalPrice: 0,
@@ -50,6 +60,11 @@ export default function AddProducts() {
   const [brand, setBrand] = useState("");
   const [description, setDescription] = useState("");
   const [sku, setSku] = useState("");
+  const [category, setCategory] = useState("");
+  const [variant, setVariant] = useState("");
+  const [size, setSize] = useState("");
+  const [color, setColor] = useState("");
+  const [tags, setTags] = useState("");
   const [price, setPrice] = useState("");
   const [qty, setQty] = useState("");
   const [points, setPoints] = useState("");
@@ -80,6 +95,11 @@ export default function AddProducts() {
           setBrand(data.brand);
           setDescription(data.description);
           setSku(data.sku);
+          setCategory(data.category);
+          setVariant(data.variant);
+          setSize(data.size);
+          setColor(data.color);
+          setTags(data.tags);
           setPrice(data.price);
           setQty(data.qty);
           setPoints(data.points);
@@ -101,7 +121,7 @@ export default function AddProducts() {
   const saveProduct = async () => {
     const tempFormData = { ...formData };
     const selectedDate = new Date(tempFormData.entryDate);
-    tempFormData.entryDate = format(selectedDate, "yyyy-MM-dd").toString();
+
     try {
       if (isEdit === true) {
         const response = await fetch(
@@ -116,6 +136,11 @@ export default function AddProducts() {
               brand,
               description,
               sku,
+              category,
+              variant,
+              size,
+              color,
+              tags,
               price,
               qty,
               points,
@@ -136,6 +161,11 @@ export default function AddProducts() {
             brand,
             description,
             sku,
+            category,
+            variant,
+            size,
+            color,
+            tags,
             price,
             qty,
             points,
@@ -148,11 +178,15 @@ export default function AddProducts() {
     } catch (error) {
       console.error("Error:", error);
     }
-    // console.log(response);
     setProductName("");
     setBrand("");
     setDescription("");
     setSku("");
+    setCategory("");
+    setVariant("");
+    setSize("");
+    setColor("");
+    setTags("");
     setPrice("");
     setQty("");
     setPoints("");
@@ -298,5 +332,12 @@ export default function AddProducts() {
         </div>
       </div>
     </div>
+
+
+
+
+
+
+
   );
 }

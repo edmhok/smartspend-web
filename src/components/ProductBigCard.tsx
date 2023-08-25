@@ -9,26 +9,31 @@ import { Link, Stack } from "@mui/material";
 import ShoppingBasketOutlinedIcon from "@mui/icons-material/ShoppingBasketOutlined";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import { useSearchParams } from "next/navigation";
-interface propsType {
-  id: number;
-  img: string;
-  title: string;
-  desc: string;
-  price: number;
-  // variant: string;
-  // size: number[];
-  // color: string[];
-  // tags: string;
+// interface propsType {
+//   id: number;
+//   img: string;
+//   title: string;
+//   desc: string;
+//   price: number;
+//   // variant: string;
+//   // size: number[];
+//   // color: string[];
+//   // tags: string;
 
-  // category: string;
-}
+//   // category: string;
+// }
 
 type Data = {
-  img: string;
   id: number;
   productName: string;
   brand: string;
+  imageUrl: string;
   description: string;
+  category: string;
+  variant: string;
+  size: number[];
+  color: string[];
+  tags: string[];
   sku: string;
   price: number;
   qty: number;
@@ -37,37 +42,48 @@ type Data = {
   discount: number;
 };
 
-const ProductBigCard: React.FC<propsType> = ({
+const ProductBigCard: React.FC<Data> = ({
   id,
-  img,
-  title,
-  desc,
+  productName,
+  brand,
+  imageUrl,
+  description,
+  category,
+  variant,
+  size,
+  color,
+  tags,
+  sku,
   price,
-  // variant,
-  // size,
-  // color,
-  // tags,
+  qty,
+  points,
+  originalPrice,
+  discount,
 
-  // category,
 }) => {
   const searchParams = useSearchParams();
   const productId = searchParams.get("id") || "0";
   console.log({ productId });
 
-  const images = "/jacket-1.jpg";
+  const image = "/jacket-1.jpg";
   console.log(productId);
   const [productData, setProductData] = useState<Data>({
-    id: -1,
-    img: "/jacket-1.jpg",
-    productName: "",
-    brand: "",
-    description: "",
-    sku: "",
-    price: 0,
-    qty: 0,
-    points: 0,
-    originalPrice: 0,
-    discount: 0,
+    id,
+    productName,
+    brand,
+    imageUrl,
+    description,
+    category,
+    variant,
+    size,
+    color,
+    tags,
+    sku,
+    price,
+    qty,
+    points,
+    originalPrice,
+    discount,
   });
 
   const fetchProductData = async () => {
@@ -106,51 +122,54 @@ const ProductBigCard: React.FC<propsType> = ({
   }, []);
 
   return (
-    <div className=" bg-white drop-shadow-md w-[1020px] h-[522p] flex flex-row content-center container mt-[50px] mb-[200px]">
-      <div className="bg-slate-200 w-[510px]">
+    <div className=" bg-white drop-shadow-md w-[1020px] h-[522p] flex flex-row content-center container mt-1 mb-[200px]">
+      <div className="bg-white w-[510px]">
         <Image
           className="w-full h-auto"
-          src={images}
+          src={image}
           width={713}
           height={750}
           alt={""}
         />
       </div>
-      <div className="flex-1 flex flex-col ps-[57px]">
-        <div className="text-fuchsia-400 font-semibold text-xl pt-[39px] ">
-          {/* {category} */}
+      <div className="flex flex-col ps-10">
+        <div className="text-[#218c20] font-semibold text-md pt-2 ">
+          {productData.category}
         </div>
-        <div className="text-black font-semibold text-2xl">
-          {productData.productName}
+        <div className="grid gap-x-4 justify-between">
+          <div className="text-black font-semibold text-xl">
+            {productData.productName}
+          </div>
+          <div className="text-[#ffad1e] font-semibold text-xl">
+            Points:{productData.points}
+          </div>
         </div>
-        {/* <div className="text-black font-thin text-xl pb-[30px]">{variant}</div> */}
+        <div className="text-black font-thin text-xl pb-2">{productData.variant}</div>
         <p className="text-black font-thin text-xl pb-[49px]">
           {productData.description}
         </p>
         <div className="text-black font-semibold text-5xl pb-[69px]">
-          {productData.price}
+          ₱ {productData.price}
         </div>
-        {/* <div className="text-black font-thin text-lg pb-[69px]">
-          {size.join(", ")}
+        <div className="text-black font-thin text-lg pb-2">
+          {productData.size}
         </div>
-        <div className="text-black font-thin text-lg pb-[69px]">
-          {color.join(", ")}
+        <div className="text-black font-thin text-lg pb-2">
+          {productData.color}
         </div>
-        <div className="text-black font-thin text-lg pb-[69px]">{tags}</div> */}
+        <div className="text-black font-thin text-lg pb-[30px]">{productData.tags}</div>
 
-        <div className="text-black font-thin pb-[50px] flex self-center gap-3">
-          {/* <Link href={`/checkout/1?id=${productId}`}> */}
+        <div className="text-[#218c20] pb-[50px] flex self-center gap-3">
           <button
             onClick={() => {
               handleAddToCart(productId);
             }}
-            className="bg-black p-4 rounded-lg text-white flex gap-3"
+            className="bg-[#218c20] p-4 rounded-lg text-white flex gap-3"
           >
             <ShoppingBasketOutlinedIcon />
             Add to Cart
           </button>
-          {/* </Link> */}
-          <button className="bg-black p-4 rounded-lg text-white flex gap-3">
+          <button className="bg-[#218c20] p-4 rounded-lg text-white flex gap-3">
             <FavoriteBorderOutlinedIcon sx={{ color: "white" }} />
           </button>
         </div>

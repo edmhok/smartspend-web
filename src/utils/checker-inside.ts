@@ -2,6 +2,7 @@ import { SITE_URL } from "./constants";
 
 export const AuthCheckerInside = () => {
     console.log('init');
+
     const token = window.localStorage.getItem('token');
     const role = window.localStorage.getItem('role');
   
@@ -21,5 +22,4 @@ export const AuthCheckerInside = () => {
     }
    
   } 
-  
   

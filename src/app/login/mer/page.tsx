@@ -128,7 +128,7 @@ const MerchantLogin = () => {
             Sign up and discover a great amount of new opportunities!
           </p>
           <div className="flex justify-center">
-            <Link href={"/register/mer"}>
+            <Link href={"/register/mer"} prefetch={false}>
               <Button className="text-[#218c20] rounded-xl p-5 hover:bg-white bg-[#85f084] font-bold">
                 Register
               </Button>

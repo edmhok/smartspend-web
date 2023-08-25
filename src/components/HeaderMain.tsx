@@ -1,13 +1,22 @@
 'use client'
 
 import React from 'react'
-import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
-import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
-import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
-import { Container } from '@mui/material';
+import { IconButton } from '@mui/material';
+import Badge, { BadgeProps } from '@mui/material/Badge';
 import Image from 'next/image';
 import logo from '../../public/logo.png'
 import Link from 'next/link';
+import { styled } from '@mui/material/styles';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+
+const StyledBadge = styled(Badge)<BadgeProps>(({ theme }) => ({
+    '& .MuiBadge-badge': {
+        right: 0,
+        top: -5,
+        border: `2px solid ${theme.palette.background.paper}`,
+        padding: '0 4px',
+    },
+}));
 
 const HeaderMain = () => {
     return (
@@ -29,21 +38,14 @@ const HeaderMain = () => {
                     </Link>
                 </div>
                 <div className="hidden lg:flex gap-4 text-gray-500 text-[30px]">
-                    <Link href="/login/adm" prefetch={false}>
-                        <div className="relative">
-                            <ShoppingCartOutlinedIcon className='w-8 h-8 space-x-2' />
-                            <div className="bg-[#ffad1e] rounded-full absolute top-0 right-0 w-[18px] h-[18px] text-[12px] text-white grid place-items-center translate-x-1 -translate-y-1">
-                                0
-                            </div>
-                        </div>
+                    <Link href={'/login/adm'} prefetch={false}>
+                        <IconButton aria-label="cart">
+                            <StyledBadge badgeContent={4} color='success'>
+                                <ShoppingCartIcon />
+                            </StyledBadge>
+                        </IconButton>
                     </Link>
 
-                    {/* <Link href="/login/usr" prefetch={false}>
-                <PersonOutlineOutlinedIcon className="w-8 h-8 space-x-2 mt-2"/>
-            </Link>
-            <div className="relative">
-                <MenuRoundedIcon className='w-8 h-8 space-x-2 flex '/>
-            </div> */}
                 </div>
             </div>
         </div>

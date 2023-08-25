@@ -148,7 +148,7 @@ const UserLogin = () => {
                 <Button
                   type="submit"
                   onClick={handleLogin}
-                  className="text-[#218c20] rounded-lg hover:bg-[#60df5e] bg-[#85f084] font-bold px-10 py-4 link"
+                  className="text-[#218c20] rounded-lg hover:bg-[#60df5e] bg-[#85f084] font-bold px-10 py-4"
                 >
                   {" "}
                   SignIn

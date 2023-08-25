@@ -88,12 +88,24 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 const themeTest = createTheme({
   palette: {
     primary: {
-      main: '#fff',
-    },
-    secondary: {
       main: '#218c20',
     },
-  },
+    secondary: {
+      main: '#fff',
+    },
+    error: {
+      main: '#d32f2f'
+    },
+    warning: {
+      main: '#ed6c02'
+    },
+    info: {
+      main: '#0288d1'
+    },
+    success: {
+      main: '#2e7d32'
+    },
+  }
 });
 
 
@@ -185,10 +197,10 @@ export default function MerchantLayout({ children }: PropsWithChildren) {
 
       <Box sx={{ display: 'flex' }}>
         <CssBaseline />
-        <AppBar position="fixed" open={open} className='bg-white'>
+        <AppBar position="fixed" open={open} color='secondary'>
           <Toolbar>
             <IconButton
-              color="secondary"
+              color="primary"
               aria-label="open drawer"
               onClick={handleDrawerOpen}
               edge="start"
@@ -196,7 +208,7 @@ export default function MerchantLayout({ children }: PropsWithChildren) {
             >
               <MenuIcon />
             </IconButton>
-            <Typography color="secondary" variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            <Typography color="primary" variant="h6" component="div" sx={{ flexGrow: 1 }}>
               Merchant
             </Typography>
             {auth && (
@@ -209,7 +221,7 @@ export default function MerchantLayout({ children }: PropsWithChildren) {
                   onClick={handleMenu}
                   color="secondary"
                 >
-                  <AccountCircle />
+                  <AccountCircle color='primary' />
                 </IconButton>
                 <Menu
                   id="menu-appbar"
@@ -259,8 +271,8 @@ export default function MerchantLayout({ children }: PropsWithChildren) {
           <Divider />
           <List>
             {[
-              { text: 'Home', href: '/dashboard' },
-              { text: 'My Info', href: '/myinfo' }
+              { text: 'Home', href: '/merchant' },
+              { text: 'My Info', href: '/merchant' }
             ].map((item) => (
               <ListItem sx={{ textAlign: 'center' }} key={item.text}>
                 <ListItemButton component="a" href={item.href}>

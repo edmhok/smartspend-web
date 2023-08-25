@@ -66,10 +66,10 @@ const MerchantLogin = () => {
             </p>
             <p className="text-sm text-center">Login using your social</p>
             <div className="flex flex-row space-x-10 pt-3 pb-3 justify-center">
-              <Link href="https://www.google.com">
+              <Link href="https://www.google.com" prefetch={false}>
                 <GoogleIcon />
               </Link>
-              <Link href="https://www.facebook.com">
+              <Link href="https://www.facebook.com" prefetch={false}>
                 <FacebookIcon />
               </Link>
             </div>
@@ -110,7 +110,7 @@ const MerchantLogin = () => {
                 </div>
               )}
 
-              <Link href={"/"} className="text-black hover:text-[#218c20] link">
+              <Link href={"/"} className="text-black hover:text-[#218c20] link" prefetch={false}>
                 Forgot your password?
               </Link>
 
@@ -135,7 +135,7 @@ const MerchantLogin = () => {
             Sign up and discover a great amount of new opportunities!
           </p>
           <div className="flex justify-center">
-            <Link href={"/register/pat"}>
+            <Link href={"/register/pat"} prefetch={false}>
               <Button className="text-[#218c20] rounded-xl p-5 hover:bg-white bg-[#85f084] font-bold">
                 Register
               </Button>

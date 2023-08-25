@@ -1,6 +1,5 @@
 'use client'
 
-import NewProducts from '@/components/NewProducts'
 import React, {
   PropsWithChildren, useCallback, useEffect, useState,
 } from 'react'

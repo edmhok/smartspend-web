@@ -16,20 +16,21 @@ export default function IntroMember() {
     const role = localStorage.getItem('role')
     const userId = localStorage.getItem('userId')
 
-    const api = role === 'patron' ? `http://localhost:4000/patrons/${userId}` : 
+    const api = role === 'patron' ? `http://localhost:4000/patrons/${userId}` :
       role === 'merchant' ? `http://localhost:4000/merchants/${userId}` : ''
 
-      if(api !== '') {
-        const response = await fetch(api, {
-          headers: { 'Authorization': `Bearer ${token}` }
-        })
-        const data = await response.json()
-        setDetails(data)
-      }
-      else {
-        setDetails('')
-      }
-    
+    if (api !== '') {
+      const response = await fetch(api, {
+        headers: { 'Authorization': `Bearer ${token}` }
+      })
+      const data = await response.json()
+      setDetails(data)
+    }
+    else {
+      setDetails(details)
+    }
+
+
   }
   useEffect(() => {
     init()
