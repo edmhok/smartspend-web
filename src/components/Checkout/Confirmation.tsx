@@ -40,7 +40,7 @@ const Confirmation = (props: PaymentProps) => {
     const token = localStorage.getItem("token");
     const userId = localStorage.getItem("userId");
 
-    const result = await fetch(`http://localhost:4000/order`, {
+    const result = await fetch(`${process.env.API_URL}/order`, {
       body: JSON.stringify({
         products_Id: shop[0],
         patron_Id: userId,

@@ -38,7 +38,7 @@ export default function AddProducts() {
         const selectedDate = new Date(tempFormData.entryDate);
         tempFormData.entryDate = format(selectedDate, "yyyy-MM-dd").toString();
 
-        const response = await fetch("http://localhost:4000/products", {
+        const response = await fetch(`${process.env.API_URL}/products`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

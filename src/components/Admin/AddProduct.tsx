@@ -5,7 +5,7 @@ import TextField from "@mui/material/TextField";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { Button } from "@mui/material";
-// import { format } from "date-fns";
+import { format } from "date-fns";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { useSearchParams } from "next/navigation";
@@ -70,7 +70,7 @@ export default function AddProducts() {
     try {
       if (productId) {
         const response = await fetch(
-          `http://localhost:4000/products/${productId}`
+          `${process.env.API_URL}/products/${productId}`
         );
         if (response.ok) {
           const data = await response.json();
@@ -105,7 +105,7 @@ export default function AddProducts() {
     try {
       if (isEdit === true) {
         const response = await fetch(
-          `http://localhost:4000/products/${productId}`,
+          `${process.env.API_URL}/products/${productId}`,
           {
             method: "PATCH",
             headers: {
@@ -126,7 +126,7 @@ export default function AddProducts() {
           }
         );
       } else {
-        const response = await fetch("http://localhost:4000/products", {
+        const response = await fetch(`${process.env.API_URL}0/products`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

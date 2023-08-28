@@ -32,7 +32,7 @@ const MerchantLogin = () => {
   };
 
   const handleLogin = async () => {
-    const response = await fetch("http://localhost:4000/auth/merchant/login", {
+    const response = await fetch(`${process.env.API_URL}/auth/merchant/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

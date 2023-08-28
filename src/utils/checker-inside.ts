@@ -1,4 +1,4 @@
-import { SITE_URL } from "./constants";
+// import { SITE_URL } from "./constants";
 
 export const AuthCheckerInside = () => {
     console.log('init');
@@ -9,13 +9,13 @@ export const AuthCheckerInside = () => {
         window.location.href = '/';
     } 
     else {
-      if (!window.location.href.includes(`${SITE_URL}/merchant`) && role === 'merchant') {
+      if (!window.location.href.includes(`${process.env.SITE_URL}/merchant`) && role === 'merchant') {
           window.location.href = '/merchant';
       } 
-      if (!window.location.href.includes(`${SITE_URL}/patron`) && role === 'patron') {
+      if (!window.location.href.includes(`${process.env.SITE_URL}/patron`) && role === 'patron') {
         window.location.href = '/patron';
       } 
-      if (!window.location.href.includes(`${SITE_URL}/admin`) && role === 'admin') {
+      if (!window.location.href.includes(`${process.env.SITE_URL}/admin`) && role === 'admin') {
         window.location.href = '/admin';
       } 
     }

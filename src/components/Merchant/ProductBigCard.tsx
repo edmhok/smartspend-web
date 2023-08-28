@@ -74,7 +74,7 @@ const ProductBigCard: React.FC<propsType> = ({
     try {
       if (productId) {
         const response = await fetch(
-          `http://localhost:4000/products/${productId}`
+          `${process.env.API_URL}/products/${productId}`
         );
         if (response.ok) {
           const data = await response.json();

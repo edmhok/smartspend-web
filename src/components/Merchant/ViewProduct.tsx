@@ -34,7 +34,7 @@ export default function ViewProduct() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await fetch("http://localhost:4000/products");
+        const response = await fetch(`${process.env.API_URL}/products`);
         console.log(response);
         if (response.ok) {
           const jsonData: Data[] = await response.json();

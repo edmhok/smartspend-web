@@ -16,8 +16,8 @@ export default function IntroMember() {
     const role = localStorage.getItem('role')
     const userId = localStorage.getItem('userId')
 
-    const api = role === 'patron' ? `http://localhost:4000/patrons/${userId}` : 
-      role === 'merchant' ? `http://localhost:4000/merchants/${userId}` : ''
+    const api = role === 'patron' ? `${process.env.API_URL}/patrons/${userId}` : 
+      role === 'merchant' ? `${process.env.API_URL}/merchants/${userId}` : ''
 
       if(api !== '') {
         const response = await fetch(api, {
@@ -27,7 +27,7 @@ export default function IntroMember() {
         setDetails(data)
       }
       else {
-        setDetails('')
+        setDetails({points:0})
       }
     
   }
@@ -55,15 +55,15 @@ export default function IntroMember() {
 
 
         <Typography variant="body1">
-          We're thrilled to have you as part of our community. SmartSpend is dedicated to helping you save money and live smarter.
+          We&apos;re thrilled to have you as part of our community. SmartSpend is dedicated to helping you save money and live smarter.
         </Typography>
 
         <Typography variant="body1">
-          Our online store offers the latest products at unbeatable prices. As a member, you'll have access to exclusive deals and our rewards program.
+          Our online store offers the latest products at unbeatable prices. As a member, you&apos;ll have access to exclusive deals and our rewards program.
         </Typography>
 
         <Typography variant="body1">
-          Feel free to browse our catalog and don't hesitate to contact us if you need any assistance.
+          Feel free to browse our catalog and don&apos;t hesitate to contact us if you need any assistance.
         </Typography>
 
         <Typography variant="body1" sx={{ mb: 2 }}>

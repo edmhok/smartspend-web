@@ -32,7 +32,7 @@ export default function ViewPoints() {
             try {
                 const token = localStorage.getItem("token");
 
-                const response = await fetch("http://localhost:4000/patrons", {
+                const response = await fetch(`${process.env.API_URL}/patrons`, {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }
@@ -72,7 +72,7 @@ export default function ViewPoints() {
         try {
             const token = localStorage.getItem("token");
 
-            const response = await fetch(`http://localhost:4000/patron/${selectedPatron.id}`, {
+            const response = await fetch(`${process.env.API_URL}/patron/${selectedPatron.id}`, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',
@@ -105,7 +105,7 @@ export default function ViewPoints() {
         try {
             const token = localStorage.getItem("token");
 
-            const response = await fetch(`http://localhost:4000/merchants/${id}`, {
+            const response = await fetch(`${process.env.API_URL}/merchants/${id}`, {
                 method: 'DELETE',
                 headers: {
                     Authorization: `Bearer ${token}`

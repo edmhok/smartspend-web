@@ -54,7 +54,7 @@ export default function MerRegister() {
     const selectedDate = new Date(tempFormData.birthdate);
     tempFormData.birthdate = format(selectedDate, 'yyyy-MM-dd').toString();
 
-    const response = await fetch('http://localhost:4000/merchants', {
+    const response = await fetch(`${process.env.API_URL}/merchants`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

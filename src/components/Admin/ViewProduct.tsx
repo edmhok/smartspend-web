@@ -34,7 +34,7 @@ export default function ViewProduct() {
 
   async function fetchData() {
     try {
-      const response = await fetch("http://localhost:4000/products");
+      const response = await fetch(`${process.env.API_URL}/products`);
       console.log(response);
       if (response.ok) {
         const jsonData: Data[] = await response.json();
@@ -54,7 +54,7 @@ export default function ViewProduct() {
   const handleDelete = async (itemId: number) => {
     try {
       // Make DELETE request to your API
-      await fetch(`http://localhost:4000/products/${itemId}`, {
+      await fetch(`${process.env.API_URL}/products/${itemId}`, {
         method: "DELETE",
       });
 
