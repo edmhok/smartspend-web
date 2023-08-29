@@ -2,7 +2,6 @@
 
 import {
   Button,
-  Checkbox,
   FormControl,
   IconButton,
   InputAdornment,
@@ -107,11 +106,11 @@ const MerchantLogin = () => {
               {error && <div className='flex self-center text-lg text-[#218c20]'>{error}</div>}
               <Link href={'/'} className='text-black hover:text-[#218c20] link' prefetch={false} >Forgot your password?</Link>
 
-              <div className="flex justify-center pb-5">
+              <div className="flex justify-center pb-5 px-10">
                 <Button
                   type="submit"
                   onClick={handleLogin}
-                  className="text-[#218c20] rounded-lg hover:bg-[#60df5e] bg-[#85f084] font-bold px-10 py-4"
+                  color='success'
                 >
                   Sign-In
                 </Button>

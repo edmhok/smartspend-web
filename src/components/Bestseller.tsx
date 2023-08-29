@@ -5,6 +5,7 @@ import { Container, Typography, Button } from '@mui/material';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import Link from 'next/link';
+import Image from 'next/image';
 interface Item {
   imgPath: string;
   title: string;
@@ -101,7 +102,12 @@ const Item = ({ item }: { item: Item }) => (
     <div className='text-center bg-white drop-shadow-md hover:drop-shadow-xl space-y-2 py-5 px-5 border border-gray-200 rounded-xl max-w-[200px] max-h-[230px] pt-5'>
       <Link href='/login/adm' className='link' prefetch={false}>
 
-        <img src={item.imgPath} alt={item.title} className='w-[137px] h-[130px]' />
+        <Image
+          src={item.imgPath}
+          alt={item.title}
+          width={137}
+          height={130}
+        />
         <Typography>{item.title}</Typography>
         <Typography>{item.status}</Typography>
 

@@ -290,7 +290,7 @@ export default function MemberLayout({ children }: PropsWithChildren) {
             ))}
           </List>
           <Divider /> */}
-          <List>
+          {/* <List>
             {groups.map(group => (
               <>
                 <ListItemButton onClick={() => handleClick(group.id)}>
@@ -309,10 +309,11 @@ export default function MemberLayout({ children }: PropsWithChildren) {
                 </Collapse>
               </>
             ))}
-          </List>
+          </List> */}
           <Divider />
           <List>
             {[
+              { text: 'Order', href: '/patron/order' },
               { text: 'Points', href: '/patron/points' },
               // { text: 'Affiliates', href: '/affiliates' }
 

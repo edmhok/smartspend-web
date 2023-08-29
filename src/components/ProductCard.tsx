@@ -7,18 +7,18 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import Rating from "@mui/material/Rating";
 import { Stack } from "@mui/material";
 interface propsType {
-  img: string;
-  title: string;
+  imageUrl: string;
+  productName: string;
   description: string;
-  // rating: number;
-  price: number;
+  rating: number;
+  price: string;
 }
 
 const ProductCard: React.FC<propsType> = ({
-  // img,
-  title,
+  imageUrl,
+  productName,
   description,
-  // rating,
+  rating,
   price,
 }) => {
 
@@ -33,23 +33,23 @@ const ProductCard: React.FC<propsType> = ({
         </div>
         <Image
           className="w-full h-auto"
-          src={"/jacket-1.jpg"}
+          src={imageUrl}
           width={200}
           height={250}
-          alt={title}
+          alt={productName}
         />
       </div>
 
       <div className="space-y-2 py-2 ps-4">
-        <h2 className="text-[#218c20] font-medium uppercase text-center link">{title}</h2>
+        <h2 className="text-[#218c20] font-medium uppercase text-center link">{productName}</h2>
         <p className="text-gray-500 max-w-[150px]">{description}</p>
         <Stack spacing={1}>
-          <Rating name="half-rating" defaultValue={2.5} precision={0.5} />
+          <Rating defaultValue={2.5} precision={0.5} value={rating} />
         </Stack>
         <div className="font-bold flex gap-4 link">
           ${price}
           <del className="text-gray-500 font-normal">
-            {/* ${parseInt(price) + 50}.00 */}
+            ${parseInt(price) + 50}.00
           </del>
         </div>
 

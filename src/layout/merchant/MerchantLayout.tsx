@@ -299,7 +299,7 @@ export default function MerchantLayout({ children }: PropsWithChildren) {
           ))}
         </List>
         <Divider /> */}
-          <List>
+          {/* <List>
             {groups.map(group => (
               <>
                 <ListItemButton onClick={() => handleClick(group.id)}>
@@ -319,10 +319,13 @@ export default function MerchantLayout({ children }: PropsWithChildren) {
               </>
             ))}
           </List>
-          <Divider />
+          <Divider /> */}
 
           <List>
             {[
+              { text: 'Add Product', href: '/merchant/product/add' },
+              { text: 'View Products', href: '/merchant/product/view' },
+              { text: 'View Order', href: '/merchant/order' },
               { text: 'Points', href: '/merchant/points' }
             ].map((item) => (
               <ListItem sx={{ textAlign: 'center' }} key={item.text}>

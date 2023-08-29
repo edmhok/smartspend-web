@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { Container, Typography, Button } from '@mui/material';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-
+import Image from 'next/image';
 interface Item {
   imgPath: string;
   title: string;
@@ -89,7 +89,12 @@ const Category = () => {
 
 const Item = ({ item }: { item: Item }) => (
   <div className='flex-col justify-center flex bg-white drop-shadow-md hover:drop-shadow-xl space-y-[61px] px-5 py-5 border border-gray-200 rounded-xl max-w-[290px] max-h-[290px] text-center pt-5'>
-    <img src={item.imgPath} alt={item.title} />
+    <Image
+      src={item.imgPath}
+      alt={item.title}
+      width={137}
+      height={130}
+    />
     <Typography>{item.title}</Typography>
   </div>
 );
