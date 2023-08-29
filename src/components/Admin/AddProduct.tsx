@@ -6,7 +6,6 @@ import { LocalizationProvider } from "@mui/x-date-pickers";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { Button } from "@mui/material";
 import { format } from "date-fns";
-import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";

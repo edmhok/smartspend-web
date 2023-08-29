@@ -1,6 +1,6 @@
 'use client'
 
-import React, { PropsWithChildren } from 'react'
+import React, { PropsWithChildren, useMemo } from 'react'
 import { ThemeProvider, createTheme, styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
@@ -94,9 +94,13 @@ const themeTest = createTheme({
   },
 });
 
-
 export default function MemberLayout({ children }: PropsWithChildren) {
-  AuthCheckerInside();
+  
+  useMemo(() => {
+    if(typeof window !== 'undefined') {
+      AuthCheckerInside(window);
+    }
+  }, [])
 
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);

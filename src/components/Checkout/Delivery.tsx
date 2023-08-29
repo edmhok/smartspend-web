@@ -182,10 +182,10 @@ const Delivery = () => {
             </Grid>
         </Grid>
             <div className='w-full mb-5 space-x-10 flex justify-end pe-[430px]'>
-                <Link href={'/checkout/1'} >
+                <Link href={'/checkout/a'} prefetch={false}>
                 <button className='px-4 py-2 text-white text-lg font-semibold bg-fuchsia-400'>Back</button>
                 </Link>
-                <Link href={'/checkout/3'} >
+                <Link href={'/checkout/c'} prefetch={false}>
                 <button className='px-4 py-2 text-white text-lg font-semibold bg-fuchsia-400'>Continue</button>
                 </Link>
             </div>

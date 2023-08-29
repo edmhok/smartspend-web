@@ -4,12 +4,12 @@ import CartInfo from '@/components/Checkout/CartInfo';
 import Footer from '@/components/Footer'
 import HeaderSub from '@/components/HeaderSub'
 import HeaderTop from '@/components/HeaderTop'
+import { NextPage } from 'next';
 
-import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 
-export default function CartMerchant() {
+const CheckoutA: NextPage = () => {
   const [items, setItems] = useState<{id: number, name: string}[]>([]);
   const [loading, setLoading] = useState(false);
 
@@ -45,3 +45,5 @@ const deleteItem = (itemId: number) => {
     </>
   )
 }
+
+export default CheckoutA

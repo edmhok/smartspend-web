@@ -5,12 +5,12 @@ import Delivery from '@/components/Checkout/Delivery';
 import Footer from '@/components/Footer'
 import HeaderSub from '@/components/HeaderSub'
 import HeaderTop from '@/components/HeaderTop'
+import { NextPage } from 'next';
 
-import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 
-export default function ScanQr() {
+const CheckoutC: NextPage = () => {
   const [items, setItems] = useState<{id: number, name: string}[]>([]);
   const [loading, setLoading] = useState(false);
 
@@ -46,3 +46,5 @@ useEffect(() => {
     </>
   )
 }
+
+export default CheckoutC

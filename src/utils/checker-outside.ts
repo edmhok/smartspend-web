@@ -1,18 +1,18 @@
 
-export const AuthCheckerOutside = () => {
+export const AuthCheckerOutside = (window:any) => {
     console.log('init');
-    const token = window.localStorage.getItem('token');
-    const role = window.localStorage.getItem('role');
+    const token = localStorage.getItem('token');
+    const role = localStorage.getItem('role');
   
     if (token) {
       if (role === 'admin') {
-        window.location.href = '/admin';
+         window.location.href = '/admin';
       }
       if (role === 'merchant') {
-        window.location.href = '/merchant'; 
+         window.location.href = '/merchant'; 
       }
       if (role === 'patron') {
-        window.location.href = '/patron';
+         window.location.href = '/patron';
       }
     } 
   } 

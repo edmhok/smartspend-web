@@ -3,7 +3,7 @@ import type { NextPage } from 'next'
 import ViewProduct from '@/components/Admin/ViewProduct'
 import { MerchantLayout } from '@/layout/merchant'
 
-const Dashboard: NextPage = () => (
+const MerchantProductView: NextPage = () => (
     <MerchantLayout>
         <ViewProduct />
 
@@ -11,4 +11,4 @@ const Dashboard: NextPage = () => (
 )
 
 
-export default Dashboard
+export default MerchantProductView

@@ -2,7 +2,7 @@
 
 import NewProducts from '@/components/NewProducts'
 import React, {
-  PropsWithChildren, useCallback, useEffect, useState,
+  PropsWithChildren, useCallback, useEffect, useMemo, useState,
 } from 'react'
 import { ThemeProvider, createTheme, styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
@@ -99,7 +99,11 @@ const themeTest = createTheme({
 });
 
 export default function AdminLayout({ children }: PropsWithChildren) {
-  AuthCheckerInside();
+  useMemo(() => {
+    if(typeof window !== 'undefined') {
+      AuthCheckerInside(window);
+    }
+  }, [])
 
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -264,7 +268,7 @@ export default function AdminLayout({ children }: PropsWithChildren) {
             {[
               { text: 'Dashboard', href: '/admin' },
               // { text: 'Leaderboard', href: '/admin/leaderboard' },
-              { text: 'Merchant Points', href: '/admin/points' },
+              // { text: 'Merchant Points', href: '/admin/points' },
             ].map((item) => (
               <ListItem sx={{ textAlign: 'center' }} key={item.text}>
                 <ListItemButton component="a" href={item.href}>

@@ -2,10 +2,6 @@
 
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
-import IconButton from "@mui/material/IconButton";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import Rating from "@mui/material/Rating";
-import { Link, Stack } from "@mui/material";
 import ShoppingBasketOutlinedIcon from "@mui/icons-material/ShoppingBasketOutlined";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import { useSearchParams } from "next/navigation";
@@ -99,7 +95,7 @@ const ProductBigCard: React.FC<propsType> = ({
     }
     console.log({ shop });
     localStorage.setItem("shop", JSON.stringify(shop));
-    window.location.href = `/checkout/1?id=${productId}`;
+    window.location.href = `/checkout/a?id=${productId}`;
   };
   useEffect(() => {
     fetchProductData();
@@ -139,7 +135,7 @@ const ProductBigCard: React.FC<propsType> = ({
         <div className="text-black font-thin text-lg pb-[69px]">{tags}</div> */}
 
         <div className="text-black font-thin pb-[50px] flex self-center gap-3">
-          {/* <Link href={`/checkout/1?id=${productId}`}> */}
+          {/* <Link href={`/checkout/a?id=${productId}`}> */}
           <button
             onClick={() => {
               handleAddToCart(productId);

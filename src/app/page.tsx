@@ -8,10 +8,16 @@ import Hero from '@/components/Hero'
 import Navbar from '@/components/Navbar'
 import NewProducts from '@/components/NewProducts'
 import { AuthCheckerOutside } from '@/utils/checker-outside'
+import { useMemo } from 'react'
 
 export default function Home() {
 
-  AuthCheckerOutside()
+  useMemo(() => {
+    if(typeof window !== 'undefined') {
+      AuthCheckerOutside(window);
+    }
+  }, [])
+
   return (
     <main className='place-content-center'>
       <HeaderMain />
