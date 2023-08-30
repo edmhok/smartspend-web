@@ -71,8 +71,8 @@ const AddProducts = () => {
         entryDate: new Date(),
     });
 
-    const urlParams = new URLSearchParams(window.location.search);
     useEffect(() => {
+        const urlParams = new URLSearchParams(window.location.search);
         console.log(urlParams.get('isEdit'))
 
         if (urlParams.get('isEdit')) {
@@ -138,6 +138,7 @@ const AddProducts = () => {
         const selectedDate = new Date(tempFormData.entryDate);
         tempFormData.entryDate = format(selectedDate, 'yyyy-MM-dd').toString();
 
+        const urlParams = new URLSearchParams(window.location.search);
         if (urlParams.get('isEdit')) {
             const id = urlParams.get('id');
             try {
