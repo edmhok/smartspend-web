@@ -16,20 +16,20 @@ export default function IntroMember() {
     const role = localStorage.getItem('role')
     const userId = localStorage.getItem('userId')
 
-    const api = role === 'patron' ? `${process.env.API_URL}/patrons/${userId}` : 
-      role === 'merchant' ? `${process.env.API_URL}/merchants/${userId}` : ''
+    const api = role === 'patron' ? `${process.env.NEXT_PUBLIC_API_URL}/patrons/${userId}` :
+      role === 'merchant' ? `${process.env.NEXT_PUBLIC_API_URL}/merchants/${userId}` : ''
 
-      if(api !== '') {
-        const response = await fetch(api, {
-          headers: { 'Authorization': `Bearer ${token}` }
-        })
-        const data = await response.json()
-        setDetails(data)
-      }
-      else {
-        setDetails({points:0})
-      }
-    
+    if (api !== '') {
+      const response = await fetch(api, {
+        headers: { 'Authorization': `Bearer ${token}` }
+      })
+      const data = await response.json()
+      setDetails(data)
+    }
+    else {
+      setDetails({ points: 0 })
+    }
+
   }
   useEffect(() => {
     init()

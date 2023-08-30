@@ -100,7 +100,7 @@ const themeTest = createTheme({
 
 export default function AdminLayout({ children }: PropsWithChildren) {
   useMemo(() => {
-    if(typeof window !== 'undefined') {
+    if (typeof window !== 'undefined') {
       AuthCheckerInside(window);
     }
   }, [])
@@ -279,7 +279,7 @@ export default function AdminLayout({ children }: PropsWithChildren) {
           </List>
           <Divider />
           <List>
-            {/* {groups.map(group => (
+            {groups.map(group => (
               <>
                 <ListItemButton onClick={() => handleClick(group.id)}>
                   <ListItemText sx={{ textAlign: 'center' }}>{group.title}</ListItemText>
@@ -296,7 +296,7 @@ export default function AdminLayout({ children }: PropsWithChildren) {
                   </List>
                 </Collapse>
               </>
-            ))} */}
+            ))}
           </List>
           <Divider />
           {/* <List>

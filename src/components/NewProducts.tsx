@@ -153,7 +153,7 @@ const NewProducts = () => {
 
   async function fetchData() {
     try {
-      const response = await fetch(`${process.env.API_URL}/products`);
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/products`);
       console.log(response);
       if (response.ok) {
         const jsonData: Data[] = await response.json();

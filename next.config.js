@@ -11,7 +11,7 @@ const nextConfig = {
         return config;
       },
     trailingSlash: true,
-    output: 'export',
+    // output: 'export',
     // experimental: {
     //     appDir: true
     // },

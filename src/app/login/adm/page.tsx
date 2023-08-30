@@ -32,7 +32,7 @@ const UserLogin = () => {
 
   const handleLogin = async () => {
     try {
-      const response = await fetch(`${process.env.API_URL}/auth/login`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -57,24 +57,6 @@ const UserLogin = () => {
       setError("Error logging in");
     }
   };
-
-  // const handleChange = () => {
-  //   return Swal.fire({
-  //     title: 'Choose option',
-  //     showDenyButton: true,
-  //     showConfirmButton: true,
-  //     confirmButtonText: 'Patron',
-  //     denyButtonText: 'Merchant'
-  //   }).then((result) => {
-  //     if (result.isConfirmed) {
-  //       window.location.href = '/register/pat';
-  //       Swal.fire('You chose Patron');
-  //     } else if (result.isDenied) {
-  //       window.location.href = '/register/mer';
-  //       Swal.fire('You chose Merchant');
-  //     }
-  //   });
-  // }
 
   return (
     <div className="flex justify-center p-[10px]">
@@ -147,7 +129,7 @@ const UserLogin = () => {
                   onClick={handleLogin}
                   className="text-[#218c20] rounded-lg hover:bg-[#60df5e] bg-[#85f084] font-bold px-10 py-4"
                 >
-                  {" "}
+                  {/* {" "} */}
                   SignIn
                 </Button>
               </div>

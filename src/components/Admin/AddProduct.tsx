@@ -69,7 +69,7 @@ export default function AddProducts() {
     try {
       if (productId) {
         const response = await fetch(
-          `${process.env.API_URL}/products/${productId}`
+          `${process.env.NEXT_PUBLIC_API_URL}/products/${productId}`
         );
         if (response.ok) {
           const data = await response.json();
@@ -104,7 +104,7 @@ export default function AddProducts() {
     try {
       if (isEdit === true) {
         const response = await fetch(
-          `${process.env.API_URL}/products/${productId}`,
+          `${process.env.NEXT_PUBLIC_API_URL}/products/${productId}`,
           {
             method: "PATCH",
             headers: {
@@ -125,7 +125,7 @@ export default function AddProducts() {
           }
         );
       } else {
-        const response = await fetch(`${process.env.API_URL}0/products`, {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}0/products`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

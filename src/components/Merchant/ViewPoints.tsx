@@ -32,7 +32,7 @@ export default function ViewPoints() {
             try {
                 const token = localStorage.getItem("token");
 
-                const response = await fetch(`${process.env.API_URL}/merchants`, {
+                const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/merchants`, {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }

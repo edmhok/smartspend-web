@@ -149,7 +149,7 @@ export default function Products() {
     try {
       if (productId) {
         const response = await fetch(
-          `${process.env.API_URL}/products/${productId}`
+          `${process.env.NEXT_PUBLIC_API_URL}/products/${productId}`
         );
         if (response.ok) {
           const data = await response.json();

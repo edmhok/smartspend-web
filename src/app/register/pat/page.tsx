@@ -53,7 +53,7 @@ export default function MerRegister() {
     const selectedDate = new Date(tempFormData.birthdate);
     tempFormData.birthdate = format(selectedDate, 'yyyy-MM-dd').toString();
 
-    const response = await fetch(`${process.env.API_URL}/patrons`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/patrons`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

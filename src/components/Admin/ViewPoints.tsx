@@ -30,7 +30,7 @@ export default function ViewPoints() {
     try {
       const token = localStorage.getItem("token");
 
-      const response = await fetch(`${process.env.API_URL}/merchants`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/merchants`, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -73,7 +73,7 @@ export default function ViewPoints() {
       // const tokenRes = await fetch('http://localhost:4000/auth/login');
       // const { token } = await tokenRes.json();
       const token = localStorage.getItem("token");
-      const response = await fetch(`${process.env.API_URL}/merchants/${selectedMerchant.id}`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/merchants/${selectedMerchant.id}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -97,13 +97,13 @@ export default function ViewPoints() {
     }
 
   }
-  
+
   // Add a deleteMerchant function
   const deleteMerchant = async (id: number) => {
     try {
       const token = localStorage.getItem("token");
 
-      const response = await fetch(`${process.env.API_URL}/merchants/${id}`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/merchants/${id}`, {
         method: 'DELETE',
         headers: {
           Authorization: `Bearer ${token}`
