@@ -11,13 +11,13 @@ import { format } from "date-fns";
 
 interface FormData {
   birthdate: any;
-  affiliate_id: number;
 }
 
-export default function MerRegister() {
+export default function PatronRegister() {
   const [error, setError] = useState('');
-  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmpassword, setConfirmPassword] = useState('');
   const [first_name, setFirstName] = useState('');
   const [middle_name, setMiddleName] = useState('');
   const [last_name, setLastName] = useState('');
@@ -28,9 +28,9 @@ export default function MerRegister() {
   const [country, setCountry] = useState('');
   const [zipcode, setZipcode] = useState('');
   const [points, setPoints] = useState('');
+  const [affiliate, setAffiliate] = useState('');
   const [formData, setFormData] = useState<FormData>({
-    birthdate: new Date(),
-    affiliate_id: 0,
+    birthdate: new Date()
   });
 
   const handleDateChange = (value: any) => {
@@ -40,15 +40,7 @@ export default function MerRegister() {
     setFormData(tempFormData);
   }
 
-  const handleChange = (event: any) => {
-    setFormData({
-      ...formData,
-      [event.target.name]: event.target.value,
-    });
-  };
-
-
-  const addMerchant = async () => {
+  const addPatron = async () => {
     const tempFormData = { ...formData };
     const selectedDate = new Date(tempFormData.birthdate);
     tempFormData.birthdate = format(selectedDate, 'yyyy-MM-dd').toString();
@@ -59,8 +51,9 @@ export default function MerRegister() {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        email,
+        username,
         password,
+        confirmpassword,
         first_name,
         middle_name,
         last_name,
@@ -72,7 +65,6 @@ export default function MerRegister() {
         zipcode,
         points,
         birthdate: selectedDate,
-        // affiliate_id,
       }),
     });
     console.log(response);
@@ -97,9 +89,10 @@ export default function MerRegister() {
         <div className="flex flex-col justify-center space-y-5">
 
           <TextField
-            label="Email Address"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            label="Username"
+            placeholder="Email Address"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
           />
           <div className="flex flex-row space-x-5">
             <TextField
@@ -130,6 +123,7 @@ export default function MerRegister() {
             <MuiTelInput
               value={phone}
               label="Phone Number"
+              defaultCountry={'PH'}
               onChange={(e) => setPhone(e)}
               className="w-[300px] mt-2"
             />
@@ -176,26 +170,26 @@ export default function MerRegister() {
           <TextField
             label="Confirm Password"
             type="confirm_password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            value={confirmpassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
           />
           <TextField
             label="Points Received"
             type="points"
-            value={'1'}
+            value={points}
             onChange={(e) => setPoints(e.target.value)}
           />
           <TextField
             label="Referred by"
             type="affiliate_id"
-            value={'0'}
-            onChange={handleChange}
+            value={affiliate}
+            onChange={(e) => setAffiliate(e.target.value)}
           />
           {error && <div className='flex self-center text-lg text-fuchsia-500'>{error}</div>}
 
           <div className='flex justify-center mt-30 '>
 
-            <Button variant="contained" size="medium" onClick={addMerchant} className="text-white rounded-lg hover:bg-[#8fe08d] bg-[#218c20] font-bold px-10 py-4">Register</Button>
+            <Button variant="contained" size="medium" onClick={addPatron} className="text-white rounded-lg hover:bg-[#8fe08d] bg-[#218c20] font-bold px-10 py-4">Register</Button>
 
           </div>
         </div>

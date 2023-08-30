@@ -11,13 +11,13 @@ import { format } from "date-fns";
 
 interface FormData {
   birthdate: any;
-  affiliate_id: string;
 }
 
-export default function MerRegister() {
+export default function MerchantRegister() {
   const [error, setError] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmpassword, setConfirmPassword] = useState('');
   const [first_name, setFirstName] = useState('');
   const [middle_name, setMiddleName] = useState('');
   const [last_name, setLastName] = useState('');
@@ -28,10 +28,9 @@ export default function MerRegister() {
   const [country, setCountry] = useState('');
   const [zipcode, setZipcode] = useState('');
   const [points, setPoints] = useState('');
+  const [affiliate, setAffiliate] = useState('');
   const [formData, setFormData] = useState<FormData>({
     birthdate: new Date(),
-    affiliate_id: '',
-
   });
 
   const handleDateChange = (value: any) => {
@@ -40,14 +39,6 @@ export default function MerRegister() {
 
     setFormData(tempFormData);
   }
-
-  const handleChange = (event: any) => {
-    setFormData({
-      ...formData,
-      [event.target.name]: event.target.value,
-    });
-  };
-
 
   const addMerchant = async () => {
     const tempFormData = { ...formData };
@@ -62,6 +53,7 @@ export default function MerRegister() {
       body: JSON.stringify({
         username,
         password,
+        confirmpassword,
         first_name,
         middle_name,
         last_name,
@@ -134,6 +126,7 @@ export default function MerRegister() {
             <MuiTelInput
               value={phone}
               label="Phone Number"
+              defaultCountry={'PH'}
               onChange={(e) => setPhone(e)}
               className="w-[300px]"
             />
@@ -180,20 +173,20 @@ export default function MerRegister() {
           <TextField
             label="Confirm Password"
             type="confirm_password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            value={confirmpassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
           />
           <TextField
             label="Points Received"
             type="points"
-            value={'1'}
+            value={points}
             onChange={(e) => setPoints(e.target.value)}
           />
           <TextField
             label="Referred by"
             type="affiliate_id"
-            value={'0'}
-            onChange={handleChange}
+            value={affiliate}
+            onChange={(e) => setAffiliate(e.target.value)}
           />
           {error && <div className='flex self-center text-lg text-fuchsia-500'>{error}</div>}
 

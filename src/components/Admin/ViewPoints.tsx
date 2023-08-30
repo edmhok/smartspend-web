@@ -87,10 +87,11 @@ export default function ViewPoints() {
       if (!response.ok) {
         throw new Error('Failed to update patron');
       }
-      // Close modal
-      setOpen(false);
       // Refetch patrons 
       fetchData();
+      // Close modal
+      handleClose();
+
 
     } catch (error) {
       console.error(error);
@@ -176,7 +177,7 @@ export default function ViewPoints() {
                     </DialogContent>
                     <DialogActions>
                       <Button color='info' onClick={handleClose}>Cancel</Button>
-                      <Button color='info' onClick={handleSave} autoFocus>
+                      <Button color='success' onClick={handleSave} autoFocus>
                         Save
                       </Button>
                     </DialogActions>
