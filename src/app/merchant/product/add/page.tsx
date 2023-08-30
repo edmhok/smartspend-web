@@ -1,7 +1,7 @@
 import React from 'react'
 import type { NextPage } from 'next'
 import { MerchantLayout } from '@/layout/merchant'
-import AddProduct from '@/components/Admin/AddProduct'
+import AddProduct from '@/components/Merchant/AddProduct'
 
 const ProductAdd: NextPage = () => (
     <MerchantLayout>
@@ -9,6 +9,4 @@ const ProductAdd: NextPage = () => (
 
     </MerchantLayout>
 )
-
-
 export default ProductAdd
