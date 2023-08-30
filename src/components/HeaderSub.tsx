@@ -16,8 +16,8 @@ const HeaderSub = () => {
       <Container className="sm:flex justify-between items-center">
         <div className="pb-6 sm:pb-0 sm:flex justify-self-center">
           <Link href={"/"} prefetch={false}>
-            <Image
-              src={logo}
+            <img
+              src={'/logo.png'}
               width={168}
               height={66}
               alt="Picture of the author"
