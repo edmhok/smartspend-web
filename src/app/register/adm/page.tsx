@@ -11,13 +11,13 @@ import { format } from "date-fns";
 import Link from "next/link";
 interface FormData {
   birthdate: any;
-  affiliate_id: number;
 }
 
-export default function MerRegister() {
+export default function AdminRegister() {
   const [error, setError] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmpassword, setConfirmPassword] = useState('');
   const [first_name, setFirstName] = useState('');
   const [middle_name, setMiddleName] = useState('');
   const [last_name, setLastName] = useState('');
@@ -29,7 +29,6 @@ export default function MerRegister() {
   const [zipcode, setZipcode] = useState('');
   const [formData, setFormData] = useState<FormData>({
     birthdate: new Date(),
-    affiliate_id: 0,
   });
 
   const handleDateChange = (value: any) => {
@@ -38,13 +37,6 @@ export default function MerRegister() {
 
     setFormData(tempFormData);
   }
-
-  const handleChange = (event: any) => {
-    setFormData({
-      ...formData,
-      [event.target.name]: event.target.value,
-    });
-  };
 
 
   const addAdmin = async () => {
@@ -60,6 +52,7 @@ export default function MerRegister() {
       body: JSON.stringify({
         username,
         password,
+        confirmpassword,
         first_name,
         middle_name,
         last_name,
@@ -140,6 +133,7 @@ export default function MerRegister() {
             <MuiTelInput
               value={phone}
               label="Phone Number"
+              defaultCountry={'PH'}
               onChange={(e) => setPhone(e)}
               className="w-[300px] mt-2"
             />
@@ -185,15 +179,10 @@ export default function MerRegister() {
           <TextField
             label="Confirm Password"
             type="confirm_password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            value={confirmpassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
           />
-          <TextField
-            label="Referred by"
-            type="affiliate_id"
-            value={formData.affiliate_id}
-            onChange={handleChange}
-          />
+
           {error && <div className='flex self-center text-lg text-fuchsia-500'>{error}</div>}
 
           <div className='flex justify-center mt-30 '>
