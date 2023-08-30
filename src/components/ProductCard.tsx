@@ -6,15 +6,10 @@ import IconButton from "@mui/material/IconButton";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import Rating from "@mui/material/Rating";
 import { Stack } from "@mui/material";
-interface propsType {
-  imageUrl: string;
-  productName: string;
-  description: string;
-  rating: number;
-  price: string;
-}
+import { SmallCardProduct } from "@/interfaces";
 
-const ProductCard: React.FC<propsType> = ({
+
+const ProductCard: React.FC<SmallCardProduct> = ({
   imageUrl,
   productName,
   description,

@@ -1,6 +1,6 @@
 import React from "react";
-import NewProducts from '@/components/NewProducts'
-import { AdminLayout } from '@/layout/admin'
+import NewProducts from '@/components/NewFavProducts'
+import { AdminLayout } from '@/layout'
 import { Box, Typography } from "@mui/material";
 
 const Admin = () => {

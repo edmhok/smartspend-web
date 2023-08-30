@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, IconButton, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField } from "@mui/material";
-import { AdminLayout } from '@/layout/admin'
+import { AdminLayout } from '@/layout'
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 interface Data {
   id: number;

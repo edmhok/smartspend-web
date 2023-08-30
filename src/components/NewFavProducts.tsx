@@ -40,7 +40,7 @@ interface Data {
   price: number;
 }
 
-const NewProducts = () => {
+const NewFavProducts = () => {
   const [favtab, setFavtab] = useState("favorites");
   const [newtab, setNewtab] = useState("new");
   const searchParams = useSearchParams();
@@ -154,4 +154,4 @@ const NewProducts = () => {
   )
 };
 
-export default NewProducts
+export default NewFavProducts

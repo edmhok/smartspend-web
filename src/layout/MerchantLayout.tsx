@@ -1,6 +1,5 @@
 'use client'
 
-import NewProducts from '@/components/NewProducts'
 import React, { PropsWithChildren } from 'react'
 import { ThemeProvider, createTheme, styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
@@ -21,7 +20,7 @@ import ListItemText from '@mui/material/ListItemText';
 import { Collapse, Menu, MenuItem, Stack } from '@mui/material';
 import { AccountCircle, ExpandLess, ExpandMore } from '@mui/icons-material';
 import { AuthCheckerInside } from '@/utils/checker-inside';
-// import { useRouter } from 'next/router';
+import Footer from './FooterLayout';
 
 
 const drawerWidth = 240;
@@ -353,20 +352,8 @@ export default function MerchantLayout({ children }: PropsWithChildren) {
         </Drawer>
         <Main open={open}>
           <DrawerHeader />
-          {/* <NewProducts /> */}
           {children}
-          <footer className=" border-top py-2">
-            <div className="w-full flex-row flex justify-between">
-              <div>
-                <a className="text-decoration-none" href="#">SmartSpend</a>
-                {' '}
-                © 2023
-              </div>
-              <div className="ms-md-auto">
-                Powered by&nbsp;Artificers
-              </div>
-            </div>
-          </footer>
+          <Footer />
         </Main>
       </Box>
     </ThemeProvider>

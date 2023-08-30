@@ -1,9 +1,9 @@
 'use client'
 
 import React, { useEffect, useState } from "react";
-import { PatronLayout } from '@/layout/patron'
-import NewProducts from '@/components/NewProducts'
+import NewProducts from '@/components/NewFavProducts'
 import { Box, Typography } from "@mui/material";
+import { PatronLayout } from "@/layout";
 
 const Patron = () => {
   const [details, setDetails] = useState({

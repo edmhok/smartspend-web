@@ -6,7 +6,7 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import Link from 'next/link';
 import { Box, Fade, FormControl, FormControlLabel, FormLabel, Grid, Paper, Radio, RadioGroup, Switch, TextField } from '@mui/material';
 import { AccountCircle } from '@mui/icons-material';
-import { PatronLayout } from '@/layout/patron';
+import { PatronLayout } from '@/layout';
 
 
 const Payment = () => {

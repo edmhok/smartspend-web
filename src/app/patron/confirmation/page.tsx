@@ -19,7 +19,7 @@ import {
 import { AccountCircle } from "@mui/icons-material";
 import Image from "next/image";
 import Swal from "sweetalert2";
-import { PatronLayout } from "@/layout/patron";
+import { PatronLayout } from "@/layout";
 
 interface PaymentProps {
     img: string;

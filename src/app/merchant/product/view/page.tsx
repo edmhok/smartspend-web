@@ -13,7 +13,7 @@ import CreateIcon from "@mui/icons-material/Create";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import IconButton from "@mui/material/IconButton";
 import Link from "next/link";
-import { MerchantLayout } from "@/layout/merchant";
+import { MerchantLayout } from "@/layout";
 
 interface Data {
     id: number;

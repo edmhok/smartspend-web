@@ -1,8 +1,8 @@
 'use client'
 import React, { useEffect, useState } from "react";
-import NewProducts from '@/components/NewProducts'
-import { MerchantLayout } from '@/layout/merchant'
+import NewFavProducts from '@/components/NewFavProducts'
 import { Box, Typography } from "@mui/material";
+import { MerchantLayout } from "@/layout";
 
 const Merchant = () => {
     const [details, setDetails] = useState({
@@ -78,7 +78,7 @@ const Merchant = () => {
             </div>
 
 
-            <NewProducts />
+            <NewFavProducts />
         </MerchantLayout>
     )
 }

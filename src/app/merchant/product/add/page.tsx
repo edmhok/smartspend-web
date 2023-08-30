@@ -8,7 +8,7 @@ import { Button, Card, CardActions, CardContent, CardHeader, Divider, FormContro
 import Checkbox from '@mui/material/Checkbox';
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { useSearchParams } from "next/navigation";
-import { MerchantLayout } from "@/layout/merchant";
+import { MerchantLayout } from "@/layout";
 interface FormData {
     entryDate: any;
 }

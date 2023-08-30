@@ -15,6 +15,7 @@ interface FormData {
 }
 
 export default function MerRegister() {
+  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -76,11 +77,7 @@ export default function MerRegister() {
     console.log(response);
     if (response.ok) {
       window.location.href = '/login/adm';
-      Swal.fire({
-        title: 'Registration',
-        text: 'Successfully registered',
-        icon: 'info'
-      });
+
     } else {
       setError('Invalid Registration');
     }
@@ -194,11 +191,13 @@ export default function MerRegister() {
             value={formData.affiliate_id}
             onChange={handleChange}
           />
-          {error && <div className='flex self-center text-lg text-fuchsia-500'>{error}</div>}
+          {error && <div className='flex self-center text-lg text-[#218c20]'>{error}</div>}
 
           <div className='flex justify-center mt-30 '>
 
-            <Button variant="contained" size="medium" onClick={addAdmin} className="text-white rounded-lg hover:bg-[#8fe08d] bg-[#218c20] font-bold px-10 py-4">Register</Button>
+            <Button variant="contained" size="large" onClick={addAdmin} className="px-10 py-4"
+              disabled={isLoading}>{isLoading ? 'Loading...' : 'Register'}
+            </Button>
 
           </div>
         </div>

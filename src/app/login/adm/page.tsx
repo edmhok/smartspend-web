@@ -144,11 +144,11 @@ const UserLogin = () => {
                 Forgot your password?
               </Link>
 
-              <div className="flex justify-center px-10 pb-5">
+              <div className="px-10 pb-5">
                 <Button
                   type="submit"
                   onClick={handleLogin}
-                  color='success'
+                  className="text-[#218c20] rounded-lg hover:bg-[#60df5e] bg-[#85f084] font-bold  py-4"
                 >
                   {" "}
                   SignIn

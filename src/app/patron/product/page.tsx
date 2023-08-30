@@ -9,7 +9,7 @@ import { Link, Stack } from "@mui/material";
 import ShoppingBasketOutlinedIcon from "@mui/icons-material/ShoppingBasketOutlined";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import { useSearchParams } from "next/navigation";
-import { PatronLayout } from "@/layout/patron";
+import { PatronLayout } from "@/layout";
 
 type Data = {
   id: number;

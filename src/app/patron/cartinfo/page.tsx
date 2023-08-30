@@ -7,7 +7,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Button, IconButton, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Tooltip } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { PatronLayout } from '@/layout/patron';
+import { PatronLayout } from '@/layout';
 
 interface OrderItem {
     id: number;
