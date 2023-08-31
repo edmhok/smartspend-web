@@ -77,9 +77,7 @@ export default function ViewProduct() {
               <TableRow>
                 <TableCell>Name</TableCell>
                 <TableCell>Brand</TableCell>
-                <TableCell>
-                  Description
-                </TableCell>
+                <TableCell> Description</TableCell>
                 <TableCell>SKU</TableCell>
                 <TableCell>Price</TableCell>
                 <TableCell>Quantity</TableCell>

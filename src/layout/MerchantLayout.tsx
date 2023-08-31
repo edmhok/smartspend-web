@@ -316,7 +316,7 @@ export default function MerchantLayout({ children }: PropsWithChildren) {
 
           <List>
             {[
-              { text: 'View Order', href: '/merchant/order' }
+              { text: 'View Order', href: '/merchant/order/view' }
             ].map((item) => (
               <ListItem sx={{ textAlign: 'center' }} key={item.text}>
                 <ListItemButton component="a" href={item.href}>

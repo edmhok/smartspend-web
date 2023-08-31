@@ -4,11 +4,11 @@ import { MerchantLayout } from '@/layout'
 import ViewOrder from '@/components/ViewOrder'
 
 const Order: NextPage = () => (
-    <MerchantLayout>
+  <MerchantLayout>
 
-        <ViewOrder />
+    <ViewOrder />
 
-    </MerchantLayout>
+  </MerchantLayout>
 )
 
 
