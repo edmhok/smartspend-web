@@ -154,16 +154,16 @@ export default function MerchantLayout({ children }: PropsWithChildren) {
         },
       ]
     },
-    {
-      id: 1,
-      title: 'Order',
-      items: [
-        {
-          title: 'View Order',
-          href: '/merchant/order',
-        },
-      ]
-    },
+    // {
+    //   id: 1,
+    //   title: 'Order',
+    //   items: [
+    //     {
+    //       title: 'View Order',
+    //       href: '/merchant/order',
+    //     },
+    //   ]
+    // },
     // {
     //   id: 1,
     //   title: 'Geneology',
@@ -264,7 +264,7 @@ export default function MerchantLayout({ children }: PropsWithChildren) {
           <Divider />
           <List>
             {[
-              { text: 'Home', href: '/dashboard' },
+              { text: 'Home', href: '/merchant' },
               { text: 'My Info', href: '/myinfo' }
             ].map((item) => (
               <ListItem sx={{ textAlign: 'center' }} key={item.text}>
@@ -316,7 +316,7 @@ export default function MerchantLayout({ children }: PropsWithChildren) {
 
           <List>
             {[
-              { text: 'Points', href: '/merchant/points' }
+              { text: 'View Order', href: '/merchant/order' }
             ].map((item) => (
               <ListItem sx={{ textAlign: 'center' }} key={item.text}>
                 <ListItemButton component="a" href={item.href}>

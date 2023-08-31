@@ -95,7 +95,7 @@ const ProductBigCard: React.FC<propsType> = ({
     }
     console.log({ shop });
     localStorage.setItem("shop", JSON.stringify(shop));
-    window.location.href = `/checkout/a?id=${productId}`;
+    window.location.href = '/patron/order/1';
   };
   useEffect(() => {
     fetchProductData();

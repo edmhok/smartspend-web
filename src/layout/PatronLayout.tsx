@@ -152,20 +152,20 @@ export default function MemberLayout({ children }: PropsWithChildren) {
     //     },
     //   ]
     // },
-    {
-      id: 0,
-      title: 'Order',
-      items: [
-        {
-          title: 'Add',
-          href: '/',
-        },
-        {
-          title: 'View',
-          href: '/',
-        },
-      ]
-    },
+    // {
+    //   id: 0,
+    //   title: 'Order',
+    //   items: [
+    //     {
+    //       title: 'Add',
+    //       href: '/patron/order/1',
+    //     },
+    //     {
+    //       title: 'View',
+    //       href: '/',
+    //     },
+    //   ]
+    // },
     // {
     //   id: 1,
     //   title: 'Geneology',
@@ -266,7 +266,7 @@ export default function MemberLayout({ children }: PropsWithChildren) {
           <Divider />
           <List>
             {[
-              { text: 'Home', href: '/dashboard' },
+              { text: 'Home', href: '/patron' },
               // { text: 'Membership', href: '/' },
               { text: 'My Info', href: '/myinfo' }
             ].map((item) => (
@@ -295,7 +295,7 @@ export default function MemberLayout({ children }: PropsWithChildren) {
             ))}
           </List>
           <Divider /> */}
-          <List>
+          {/* <List>
             {groups.map(group => (
               <>
                 <ListItemButton onClick={() => handleClick(group.id)}>
@@ -315,8 +315,8 @@ export default function MemberLayout({ children }: PropsWithChildren) {
               </>
             ))}
           </List>
-          <Divider />
-          <List>
+          <Divider /> */}
+          {/* <List>
             {[
               { text: 'Points', href: '/patron/points' },
               // { text: 'Affiliates', href: '/affiliates' }
@@ -328,7 +328,7 @@ export default function MemberLayout({ children }: PropsWithChildren) {
                 </ListItemButton>
               </ListItem>
             ))}
-          </List>
+          </List> */}
           {/* <Divider /> */}
           {/* <List>
             {[

@@ -17,7 +17,7 @@ import FacebookIcon from "@mui/icons-material/Facebook";
 import Swal from "sweetalert2";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 
-const MerchantLogin = () => {
+const PatronLogin = () => {
   const [error, setError] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -147,4 +147,4 @@ const MerchantLogin = () => {
   );
 };
 
-export default MerchantLogin;
+export default PatronLogin;

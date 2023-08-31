@@ -67,16 +67,16 @@ const Confirmation = (props: PaymentProps) => {
 
   return (
     <div className=" w-full flex flex-col items-center">
-      <div className="bg-[#EFEFEF] w-full justify-center flex flex-row gap-x-[150px] p-[20px] mb-10">
-        <div className="text-sm text-fuchsia-500 ">
+      <div className="w-full justify-center flex flex-row gap-x-[150px] p-[20px] mb-10">
+        <div className="text-sm text-[#218c20] ">
           <CheckCircleOutlineIcon />
           Cart Information
         </div>
-        <div className="text-sm text-fuchsia-500 ">
+        <div className="text-sm text-[#218c20] ">
           <CheckCircleOutlineIcon />
           Delivery Method
         </div>
-        <div className="text-sm text-fuchsia-500 ">
+        <div className="text-sm text-[#218c20] ">
           <CheckCircleIcon />
           Confirmation
         </div>
@@ -132,15 +132,6 @@ const Confirmation = (props: PaymentProps) => {
               </Box>
             </FormControl>
           </div>
-        </div>
-
-        <div className="w-full flex justify-center mb-5">
-          <button
-            onClick={handleClick}
-            className="px-9 py-2 text-black text-lg font-semibold bg-yellow-400"
-          >
-            PAYMENT VERIFICATION
-          </button>
         </div>
       </div>
     </div>
