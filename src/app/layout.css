@@ -2942,3 +2942,20 @@ body {
     background-color: rgba(255, 255, 255, 0.2);
   }
  
+  .running-message-container {
+    overflow: hidden; /* Hide overflow to create the scrolling effect */
+  }
+  
+  .running-message {
+    white-space: nowrap; /* Prevent text from wrapping */
+    animation: marquee 20s linear infinite; /* Apply the animation */
+  }
+  
+  @keyframes marquee {
+    from {
+      transform: translateX(100%); /* Start off-screen to the right */
+    }
+    to {
+      transform: translateX(-100%); /* Move off-screen to the left */
+    }
+  }
