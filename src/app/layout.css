@@ -2938,3 +2938,7 @@ body {
     text-decoration: none;
   }
 
+  .css-yiavyu-MuiBackdrop-root-MuiDialog-backdrop {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+ 
