@@ -10,21 +10,21 @@ interface propsType {
   img: string;
   title: string;
   description: string;
-  // rating: number;
+  rating: number;
   price: number;
 }
 
 const ProductCard: React.FC<propsType> = ({
-  // img,
+  img,
   title,
   description,
-  // rating,
+  rating,
   price,
 }) => {
 
 
   return (
-    <div className=" bg-white drop-shadow-md hover:drop-shadow-xl backdrop:px-5 max-w-[312px] max-h-[418px]">
+    <div className="px-5 py-5 bg-white drop-shadow-md hover:drop-shadow-xl backdrop:px-5 max-w-[212px] max-h-[318px]">
       <div className="static">
         <div className="absolute top-3 right-2">
           <IconButton aria-label="add to favorites">
@@ -33,23 +33,23 @@ const ProductCard: React.FC<propsType> = ({
         </div>
         <img
           className="w-full h-auto"
-          src={"/jacket-1.jpg"}
-          width={200}
-          height={250}
+          src={'/jacket-1.jpg'}
+          width={150}
+          height={200}
           alt={title}
         />
       </div>
 
-      <div className="space-y-2 py-2 ps-4">
+      <div className="space-y-1 py-2 ps-4">
         <h2 className="text-[#218c20] font-medium uppercase text-center link">{title}</h2>
-        <p className="text-gray-500 max-w-[150px]">{description}</p>
+        <p className="text-gray-500 max-w-[150px] text-sm">{description}</p>
         <Stack spacing={1}>
           <Rating name="half-rating" defaultValue={2.5} precision={0.5} />
         </Stack>
         <div className="font-bold flex gap-4 link">
           ${price}
-          <del className="text-gray-500 font-normal">
-            {/* ${parseInt(price) + 50}.00 */}
+          <del className="text-gray-500 font-normal pb-4">
+            ${(price) + 50}.00
           </del>
         </div>
 

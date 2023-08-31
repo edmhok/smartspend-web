@@ -5,6 +5,7 @@ import { Container, Typography, Button } from '@mui/material';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import Link from 'next/link';
+import Image from 'next/image';
 interface Item {
   imgPath: string;
   title: string;
@@ -74,18 +75,18 @@ const Bestseller = () => {
 
   return (
     <div className='sm:block hidden'>
-      <div className='align-start font-medium text-[#218c20] text-2xl pt-10 ps-20'>Best Seller</div>
-      <div className="pt-6 relative flex justify-center">
-        <div className='flex direction-row justify-around'>
+      <div className='container align-start font-medium text-[#218c20] text-2xl pt-10 ps-20'>Best Seller</div>
+      <div className="container pt-6 relative flex">
+        <div className='container flex direction-row justify-around'>
           {items.slice(currentIndex, currentIndex + visibleItems).map(item => (
             <Item key={item.title} item={item} />
           ))}
         </div>
-        <Button className='left-button' onClick={handlePrev}>
-          <ArrowBackIosIcon />
+        <Button className='absolute left-5 mt-20' onClick={handlePrev}>
+          <ArrowBackIosIcon color='success' />
         </Button>
         <Button className='absolute right-0 mt-20' onClick={handleNext}>
-          <ArrowForwardIosIcon />
+          <ArrowForwardIosIcon color='success' />
         </Button>
       </div>
     </div>
@@ -93,17 +94,18 @@ const Bestseller = () => {
 }
 
 const Item = ({ item }: { item: Item }) => (
-  <Container className='flex-col flex content-center'>
-    <div className='text-center bg-white drop-shadow-md hover:drop-shadow-xl space-y-2 py-5 px-5 border border-gray-200 rounded-xl max-w-[200px] max-h-[230px] pt-5'>
-      <Link href='/login/adm' className='link' prefetch={false}>
-
-        <img src={item.imgPath} alt={item.title} className='w-[137px] h-[130px]' />
-        <Typography>{item.title}</Typography>
-        <Typography>{item.status}</Typography>
-
-      </Link>
-    </div>
-  </Container>
+  <div className='text-center bg-white drop-shadow-md hover:drop-shadow-xl space-y-2 py-5 px-2 border border-gray-200 rounded-xl max-w-[200px] max-h-[230px] pt-5'>
+    <Link href='/login/adm' className='link' prefetch={false}>
+      <Image
+        src={item.imgPath}
+        alt={item.title}
+        width={130}
+        height={130}
+      />
+      <Typography>{item.title}</Typography>
+      <Typography>{item.status}</Typography>
+    </Link>
+  </div>
 
 );
 

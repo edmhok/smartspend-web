@@ -143,30 +143,30 @@ export default function AdminLayout({ children }: PropsWithChildren) {
   };
 
   const groups: SidebarNavGroup[] = [
-    {
-      id: 0,
-      title: 'Products',
-      items: [
-        {
-          title: 'Add',
-          href: '/admin/product/add',
-        },
-        {
-          title: 'View',
-          href: '/admin/product/view',
-        },
-      ]
-    },
-    {
-      id: 1,
-      title: 'Order',
-      items: [
-        {
-          title: 'View Order',
-          href: '/admin/order',
-        },
-      ]
-    },
+    // {
+    //   id: 0,
+    //   title: 'Products',
+    //   items: [
+    //     {
+    //       title: 'Add',
+    //       href: '/admin/product/add',
+    //     },
+    //     {
+    //       title: 'View',
+    //       href: '/admin/product/view',
+    //     },
+    //   ]
+    // },
+    // {
+    //   id: 1,
+    //   title: 'Order',
+    //   items: [
+    //     {
+    //       title: 'View Order',
+    //       href: '/admin/order',
+    //     },
+    //   ]
+    // },
     // {
     //   id: 2,
     //   title: 'Geneology',
@@ -277,7 +277,7 @@ export default function AdminLayout({ children }: PropsWithChildren) {
               </ListItem>
             ))}
           </List>
-          <Divider />
+          {/* <Divider />
           <List>
             {groups.map(group => (
               <>
@@ -297,7 +297,7 @@ export default function AdminLayout({ children }: PropsWithChildren) {
                 </Collapse>
               </>
             ))}
-          </List>
+          </List> */}
           <Divider />
           {/* <List>
           {[

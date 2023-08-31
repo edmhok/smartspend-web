@@ -5,27 +5,31 @@ import React, { useEffect, useState } from "react";
 import ShoppingBasketOutlinedIcon from "@mui/icons-material/ShoppingBasketOutlined";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import { useSearchParams } from "next/navigation";
+import Link from "next/link";
 interface propsType {
-  id: number;
-  img: string;
-  title: string;
-  desc: string;
+  _id: string;
+  productName: string;
+  imageUrl: string;
+  description: string;
+  category: string;
+  variant: string;
+  size: string;
+  color: string;
+  tags: string;
+  qty: number;
   price: number;
-  // variant: string;
-  // size: number[];
-  // color: string[];
-  // tags: string;
+  points: number;
+  discount: number;
+  originalPrice: number;
 
-  // category: string;
 }
 
 type Data = {
+  id: string;
   img: string;
-  id: number;
   productName: string;
   brand: string;
   description: string;
-  sku: string;
   price: number;
   qty: number;
   points: number;
@@ -34,17 +38,19 @@ type Data = {
 };
 
 const ProductBigCard: React.FC<propsType> = ({
-  id,
-  img,
-  title,
-  desc,
-  price,
-  // variant,
-  // size,
-  // color,
-  // tags,
-
-  // category,
+  _id,
+  productName,
+  imageUrl,
+  description,
+  category,
+  variant,
+  size,
+  color,
+  tags,
+  originalPrice,
+  qty,
+  points,
+  discount,
 }) => {
   const searchParams = useSearchParams();
   const productId = searchParams.get("id") || "0";
@@ -52,29 +58,18 @@ const ProductBigCard: React.FC<propsType> = ({
 
   const images = "/jacket-1.jpg";
   console.log(productId);
-  const [productData, setProductData] = useState<Data>({
-    id: -1,
-    img: "/jacket-1.jpg",
-    productName: "",
-    brand: "",
-    description: "",
-    sku: "",
-    price: 0,
-    qty: 0,
-    points: 0,
-    originalPrice: 0,
-    discount: 0,
-  });
+  const [item, setItem] = useState<Data[]>([])
+
 
   const fetchProductData = async () => {
     try {
-      if (productId) {
+      if (_id) {
         const response = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}/products/${productId}`
+          `${process.env.NEXT_PUBLIC_API_URL}/products/${_id}`
         );
         if (response.ok) {
           const data = await response.json();
-          setProductData(data);
+          setItem(data);
         } else {
           console.error("Failed to fetch resource data");
         }
@@ -84,14 +79,14 @@ const ProductBigCard: React.FC<propsType> = ({
     }
   };
 
-  const handleAddToCart = (productId: string) => {
+  const handleAddToCart = (_id: string) => {
     let shop = JSON.parse(localStorage.getItem("shop") || "[]");
     if (shop.length > 0) {
       console.log("1");
-      shop.push(productId);
+      shop.push(_id);
     } else {
       console.log("2");
-      shop = [productId];
+      shop = [_id];
     }
     console.log({ shop });
     localStorage.setItem("shop", JSON.stringify(shop));
@@ -106,53 +101,56 @@ const ProductBigCard: React.FC<propsType> = ({
       <div className="bg-slate-200 w-[510px]">
         <Image
           className="w-full h-auto"
-          src={images}
+          src={imageUrl}
           width={713}
           height={750}
           alt={""}
         />
       </div>
       <div className="flex-1 flex flex-col ps-[57px]">
-        <div className="text-fuchsia-400 font-semibold text-xl pt-[39px] ">
-          {/* {category} */}
+        <div className="text-[#ffad1e] font-semibold text-xl pt-[39px] ">
+          {category}
         </div>
         <div className="text-black font-semibold text-2xl">
-          {productData.productName}
+          {productName}
         </div>
-        {/* <div className="text-black font-thin text-xl pb-[30px]">{variant}</div> */}
+        <div className="text-black font-thin text-xl pb-[30px]">{variant}</div>
         <p className="text-black font-thin text-xl pb-[49px]">
-          {productData.description}
+          {description}
         </p>
         <div className="text-black font-semibold text-5xl pb-[69px]">
-          {productData.price}
-        </div>
-        {/* <div className="text-black font-thin text-lg pb-[69px]">
-          {size.join(", ")}
+          {originalPrice}
         </div>
         <div className="text-black font-thin text-lg pb-[69px]">
-          {color.join(", ")}
+          {size}
         </div>
-        <div className="text-black font-thin text-lg pb-[69px]">{tags}</div> */}
+        <div className="text-black font-thin text-lg pb-[69px]">
+          {color}
+        </div>
+        <div className="text-[#ffad1e] font-semibold text-xl pt-[39px] ">
+          {points}
+          <div className="text-black font-thin text-lg pb-[69px]">{tags}</div>
 
-        <div className="text-black font-thin pb-[50px] flex self-center gap-3">
-          {/* <Link href={`/checkout/a?id=${productId}`}> */}
-          <button
-            onClick={() => {
-              handleAddToCart(productId);
-            }}
-            className="bg-black p-4 rounded-lg text-white flex gap-3"
-          >
-            <ShoppingBasketOutlinedIcon />
-            Add to Cart
-          </button>
-          {/* </Link> */}
-          <button className="bg-black p-4 rounded-lg text-white flex gap-3">
-            <FavoriteBorderOutlinedIcon sx={{ color: "white" }} />
-          </button>
+          <div className="text-black font-thin pb-[50px] flex self-center gap-3">
+            <Link href={`/patron/order/1/?id=${_id}`} prefetch={false}>
+              <button
+                onClick={() => {
+                  handleAddToCart(_id);
+                }}
+                className="bg-black p-4 rounded-lg text-white flex gap-3"
+              >
+                <ShoppingBasketOutlinedIcon />
+                Add to Cart
+              </button>
+            </Link>
+            <button className="bg-[#ffad1e] p-4 rounded-lg text-white flex gap-3">
+              <FavoriteBorderOutlinedIcon sx={{ color: "white" }} />
+            </button>
+          </div>
         </div>
       </div>
     </div>
   );
 };
 
-export default ProductBigCard;
+export default ProductBigCard
