@@ -1,6 +1,5 @@
 'use client'
 
-import NewProducts from '@/components/NewProducts'
 import React, { PropsWithChildren, useMemo } from 'react'
 import { ThemeProvider, createTheme, styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
@@ -21,7 +20,7 @@ import ListItemText from '@mui/material/ListItemText';
 import { Collapse, Menu, MenuItem, Stack } from '@mui/material';
 import { AccountCircle, ExpandLess, ExpandMore } from '@mui/icons-material';
 import { AuthCheckerInside } from '@/utils/checker-inside';
-// import { useRouter } from 'next/router';
+import Footer from './Footer';
 
 
 const drawerWidth = 240;
@@ -96,10 +95,10 @@ const themeTest = createTheme({
   },
 });
 
-export default function MerchantLayout({ children }: PropsWithChildren) {
-  
+export default function MemberLayout({ children }: PropsWithChildren) {
+
   useMemo(() => {
-    if(typeof window !== 'undefined') {
+    if (typeof window !== 'undefined') {
       AuthCheckerInside(window);
     }
   }, [])
@@ -139,27 +138,31 @@ export default function MerchantLayout({ children }: PropsWithChildren) {
   };
 
   const groups: SidebarNavGroup[] = [
+    // {
+    //   id: 0,
+    //   title: 'Products',
+    //   items: [
+    //     {
+    //       title: 'Add',
+    //       href: '/',
+    //     },
+    //     {
+    //       title: 'View',
+    //       href: '/',
+    //     },
+    //   ]
+    // },
     {
       id: 0,
-      title: 'Products',
-      items: [
-        {
-          title: 'Add',
-          href: '/merchant/product/add',
-        },
-        {
-          title: 'View',
-          href: '/merchant/product/view',
-        },
-      ]
-    },
-    {
-      id: 1,
       title: 'Order',
       items: [
         {
-          title: 'View Order',
-          href: '/merchant/order',
+          title: 'Add',
+          href: '/',
+        },
+        {
+          title: 'View',
+          href: '/',
         },
       ]
     },
@@ -201,7 +204,7 @@ export default function MerchantLayout({ children }: PropsWithChildren) {
               <MenuIcon />
             </IconButton>
             <Typography color="secondary" variant="h6" component="div" sx={{ flexGrow: 1 }}>
-              Merchant
+              Patron
             </Typography>
             {auth && (
               <div>
@@ -264,6 +267,7 @@ export default function MerchantLayout({ children }: PropsWithChildren) {
           <List>
             {[
               { text: 'Home', href: '/dashboard' },
+              // { text: 'Membership', href: '/' },
               { text: 'My Info', href: '/myinfo' }
             ].map((item) => (
               <ListItem sx={{ textAlign: 'center' }} key={item.text}>
@@ -275,22 +279,22 @@ export default function MerchantLayout({ children }: PropsWithChildren) {
           </List>
           <Divider />
           {/* <List>
-          {[
-            { text: 'Shop', href: '/shop' },
-            { text: 'Order History', href: '/membership' },
-            { text: 'My Team', href: '/info' },
-            { text: 'My Enroller', href: '/enroller' },
-            { text: 'My Earning', href: '/earning' },
-            { text: 'Leaderboard', href: '/leaderboard' },
-          ].map((item) => (
-            <ListItem sx={{ textAlign: 'center' }} key={item.text}>
-              <ListItemButton component="a" href={item.href}>
-                <ListItemText sx={{ textAlign: 'center' }} primary={item.text} />
-              </ListItemButton>
-            </ListItem>
-          ))}
-        </List>
-        <Divider /> */}
+            {[
+              { text: 'Shop', href: '/shop' },
+              { text: 'Order History', href: '/membership' },
+              { text: 'My Team', href: '/info' },
+              { text: 'My Enroller', href: '/enroller' },
+              { text: 'My Earning', href: '/earning' },
+              { text: 'Leaderboard', href: '/leaderboard' },
+            ].map((item) => (
+              <ListItem sx={{ textAlign: 'center' }} key={item.text}>
+                <ListItemButton component="a" href={item.href}>
+                  <ListItemText sx={{ textAlign: 'center' }} primary={item.text} />
+                </ListItemButton>
+              </ListItem>
+            ))}
+          </List>
+          <Divider /> */}
           <List>
             {groups.map(group => (
               <>
@@ -312,10 +316,11 @@ export default function MerchantLayout({ children }: PropsWithChildren) {
             ))}
           </List>
           <Divider />
-
           <List>
             {[
-              { text: 'Points', href: '/merchant/points' }
+              { text: 'Points', href: '/patron/points' },
+              // { text: 'Affiliates', href: '/affiliates' }
+
             ].map((item) => (
               <ListItem sx={{ textAlign: 'center' }} key={item.text}>
                 <ListItemButton component="a" href={item.href}>
@@ -324,38 +329,28 @@ export default function MerchantLayout({ children }: PropsWithChildren) {
               </ListItem>
             ))}
           </List>
+          {/* <Divider /> */}
           {/* <List>
-          {[
-            { text: 'FAQ', href: '/faq' },
-            { text: 'Contact Us', href: '/contac' },
-            { text: 'Log-out', href: '/' }
-          ].map((item) => (
-            <ListItem sx={{ textAlign: 'center' }} key={item.text}>
-              <ListItemButton component="a" href={item.href}>
-                <ListItemText primary={item.text} sx={{ textAlign: 'center' }} />
-              </ListItemButton>
-            </ListItem>
-          ))}
-        </List>
-        <Divider /> */}
+            {[
+              { text: 'FAQ', href: '/faq' },
+              { text: 'Contact Us', href: '/contac' },
+              { text: 'Log-out', href: '/' }
+            ].map((item) => (
+              <ListItem sx={{ textAlign: 'center' }} key={item.text}>
+                <ListItemButton component="a" href={item.href}>
+                  <ListItemText primary={item.text} sx={{ textAlign: 'center' }} />
+                </ListItemButton>
+              </ListItem>
+            ))}
+          </List>
+          <Divider /> */}
 
         </Drawer>
         <Main open={open}>
           <DrawerHeader />
           {/* <NewProducts /> */}
           {children}
-          <footer className=" border-top py-2">
-            <div className="w-full flex-row flex justify-between">
-              <div>
-                <a className="text-decoration-none" href="#">SmartSpend</a>
-                {' '}
-                © 2023
-              </div>
-              <div className="ms-md-auto">
-                Powered by&nbsp;Artificers
-              </div>
-            </div>
-          </footer>
+          <Footer />
         </Main>
       </Box>
     </ThemeProvider>

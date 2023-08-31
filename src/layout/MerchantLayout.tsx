@@ -1,9 +1,7 @@
 'use client'
 
 import NewProducts from '@/components/NewProducts'
-import React, {
-  PropsWithChildren, useCallback, useEffect, useMemo, useState,
-} from 'react'
+import React, { PropsWithChildren, useMemo } from 'react'
 import { ThemeProvider, createTheme, styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
@@ -22,8 +20,9 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import { Collapse, Menu, MenuItem, Stack } from '@mui/material';
 import { AccountCircle, ExpandLess, ExpandMore } from '@mui/icons-material';
-import Footer from './FooterLayout';
 import { AuthCheckerInside } from '@/utils/checker-inside';
+import Footer from './Footer';
+// import { useRouter } from 'next/router';
 
 
 const drawerWidth = 240;
@@ -98,7 +97,8 @@ const themeTest = createTheme({
   },
 });
 
-export default function AdminLayout({ children }: PropsWithChildren) {
+export default function MerchantLayout({ children }: PropsWithChildren) {
+
   useMemo(() => {
     if (typeof window !== 'undefined') {
       AuthCheckerInside(window);
@@ -107,7 +107,7 @@ export default function AdminLayout({ children }: PropsWithChildren) {
 
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
-
+  // const router = useRouter();
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -129,16 +129,13 @@ export default function AdminLayout({ children }: PropsWithChildren) {
     window.location.href = '/'
   };
 
-  const handleSetting = () => {
-    window.location.href = '/admin'
-  };
-
   const [openGroups, setOpenGroups] = React.useState<Record<string, boolean>>({});
 
   const handleClick = (id: number) => {
     setOpenGroups({
       ...openGroups,
       [id]: !openGroups[id]
+
     });
   };
 
@@ -149,11 +146,11 @@ export default function AdminLayout({ children }: PropsWithChildren) {
       items: [
         {
           title: 'Add',
-          href: '/admin/product/add',
+          href: '/merchant/product/add',
         },
         {
           title: 'View',
-          href: '/admin/product/view',
+          href: '/merchant/product/view',
         },
       ]
     },
@@ -163,25 +160,25 @@ export default function AdminLayout({ children }: PropsWithChildren) {
       items: [
         {
           title: 'View Order',
-          href: '/admin/order',
+          href: '/merchant/order',
         },
       ]
     },
     // {
-    //   id: 2,
+    //   id: 1,
     //   title: 'Geneology',
     //   items: [
     //     {
     //       title: 'Unilevel',
-    //       href: '/unilevel',
+    //       href: '/',
     //     },
     //     {
     //       title: 'Matrix Level',
-    //       href: '/matrix',
+    //       href: '/',
     //     },
     //     {
     //       title: '3Tier Level',
-    //       href: '/3tier',
+    //       href: '/',
     //     },
     //   ]
     // },
@@ -190,11 +187,11 @@ export default function AdminLayout({ children }: PropsWithChildren) {
 
   return (
     <ThemeProvider theme={themeTest}>
+
       <Box sx={{ display: 'flex' }}>
         <CssBaseline />
-        <AppBar position="fixed" open={open}>
+        <AppBar position="fixed" open={open} className='bg-white'>
           <Toolbar>
-
             <IconButton
               color="secondary"
               aria-label="open drawer"
@@ -204,8 +201,8 @@ export default function AdminLayout({ children }: PropsWithChildren) {
             >
               <MenuIcon />
             </IconButton>
-            <Typography color="#218c20" variant="h6" component="div" sx={{ flexGrow: 1 }}>
-              Admin
+            <Typography color="secondary" variant="h6" component="div" sx={{ flexGrow: 1 }}>
+              Merchant
             </Typography>
             {auth && (
               <div>
@@ -234,7 +231,8 @@ export default function AdminLayout({ children }: PropsWithChildren) {
                   open={Boolean(anchorEl)}
                   onClose={handleClose}
                 >
-                  <MenuItem onClick={handleSetting}>Profile</MenuItem>
+                  <MenuItem onClick={handleClose}>Profile</MenuItem>
+                  <MenuItem onClick={handleClose}>My account</MenuItem>
                   <MenuItem onClick={handleClose}>Log-out</MenuItem>
                 </Menu>
               </div>
@@ -263,12 +261,11 @@ export default function AdminLayout({ children }: PropsWithChildren) {
               {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
             </IconButton>
           </DrawerHeader>
-          <Divider className='div-sidenav' />
+          <Divider />
           <List>
             {[
-              { text: 'Dashboard', href: '/admin' },
-              { text: 'Leaderboard', href: '/admin/leaderboard' },
-              { text: 'Merchant Points', href: '/admin/points' },
+              { text: 'Home', href: '/dashboard' },
+              { text: 'My Info', href: '/myinfo' }
             ].map((item) => (
               <ListItem sx={{ textAlign: 'center' }} key={item.text}>
                 <ListItemButton component="a" href={item.href}>
@@ -278,6 +275,23 @@ export default function AdminLayout({ children }: PropsWithChildren) {
             ))}
           </List>
           <Divider />
+          {/* <List>
+          {[
+            { text: 'Shop', href: '/shop' },
+            { text: 'Order History', href: '/membership' },
+            { text: 'My Team', href: '/info' },
+            { text: 'My Enroller', href: '/enroller' },
+            { text: 'My Earning', href: '/earning' },
+            { text: 'Leaderboard', href: '/leaderboard' },
+          ].map((item) => (
+            <ListItem sx={{ textAlign: 'center' }} key={item.text}>
+              <ListItemButton component="a" href={item.href}>
+                <ListItemText sx={{ textAlign: 'center' }} primary={item.text} />
+              </ListItemButton>
+            </ListItem>
+          ))}
+        </List>
+        <Divider /> */}
           <List>
             {groups.map(group => (
               <>
@@ -287,9 +301,9 @@ export default function AdminLayout({ children }: PropsWithChildren) {
                 </ListItemButton>
 
                 <Collapse in={openGroups[group.id]} timeout="auto" unmountOnExit>
-                  <List component="div" disablePadding>
-                    {group.items.map(item => (
-                      <ListItemButton sx={{ pl: 4 }} component='a' href={item.href}>
+                  <List component="div">
+                    {group.items.map((item, index) => (
+                      <ListItemButton key={index} sx={{ pl: 4 }} component='a' href={item.href}>
                         <ListItemText sx={{ textAlign: 'center' }}>{item.title}</ListItemText>
                       </ListItemButton>
                     ))}
@@ -299,21 +313,37 @@ export default function AdminLayout({ children }: PropsWithChildren) {
             ))}
           </List>
           <Divider />
+
+          <List>
+            {[
+              { text: 'Points', href: '/merchant/points' }
+            ].map((item) => (
+              <ListItem sx={{ textAlign: 'center' }} key={item.text}>
+                <ListItemButton component="a" href={item.href}>
+                  <ListItemText primary={item.text} sx={{ textAlign: 'center' }} />
+                </ListItemButton>
+              </ListItem>
+            ))}
+          </List>
           {/* <List>
           {[
-            { text: 'Coupon', href: '/admin/coupon' },
-            { text: 'Statistic', href: '/admin/statistic' },
+            { text: 'FAQ', href: '/faq' },
+            { text: 'Contact Us', href: '/contac' },
+            { text: 'Log-out', href: '/' }
           ].map((item) => (
             <ListItem sx={{ textAlign: 'center' }} key={item.text}>
               <ListItemButton component="a" href={item.href}>
-                <ListItemText sx={{ textAlign: 'center' }} primary={item.text} />
+                <ListItemText primary={item.text} sx={{ textAlign: 'center' }} />
               </ListItemButton>
             </ListItem>
           ))}
-        </List> */}
+        </List>
+        <Divider /> */}
+
         </Drawer>
         <Main open={open}>
           <DrawerHeader />
+          {/* <NewProducts /> */}
           {children}
           <Footer />
         </Main>

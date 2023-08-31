@@ -1,7 +1,7 @@
 
 import React from 'react'
 import type { NextPage } from 'next'
-import { PatronLayout } from '@/layout/patron'
+import { PatronLayout } from '@/layout'
 import IntroMember from '@/components/IntroMember'
 import NewProducts from '@/components/NewProducts'
 
