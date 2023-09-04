@@ -16,40 +16,44 @@ interface OrderData {
 
 export default function ViewOrder() {
     const [order, setOrder] = useState<OrderData[]>([]);
-
-    useEffect(() => {
-        async function fetchData() {
-            try {
-                const token = localStorage.getItem("token");
-                const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/order`, {
-                    headers: {
-                        Authorization: `Bearer ${token}`
-                    }
-                });
-                console.log(response);
-
-                if (response.ok) {
-                    const jsonData: OrderData[] = await response.json();
-                    setOrder(jsonData);
-                    // console.log(response);
-                } else {
-                    console.error("Failed to fetch data");
+    async function fetchData() {
+        try {
+            const token = localStorage.getItem("token");
+            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/order`, {
+                headers: {
+                    Authorization: `Bearer ${token}`
                 }
-            } catch (error) {
-                console.error("Error:", error);
+            });
+            console.log(response);
+
+            if (response.ok) {
+                const jsonData: OrderData[] = await response.json();
+                setOrder(jsonData);
+                // console.log(response);
+            } else {
+                console.error("Failed to fetch data");
             }
+        } catch (error) {
+            console.error("Error:", error);
         }
+    }
+    useEffect(() => {
+        
         fetchData();
     }, []);
 
     const confirmOrder = async (_id: string) => {
         try {
             const token = localStorage.getItem("token");
-            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/order`, {
-                method: 'POST',
+            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/order/${_id}`, {
+                method: 'PATCH',
                 headers: {
-                    Authorization: `Bearer ${token}`
-                }
+                    Authorization: `Bearer ${token}`,
+                    'Content-Type': 'application/json', 
+                },
+                body: JSON.stringify({
+                    isPaid: 'true' 
+                })
             });
 
             if (!response.ok) {
@@ -105,32 +109,58 @@ export default function ViewOrder() {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {order.map((item, index) => (
-                                <TableRow
-                                    key={index}
-                                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                                >
-                                    <TableCell component="th" scope="row">{item._id}</TableCell>
-                                    <TableCell component="th" scope="row">{item.products.map((product: any) => product.productName).join(', ')}</TableCell>
-                                    <TableCell component="th" scope="row"> {item.qty}</TableCell>
-                                    <TableCell component="th" scope="row"> {item.isPaid}</TableCell>
-                                    <TableCell component="th" scope="row"> {'?'}</TableCell>
-                                    <TableCell component="th" scope="row"> {item.status}</TableCell>
+                            {order.map((item, index) => {
+                                return (
+                                    <>
+                                        <TableRow
+                                            key={index}
+                                            sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                                        >
+                                            <TableCell component="th" scope="row">{item._id}</TableCell>
+                                            <TableCell component="th" scope="row">{}</TableCell>
+                                            <TableCell component="th" scope="row"> {}</TableCell>
+                                            <TableCell component="th" scope="row"> {(item.isPaid) ? 'yes' : 'no'}</TableCell>
+                                            <TableCell component="th" scope="row"> {item.products.points}</TableCell>
+                                            <TableCell component="th" scope="row"> {item.status}</TableCell>
 
-                                    <TableCell>
-                                        <IconButton
-                                            onClick={() => confirmOrder(item._id)}>
-                                            <CheckIcon fontSize="small" />
-                                        </IconButton>
-                                    </TableCell>
-                                    <TableCell>
-                                        <IconButton
-                                            onClick={() => deleteOrder(item._id)}>
-                                            <DeleteOutlineIcon fontSize="small" />
-                                        </IconButton>
-                                    </TableCell>
-                                </TableRow>
-                            ))}
+                                            <TableCell>
+                                                {
+                                                    (!item.isPaid && 
+                                                        <IconButton
+                                                            onClick={() => confirmOrder(item._id)}>
+                                                            <CheckIcon fontSize="small" />
+                                                        </IconButton>
+                                                    )
+                                                }
+                                            </TableCell>
+                                            <TableCell>
+                                                <IconButton
+                                                    onClick={() => deleteOrder(item._id)}>
+                                                    <DeleteOutlineIcon fontSize="small" />
+                                                </IconButton>
+                                            </TableCell>
+                                        </TableRow>  
+                                        {item.products.map((prod, ind) => {
+                                            return (
+                                                <TableRow
+                                                    key={index}
+                                                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                                                >
+                                                    <TableCell component="th" scope="row">{}</TableCell>
+                                                    <TableCell component="th" scope="row">{prod.product.productName}</TableCell>
+                                                    <TableCell component="th" scope="row"> {prod.qty}</TableCell>
+                                                    <TableCell component="th" scope="row"> {}</TableCell>
+                                                    <TableCell component="th" scope="row"> {prod.product.points}</TableCell>
+                                                    <TableCell component="th" scope="row"> {}</TableCell>
+
+                                                    <TableCell>&nbsp;</TableCell>
+                                                    <TableCell>&nbsp;</TableCell>
+                                                </TableRow>
+                                            )
+                                        })}
+                                    </>                                  
+                                )
+                            })}
                         </TableBody>
                     </Table>
                 </TableContainer>
