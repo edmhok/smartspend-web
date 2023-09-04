@@ -15,7 +15,7 @@ const HeaderMain = () => {
             <div className="container sm:flex justify-between items-center">
                 <div className="pb-2 sm:pb-0 ">
                     <Link href={'/'} className='flex flex-row items-center space-x-4 sm:flex justify-center' prefetch={false}>
-                        <img
+                        <Image
                             className=''
                             src={'/logo.png'}
                             width={56}
@@ -29,6 +29,10 @@ const HeaderMain = () => {
                     </Link>
                 </div>
                 <div className="hidden lg:flex gap-4 text-gray-500 text-[30px]">
+                    <Link href="/login/usr" prefetch={false}>
+                        <PersonOutlineOutlinedIcon className="w-8 h-8 space-x-2 mt-2" />
+                    </Link>
+
                     <Link href="/login/adm" prefetch={false}>
                         <div className="relative">
                             <ShoppingCartOutlinedIcon className='w-8 h-8 space-x-2' />
@@ -38,12 +42,7 @@ const HeaderMain = () => {
                         </div>
                     </Link>
 
-                    {/* <Link href="/login/usr" prefetch={false}>
-                <PersonOutlineOutlinedIcon className="w-8 h-8 space-x-2 mt-2"/>
-            </Link>
-            <div className="relative">
-                <MenuRoundedIcon className='w-8 h-8 space-x-2 flex '/>
-            </div> */}
+
                 </div>
             </div>
         </div>

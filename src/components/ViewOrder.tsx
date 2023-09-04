@@ -38,7 +38,7 @@ export default function ViewOrder() {
         }
     }
     useEffect(() => {
-        
+
         fetchData();
     }, []);
 
@@ -49,10 +49,10 @@ export default function ViewOrder() {
                 method: 'PATCH',
                 headers: {
                     Authorization: `Bearer ${token}`,
-                    'Content-Type': 'application/json', 
+                    'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    isPaid: 'true' 
+                    isPaid: 'true'
                 })
             });
 
@@ -117,15 +117,15 @@ export default function ViewOrder() {
                                             sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                                         >
                                             <TableCell component="th" scope="row">{item._id}</TableCell>
-                                            <TableCell component="th" scope="row">{}</TableCell>
-                                            <TableCell component="th" scope="row"> {}</TableCell>
+                                            <TableCell component="th" scope="row">{ }</TableCell>
+                                            <TableCell component="th" scope="row"> { }</TableCell>
                                             <TableCell component="th" scope="row"> {(item.isPaid) ? 'yes' : 'no'}</TableCell>
                                             <TableCell component="th" scope="row"> {item.products.points}</TableCell>
                                             <TableCell component="th" scope="row"> {item.status}</TableCell>
 
                                             <TableCell>
                                                 {
-                                                    (!item.isPaid && 
+                                                    (!item.isPaid &&
                                                         <IconButton
                                                             onClick={() => confirmOrder(item._id)}>
                                                             <CheckIcon fontSize="small" />
@@ -139,26 +139,26 @@ export default function ViewOrder() {
                                                     <DeleteOutlineIcon fontSize="small" />
                                                 </IconButton>
                                             </TableCell>
-                                        </TableRow>  
-                                        {item.products.map((prod, ind) => {
+                                        </TableRow>
+                                        {item.products.map((prod: any) => {
                                             return (
                                                 <TableRow
                                                     key={index}
                                                     sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                                                 >
-                                                    <TableCell component="th" scope="row">{}</TableCell>
+                                                    <TableCell component="th" scope="row">{ }</TableCell>
                                                     <TableCell component="th" scope="row">{prod.product.productName}</TableCell>
                                                     <TableCell component="th" scope="row"> {prod.qty}</TableCell>
-                                                    <TableCell component="th" scope="row"> {}</TableCell>
+                                                    <TableCell component="th" scope="row"> { }</TableCell>
                                                     <TableCell component="th" scope="row"> {prod.product.points}</TableCell>
-                                                    <TableCell component="th" scope="row"> {}</TableCell>
+                                                    <TableCell component="th" scope="row"> { }</TableCell>
 
                                                     <TableCell>&nbsp;</TableCell>
                                                     <TableCell>&nbsp;</TableCell>
                                                 </TableRow>
                                             )
                                         })}
-                                    </>                                  
+                                    </>
                                 )
                             })}
                         </TableBody>

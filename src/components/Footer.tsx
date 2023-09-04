@@ -48,8 +48,8 @@ const Footer = () => {
     <Box sx={{ flexGrow: 1 }}>
 
       <div className="running-message-container w-full bg-black text-center text-white font-bold py-2 md:pb-2">
-        <div className="running-message">Discover a new way to shop online with SmartSpend Ecommerce. We're bringing you a curated selection of the latest products, trends, and deals, all in one place.
-          Whether you're looking for fashion, electronics, home essentials, or more, we've got you covered.
+        <div className="running-message">Discover a new way to shop online with SmartSpend Ecommerce. We&apos;re bringing you a curated selection of the latest products, trends, and deals, all in one place.
+          Whether you&apos;re looking for fashion, electronics, home essentials, or more, we&apos;ve got you covered.
         </div>
       </div>
 

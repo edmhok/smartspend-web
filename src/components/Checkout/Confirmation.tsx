@@ -109,7 +109,7 @@ const Confirmation = (props: PaymentProps) => {
                 {deliveryMethod === "gcash" && (
                   <div className="pb-5 pt-[10px] ">
                     <div className="ps-[70px]">PLEASE SCAN TO PAY</div>
-                    <img
+                    <Image
                       src={props.img}
                       alt={props.alt}
                       width={props.width}
@@ -121,7 +121,7 @@ const Confirmation = (props: PaymentProps) => {
 
                 {deliveryMethod === "bank" && (
                   <div className="pb-8 pt-[10px] ">
-                    <img
+                    <Image
                       src={props.img}
                       alt={props.alt}
                       width={props.width}
