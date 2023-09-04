@@ -44,6 +44,7 @@ type Data = {
   points: number;
   discount: number;
   originalPrice: number;
+  merchant: string
 };
 interface Detail {
   _id: string;
@@ -70,6 +71,7 @@ export default function Product() {
     points: 0,
     discount: 0,
     originalPrice: 0,
+    merchant: ''
   });
   const searchParams = useSearchParams();
 
@@ -94,6 +96,7 @@ export default function Product() {
       orders.push({
         id: detail._id,
         qty: quantity,
+        merchant: detail.merchant
       });
     }
     localStorage.setItem("orders", JSON.stringify(orders));
@@ -133,9 +136,9 @@ export default function Product() {
         <div className="text-black font-thin text-lg pb-[20px]">{detail.tags}</div>
 
         <div className='flex flex-row pb-10 items-center py-10 '>
-          <button className="text-white bg-black w-5 h-10 rounded-l-xl" type='button' onClick={() => { handleQtyChange(detail.qty - 1) }}>-</button>
-          <h5 className='py-5 px-5 border border-gray-400' >{detail.qty}</h5>
-          <button className="text-white bg-black w-5 h-10 rounded-r-xl" type='button' onClick={() => { handleQtyChange(detail.qty + 1) }}>+</button>
+          <button className="text-white bg-black w-5 h-10 rounded-l-xl" type='button' onClick={() => { handleQtyChange(quantity - 1) }}>-</button>
+          <h5 className='py-5 px-5 border border-gray-400' >{quantity}</h5>
+          <button className="text-white bg-black w-5 h-10 rounded-r-xl" type='button' onClick={() => { handleQtyChange(quantity + 1) }}>+</button>
           <div className="text-black text-lg ps-10">Stock:{detail.qty}</div>
 
         </div>

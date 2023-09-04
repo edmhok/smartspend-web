@@ -1,0 +1,14 @@
+<Error>
+  <Code>RoutingRules</Code>
+  <Message>RoutingRules</Message>
+  <RoutingRules>
+    <RoutingRule>
+      <Condition>
+        <HttpErrorCodeReturnedEquals>404</HttpErrorCodeReturnedEquals>
+      </Condition>
+      <Redirect>
+        <ReplaceKeyWith>index.html</ReplaceKeyWith>
+      </Redirect>
+    </RoutingRule>
+  </RoutingRules>
+</Error>

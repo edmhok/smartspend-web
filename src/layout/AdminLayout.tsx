@@ -288,8 +288,8 @@ export default function AdminLayout({ children }: PropsWithChildren) {
 
                 <Collapse in={openGroups[group.id]} timeout="auto" unmountOnExit>
                   <List component="div" disablePadding>
-                    {group.items.map(item => (
-                      <ListItemButton sx={{ pl: 4 }} component='a' href={item.href}>
+                    {group.items.map((item, index) => (
+                      <ListItemButton key={index} sx={{ pl: 4 }} component='a' href={item.href}>
                         <ListItemText sx={{ textAlign: 'center' }}>{item.title}</ListItemText>
                       </ListItemButton>
                     ))}
