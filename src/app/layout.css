@@ -2937,6 +2937,9 @@ body {
   .link {
     text-decoration: none;
   }
+  .link:hover {
+    color:#218c20;
+  }
 
   .css-yiavyu-MuiBackdrop-root-MuiDialog-backdrop {
     background-color: rgba(255, 255, 255, 0.2);
