@@ -31,7 +31,7 @@ const ProductCard: React.FC<propsType> = ({
             <FavoriteIcon />
           </IconButton>
         </div>
-        <img
+        <Image
           className="w-full h-auto"
           src={'/jacket-1.jpg'}
           width={150}

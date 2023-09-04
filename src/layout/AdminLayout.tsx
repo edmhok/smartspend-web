@@ -90,7 +90,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 const themeTest = createTheme({
   palette: {
     primary: {
-      main: '#fff',
+      main: '#F3F3F3',
     },
     secondary: {
       main: '#218c20',

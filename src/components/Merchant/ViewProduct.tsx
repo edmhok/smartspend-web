@@ -15,7 +15,7 @@ import IconButton from "@mui/material/IconButton";
 import Link from "next/link";
 
 interface Data {
-  id: number;
+  _id: string;
   entryDate: string;
   productName: string;
   brand: string;
@@ -50,19 +50,25 @@ export default function ViewProduct() {
     fetchData();
   }, []);
 
-  const handleDelete = async (itemId: number) => {
+  const handleDelete = async (_id: string) => {
     try {
-      // Make DELETE request to your API
-      await fetch(`${process.env.NEXT_PUBLIC_API_URL}/products/${itemId}`, {
+      const token = localStorage.getItem("token");
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/products/${_id}`, {
         method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
       });
-      // Update state to remove deleted item
-      // setProductData(data.filter(item => item.id !== itemId));
+      if (!response.ok) {
+        throw new Error('Failed to delete merchant');
+      }
+      // Refetch merchants after delete
       fetchData();
+
     } catch (error) {
-      console.error("Error deleting item:", error);
+      console.error(error);
     }
-  };
+  }
 
   return (
     <div >
@@ -87,7 +93,7 @@ export default function ViewProduct() {
             <TableBody>
               {productData.map((item) => (
                 <TableRow
-                  key={item.id}
+                  key={item._id}
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                 >
                   <TableCell component="th" scope="row">
@@ -102,12 +108,12 @@ export default function ViewProduct() {
                   <TableCell>{item.qty}</TableCell>
                   <TableCell>
                     <IconButton>
-                      <Link href={`/merchant/product/add/?id=${item.id}`} prefetch={false}>
+                      <Link href={`/merchant/product/add/?id=${item._id}`} prefetch={false}>
                         <CreateIcon fontSize="small" />
                       </Link>
                     </IconButton>
 
-                    <IconButton onClick={() => handleDelete(item.id)}>
+                    <IconButton onClick={() => handleDelete(item._id)}>
                       <DeleteOutlineIcon fontSize="small" />
                     </IconButton>
                   </TableCell>

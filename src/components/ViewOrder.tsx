@@ -6,8 +6,8 @@ import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import CheckIcon from '@mui/icons-material/Check';
 
 interface OrderData {
-    _id: number;
-    products_id: number;
+    _id: string;
+    products: any;
     qty: number;
     isPaid: boolean;
     points: number;
@@ -21,7 +21,6 @@ export default function ViewOrder() {
         async function fetchData() {
             try {
                 const token = localStorage.getItem("token");
-
                 const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/order`, {
                     headers: {
                         Authorization: `Bearer ${token}`
@@ -31,7 +30,6 @@ export default function ViewOrder() {
 
                 if (response.ok) {
                     const jsonData: OrderData[] = await response.json();
-
                     setOrder(jsonData);
                     // console.log(response);
                 } else {
@@ -44,7 +42,7 @@ export default function ViewOrder() {
         fetchData();
     }, []);
 
-    const confirmOrder = async (_id: number) => {
+    const confirmOrder = async (_id: string) => {
         try {
             const token = localStorage.getItem("token");
             const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/order`, {
@@ -59,13 +57,11 @@ export default function ViewOrder() {
             }
             // Refetch merchants after delete
             fetchData();
-
-
         } catch (error) {
             console.error(error);
         }
     }
-    const deleteOrder = async (_id: number) => {
+    const deleteOrder = async (_id: string) => {
         try {
             const token = localStorage.getItem("token");
             // Make DELETE request to your API
@@ -99,7 +95,7 @@ export default function ViewOrder() {
                         <TableHead>
                             <TableRow>
                                 <TableCell>Order ID</TableCell>
-                                <TableCell>Product ID</TableCell>
+                                <TableCell>Product Name</TableCell>
                                 <TableCell>Qty</TableCell>
                                 <TableCell>isPaid</TableCell>
                                 <TableCell>Points</TableCell>
@@ -115,7 +111,7 @@ export default function ViewOrder() {
                                     sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                                 >
                                     <TableCell component="th" scope="row">{item._id}</TableCell>
-                                    <TableCell component="th" scope="row">{item.products_id}</TableCell>
+                                    <TableCell component="th" scope="row">{item.products.map((product: any) => product.productName).join(', ')}</TableCell>
                                     <TableCell component="th" scope="row"> {item.qty}</TableCell>
                                     <TableCell component="th" scope="row"> {item.isPaid}</TableCell>
                                     <TableCell component="th" scope="row"> {'?'}</TableCell>

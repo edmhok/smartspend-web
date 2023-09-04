@@ -34,8 +34,6 @@ export default function ViewPoints() {
 
   };
 
-
-
   const fetchData = async () => {
     try {
       const token = localStorage.getItem("token");
@@ -80,13 +78,13 @@ export default function ViewPoints() {
           points: selectedMerchant.points
         })
       });
-      if (!response.ok) {
+      if (response.ok) {
+        fetchData();
+        handleClose();
+      } else {
         throw new Error('Failed to update patron');
       }
-      // Refetch patrons 
-      fetchData();
-      // Close modal
-      handleClose();
+
 
     } catch (error) {
       console.error(error);

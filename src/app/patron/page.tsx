@@ -64,7 +64,7 @@ const Patron = () => {
         </Button> */}
 
           <Button
-            className={`text-lg font-bold text-fuchsia-400 rounded-t-lg
+            className={`text-lg font-bold text-[#218c20] rounded-t-lg
          ${tab === "new" ? "bg-[#F1F1F1]" : "bg-[#F6F6F6]"}`}
             onMouseEnter={() => setTab("new")}
             onClick={() => setTab("new")}
@@ -106,6 +106,7 @@ const Patron = () => {
                     description={item.description}
                     // rating={item.rating}
                     price={item.price}
+                    rating={0}
                   />
                 </Link>
               ))}

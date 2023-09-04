@@ -1,12 +1,14 @@
 import React from "react";
 import type { NextPage } from "next";
 import { PatronLayout } from "@/layout";
-import ProductBigCard from "../../../components/ProductBigCard";
+import ProductBigCard from "@/components/ProductBigCard";
 
-const ProductCard: NextPage = () => (
+const ProductID: NextPage = () => (
+
   <PatronLayout>
-    <ProductBigCard id={0} img={""} title={""} desc={""} price={0} />
+
+    <ProductBigCard />
   </PatronLayout>
 );
 
-export default ProductCard;
+export default ProductID;

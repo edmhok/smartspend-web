@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { Button, IconButton, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Tooltip } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Delete, Edit } from '@mui/icons-material';
+import Image from 'next/image';
 
 interface OrderItem {
     id: number;
@@ -27,7 +28,7 @@ const CartInfo = () => {
 
     async function fetchData() {
         try {
-            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/products`);
+            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/order`);
             console.log(response);
             if (response.ok) {
                 const jsonData: OrderItem[] = await response.json();
@@ -120,23 +121,24 @@ const CartInfo = () => {
                                     </TableRow>
                                 </TableHead>
                                 <TableBody >
-                                    {orders.map(order => (
-                                        <TableRow key={order.id}>
+                                    {orders.map((order, index) => (
+                                        <TableRow key={index}>
                                             <TableCell>
-                                                <img
+                                                <Image
                                                     // src={`/api/images/${order.thumbnail}`}
                                                     src={images}
                                                     alt={order.productName}
-                                                    className="w-[30px] h-[30px]"
+                                                    width={30}
+                                                    height={30}
                                                 />
                                             </TableCell>
                                             <TableCell>{order.productName}</TableCell>
                                             <TableCell>{order.description}</TableCell>
 
                                             <TableCell>
-                                                <Button size="small" onClick={() => { handleQtyChange(order.id, order.qty - 1) }}>-</Button>
-                                                {order.qty}
-                                                <Button size="small" onClick={() => { handleQtyChange(order.id, order.qty + 1) }}>+</Button>
+                                                <button className="text-white bg-slate-300 w-3 h-5 rounded-l-xl" onClick={() => { handleQtyChange(order.id, order.qty - 1) }}>-</button>
+                                                <strong className='px-2 '>{order.qty}</strong>
+                                                <button className="text-white bg-slate-300 w-3 h-5 rounded-r-xl" onClick={() => { handleQtyChange(order.id, order.qty + 1) }}>+</button>
                                             </TableCell>
 
                                             <TableCell>{order.price}</TableCell>

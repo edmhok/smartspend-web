@@ -144,6 +144,7 @@ const AddProducts = () => {
         }
         else {
             try {
+                console.log('post');
                 const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/products/`, {
                     method: 'POST',
                     headers: {
@@ -167,7 +168,9 @@ const AddProducts = () => {
                         entryDate: selectedDate,
                     }),
                 });
-                const jsonData = await response.json();
+                console.log({ response });
+
+                const jsonData: Data[] = await response.json();
                 window.location.href = "/merchant/product/view";
                 setIsLoading(false);
 
@@ -187,7 +190,7 @@ const AddProducts = () => {
     //                 `${process.env.NEXT_PUBLIC_API_URL}/products/${+_id}`);
 
     //             if (response.ok) {
-    //                 const data = await response.json();
+    //                 const data: Data[] = await response.json();
     //                 setIsEdit(true);
     //                 setProductName(data.productName);
     //                 setBrand(data.brand);

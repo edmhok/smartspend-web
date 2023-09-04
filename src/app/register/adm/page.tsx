@@ -79,16 +79,14 @@ export default function AdminRegister() {
     }
   };
 
-
-
-
   return (
     <div className="w-full h-full flex justify-center py-[20px]">
       <div className=" bg-white shadow-2xl flex flex-col content-center p-[50px] space-y-5">
         <p className="text-2xl text-center pb-3">
-          Create a User Account
+          Create Admin Account
         </p>
-        <p className="text-sm text-center">Choose</p>
+
+        <p className="text-sm text-center">or choose</p>
         <div className="flex flex-row space-x-10 py-2 justify-center">
           <Link href="/register/mer" className="no-underline" prefetch={false}>
             <div className="text-lg text-black font-semibold hover:text-amber-600">Mechant</div>
@@ -165,6 +163,7 @@ export default function AdminRegister() {
               onChange={(e) => setCountry(e.target.value)}
             />
             <TextField
+              className="w-[300px]"
               label="Zipcode"
               value={zipcode}
               onChange={(e) => setZipcode(e.target.value)}
@@ -183,7 +182,7 @@ export default function AdminRegister() {
             onChange={(e) => setConfirmPassword(e.target.value)}
           />
 
-          {error && <div className='flex self-center text-lg text-fuchsia-500'>{error}</div>}
+          {error && <div className='flex self-center text-lg text-[#218c20]'>{error}</div>}
 
           <div className='flex justify-center mt-30 '>
 
