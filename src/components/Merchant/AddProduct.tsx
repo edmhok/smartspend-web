@@ -104,6 +104,8 @@ const AddProducts = () => {
     const saveProduct = async () => {
         setIsLoading(true);
 
+        const merchant = localStorage.getItem('userId');
+
         const tempFormData = { ...formData };
         const selectedDate = new Date(tempFormData.entryDate);
         tempFormData.entryDate = format(selectedDate, 'yyyy-MM-dd').toString();
@@ -166,6 +168,7 @@ const AddProducts = () => {
                         discount,
                         originalPrice,
                         entryDate: selectedDate,
+                        merchant: merchant
                     }),
                 });
                 console.log({ response });

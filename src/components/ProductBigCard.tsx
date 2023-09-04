@@ -44,6 +44,7 @@ type Data = {
   points: number;
   discount: number;
   originalPrice: number;
+  merchant: string
 };
 interface Detail {
   _id: string;
@@ -70,6 +71,7 @@ export default function Product() {
     points: 0,
     discount: 0,
     originalPrice: 0,
+    merchant: ''
   });
   const searchParams = useSearchParams();
 
@@ -94,6 +96,7 @@ export default function Product() {
       orders.push({
         id: detail._id,
         qty: quantity,
+        merchant: detail.merchant
       });
     }
     localStorage.setItem("orders", JSON.stringify(orders));

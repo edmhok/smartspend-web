@@ -27,12 +27,23 @@ const CartInfo = () => {
     const images = "/jacket-1.jpg";
 
     async function fetchData() {
+        const lcData = JSON.parse(localStorage.getItem("orders") || "[]");
+        const ids = lcData.map((item: any) => item.id).join(",");
         try {
-            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/order`);
-            console.log(response);
+            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/products/batch?ids=${ids}`);
+            
             if (response.ok) {
-                const jsonData: OrderItem[] = await response.json();
-                setOrders(jsonData);
+                const data = await response.json();
+                const newData = data.map((item: any) => {
+                    const qty = lcData.find((i: any) => i.id === item._id).qty
+                    return {
+                        ...item,                        
+                        qty,
+                        total: qty * item.price
+                    };
+                });
+                
+                setOrders(newData);
                 //   console.log(response);
             } else {
                 console.error("Failed to fetch data");
@@ -136,9 +147,9 @@ const CartInfo = () => {
                                             <TableCell>{order.description}</TableCell>
 
                                             <TableCell>
-                                                <button className="text-white bg-slate-300 w-3 h-5 rounded-l-xl" onClick={() => { handleQtyChange(order.id, order.qty - 1) }}>-</button>
+                                                {/* <button className="text-white bg-slate-300 w-3 h-5 rounded-l-xl" onClick={() => { handleQtyChange(order.id, order.qty - 1) }}>-</button> */}
                                                 <strong className='px-2 '>{order.qty}</strong>
-                                                <button className="text-white bg-slate-300 w-3 h-5 rounded-r-xl" onClick={() => { handleQtyChange(order.id, order.qty + 1) }}>+</button>
+                                                {/* <button className="text-white bg-slate-300 w-3 h-5 rounded-r-xl" onClick={() => { handleQtyChange(order.id, order.qty + 1) }}>+</button> */}
                                             </TableCell>
 
                                             <TableCell>{order.price}</TableCell>

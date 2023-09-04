@@ -162,7 +162,7 @@ const Delivery = () => {
                         </Box>
                     </FormControl>
                 </Grid>
-                <Grid item xs={4} >
+                {/* <Grid item xs={4} >
                     <div className='w-[300px] flex flex-col ps-10 pt-10'>
                         <h1 className='text-2xl text-thin pb-5'>Order Summary</h1>
                         <ul className='flex flex-row'>
@@ -176,7 +176,7 @@ const Delivery = () => {
                             </li>
                         </ul>
                     </div>
-                </Grid>
+                </Grid> */}
             </Grid>
 
         </div>
