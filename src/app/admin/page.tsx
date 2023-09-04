@@ -1,7 +1,7 @@
 import React from 'react'
 import type { NextPage } from 'next'
 import NewProducts from '@/components/NewProducts'
-import { AdminLayout } from '@/layout/admin'
+import { AdminLayout } from '@/layout'
 import { Box, Typography } from "@mui/material";
 
 const Admin: NextPage = () => (

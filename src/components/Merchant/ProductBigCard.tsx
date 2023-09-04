@@ -95,7 +95,7 @@ const ProductBigCard: React.FC<propsType> = ({
     }
     console.log({ shop });
     localStorage.setItem("shop", JSON.stringify(shop));
-    window.location.href = `/checkout/a?id=${productId}`;
+    window.location.href = '/patron/order/1';
   };
   useEffect(() => {
     fetchProductData();
@@ -104,7 +104,7 @@ const ProductBigCard: React.FC<propsType> = ({
   return (
     <div className=" bg-white drop-shadow-md w-[1020px] h-[522p] flex flex-row content-center container mt-[50px] mb-[200px]">
       <div className="bg-slate-200 w-[510px]">
-        <img
+        <Image
           className="w-full h-auto"
           src={images}
           width={713}

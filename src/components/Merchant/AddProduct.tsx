@@ -11,9 +11,10 @@ import { useSearchParams } from "next/navigation";
 import { format } from 'date-fns';
 interface FormData {
     entryDate: any;
+
 }
 type Data = {
-    id: number;
+    _id: string;
     productName: string;
     brand: string;
     description: string;
@@ -23,30 +24,13 @@ type Data = {
     size: string;
     color: string;
     tags: string;
-    price: number;
-    qty: number;
-    points: number;
-    originalPrice: number;
-    discount: number;
+    price: string;
+    qty: string;
+    points: string;
+    discount: string;
+    originalPrice: string;
+
 };
-//   tags sample
-const ITEM_HEIGHT = 48;
-const ITEM_PADDING_TOP = 8;
-const MenuProps = {
-    PaperProps: {
-        style: {
-            maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-            width: 250,
-        },
-    },
-};
-const names = [
-    'clothing',
-    'food',
-    'garment',
-    'men',
-    'bestseller',
-];
 
 const AddProducts = () => {
     const [isLoading, setIsLoading] = useState(false);
@@ -68,62 +52,48 @@ const AddProducts = () => {
     const [discount, setDiscount] = useState("");
     const [originalPrice, setOriginalPrice] = useState("");
     const [formData, setFormData] = useState<FormData>({
-        entryDate: new Date(),
+        entryDate: new Date()
     });
 
+
     useEffect(() => {
+        const token = localStorage.getItem('token');
+        if (!token) {
+            window.location.href = '/';
+        }
         const urlParams = new URLSearchParams(window.location.search);
         console.log(urlParams.get('isEdit'))
 
         if (urlParams.get('isEdit')) {
-            const id = urlParams.get('id');
+            const id = urlParams.get('_id');
             if (id) {
                 setPageTitle("Edit Product#" + id);
                 fetchData(parseInt(id))
             }
         }
     }, [])
-    // const fetchProductData = async () => {
-    //     try {
-    //       if (productId) {
-    //         const response = await fetch(
-    //           `${process.env.NEXT_PUBLIC_API_URL}/products/${productId}`
-    //         );
-    //         if (response.ok) {
-    //           const data = await response.json();
-    //           setProductData(data);
-    //           setIsEdit(true);
-    //           setProductName(data.productName);
-    //           setBrand(data.brand);
-    //           setDescription(data.description);
-    //           setSku(data.sku);
-    //           setPrice(data.price);
-    //           setQty(data.qty);
-    //           setPoints(data.points);
-    //           setDiscount(data.discount);
-    //           setOriginalPrice(data.originalPrice);
-    //         } else {
-    //           console.error("Failed to fetch resource data");
-    //         }
-    //       }
-    //     } catch (error) {
-    //       console.error("Error:", error);
-    //     }
-    //   };
 
-    //   useEffect(() => {
-    //     fetchProductData();
-    //   }, []);
+    const handleImageChange = (e: any) => {
+        const imageFile = e.target.files[0];
+        setSelectedImage(imageFile);
+        // Implement your upload logic here
+        if (selectedImage) {
+            // Example: You can use FormData to send the image to your server
+            const formData = new FormData();
+            formData.append("image", selectedImage);
+            // Make an API call to upload the image
+        }
+    };
 
-    const [personName, setPersonName] = React.useState<string[]>([]);
+    const reloadPage = (): void => {
+        window.location.reload();
+    }
 
     const handleDateChange = (value: any) => {
         const tempFormData = formData;
         tempFormData.entryDate = Date.now();
-
         setFormData(tempFormData);
     };
-
     const handleChange = (event: any) => {
         setFormData({
             ...formData,
@@ -140,7 +110,7 @@ const AddProducts = () => {
 
         const urlParams = new URLSearchParams(window.location.search);
         if (urlParams.get('isEdit')) {
-            const id = urlParams.get('id');
+            const id = urlParams.get('_id');
             try {
                 await fetch(`${process.env.NEXT_PUBLIC_API_URL}/products/${id}`, {
                     method: 'PATCH',
@@ -174,7 +144,8 @@ const AddProducts = () => {
         }
         else {
             try {
-                const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/products`, {
+                console.log('post');
+                const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/products/`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -197,7 +168,9 @@ const AddProducts = () => {
                         entryDate: selectedDate,
                     }),
                 });
-                const jsonData = await response.json();
+                console.log({ response });
+
+                const jsonData: Data[] = await response.json();
                 window.location.href = "/merchant/product/view";
                 setIsLoading(false);
 
@@ -208,33 +181,43 @@ const AddProducts = () => {
         }
     };
 
+    // const fetchProductData = async (_id: string) => {
+    //     setIsLoading(true);
 
-    const handleImageChange = (e: any) => {
-        const imageFile = e.target.files[0];
-        setSelectedImage(imageFile);
-        // Implement your upload logic here
-        if (selectedImage) {
-            // Example: You can use FormData to send the image to your server
-            const formData = new FormData();
-            formData.append("image", selectedImage);
-            // Make an API call to upload the image
-        }
-    };
-    const handleTagChange = (event: SelectChangeEvent<typeof personName>) => {
-        const {
-            target: { value },
-        } = event;
-        setPersonName(
-            // On autofill we get a stringified value.
-            typeof value === 'string' ? value.split(',') : value,
-        );
-    };
-    const reloadPage = (): void => {
-        window.location.reload();
-    }
+    //     try {
+    //         if (_id) {
+    //             const response = await fetch(
+    //                 `${process.env.NEXT_PUBLIC_API_URL}/products/${+_id}`);
+
+    //             if (response.ok) {
+    //                 const data: Data[] = await response.json();
+    //                 setIsEdit(true);
+    //                 setProductName(data.productName);
+    //                 setBrand(data.brand);
+    //                 setDescription(data.description);
+    //                 setSku(data.sku);
+    //                 setPrice(data.price);
+    //                 setQty(data.qty);
+    //                 setPoints(data.points);
+    //                 setDiscount(data.discount);
+    //                 setOriginalPrice(data.originalPrice);
+    //             } else {
+    //                 throw new Error('Failed to fetch data');
+    //             }
+    //         }
+    //     } catch (error) {
+    //         console.error("Error:", error);
+    //     }
+    // };
+
+    // useEffect(() => {
+    //     fetchProductData();
+    // }, []);
+
+
     return (
 
-        <Card color='secondary' sx={{ p: 2 }}>
+        <Card sx={{ p: 2 }}>
             <CardHeader title={(pageTitle)} titleTypographyProps={{ variant: 'h6' }} />
             <Divider sx={{ margin: 0 }} />
             <form onSubmit={e => e.preventDefault()}>
@@ -243,10 +226,12 @@ const AddProducts = () => {
                         <Grid item xs={10} sm={6}>
                             <TextField
                                 fullWidth
+                                color="secondary"
                                 label='Name'
                                 placeholder='Name of Product'
                                 value={productName}
                                 onChange={(e) => setProductName(e.target.value)}
+
                             />
                         </Grid>
                         <Grid item xs={12} sm={6}>
@@ -260,11 +245,20 @@ const AddProducts = () => {
                             </LocalizationProvider>
                         </Grid>
                         <Grid item xs={12} sm={6}>
-                            <TextField fullWidth label='Brand' placeholder='Brand' value={brand} onChange={(e) => setBrand(e.target.value)} />
+                            <TextField
+                                color="secondary"
+                                fullWidth
+                                label='Brand'
+                                placeholder='Brand'
+                                value={brand}
+                                onChange={(e) => setBrand(e.target.value)} />
+
+
                         </Grid>
                         <Grid item xs={12} sm={6}>
                             <TextField
                                 fullWidth
+                                color="secondary"
                                 label="Description"
                                 placeholder="(maximum of 150 words)"
                                 multiline
@@ -272,17 +266,20 @@ const AddProducts = () => {
                                 maxRows={6}
                                 value={description}
                                 onChange={(e) => setDescription(e.target.value)}
+
                             />
                         </Grid>
                         <Grid item xs={12} sm={6}>
                             <FormControl fullWidth>
                                 <InputLabel id='form-layouts-separator-select-label'>Category</InputLabel>
                                 <Select
+                                    color="secondary"
                                     label='Category'
                                     value={category}
                                     id='form-layouts-separator-select'
                                     labelId='form-layouts-separator-select-label'
                                     onChange={(e) => setCategory(e.target.value)}
+
                                 >
                                     <MenuItem value='Garments'>Garments</MenuItem>
                                     <MenuItem value='Technology'>Technology</MenuItem>
@@ -292,7 +289,13 @@ const AddProducts = () => {
                             </FormControl>
                         </Grid>
                         <Grid item xs={12} sm={6}>
-                            <TextField fullWidth label='Variant' placeholder='Variant' value={variant} onChange={(e) => setVariant(e.target.value)} />
+                            <TextField color="secondary"
+                                fullWidth label='Variant'
+                                placeholder='Variant'
+                                value={variant}
+                                onChange={(e) => setVariant(e.target.value)} />
+
+
                         </Grid>
 
                         <Grid item xs={12}>
@@ -304,58 +307,100 @@ const AddProducts = () => {
                             </Typography>
                         </Grid>
                         <Grid item xs={12} sm={4}>
-                            <TextField fullWidth label='Size' placeholder='small' value={size} onChange={(e) => setSize(e.target.value)} />
+                            <TextField
+                                color="secondary"
+                                fullWidth label='Size'
+                                placeholder='small'
+                                value={size}
+                                onChange={(e) => setSize(e.target.value)} />
+
+
                         </Grid>
                         <Grid item xs={6} sm={4}>
-                            <TextField fullWidth label='Color' placeholder='black' value={color} onChange={(e) => setColor(e.target.value)} />
+                            <TextField
+                                color="secondary"
+                                fullWidth label='Color'
+                                placeholder='black'
+                                value={color}
+                                onChange={(e) => setColor(e.target.value)} />
+
+
                         </Grid>
                         <Grid item xs={12} sm={4}>
-                            <TextField fullWidth label='Quantity' placeholder='quantity' value={qty} onChange={(e) => setQty(e.target.value)} />
+                            <TextField
+                                color="secondary"
+                                fullWidth
+                                label='Quantity'
+                                placeholder='quantity'
+                                value={qty}
+                                onChange={(e) => setQty(e.target.value)} />
+
+
                         </Grid>
                         <Grid item xs={12} sm={6}>
-                            <TextField fullWidth label='SKU' placeholder='SKU' value={sku} onChange={(e) => setSku(e.target.value)} />
+                            <TextField
+                                color="secondary"
+                                fullWidth label='SKU'
+                                placeholder='SKU'
+                                value={sku}
+                                onChange={(e) => setSku(e.target.value)} />
+
+
                         </Grid>
                         <Grid item xs={12} sm={6}>
-                            <FormControl sx={{ m: 0, width: 650 }}>
-                                <InputLabel id="demo-multiple-checkbox-label">Tag</InputLabel>
-                                <Select
-                                    labelId="demo-multiple-checkbox-label"
-                                    id="demo-multiple-checkbox"
-                                    multiple
-                                    value={personName}
-                                    onChange={handleTagChange}
-                                    input={<OutlinedInput label="Tag" />}
-                                    renderValue={(selected) => selected.join(', ')}
-                                    MenuProps={MenuProps}
-                                >
-                                    {names.map((name) => (
-                                        <MenuItem key={name} value={name}>
-                                            <Checkbox checked={personName.indexOf(name) > -1} />
-                                            <ListItemText primary={name} />
-                                        </MenuItem>
-                                    ))}
-                                </Select>
-                            </FormControl>
+                            <TextField
+                                color="secondary"
+                                fullWidth
+                                label='Tags'
+                                placeholder='Tags'
+                                value={tags}
+                                onChange={(e) => setTags(e.target.value)} />
+
+
                         </Grid>
                         <Grid item xs={12} sm={6}>
                             <FormControl fullWidth sx={{ m: 0 }}>
                                 <InputLabel htmlFor="outlined-adornment-amount">Price</InputLabel>
                                 <OutlinedInput
+                                    color="secondary"
                                     id="outlined-adornment-amount"
                                     startAdornment={<InputAdornment position="start">₱</InputAdornment>}
                                     label="Price"
                                     value={price}
                                     onChange={(e) => setPrice(e.target.value)}
+
                                 />
                             </FormControl>
                         </Grid>
                         <Grid item xs={12} sm={6}>
-                            <TextField fullWidth label='Discount' placeholder='Discount' value={discount} onChange={(e) => setDiscount(e.target.value)} />
+                            <TextField
+                                color="secondary"
+                                fullWidth
+                                label='Discount'
+                                placeholder='Discount'
+                                value={discount}
+                                onChange={(e) => setDiscount(e.target.value)} />
+
+
                         </Grid>
-                        <Grid item xs={12} sm={6}>
-                            <TextField label='Points' placeholder='Points' value={points} onChange={(e) => setPoints(e.target.value)} />
+
+                        <Grid item xs={8} sm={4}>
+                            <TextField
+                                color="secondary"
+                                label='Points'
+                                placeholder='Points'
+                                value={points}
+                                onChange={(e) => setPoints(e.target.value)} />
                         </Grid>
-                        <Grid item xs={12} sm={6}>
+                        <Grid item xs={8} sm={4}>
+                            <TextField
+                                color="secondary"
+                                label='Original Price'
+                                placeholder='Original Price'
+                                value={originalPrice}
+                                onChange={(e) => setOriginalPrice(e.target.value)} />
+                        </Grid>
+                        <Grid item xs={8} sm={4}>
                             <input
                                 accept="image/*"
                                 id="image-upload"
@@ -367,10 +412,10 @@ const AddProducts = () => {
                 </CardContent>
                 <Divider sx={{ margin: 0 }} />
                 <CardActions className="flex justify-end">
-                    <Button size='large' color='primary' variant='outlined' onClick={reloadPage}>
+                    <Button size='large' color='secondary' variant='outlined' onClick={reloadPage}>
                         Cancel
                     </Button>
-                    <Button size='large' type='submit' sx={{ mr: 2 }} variant='contained' onClick={saveProduct} disabled={isLoading}>
+                    <Button color='secondary' size='large' type='submit' sx={{ mr: 2 }} variant='outlined' onClick={saveProduct} disabled={isLoading}>
                         {isLoading ? 'Loading...' : 'Save'}
                     </Button>
                 </CardActions>
@@ -383,3 +428,4 @@ export default AddProducts;
 function fetchData(arg0: number) {
     throw new Error("Function not implemented.");
 }
+

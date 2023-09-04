@@ -21,6 +21,7 @@ import ListItemText from '@mui/material/ListItemText';
 import { Collapse, Menu, MenuItem, Stack } from '@mui/material';
 import { AccountCircle, ExpandLess, ExpandMore } from '@mui/icons-material';
 import { AuthCheckerInside } from '@/utils/checker-inside';
+import Footer from './Footer';
 // import { useRouter } from 'next/router';
 
 
@@ -97,9 +98,9 @@ const themeTest = createTheme({
 });
 
 export default function MerchantLayout({ children }: PropsWithChildren) {
-  
+
   useMemo(() => {
-    if(typeof window !== 'undefined') {
+    if (typeof window !== 'undefined') {
       AuthCheckerInside(window);
     }
   }, [])
@@ -153,16 +154,16 @@ export default function MerchantLayout({ children }: PropsWithChildren) {
         },
       ]
     },
-    {
-      id: 1,
-      title: 'Order',
-      items: [
-        {
-          title: 'View Order',
-          href: '/merchant/order',
-        },
-      ]
-    },
+    // {
+    //   id: 1,
+    //   title: 'Order',
+    //   items: [
+    //     {
+    //       title: 'View Order',
+    //       href: '/merchant/order',
+    //     },
+    //   ]
+    // },
     // {
     //   id: 1,
     //   title: 'Geneology',
@@ -263,7 +264,7 @@ export default function MerchantLayout({ children }: PropsWithChildren) {
           <Divider />
           <List>
             {[
-              { text: 'Home', href: '/dashboard' },
+              { text: 'Home', href: '/merchant' },
               { text: 'My Info', href: '/myinfo' }
             ].map((item) => (
               <ListItem sx={{ textAlign: 'center' }} key={item.text}>
@@ -315,7 +316,7 @@ export default function MerchantLayout({ children }: PropsWithChildren) {
 
           <List>
             {[
-              { text: 'Points', href: '/merchant/points' }
+              { text: 'View Order', href: '/merchant/order/view' }
             ].map((item) => (
               <ListItem sx={{ textAlign: 'center' }} key={item.text}>
                 <ListItemButton component="a" href={item.href}>
@@ -344,18 +345,7 @@ export default function MerchantLayout({ children }: PropsWithChildren) {
           <DrawerHeader />
           {/* <NewProducts /> */}
           {children}
-          <footer className=" border-top py-2">
-            <div className="w-full flex-row flex justify-between">
-              <div>
-                <a className="text-decoration-none" href="#">SmartSpend</a>
-                {' '}
-                © 2023
-              </div>
-              <div className="ms-md-auto">
-                Powered by&nbsp;Artificers
-              </div>
-            </div>
-          </footer>
+          <Footer />
         </Main>
       </Box>
     </ThemeProvider>
