@@ -2507,3 +2507,7 @@ color: #9ca3af;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+
+.image-slider-container .slick-slide {
+  margin: 20px;
+}

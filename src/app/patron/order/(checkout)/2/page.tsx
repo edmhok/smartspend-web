@@ -35,7 +35,7 @@ const CheckoutB: NextPage = () => {
             Swal.fire("Thank You for your order.");
         }
         setTimeout(() => {
-            window.location.href = "/patron";
+            window.location.href = "/patron/order/3";
         }, 2000);
     };
     return (

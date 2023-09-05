@@ -125,9 +125,11 @@ import Slider from "react-slick";
 
 import { HiOutlineChevronLeft, HiOutlineChevronRight } from "react-icons/hi";
 import CarouselBoxCard from "./Merchant/CarouselBoxCard";
+import ProductCard from "./ProductCard";
+import imagePlaceholder from "./../../public/jacket-1.jpg";
 
 interface Props {
-  id: string;
+  id?: string;
   className?: string;
   children?: React.ReactNode;
   href?: string;
@@ -141,98 +143,59 @@ const DealsofDayBox: React.FC<Props> = ({
   full
 }) => {
   const [data, setData] = useState<Props[]>([]);
+  const [productData, setProductData] = useState([]);
+
+
+  async function fetchData() {
+    try {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/products`);
+      console.log(response);
+      if (response.ok) {
+        const jsonData = await response.json();
+        setProductData(jsonData);
+        // console.log(response);
+      } else {
+        console.error("Failed to fetch data");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  }
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+
 
   const settings = {
-    className: ` px-4 ${full ? "bg-palette-fill" : "bg-[#37bccef9]"}`,
-    infinite: true,
-    speed: 600,
-    centerPadding: "60px",
-    slidesToShow: 5,
-    slidesToScroll: 5,
-    // initialSlide: 0,
-    swipeToSlide: true,
-    // rtl: true,
-    nextArrow: <NextArrow />,
-    prevArrow: <PrevArrow />,
-    responsive: [
-      {
-        breakpoint: 1324,
-        settings: {
-          slidesToShow: 4,
-          slidesToScroll: 4,
-        },
-      },
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 3,
-        },
-      },
-      {
-        breakpoint: 768,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
-        },
-      },
-      {
-        breakpoint: 640,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-        },
-      },
-    ],
+    className: 'slider variable-width',
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    variableWidth: true,
+    infinite: false,
+    arrows: true
   };
 
 
   return (
-    <div
-      className={`w-[100%] mx-auto my-8 flex rounded-md ${full ? "flex-col" : "bg-[#ffad1e]"
-        }`}
-    >
-      <div
-        className={`flex flex-col items-center justify-around flex-grow text-sm sm:text-base  bg-cover bg-no-repeat bg-center rounded-md backdrop-blur-md ${className}`}
-      >
-        <h2
-          className={`text-lg  sm:text-xl font-bold ${full
-            ? "text-palette-base self-start"
-            : "text-palette-primary text-center"
-            } `}
-        >
-          Deals of the Day
-        </h2>
-        {!full ? (
-          <Link href={`/`}>
-            <a className="text-palette-primary/80 dark:text-rose-300 text-sm font-bold py-2 px-6 -mb-4 shadow-lg block rounded-lg backdrop-filter backdrop-blur-[10px] bg-palette-card/80">
-              {'seeAll'}
-            </a>
+    <div className="image-slider-container container">
+      <h1>Featured Products</h1>
+      <Slider {...settings}>
+        {productData.map((item:any, index) => (
+          <Link key={index} href={`/login/adm`} prefetch={false}>
+            <ProductCard
+              key={index}
+              img={item.photo || imagePlaceholder}
+              title={item.productName}
+              description={item.description}
+              // rating={item.rating}
+              price={item.price}
+              rating={0}
+            />
           </Link>
-        ) : null}
-      </div>
-      <div
-        className={`relative ${full ? "w-full mt-4" : "w-[55%] sm:w-[75%] md:w-[85%]"
-          }`}
-      >
-        <Slider {...settings}>
-          <CarouselBoxCard
-            id={""}
-            imageUrl={""}
-            productName={""}
-            price={""}
-            qty={""}
-          />
-        </Slider>
-        <div>
-          <div className="absolute top-[45%] right-4 md:right-1 shadow-lg rounded-full bg-palette-card p-1 drop-shadow-lg text-[0.8rem] md:text-[1.8rem]">
-            <HiOutlineChevronRight style={{ color: "gray" }} />
-          </div>
-          <div className="absolute top-[45%] left-4 md:-left-1 shadow-lg rounded-full bg-palette-card p-1 drop-shadow-lg text-[0.8rem] md:text-[1.8rem]">
-            <HiOutlineChevronLeft style={{ color: "gray" }} />
-          </div>
-        </div>
-      </div>
+        ))}
+        {/* Add more slides as needed */}
+      </Slider>
     </div>
   );
 };

@@ -7,6 +7,7 @@ import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { Button, TableCell, TableRow, TextField } from "@mui/material";
+import imagePlaceholder from "./../../public/jacket-1.jpg";
 // import { renderImage } from "./../../utils/utils";
 
 // interface propsType {
@@ -55,7 +56,7 @@ interface Detail {
 export default function Product() {
   const [isLoading, setIsLoading] = useState(false);
   const [quantity, setQuantity] = useState(1);
-  const [detail, setDetail] = useState<Data>({
+  const [detail, setDetail] = useState({
     _id: '',
     productName: '',
     imageUrl: '',
@@ -71,7 +72,8 @@ export default function Product() {
     points: 0,
     discount: 0,
     originalPrice: 0,
-    merchant: ''
+    merchant: '',
+    photo: null
   });
   const searchParams = useSearchParams();
 
@@ -117,8 +119,8 @@ export default function Product() {
       <div className="bg-white w-[510px]">
         <Image
           className="w-full h-auto"
-          src={'/jacket-1.jpg'}
-          // src={renderImage(detail?.photo ? detail.photo : imagePlaceholder)}
+          // src={'/jacket-1.jpg'}
+          src={detail.photo || imagePlaceholder}
           width={713}
           height={750}
           alt={""}

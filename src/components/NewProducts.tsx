@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import ProductCard from "./ProductCard";
 import { Button } from "@mui/material";
 import Link from "next/link";
+import imagePlaceholder from "./../../public/jacket-1.jpg";
 
 const productData = {
   // favorites: [
@@ -121,7 +122,7 @@ const NewProducts = () => {
                 <Link key={index} href={item._id ? `/merchant/product/${item._id}` : '/login/adm'} prefetch={false}>
                   <ProductCard
                     // key={index}
-                    img={item.img}
+                    img={item.photo || imagePlaceholder}
                     title={item.productName}
                     description={item.description}
                     rating={item.rating}

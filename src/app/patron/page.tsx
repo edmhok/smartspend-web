@@ -6,6 +6,7 @@ import { Button } from "@mui/material";
 import Link from "next/link";
 import { PatronLayout } from '@/layout'
 import IntroMember from '@/components/IntroMember'
+import imagePlaceholder from "./../../../public/jacket-1.jpg";
 
 interface Data {
   img: string;
@@ -101,7 +102,7 @@ const Patron = () => {
                 <Link key={index} href={`/patron/product/?id=${item["_id"]}`} prefetch={false}>
                   <ProductCard
                     key={index}
-                    img={item.img}
+                    img={item.photo || imagePlaceholder}
                     title={item.productName}
                     description={item.description}
                     // rating={item.rating}

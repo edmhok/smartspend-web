@@ -43,8 +43,8 @@ const CarouselBoxCard: React.FC<Props> = ({ id, imageUrl, productName, qty }) =>
     <div className="w-full h-full px-2 my-2">
       <Link
         href={'/'}
+        className="flex flex-col w-full p-3 shadow-lg backdrop-filter backdrop-blur-[10px] bg-palette-card/80 rounded-md"
       >
-        <a className="flex flex-col w-full p-3 shadow-lg backdrop-filter backdrop-blur-[10px] bg-palette-card/80 rounded-md">
           <div className="text-center flex-grow">
             {/* {product?.image[0] && ( */}
             <Image
@@ -68,9 +68,8 @@ const CarouselBoxCard: React.FC<Props> = ({ id, imageUrl, productName, qty }) =>
           </div>
           <p className="truncate">{productName}</p>
           <div>
-            {price}
+            [price]
           </div>
-        </a>
       </Link>
     </div>
   );
