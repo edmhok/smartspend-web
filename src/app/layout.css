@@ -2474,3 +2474,36 @@ color: #9ca3af;
 .slick-prev::before {
   font-size: 50px;
 } */
+.icon_flash {
+  position:absolute;
+  display:flex;
+  flex-direction: column;
+}
+.favorite-icon {
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+}
+.deals_css {
+  text-align: center;
+  background-color: white; 
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;  
+  padding-top: 1.25rem;
+  padding-bottom: 1.25rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  border: 1px solid;
+  border-color: #e5e7eb;
+  max-width: 500px;
+  max-height: 500px; 
+  padding-top: 1.25rem;
+}
+.deals_css:drop-shadow-xl:hover {
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+.truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
