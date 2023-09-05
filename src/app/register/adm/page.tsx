@@ -9,6 +9,7 @@ import { MuiTelInput } from 'mui-tel-input'
 import Swal from 'sweetalert2'
 import { format } from "date-fns";
 import Link from "next/link";
+import ImageUploader from "@/components/Merchant/ImageUploader";
 interface FormData {
   birthdate: any;
 }
@@ -80,7 +81,7 @@ export default function AdminRegister() {
   };
 
   return (
-    <div className="w-full h-full flex justify-center py-[20px]">
+    <div className="w-full h-full flex justify-center py-[10px]">
       <div className=" bg-white shadow-2xl flex flex-col content-center p-[50px] space-y-5">
         <p className="text-2xl text-center pb-3">
           Create Admin Account
@@ -169,6 +170,7 @@ export default function AdminRegister() {
               onChange={(e) => setZipcode(e.target.value)}
             />
           </div>
+          <ImageUploader />
           <TextField
             label="Password"
             type="password"

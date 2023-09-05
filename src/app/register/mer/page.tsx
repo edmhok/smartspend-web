@@ -8,6 +8,7 @@ import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import { MuiTelInput } from 'mui-tel-input'
 import Swal from 'sweetalert2'
 import { format } from "date-fns";
+import ImageUploader from "@/components/Merchant/ImageUploader";
 
 interface FormData {
   birthdate: any;
@@ -81,11 +82,8 @@ export default function MerchantRegister() {
     }
   };
 
-
-
-
   return (
-    <div className="w-full h-full flex justify-center py-[100px]">
+    <div className="w-full h-full flex justify-center py-[10px]">
       <div className=" bg-white shadow-2xl flex flex-col content-center p-[50px] space-y-5">
         <p className="text-2xl text-center pb-3">
           Create a Merchant Account
@@ -164,6 +162,7 @@ export default function MerchantRegister() {
               onChange={(e) => setZipcode(e.target.value)}
             />
           </div>
+          <ImageUploader />
           <TextField
             label="Password"
             type="password"
@@ -175,12 +174,6 @@ export default function MerchantRegister() {
             type="confirm_password"
             value={confirmpassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
-          />
-          <TextField
-            label="Points Received"
-            type="points"
-            value={points}
-            onChange={(e) => setPoints(e.target.value)}
           />
           <TextField
             label="Referred by"
