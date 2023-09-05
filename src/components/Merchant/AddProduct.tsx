@@ -50,7 +50,7 @@ type Data = {
 
 const AddProducts = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const [photo, setPhoto] = useState('');
+  const [photo, setPhoto] = useState(null);
   const [pageTitle, setPageTitle] = useState("Add New Product");
   const [isEdit, setIsEdit] = useState(false);
   const [productName, setProductName] = useState("");
@@ -141,7 +141,7 @@ const AddProducts = () => {
     formdata.append('discount', discount);
     formdata.append('originalPrice', originalPrice);
     formdata.append('entryDate', tempFormData.entryDate);
-    formdata.append('photo', photo);
+    formdata.append('photo', photo || '');
 
     const urlParams = new URLSearchParams(window.location.search);
     if (urlParams.get("isEdit")) {
