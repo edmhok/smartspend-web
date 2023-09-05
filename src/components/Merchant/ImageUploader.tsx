@@ -1,51 +1,65 @@
-import { Button } from '@mui/material';
-import { useState } from 'react';
+import { Button } from "@mui/material";
+import { useState } from "react";
 
 interface Image {
-    dataUrl: string;
+  dataUrl: string;
 }
 
 function ImageUploader() {
+  const [image, setImage] = useState<Image | null>(null);
+  const [selectedImage, setSelectedImage] = useState(null);
 
-    const [image, setImage] = useState<Image | null>(null);
+  const saveImage = (file: File) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      // Resize image to 60x60px
+      const img = new Image();
+      img.src = reader.result as string;
 
-    const saveImage = (file: File) => {
-        const reader = new FileReader();
-        reader.onload = () => {
+      const canvas = document.createElement("canvas");
+      canvas.width = 100;
+      canvas.height = 100;
 
-            // Resize image to 60x60px
-            const img = new Image();
-            img.src = reader.result as string;
+      const ctx = canvas.getContext("2d");
+      ctx!.drawImage(img, 0, 0, 60, 60);
 
-            const canvas = document.createElement('canvas');
-            canvas.width = 60;
-            canvas.height = 60;
+      setImage({ dataUrl: canvas.toDataURL() });
+      localStorage.setItem("image", JSON.stringify({ dataUrl: reader.result }));
+    };
+    reader.readAsDataURL(file);
+  };
 
-            const ctx = canvas.getContext('2d');
-            ctx!.drawImage(img, 0, 0, 60, 60);
-
-            setImage({ dataUrl: canvas.toDataURL() });
-            localStorage.setItem('image', JSON.stringify({ dataUrl: reader.result }));
-        }
-        reader.readAsDataURL(file);
+  const loadImage = () => {
+    const json = localStorage.getItem("image");
+    if (json) {
+      setImage(JSON.parse(json));
     }
-
-    const loadImage = () => {
-        const json = localStorage.getItem('image');
-        if (json) {
-            setImage(JSON.parse(json));
-        }
-    }
-    // Render uploaded image
-    return (
-        <div className='flex flex-col justify-start'>
-            <div className='text-md pb-5'>Upload your Photo here</div>
-            <input type="file" onChange={e => saveImage(e.target.files![0])} />
-            {image && <img src={image.dataUrl} width={60} height={60} />}
-
+  };
+  const handleImageChange = (e: any) => {
+    const imageFile = e.target.files[0];
+    setSelectedImage(imageFile);
+  };
+  return (
+    <div className="flex flex-col justify-start">
+      <div className="text-md pb-5">Upload your Photo here</div>
+      <input
+        accept="image/*"
+        id="image-upload"
+        type="file"
+        onChange={handleImageChange}
+      />
+      {selectedImage && (
+        <div style={{ marginTop: 10 }}>
+          <img
+            src={URL.createObjectURL(selectedImage)}
+            alt="Selected"
+            width={100}
+            height={100}
+          />
         </div>
-    )
-
+      )}
+    </div>
+  );
 }
 
 export default ImageUploader;
