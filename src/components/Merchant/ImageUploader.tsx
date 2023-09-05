@@ -41,7 +41,7 @@ function ImageUploader() {
   };
   return (
     <div className="flex flex-col justify-start">
-      <div className="text-md pb-5">Upload your Photo here</div>
+      <div className="text-md pb-5">Upload your ID here</div>
       <input
         accept="image/*"
         id="image-upload"
@@ -53,7 +53,7 @@ function ImageUploader() {
           <img
             src={URL.createObjectURL(selectedImage)}
             alt="Selected"
-            width={100}
+            width={200}
             height={100}
           />
         </div>
