@@ -2962,3 +2962,136 @@ body {
       transform: translateX(-100%); /* Move off-screen to the left */
     }
   }
+
+
+  /* HeadMain */
+.head_bg01 {
+width: 100%; 
+background-color: #fff;
+padding-top: 1.75rem;
+}
+
+.pb-2 {
+  padding-bottom: 0.5rem;
+}
+
+.hidden {
+  display: none; 
+}
+.logo{
+  display:block;
+}
+
+.logo_txt1 {
+  font-size: 1.5rem; 
+  line-height: 2rem;
+  color: #218c20;
+}
+.logo_txt2 {
+  font-size: 1.5rem; 
+  line-height: 2rem;
+  color: #ffad1e;
+}
+.menu_icon{
+display:hidden;
+}
+ 
+.cssright {
+color: #6b7280;
+font-size: 20px;
+display: flex; 
+align-items: center; 
+}
+.logo_invisible {
+display:none;
+justify-content: center;
+
+}
+.input_search {
+border-color: #e5e7eb;
+border-width: 1px;
+padding: 0.5rem; 
+padding-left: 1rem;
+padding-right: 1rem; 
+border-radius: 0.5rem;
+width: 100%;
+display:flex;
+align-items: center;
+}
+.search {
+width: 60%;
+position:relative;
+}
+.search_icon {
+position: absolute;
+right: 0;
+top: 0;
+margin-right: 0.75rem;
+margin-top: 0.75rem;
+color: #9ca3af;
+} 
+.shop_notification {
+  background-color: #ffad1e;
+  border-radius: 9999px; 
+  position: absolute;
+  top: -10px;
+  right: -10px; 
+  width: 18px;
+  height: 18px;
+  font-size: 12px;
+  color: white;
+  display: grid;
+  place-items: center;
+  transform: translateX(4px); 
+  transform: translateY(-4px);
+}
+
+ @media (max-width: 600px) {
+    .logo_txt {
+      display: none;
+    }
+    .logo_img1 {
+      display:none;
+    }
+    .logo_invisible {
+      display:block;
+    }
+    .input_search {
+      display:none;
+    }
+    .search {
+      display:flex;
+      justify-content: center;
+    }
+    .menubar {
+      display:block;
+     }
+   
+
+}
+  @media (min-width: 640px) {
+    .logo_txt {
+      display: block;
+    }
+    .menubar {
+      display: none;
+    }
+    .sm\:flex {
+      display: flex;
+    }
+    .justify-between {
+      justify-content: space-between;
+    }
+    .items-center {
+      align-items: center;
+    }
+    .sm\:pb-0 {
+      padding-bottom: 0;
+    }  
+  }
+
+  @media (min-width: 1024px) {
+    .lg\:flex {
+      display: flex;
+    }
+  }
