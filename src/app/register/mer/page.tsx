@@ -29,7 +29,7 @@ export default function MerchantRegister() {
   const [country, setCountry] = useState("");
   const [zipcode, setZipcode] = useState("");
   const [points, setPoints] = useState("");
-  const [affiliate, setAffiliate] = useState("");
+  const [affiliate, setAffiliate] = useState("admin");
   const [photos, setPhotos] = useState(null);
   const [formData, setFormData] = useState<FormData>({
     birthdate: new Date(),
@@ -76,32 +76,27 @@ export default function MerchantRegister() {
         const tempFormData = { ...formData };
         const selectedDate = new Date(tempFormData.birthdate);
         tempFormData.birthdate = format(selectedDate, "yyyy-MM-dd").toString();
-        console.log(`${process.env.NEXT_PUBLIC_API_URL}/merchants`);
+
+        var formdata = new FormData();
+        formdata.append("username", username);
+        formdata.append("password", password);
+        formdata.append("first_name", first_name);
+        formdata.append("middle_name", middle_name);
+        formdata.append("last_name", last_name);
+        formdata.append("birthdate", tempFormData.birthdate);
+        formdata.append("phone", phone);
+        formdata.append("address", address);
+        formdata.append("city", city);
+        formdata.append("state", state);
+        formdata.append("country", country);
+        formdata.append("zipcode", zipcode);
+        formdata.append("photos", photos);
+
         const response = await fetch(
           `${process.env.NEXT_PUBLIC_API_URL}/merchants`,
           {
             method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              username,
-              password,
-              confirmpassword,
-              first_name,
-              middle_name,
-              last_name,
-              phone,
-              address,
-              city,
-              state,
-              country,
-              zipcode,
-              birthdate: selectedDate,
-              points,
-              photos: [photos],
-              // affiliate_id,
-            }),
+            body: formdata
           }
         );
         console.log(response);
