@@ -162,7 +162,6 @@ export default function MerchantRegister() {
               onChange={(e) => setZipcode(e.target.value)}
             />
           </div>
-          <ImageUploader />
           <TextField
             label="Password"
             type="password"
@@ -181,6 +180,7 @@ export default function MerchantRegister() {
             value={affiliate}
             onChange={(e) => setAffiliate(e.target.value)}
           />
+          <ImageUploader />
           {error && <div className='flex self-center text-lg text-fuchsia-500'>{error}</div>}
 
           <div className='flex justify-center mt-30 '>

@@ -2442,3 +2442,35 @@ color: #9ca3af;
 .regis_btn:hover {
   background-color: white;
 }
+/* 
+.app {
+  width: 60%;
+  margin: 0 auto;
+  position: relative;
+}
+
+.slick-slide {
+  height: 200px;
+  border: 1px solid #000;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.slick-slide img {
+  margin: 0 auto;
+}
+
+.slick-next,
+.slick-prev {
+  width: 100px;
+  height: 100px;
+  background-color: #2647a3 !important;
+  z-index: 99999;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.slick-next::before,
+.slick-prev::before {
+  font-size: 50px;
+} */

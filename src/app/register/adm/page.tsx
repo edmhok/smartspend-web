@@ -170,7 +170,6 @@ export default function AdminRegister() {
               onChange={(e) => setZipcode(e.target.value)}
             />
           </div>
-          <ImageUploader />
           <TextField
             label="Password"
             type="password"
@@ -183,6 +182,7 @@ export default function AdminRegister() {
             value={confirmpassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
           />
+          <ImageUploader />
 
           {error && <div className='flex self-center text-lg text-[#218c20]'>{error}</div>}
 

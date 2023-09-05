@@ -38,9 +38,9 @@ function ImageUploader() {
     }
     // Render uploaded image
     return (
-        <div className='flex flex-row items-center'>
+        <div className='flex flex-col justify-start'>
+            <div className='text-md pb-5'>Upload your Photo here</div>
             <input type="file" onChange={e => saveImage(e.target.files![0])} />
-            <Button onClick={loadImage}>Load Image</Button>
             {image && <img src={image.dataUrl} width={60} height={60} />}
 
         </div>
