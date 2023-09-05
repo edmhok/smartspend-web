@@ -74,29 +74,26 @@ export default function PatronRegister() {
         const selectedDate = new Date(tempFormData.birthdate);
         tempFormData.birthdate = format(selectedDate, "yyyy-MM-dd").toString();
 
+        var formdata = new FormData();
+        formdata.append("username", username);
+        formdata.append("password", password);
+        formdata.append("first_name", first_name);
+        formdata.append("middle_name", middle_name);
+        formdata.append("last_name", last_name);
+        formdata.append("birthdate", tempFormData.birthdate);
+        formdata.append("phone", phone);
+        formdata.append("address", address);
+        formdata.append("city", city);
+        formdata.append("state", state);
+        formdata.append("country", country);
+        formdata.append("zipcode", zipcode);
+        formdata.append("photos", photos);
+
         const response = await fetch(
           `${process.env.NEXT_PUBLIC_API_URL}/patrons`,
           {
             method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              username,
-              password,
-              confirmpassword,
-              first_name,
-              middle_name,
-              last_name,
-              phone,
-              address,
-              city,
-              state,
-              country,
-              zipcode,
-              birthdate: selectedDate,
-              photos: [photos],
-            }),
+            body: formdata
           }
         );
         console.log(response);

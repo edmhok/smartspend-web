@@ -13,6 +13,7 @@ import CreateIcon from "@mui/icons-material/Create";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import IconButton from "@mui/material/IconButton";
 import Link from "next/link";
+import Image from 'next/image'
 
 interface Data {
   _id: string;
@@ -26,6 +27,7 @@ interface Data {
   points: number;
   originalPrice: number;
   discount: number;
+  photo: string
 }
 
 export default function ViewProduct() {
@@ -33,7 +35,12 @@ export default function ViewProduct() {
 
   async function fetchData() {
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/products`);
+      const token = localStorage.getItem("token");
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/products`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        }
+      });
       console.log(response);
       if (response.ok) {
         const jsonData: Data[] = await response.json();
@@ -81,6 +88,7 @@ export default function ViewProduct() {
           <Table sx={{ minWidth: 650, minHeight: 100 }} aria-label="simple table">
             <TableHead>
               <TableRow>
+                <TableCell>&nbsp;</TableCell>
                 <TableCell>Name</TableCell>
                 <TableCell>Brand</TableCell>
                 <TableCell> Description</TableCell>
@@ -96,6 +104,9 @@ export default function ViewProduct() {
                   key={item._id}
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                 >
+                  <TableCell component="th" scope="row">
+                    <Image alt={item.productName} width={100} height={100} src={item.photo || ''} />
+                  </TableCell>
                   <TableCell component="th" scope="row">
                     {item.productName}
                   </TableCell>

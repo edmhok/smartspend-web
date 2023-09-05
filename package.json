@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev -p 8080",
-    "build": "next build",
+    "dev": "export NODE_ENV=local && next dev -p 8080",
+    "build": "export NODE_ENV=production && next build",
     "deploy": "scp -i ~/.ssh/smartspend-ec2/smartspend.pem -r .next ec2-user@18.179.11.248:~/smartspend-web",
     "export": "next export",
     "start": "next start -p 8080",

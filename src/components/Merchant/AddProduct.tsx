@@ -50,7 +50,7 @@ type Data = {
 
 const AddProducts = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const [photos, setPhotos] = useState(null);
+  const [photo, setPhoto] = useState('');
   const [pageTitle, setPageTitle] = useState("Add New Product");
   const [isEdit, setIsEdit] = useState(false);
   const [productName, setProductName] = useState("");
@@ -90,12 +90,12 @@ const AddProducts = () => {
 
   const handleImageChange = (e: any) => {
     const imageFile = e.target.files[0];
-    setPhotos(imageFile);
+    setPhoto(imageFile);
     // Implement your upload logic here
-    if (photos) {
+    if (photo) {
       // Example: You can use FormData to send the image to your server
       const formData = new FormData();
-      formData.append("image", photos);
+      formData.append("image", photo);
       // Make an API call to upload the image
     }
   };
@@ -117,6 +117,7 @@ const AddProducts = () => {
   };
 
   const saveProduct = async () => {
+    const token = localStorage.getItem("token");
     setIsLoading(true);
 
     const merchant = localStorage.getItem("userId");
@@ -124,6 +125,23 @@ const AddProducts = () => {
     const tempFormData = { ...formData };
     const selectedDate = new Date(tempFormData.entryDate);
     tempFormData.entryDate = format(selectedDate, "yyyy-MM-dd").toString();
+    var formdata = new FormData();
+    formdata.append('productName', productName);
+    formdata.append('brand', brand);
+    formdata.append('description', description);
+    formdata.append('sku', sku);
+    formdata.append('category', category);
+    formdata.append('variant', variant);
+    formdata.append('size', size);
+    formdata.append('color', color);
+    formdata.append('tags', tags);
+    formdata.append('price', price);
+    formdata.append('qty', qty);
+    formdata.append('points', points);
+    formdata.append('discount', discount);
+    formdata.append('originalPrice', originalPrice);
+    formdata.append('entryDate', tempFormData.entryDate);
+    formdata.append('photo', photo);
 
     const urlParams = new URLSearchParams(window.location.search);
     if (urlParams.get("isEdit")) {
@@ -132,26 +150,9 @@ const AddProducts = () => {
         await fetch(`${process.env.NEXT_PUBLIC_API_URL}/products/${id}`, {
           method: "PATCH",
           headers: {
-            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
           },
-          body: JSON.stringify({
-            productName,
-            brand,
-            description,
-            sku,
-            photos: [photos],
-            category,
-            variant,
-            size,
-            color,
-            tags,
-            price,
-            qty,
-            points,
-            discount,
-            originalPrice,
-            entryDate: selectedDate,
-          }),
+          body: formdata
         });
         setIsLoading(false);
         window.location.href = "/merchant/product/view";
@@ -161,32 +162,16 @@ const AddProducts = () => {
       }
     } else {
       try {
-        console.log("post");
+        
+        
         const response = await fetch(
           `${process.env.NEXT_PUBLIC_API_URL}/products/`,
           {
             method: "POST",
+            body: formdata,
             headers: {
-              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
             },
-            body: JSON.stringify({
-              productName,
-              brand,
-              description,
-              sku,
-              category,
-              variant,
-              size,
-              color,
-              tags,
-              price,
-              qty,
-              points,
-              discount,
-              originalPrice,
-              entryDate: selectedDate,
-              merchant: merchant,
-            }),
           }
         );
         console.log({ response });
@@ -426,10 +411,10 @@ const AddProducts = () => {
                 type="file"
                 onChange={handleImageChange}
               />
-              {photos && (
+              {photo && (
                 <div style={{ marginTop: 10 }}>
                   <img
-                    src={URL.createObjectURL(photos)}
+                    src={URL.createObjectURL(photo)}
                     alt="Selected"
                     width={200}
                     height={100}

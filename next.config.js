@@ -10,6 +10,9 @@ const nextConfig = {
     
         return config;
       },
+      images: {
+        domains: ['smartspend-assets.s3.ap-northeast-1.amazonaws.com'],
+      },
     trailingSlash: true,
     // output: 'export',
     // experimental: {
