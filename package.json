@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev -p 8080",
     "build": "next build",
+    "deploy": "scp -i ~/.ssh/smartspend-ec2/smartspend.pem -r .next ec2-user@18.179.11.248:~/smartspend-web",
     "export": "next export",
     "start": "next start -p 8080",
     "lint": "next lint"
@@ -32,6 +33,7 @@
     "react-material-ui-carousel": "^3.4.2",
     "react-resize-detector": "^9.1.0",
     "react-slick": "^0.29.0",
+    "sharp": "^0.32.5",
     "slick-carousel": "^1.8.1",
     "sweetalert2": "^11.7.21",
     "tailwindcss": "^3.3.3",

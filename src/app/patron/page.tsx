@@ -97,7 +97,7 @@ const Patron = () => {
         <div className="border border-x-[#F1F1F1] border-y-[#F1F1F1] bg-[#F1F1F1]">
           <div className="container p-10">
             <div className="grid grid-cols-1 place-items-center sm:place-items-start sm:grid-cols-2 lg:grid-col-3 xl:grid-cols-4 gap-10 xl:gap-x-20 xl:gap-y-10">
-              {productData.map((item, index) => (
+              {productData.map((item:any, index) => (
                 <Link key={index} href={`/patron/product/?id=${item["_id"]}`} prefetch={false}>
                   <ProductCard
                     key={index}

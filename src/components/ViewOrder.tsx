@@ -140,10 +140,10 @@ export default function ViewOrder() {
                                                 </IconButton>
                                             </TableCell>
                                         </TableRow>  
-                                        {item.products.map((prod, ind) => {
+                                        {item.products.map((prod:any, ind:number) => {
                                             return (
                                                 <TableRow
-                                                    key={index}
+                                                    key={ind}
                                                     sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                                                 >
                                                     <TableCell component="th" scope="row">{}</TableCell>

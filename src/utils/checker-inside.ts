@@ -11,13 +11,16 @@ export const AuthCheckerInside = (window:any) => {
       window.location.href = '/';
     } 
     else {
-      if (! window.location.href.includes(`${process.env.NEXT_PUBLIC_SITE_URL}/merchant`) && role === 'merchant') {
+      if (! window.location.href.includes(`/merchant`) && role === 'merchant') {
+        console.log('not a merchant, go back to merchant page...')
         window.location.href = '/merchant';
       } 
-      if (! window.location.href.includes(`${process.env.NEXT_PUBLIC_SITE_URL}/patron`) && role === 'patron') {
+      if (! window.location.href.includes(`/patron`) && role === 'patron') {
+        console.log('not a patron, go back to patron page...')
         window.location.href = '/patron';
       } 
-      if (! window.location.href.includes(`${process.env.NEXT_PUBLIC_SITE_URL}/admin`) && role === 'admin') {
+      if (! window.location.href.includes(`/admin`) && role === 'admin') {
+        console.log('not a admin, go back to admin page...')
         window.location.href = '/admin';
       } 
     }
