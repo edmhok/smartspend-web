@@ -127,7 +127,7 @@ const UserLogin = () => {
                 <Button
                   type="submit"
                   onClick={handleLogin}
-                  className="text-[#218c20] rounded-lg hover:bg-[#60df5e] bg-[#85f084] font-bold px-10 py-4"
+                  className="signin_btn"
                 >
                   {/* {" "} */}
                   SignIn
@@ -146,7 +146,7 @@ const UserLogin = () => {
           </p>
           <div className="flex justify-center">
             <Link prefetch={false} href={"/register/adm"}>
-              <Button className="text-[#218c20] rounded-xl p-5 hover:bg-white bg-[#85f084] font-bold">
+              <Button className="regis_btn">
                 Register
               </Button>
             </Link>
