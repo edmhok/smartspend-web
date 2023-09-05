@@ -7,7 +7,7 @@ interface Image {
 
 function ImageUploader() {
   const [image, setImage] = useState<Image | null>(null);
-  const [selectedImage, setSelectedImage] = useState(null);
+  const [photos, setPhotos] = useState(null);
 
   const saveImage = (file: File) => {
     const reader = new FileReader();
@@ -37,7 +37,7 @@ function ImageUploader() {
   };
   const handleImageChange = (e: any) => {
     const imageFile = e.target.files[0];
-    setSelectedImage(imageFile);
+    setPhotos(imageFile);
   };
   return (
     <div className="flex flex-col justify-start">
@@ -48,10 +48,10 @@ function ImageUploader() {
         type="file"
         onChange={handleImageChange}
       />
-      {selectedImage && (
+      {photos && (
         <div style={{ marginTop: 10 }}>
           <img
-            src={URL.createObjectURL(selectedImage)}
+            src={URL.createObjectURL(photos)}
             alt="Selected"
             width={200}
             height={100}
