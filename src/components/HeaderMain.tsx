@@ -13,7 +13,7 @@ const HeaderMain = () => {
         <div className="head_bg01">
             <div className="container flex justify-between items-center">
                 <div className='menubar'>
-                    <Link href="/login/usr" prefetch={false}>
+                    <Link href="/" prefetch={false}>
                         <MenuRoundedIcon className="text-gray-500 w-8 h-8" />
                     </Link>
                 </div>
@@ -50,11 +50,11 @@ const HeaderMain = () => {
                     />
                 </div>
                 <div className="cssright">
-                    <Link href="/login/usr" prefetch={false}>
+                    <Link href="/login/adm" prefetch={false}>
                         <PersonOutlineOutlinedIcon className="w-8 h-8 " />
                     </Link>
 
-                    <Link href="/" prefetch={false}>
+                    <Link href="/login/adm" prefetch={false}>
                         <div className="relative">
                             <ShoppingCartOutlinedIcon className='w-8 h-8 space-x-2' />
                             <div className="shop_notification">
