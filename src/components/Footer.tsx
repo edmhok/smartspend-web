@@ -108,36 +108,37 @@ const Footer = () => {
             </div>
           </Grid>
           <Grid item xs={12} md={6} >
-            <div className='flex justify-center pb-[20px]'>
+            <div className='flex flex-row justify-center pb-[20px] relative'>
               <ul className='flex flex-row space-x-20'>
                 <Link href='/' className='link' prefetch={false}><li className='text-sm'>Terms of Use</li></Link>
                 <Link href='/' className='link' prefetch={false}><li className='text-sm'>License</li></Link>
                 <Link href='/' className='link' prefetch={false}><li className='text-sm'>Policy</li></Link>
               </ul>
+              <div className='absolute bottom-10 right-0'>
+                {isVisible &&
+                  <div
+                    className="text-gray p-2 cursor-pointer"
+                    onClick={scrollToTop}
+                  >
+
+                  </div>
+                }
+                <Fab
+                  onMouseEnter={() => setHovered(true)}
+                  onMouseLeave={() => setHovered(false)}
+                  color="success"
+                  size="small"
+                  onClick={scrollToTop}
+                  style={{ display: isVisible ? 'flex' : 'none' }}
+                >
+                  <KeyboardArrowUpIcon />
+                </Fab>
+              </div>
             </div>
           </Grid>
         </Grid>
       </div>
-      <div className='absolute right-0 bottom-10'>
-        {isVisible &&
-          <div
-            className="text-gray p-2 cursor-pointer"
-            onClick={scrollToTop}
-          >
 
-          </div>
-        }
-        <Fab
-          onMouseEnter={() => setHovered(true)}
-          onMouseLeave={() => setHovered(false)}
-          color="success"
-          size="small"
-          onClick={scrollToTop}
-          style={{ display: isVisible ? 'flex' : 'none' }}
-        >
-          <KeyboardArrowUpIcon />
-        </Fab>
-      </div>
     </Box>
   )
 }

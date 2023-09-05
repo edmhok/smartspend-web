@@ -1,53 +1,65 @@
-'use client'
+"use client";
 
-import React from 'react'
-import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
-import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
-import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
-import { Container } from '@mui/material';
-import Image from 'next/image';
-import logo from '../../public/logo.png'
-import Link from 'next/link';
+import React from "react";
+import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
+import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
+import { BsSearch } from "react-icons/bs";
+import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
+import Image from "next/image";
+import Link from "next/link";
 
 const HeaderMain = () => {
-    return (
-        <div className=" w-full bg-white py-3">
-            <div className="container sm:flex justify-between items-center">
-                <div className="pb-2 sm:pb-0 ">
-                    <Link href={'/'} className='flex flex-row items-center space-x-4 sm:flex justify-center' prefetch={false}>
-                        <img
-                            className=''
-                            src={'/logo.png'}
-                            width={56}
-                            height={67}
-                            alt="Picture of the author"
-                        />
-                        <div className=''>
-                            <strong className='text-2xl text-[#218c20]'>SMART</strong>
-                            <strong className='text-2xl text-[#ffad1e]'>SPEND</strong>
-                        </div>
-                    </Link>
-                </div>
-                <div className="hidden lg:flex gap-4 text-gray-500 text-[30px]">
-                    <Link href="/login/adm" prefetch={false}>
-                        <div className="relative">
-                            <ShoppingCartOutlinedIcon className='w-8 h-8 space-x-2' />
-                            <div className="bg-[#ffad1e] rounded-full absolute top-0 right-0 w-[18px] h-[18px] text-[12px] text-white grid place-items-center translate-x-1 -translate-y-1">
-                                0
-                            </div>
-                        </div>
-                    </Link>
-
-                    {/* <Link href="/login/usr" prefetch={false}>
-                <PersonOutlineOutlinedIcon className="w-8 h-8 space-x-2 mt-2"/>
-            </Link>
-            <div className="relative">
-                <MenuRoundedIcon className='w-8 h-8 space-x-2 flex '/>
-            </div> */}
-                </div>
-            </div>
+  return (
+    <div className="head_bg01">
+      <div className="container flex justify-between items-center">
+        <div className="menubar">
+          <Link href="/login/usr" prefetch={false}>
+            <MenuRoundedIcon className="text-gray-500 w-8 h-8" />
+          </Link>
         </div>
-    )
-}
+        <div className="flex flex-row items-center space-x-4">
+          <Link href={"/"} prefetch={false}>
+            <Image
+              className="logo_img1"
+              src={"/logo.png"}
+              width={56}
+              height={67}
+              alt="Picture of the author"
+            />
+          </Link>
+          <div className="logo_txt">
+            <strong className="logo_txt1">SMART</strong>
+            <strong className="logo_txt2">SPEND</strong>
+          </div>
+        </div>
 
-export default HeaderMain
+        <div className="search">
+          <div className="logo_invisible">
+            <strong className="logo_txt1">SMART</strong>
+            <strong className="logo_txt2">SPEND</strong>
+          </div>
+          <input
+            className="input_search"
+            type="text"
+            placeholder="Enter any product name..."
+          />
+          <BsSearch className="search_icon" size={20} />
+        </div>
+        <div className="cssright">
+          <Link href="/login/adm" prefetch={false}>
+            <PersonOutlineOutlinedIcon className="w-8 h-8 " />
+          </Link>
+
+          <Link href="/" prefetch={false}>
+            <div className="relative">
+              <ShoppingCartOutlinedIcon className="w-8 h-8 space-x-2" />
+              <div className="shop_notification">0</div>
+            </div>
+          </Link>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default HeaderMain;
