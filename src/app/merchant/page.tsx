@@ -7,7 +7,7 @@ import { MerchantLayout } from '@/layout'
 const Merchant: NextPage = () => (
     <MerchantLayout>
         <IntroMember />
-        {/* <NewProducts  /> */}
+        <NewProducts />
 
     </MerchantLayout>
 )

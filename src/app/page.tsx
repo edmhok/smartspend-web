@@ -13,7 +13,7 @@ import { useMemo } from 'react'
 export default function Home() {
 
   useMemo(() => {
-    if(typeof window !== 'undefined') {
+    if (typeof window !== 'undefined') {
       AuthCheckerOutside(window);
     }
   }, [])

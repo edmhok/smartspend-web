@@ -120,11 +120,11 @@
 
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import { NextArrow, PrevArrow } from "./CarouselBoxArrows";
+import { NextArrow, PrevArrow } from "./Carousel/CarouselBoxArrows";
 import Slider from "react-slick";
 
 import { HiOutlineChevronLeft, HiOutlineChevronRight } from "react-icons/hi";
-import CarouselBoxCard from "./Merchant/CarouselBoxCard";
+import CarouselBoxCard from "./Carousel/CarouselBoxCard";
 import ProductCard from "./ProductCard";
 import imagePlaceholder from "./../../public/jacket-1.jpg";
 
@@ -181,7 +181,7 @@ const DealsofDayBox: React.FC<Props> = ({
     <div className="image-slider-container container">
       <h1>Featured Products</h1>
       <Slider {...settings}>
-        {productData.map((item:any, index) => (
+        {productData.map((item: any, index) => (
           <Link key={index} href={`/login/adm`} prefetch={false}>
             <ProductCard
               key={index}

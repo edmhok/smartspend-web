@@ -13,7 +13,6 @@ import {
 import Swal from "sweetalert2";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import Link from "next/link";
-
 // const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
 const UserLogin = () => {

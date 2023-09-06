@@ -12,6 +12,16 @@ interface Props {
 
 const CarouselBoxCard: React.FC<Props> = ({ id, imageUrl, productName, qty }) => {
   const [product, setProduct] = useState<Props[]>([]);
+  const [desc, setDesc] = useState('');
+
+  // Truncate description
+  useEffect(() => {
+    if (desc.length > 10) {
+      setDesc(desc.substring(0, 0) + '...');
+    } else {
+      setDesc(desc);
+    }
+  }, [desc])
 
   async function fetchData() {
     try {
@@ -45,31 +55,31 @@ const CarouselBoxCard: React.FC<Props> = ({ id, imageUrl, productName, qty }) =>
         href={'/'}
         className="flex flex-col w-full p-3 shadow-lg backdrop-filter backdrop-blur-[10px] bg-palette-card/80 rounded-md"
       >
-          <div className="text-center flex-grow">
-            {/* {product?.image[0] && ( */}
-            <Image
-              src={'/sports-1.jpg'}
-              alt="product image"
-              width={200}
-              height={185}
-              className="object-contain hover:scale-105 transition-transform !p-2"
-            />
-            {/* )}
+        <div className="text-center flex-grow">
+          {/* {product?.image[0] && ( */}
+          <Image
+            src={'/sports-1.jpg'}
+            alt="product image"
+            width={200}
+            height={185}
+            className="object-contain hover:scale-105 transition-transform !p-2"
+          />
+          {/* )}
             {product.isOffer ? ( */}
-            <span className="block absolute -top-2 -right-2">
-              <Image
-                src={"/discount.png"}
-                width={40}
-                height={40}
-                alt="discount-icon"
-              />
-            </span>
-            {/* ) : null} */}
-          </div>
-          <p className="truncate">{productName}</p>
-          <div>
-            [price]
-          </div>
+          <span className="block absolute -top-2 -right-2">
+            <Image
+              src={"/discount.png"}
+              width={40}
+              height={40}
+              alt="discount-icon"
+            />
+          </span>
+          {/* ) : null} */}
+        </div>
+        <p className="truncate">{productName}</p>
+        <div>
+          [price]
+        </div>
       </Link>
     </div>
   );

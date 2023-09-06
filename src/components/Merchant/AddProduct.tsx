@@ -13,17 +13,13 @@ import {
   Divider,
   FormControl,
   Grid,
-  IconButton,
   InputAdornment,
   InputLabel,
-  ListItemText,
   MenuItem,
   OutlinedInput,
   Select,
-  SelectChangeEvent,
   Typography,
 } from "@mui/material";
-import Checkbox from "@mui/material/Checkbox";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { useSearchParams } from "next/navigation";
 import { format } from "date-fns";
@@ -71,6 +67,7 @@ const AddProducts = () => {
     entryDate: new Date(),
   });
 
+  // Fetch product data if editing
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (!token) {
@@ -83,10 +80,39 @@ const AddProducts = () => {
       const id = urlParams.get("_id");
       if (id) {
         setPageTitle("Edit Product#" + id);
-        fetchData(parseInt(id));
+        fetchProductData(id);
       }
     }
   }, []);
+  // Fetch product data by ID
+
+  const fetchProductData = async (id: string) => {
+    setIsLoading(true);
+
+    try {
+      if (id) {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/products/${id}`);
+
+        if (response.ok) {
+          const data = await response.json();
+          setIsEdit(true);
+          setProductName(data.productName);
+          setBrand(data.brand);
+          setDescription(data.description);
+          setSku(data.sku);
+          setPrice(data.price);
+          setQty(data.qty);
+          setPoints(data.points);
+          setDiscount(data.discount);
+          setOriginalPrice(data.originalPrice);
+        } else {
+          throw new Error('Failed to fetch data');
+        }
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
 
   const handleImageChange = (e: any) => {
     const imageFile = e.target.files[0];
@@ -100,23 +126,17 @@ const AddProducts = () => {
     }
   };
 
-  const reloadPage = (): void => {
-    window.location.reload();
-  };
-
   const handleDateChange = (value: any) => {
     const tempFormData = formData;
     tempFormData.entryDate = Date.now();
     setFormData(tempFormData);
   };
-  const handleChange = (event: any) => {
-    setFormData({
-      ...formData,
-      [event.target.name]: event.target.value,
-    });
-  };
+  // const reloadPage = (): void => {
+  //   window.location.reload();
+  // };
 
-  const saveProduct = async () => {
+
+  const handleSubmit = async () => {
     const token = localStorage.getItem("token");
     setIsLoading(true);
 
@@ -151,6 +171,7 @@ const AddProducts = () => {
           method: "PATCH",
           headers: {
             Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
           },
           body: formdata
         });
@@ -162,8 +183,8 @@ const AddProducts = () => {
       }
     } else {
       try {
-        
-        
+
+
         const response = await fetch(
           `${process.env.NEXT_PUBLIC_API_URL}/products/`,
           {
@@ -171,6 +192,7 @@ const AddProducts = () => {
             body: formdata,
             headers: {
               Authorization: `Bearer ${token}`,
+              'Content-Type': 'application/json',
             },
           }
         );
@@ -185,39 +207,6 @@ const AddProducts = () => {
       }
     }
   };
-
-  // const fetchProductData = async (_id: string) => {
-  //     setIsLoading(true);
-
-  //     try {
-  //         if (_id) {
-  //             const response = await fetch(
-  //                 `${process.env.NEXT_PUBLIC_API_URL}/products/${+_id}`);
-
-  //             if (response.ok) {
-  //                 const data: Data[] = await response.json();
-  //                 setIsEdit(true);
-  //                 setProductName(data.productName);
-  //                 setBrand(data.brand);
-  //                 setDescription(data.description);
-  //                 setSku(data.sku);
-  //                 setPrice(data.price);
-  //                 setQty(data.qty);
-  //                 setPoints(data.points);
-  //                 setDiscount(data.discount);
-  //                 setOriginalPrice(data.originalPrice);
-  //             } else {
-  //                 throw new Error('Failed to fetch data');
-  //             }
-  //         }
-  //     } catch (error) {
-  //         console.error("Error:", error);
-  //     }
-  // };
-
-  // useEffect(() => {
-  //     fetchProductData();
-  // }, []);
 
   return (
     <Card sx={{ p: 2 }}>
@@ -270,24 +259,13 @@ const AddProducts = () => {
               />
             </Grid>
             <Grid item xs={12} sm={6}>
-              <FormControl fullWidth>
-                <InputLabel id="form-layouts-separator-select-label">
-                  Category
-                </InputLabel>
-                <Select
-                  color="secondary"
-                  label="Category"
-                  value={category}
-                  id="form-layouts-separator-select"
-                  labelId="form-layouts-separator-select-label"
-                  onChange={(e) => setCategory(e.target.value)}
-                >
-                  <MenuItem value="Garments">Garments</MenuItem>
-                  <MenuItem value="Technology">Technology</MenuItem>
-                  <MenuItem value="Food">Food</MenuItem>
-                  <MenuItem value="Furniture">Furniture</MenuItem>
-                </Select>
-              </FormControl>
+              <TextField
+                fullWidth
+                color="secondary"
+                label="Category"
+                value={category}
+                onChange={(e) => setCategory(e.target.value)}
+              />
             </Grid>
             <Grid item xs={12} sm={6}>
               <TextField
@@ -359,21 +337,16 @@ const AddProducts = () => {
               />
             </Grid>
             <Grid item xs={12} sm={6}>
-              <FormControl fullWidth sx={{ m: 0 }}>
-                <InputLabel htmlFor="outlined-adornment-amount">
-                  Price
-                </InputLabel>
-                <OutlinedInput
-                  color="secondary"
-                  id="outlined-adornment-amount"
-                  startAdornment={
-                    <InputAdornment position="start">₱</InputAdornment>
-                  }
-                  label="Price"
-                  value={price}
-                  onChange={(e) => setPrice(e.target.value)}
-                />
-              </FormControl>
+              <TextField
+                color="secondary"
+                fullWidth
+                id="filled-number"
+                label="Price"
+                type="number"
+                InputLabelProps={{ shrink: true }}
+                value={price}
+                onChange={(e) => setPrice(e.target.value)}
+              />
             </Grid>
             <Grid item xs={12} sm={6}>
               <TextField
@@ -426,21 +399,21 @@ const AddProducts = () => {
         </CardContent>
         <Divider sx={{ margin: 0 }} />
         <CardActions className="flex justify-end">
-          <Button
+          {/* <Button
             size="large"
             color="secondary"
             variant="outlined"
             onClick={reloadPage}
           >
             Cancel
-          </Button>
+          </Button> */}
           <Button
             color="secondary"
             size="large"
             type="submit"
             sx={{ mr: 2 }}
             variant="outlined"
-            onClick={saveProduct}
+            onClick={handleSubmit}
             disabled={isLoading}
           >
             {isLoading ? "Loading..." : "Save"}
@@ -452,6 +425,4 @@ const AddProducts = () => {
 };
 export default AddProducts;
 
-function fetchData(arg0: number) {
-  throw new Error("Function not implemented.");
-}
+

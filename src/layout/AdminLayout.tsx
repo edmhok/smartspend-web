@@ -267,7 +267,7 @@ export default function AdminLayout({ children }: PropsWithChildren) {
           <List>
             {[
               { text: 'Dashboard', href: '/admin' },
-              { text: 'Leaderboard', href: '/admin/leaderboard' },
+              { text: 'Leaderboard', href: '/admin/member' },
               { text: 'Merchant Points', href: '/admin/points' },
             ].map((item) => (
               <ListItem sx={{ textAlign: 'center' }} key={item.text}>
