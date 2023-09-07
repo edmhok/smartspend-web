@@ -72,7 +72,8 @@ export default function ViewOrder() {
             const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/order/${_id}`, {
                 method: "DELETE",
                 headers: {
-                    Authorization: `Bearer ${token}`
+                    Authorization: `Bearer ${token}`,
+                    'Content-Type': 'application/json',
                 }
             });
             if (!response.ok) {
@@ -139,8 +140,8 @@ export default function ViewOrder() {
                                                     <DeleteOutlineIcon fontSize="small" />
                                                 </IconButton>
                                             </TableCell>
-                                        </TableRow>  
-                                        {item.products.map((prod:any, ind:number) => {
+                                        </TableRow>
+                                        {item.products.map((prod: any, ind: number) => {
                                             return (
                                                 <TableRow
                                                     key={ind}
