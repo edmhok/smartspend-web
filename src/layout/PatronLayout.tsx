@@ -20,7 +20,7 @@ import ListItemText from '@mui/material/ListItemText';
 import { Collapse, Menu, MenuItem, Stack } from '@mui/material';
 import { AccountCircle, ExpandLess, ExpandMore } from '@mui/icons-material';
 import { AuthCheckerInside } from '@/utils/checker-inside';
-import Footer from './Footer';
+import Footer from '@/components/footer/footer';
 
 
 const drawerWidth = 240;
@@ -268,7 +268,7 @@ export default function MemberLayout({ children }: PropsWithChildren) {
             {[
               { text: 'Home', href: '/patron' },
               // { text: 'Membership', href: '/' },
-              { text: 'My Info', href: '/myinfo' }
+              { text: 'My Info', href: '/patron/info' }
             ].map((item) => (
               <ListItem sx={{ textAlign: 'center' }} key={item.text}>
                 <ListItemButton component="a" href={item.href}>
@@ -348,7 +348,6 @@ export default function MemberLayout({ children }: PropsWithChildren) {
         </Drawer>
         <Main open={open}>
           <DrawerHeader />
-          {/* <NewProducts /> */}
           {children}
           <Footer />
         </Main>
