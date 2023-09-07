@@ -1,14 +1,13 @@
 "use client"
 
-import Bestseller from '@/components/Bestseller'
 import Category from '@/components/Category'
-import Footer from '@/components/Footer'
 import HeaderMain from '@/components/HeaderMain'
 import Hero from '@/components/Hero'
 import Navbar from '@/components/Navbar'
-import NewProducts from '@/components/NewProducts'
 import { AuthCheckerOutside } from '@/utils/checker-outside'
 import { useMemo } from 'react'
+import FeaturedProducts from '@/components/FeaturedProducts'
+import NewFooter from '@/components/footer/footer'
 
 export default function Home() {
 
@@ -23,9 +22,9 @@ export default function Home() {
       <HeaderMain />
       {/* <Navbar /> */}
       <Hero />
-      <Bestseller />
+      <FeaturedProducts />
       <Category />
-      <Footer />
+      <NewFooter />
     </main>
   )
 }
