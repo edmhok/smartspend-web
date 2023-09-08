@@ -6,8 +6,8 @@ import Hero from '@/components/Hero'
 import Navbar from '@/components/Navbar'
 import { AuthCheckerOutside } from '@/utils/checker-outside'
 import { useMemo } from 'react'
-import FeaturedProducts from '@/components/FeaturedProducts'
 import NewFooter from '@/components/footer/footer'
+import Bestseller from '@/components/Bestseller'
 
 export default function Home() {
 
@@ -18,13 +18,13 @@ export default function Home() {
   }, [])
 
   return (
-    <main className='place-content-center'>
+    <div>
       <HeaderMain />
       {/* <Navbar /> */}
       <Hero />
-      <FeaturedProducts />
+      <Bestseller />
       <Category />
       <NewFooter />
-    </main>
+    </div>
   )
 }

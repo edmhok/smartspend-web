@@ -2,14 +2,14 @@ import React from 'react'
 import type { NextPage } from 'next'
 import { AdminLayout } from '@/layout'
 import ViewPoints from '@/components/Admin/ViewPoints'
-import MemberList from '@/components/Admin/MemberList'
+import MerList from '@/components/Admin/MerList'
 
-const Points: NextPage = () => (
+const MerchantList: NextPage = () => (
     <AdminLayout>
-        <MemberList />
+        <MerList />
 
     </AdminLayout>
 )
 
 
-export default Points
+export default MerchantList

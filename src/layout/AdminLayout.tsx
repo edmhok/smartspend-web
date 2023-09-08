@@ -1,6 +1,5 @@
 'use client'
 
-import NewProducts from '@/components/NewProducts'
 import React, {
   PropsWithChildren, useCallback, useEffect, useMemo, useState,
 } from 'react'
@@ -22,8 +21,8 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import { Collapse, Menu, MenuItem, Stack } from '@mui/material';
 import { AccountCircle, ExpandLess, ExpandMore } from '@mui/icons-material';
-import Footer from './Footer';
 import { AuthCheckerInside } from '@/utils/checker-inside';
+import Footer from '@/components/footer/footer';
 
 
 const drawerWidth = 240;
@@ -267,7 +266,8 @@ export default function AdminLayout({ children }: PropsWithChildren) {
           <List>
             {[
               { text: 'Dashboard', href: '/admin' },
-              { text: 'Leaderboard', href: '/admin/member' },
+              { text: 'Merchant', href: '/admin/mer' },
+              { text: 'Patron', href: '/admin/pat' },
               { text: 'Merchant Points', href: '/admin/points' },
             ].map((item) => (
               <ListItem sx={{ textAlign: 'center' }} key={item.text}>
