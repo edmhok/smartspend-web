@@ -299,18 +299,18 @@ export default function AdminLayout({ children }: PropsWithChildren) {
             ))}
           </List> */}
           <Divider />
-          {/* <List>
-          {[
-            { text: 'Coupon', href: '/admin/coupon' },
-            { text: 'Statistic', href: '/admin/statistic' },
-          ].map((item) => (
-            <ListItem sx={{ textAlign: 'center' }} key={item.text}>
-              <ListItemButton component="a" href={item.href}>
-                <ListItemText sx={{ textAlign: 'center' }} primary={item.text} />
-              </ListItemButton>
-            </ListItem>
-          ))}
-        </List> */}
+          <List>
+            {[
+              { text: 'All Products', href: '/admin/products' },
+              // { text: 'Statistic', href: '/admin/statistic' },
+            ].map((item) => (
+              <ListItem sx={{ textAlign: 'center' }} key={item.text}>
+                <ListItemButton component="a" href={item.href}>
+                  <ListItemText sx={{ textAlign: 'center' }} primary={item.text} />
+                </ListItemButton>
+              </ListItem>
+            ))}
+          </List>
         </Drawer>
         <Main open={open}>
           <DrawerHeader />
