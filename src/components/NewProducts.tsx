@@ -1,36 +1,10 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import ProductCard from "./ProductCard";
+import ProductCard from "./Card";
 import { Button } from "@mui/material";
 import Link from "next/link";
-import imagePlaceholder from "./../../public/jacket-1.jpg";
-
-const productData = {
-  // favorites: [
-  //   {
-  //     id: "0",
-  //     img: "",
-  //     title: "",
-  //     desc: "",
-  //     // rating: 4,
-  //     price: "",
-  //   },
-
-
-  // ],
-  new: [
-    {
-      id: 1,
-      img: "",
-      title: "",
-      desc: "",
-      rating: 4,
-      price: "",
-    },
-
-  ],
-};
+import Card from "./Card";
 
 interface Data {
   rating: number;
@@ -49,7 +23,6 @@ interface Data {
 }
 
 const NewProducts = () => {
-  // const [favtab, setFavtab] = useState("favorites");
   const [newtab, setNewtab] = useState("new");
   const [productData, setProductData] = useState<Data[]>([]);
 
@@ -75,14 +48,6 @@ const NewProducts = () => {
   return (
     <div className="container space-x-1 pt-10 ">
       <div className="grid grid-cols-6 ps-1">
-        {/* <Button
-          className={`font-bold text-[#218c20] text-lg rounded-t-lg
-        ${favtab === "favorites" ? "bg-white" : "bg-[#F1F1F1]"}`}
-          onMouseEnter={() => setFavtab("favorites")}
-          onClick={() => setFavtab("favorites")}
-        >
-          Favorites
-        </Button> */}
 
         <Button
           className={`text-lg font-bold text-[#218c20] rounded-t-lg
@@ -93,41 +58,14 @@ const NewProducts = () => {
           New
         </Button>
       </div>
-      {/* {favtab === "favorites" && (
-        <div className="border border-x-[#F1F1F1] border-y-[#F1F1F1] bg-[#F1F1F1]">
-          <div className="container p-10">
-            <div className="grid grid-cols-1 place-items-center sm:place-items-start sm:grid-cols-2 lg:grid-col-3 xl:grid-cols-4 gap-10 xl:gap-x-20 xl:gap-y-10">
-              {productData.map((item, index) => (
-                <Link href={`/product/${item.id}`} key={index}>
-                  <ProductCard
-                    key={index}
-                    img={item.img}
-                    title={item.productName}
-                    description={item.description}
-                    // rating={item.rating}
-                    price={item.price}
-                  />
-                </Link>
-              ))}
-            </div>
-          </div>
-        </div>
-      )} */}
 
       {newtab === "new" && (
         <div className="border border-x-[#F1F1F1] border-y-[#F1F1F1] bg-[#F1F1F1]">
           <div className="container p-2">
-            <div className="grid grid-cols-1 place-items-center sm:place-items-start sm:grid-cols-2 lg:grid-col-3 xl:grid-cols-4 gap-10 xl:gap-x-10 xl:gap-y-10">
+            <div className="grid grid-cols-1 place-items-center sm:place-items-start sm:grid-cols-2 lg:grid-col-3 xl:grid-cols-4 gap-10 xl:gap-x-20 xl:gap-y-10">
               {productData.map((item: any, index) => (
                 <Link key={index} href={item._id ? `/merchant/product/${item._id}` : '/login/adm'} prefetch={false}>
-                  <ProductCard
-                    // key={index}
-                    img={item.photo || imagePlaceholder}
-                    title={item.productName}
-                    description={item.description}
-                    rating={item.rating}
-                    price={item.price}
-                  />
+                  <Card img={item.img} title={item.productName} description={item.description} rating={0} price={item.price} />
                 </Link>
               ))}
             </div>

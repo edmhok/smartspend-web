@@ -312,7 +312,7 @@ export default function AdminLayout({ children }: PropsWithChildren) {
             ))}
           </List>
         </Drawer>
-        <Main open={open}>
+        <Main open={open} className="flex-grow  md:mt-40">
           <DrawerHeader />
           {children}
           <Footer />

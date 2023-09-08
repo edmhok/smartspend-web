@@ -86,12 +86,12 @@ const AddProducts = () => {
   }, []);
   // Fetch product data by ID
 
-  const fetchProductData = async (id: string) => {
+  const fetchProductData = async (_id: string) => {
     setIsLoading(true);
 
     try {
-      if (id) {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/products/${id}`);
+      if (_id) {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/products/${_id}`);
 
         if (response.ok) {
           const data = await response.json();
@@ -171,7 +171,6 @@ const AddProducts = () => {
           method: "PATCH",
           headers: {
             Authorization: `Bearer ${token}`,
-            'Content-Type': 'application/json',
           },
           body: formdata
         });
@@ -189,11 +188,10 @@ const AddProducts = () => {
           `${process.env.NEXT_PUBLIC_API_URL}/products/`,
           {
             method: "POST",
-            body: formdata,
             headers: {
               Authorization: `Bearer ${token}`,
-              'Content-Type': 'application/json',
             },
+            body: formdata,
           }
         );
         console.log({ response });

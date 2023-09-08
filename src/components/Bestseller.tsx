@@ -120,13 +120,10 @@
 
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import { NextArrow, PrevArrow } from "./Carousel/CarouselBoxArrows";
 import Slider from "react-slick";
 
 import { HiOutlineChevronLeft, HiOutlineChevronRight } from "react-icons/hi";
-import CarouselBoxCard from "./Carousel/CarouselBoxCard";
-import ProductCard from "./ProductCard";
-import imagePlaceholder from "./../../public/jacket-1.jpg";
+import ProductCard from "./Card";
 
 interface Props {
   id?: string;
@@ -185,7 +182,7 @@ const DealsofDayBox: React.FC<Props> = ({
           <Link key={index} href={`/login/adm`} prefetch={false}>
             <ProductCard
               key={index}
-              img={item.photo || imagePlaceholder}
+              img={item.photo}
               title={item.productName}
               description={item.description}
               // rating={item.rating}

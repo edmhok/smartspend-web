@@ -6,8 +6,8 @@ import Hero from '@/components/Hero'
 import Navbar from '@/components/Navbar'
 import { AuthCheckerOutside } from '@/utils/checker-outside'
 import { useMemo } from 'react'
-import NewFooter from '@/components/footer/footer'
 import Bestseller from '@/components/Bestseller'
+import Footer from '@/components/footer/footer'
 
 export default function Home() {
 
@@ -18,13 +18,13 @@ export default function Home() {
   }, [])
 
   return (
-    <div>
+    <main >
       <HeaderMain />
       {/* <Navbar /> */}
       <Hero />
       <Bestseller />
       <Category />
-      <NewFooter />
-    </div>
+      <Footer />
+    </main>
   )
 }
