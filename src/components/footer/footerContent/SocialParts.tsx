@@ -27,7 +27,7 @@ const SocialPart = () => {
             </div>
             <div className="mt-6">
                 <h4 className="text-sm sm:text-base">{'Stay up to date with the latest discounts by emailing us'}</h4>
-                <form
+                {/* <form
                     className="flex items-center flex-wrap sm:flex-nowrap mt-4 "
                     onSubmit={(e) => {
                         e.preventDefault();
@@ -44,7 +44,7 @@ const SocialPart = () => {
                     >
                         {"Register"}
                     </button>
-                </form>
+                </form> */}
             </div>
         </div>
     );

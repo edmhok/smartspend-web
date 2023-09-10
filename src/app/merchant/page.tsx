@@ -8,7 +8,7 @@ import MProducts from '@/components/Merchant/MProducts'
 const Merchant: NextPage = () => (
     <MerchantLayout>
         <IntroMember />
-        <MProducts />
+        {/* <MProducts /> */}
 
     </MerchantLayout>
 )
