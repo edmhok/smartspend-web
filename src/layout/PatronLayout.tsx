@@ -348,7 +348,7 @@ export default function MemberLayout({ children }: PropsWithChildren) {
         </Drawer>
         <Main open={open}>
           <DrawerHeader />
-          {children}
+          <div>{children}</div>
           <Footer />
         </Main>
       </Box>

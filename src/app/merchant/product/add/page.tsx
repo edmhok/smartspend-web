@@ -6,7 +6,6 @@ import AddProduct from '@/components/Merchant/AddProduct'
 const ProductAdd: NextPage = () => (
     <MerchantLayout>
         <AddProduct />
-
     </MerchantLayout>
 )
 export default ProductAdd

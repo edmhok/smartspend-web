@@ -74,10 +74,10 @@ const AddProducts = () => {
       window.location.href = "/";
     }
     const urlParams = new URLSearchParams(window.location.search);
-    console.log(urlParams.get("isEdit"));
+    console.log(urlParams.get("id"));
 
-    if (urlParams.get("isEdit")) {
-      const id = urlParams.get("_id");
+    if (urlParams.get("id")) {
+      const id = urlParams.get("id");
       if (id) {
         setPageTitle("Edit Product#" + id);
         fetchProductData(id);
@@ -105,6 +105,8 @@ const AddProducts = () => {
           setPoints(data.points);
           setDiscount(data.discount);
           setOriginalPrice(data.originalPrice);
+          setIsLoading(false);
+          setPhoto(data.photo)
         } else {
           throw new Error('Failed to fetch data');
         }
@@ -385,7 +387,7 @@ const AddProducts = () => {
               {photo && (
                 <div style={{ marginTop: 10 }}>
                   <img
-                    src={URL.createObjectURL(photo)}
+                    src={typeof photo === 'string' ? photo : URL.createObjectURL(photo)}
                     alt="Selected"
                     width={200}
                     height={100}

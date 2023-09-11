@@ -342,7 +342,7 @@ export default function MerchantLayout({ children }: PropsWithChildren) {
         </Drawer>
         <Main open={open} className="flex-grow  md:mt-40">
           <DrawerHeader />
-          {children}
+          <div>{children}</div>
           <Footer />
         </Main>
       </Box>

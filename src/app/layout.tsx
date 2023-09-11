@@ -28,7 +28,9 @@ export default function RootLayout({
       <body className={inter.className}>
         
         {/* <Suspense> */}
-          <main>{children}</main>
+          <main>
+            <div>{children}</div>
+          </main>
         {/* </Suspense> */}
       </body>
     </html>

@@ -13,10 +13,15 @@ const nextConfig = {
       images: {
         domains: [
           'smartspend-assets.s3.ap-northeast-1.amazonaws.com',
-          'smartspend-assets.s3.amazonaws.com'
+          'smartspend-assets.s3.amazonaws.com',
+          's3.amazonaws.com'
         ],
       },
     trailingSlash: true,
+    future: {
+      webpack5: true,
+    },
+  
     // output: 'export',
     // experimental: {
     //     appDir: true

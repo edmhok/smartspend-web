@@ -179,17 +179,16 @@ const DealsofDayBox: React.FC<Props> = ({
       <h1>Featured Products</h1>
       <Slider {...settings}>
         {productData.map((item: any, index) => (
-          <Link key={index} href={`/login/adm`} prefetch={false}>
-            <ProductCard
-              key={index}
-              img={item.photo}
-              title={item.productName}
-              description={item.description}
-              // rating={item.rating}
-              price={item.price}
-              rating={0}
-            />
-          </Link>
+          <ProductCard
+            link={'/login/adm'}
+            key={index}
+            img={item.photo}
+            title={item.productName}
+            description={item.description}
+            // rating={item.rating}
+            price={item.price}
+            rating={0}
+          />
         ))}
         {/* Add more slides as needed */}
       </Slider>

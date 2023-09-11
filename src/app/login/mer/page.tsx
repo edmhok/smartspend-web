@@ -11,7 +11,7 @@ import {
   TextField,
 } from "@mui/material";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import GoogleIcon from "@mui/icons-material/Google";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import Swal from "sweetalert2";
@@ -19,7 +19,7 @@ import { Visibility, VisibilityOff } from "@mui/icons-material";
 
 const MerchantLogin = () => {
   const [error, setError] = useState("");
-  const [username, setUsername] = useState("");
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = React.useState(false);
 
@@ -56,8 +56,13 @@ const MerchantLogin = () => {
     }
   };
 
+  useEffect(() => {
+    setUsername('');
+  }, []);
+
   return (
     <div className="flex justify-center p-[10px]">
+      
       <div className="bg-white shadow-2xl flex flex-row">
         <div className="py-3 space-y-3 border border-r-slate-300 flex flex-col">
           <div className="p-[30px] flex flex-col">
@@ -74,12 +79,19 @@ const MerchantLogin = () => {
               </Link>
             </div>
             <div className="flex flex-col py-10 space-y-3">
-              <TextField
-                sx={{ m: 1, width: "40ch" }}
-                label="Username"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-              />
+              
+              <FormControl sx={{ m: 1, width: "40ch" }} variant="outlined">
+                <InputLabel htmlFor="outlined-adornment-username">
+                  Username
+                </InputLabel>
+                <OutlinedInput
+                  id="outlined-adornment-username"
+                  type="text"
+                  label="Username"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                />
+              </FormControl>
               <FormControl sx={{ m: 1, width: "40ch" }} variant="outlined">
                 <InputLabel htmlFor="outlined-adornment-password">
                   Password
