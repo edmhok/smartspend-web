@@ -142,6 +142,9 @@ export default function ViewOrder() {
                                             </TableCell>
                                         </TableRow>
                                         {item.products.map((prod: any, ind: number) => {
+                                            if(!prod.product) {
+                                                return;
+                                            }
                                             return (
                                                 <TableRow
                                                     key={ind}
