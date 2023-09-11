@@ -1,13 +1,13 @@
 import React from "react";
 import type { NextPage } from "next";
 import { MerchantLayout, PatronLayout } from "@/layout";
-import ProductBigCard from "@/components/CardDetails";
+import NewProducts from "@/components/NewProducts";
 
 const ProductID: NextPage = () => (
 
   <MerchantLayout>
 
-    <ProductBigCard />
+    <NewProducts />
   </MerchantLayout>
 );
 

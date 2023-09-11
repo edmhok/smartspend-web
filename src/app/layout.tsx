@@ -26,10 +26,10 @@ export default function RootLayout({
 
     <html lang="en" >
       <body className={inter.className}>
-        
-        {/* <Suspense> */}
+
+        <Suspense>
           <main>{children}</main>
-        {/* </Suspense> */}
+        </Suspense>
       </body>
     </html>
   )
