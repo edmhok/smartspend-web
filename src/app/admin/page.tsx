@@ -28,7 +28,7 @@ const Admin: NextPage = () => (
       </Box>
     </div>
 
-    <NewProducts />
+    {/* <NewProducts /> */}
 
   </AdminLayout>
 )

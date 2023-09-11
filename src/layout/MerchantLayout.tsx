@@ -228,7 +228,7 @@ export default function MerchantLayout({ children }: PropsWithChildren) {
                     horizontal: 'right',
                   }}
                   open={Boolean(anchorEl)}
-                  onClose={handleClose}
+                  onClose={() => {setAnchorEl(null);}}
                 >
                   <MenuItem onClick={handleClose}>Profile</MenuItem>
                   <MenuItem onClick={handleClose}>My account</MenuItem>

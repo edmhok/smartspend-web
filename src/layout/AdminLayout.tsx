@@ -231,7 +231,7 @@ export default function AdminLayout({ children }: PropsWithChildren) {
                     horizontal: 'right',
                   }}
                   open={Boolean(anchorEl)}
-                  onClose={handleClose}
+                  onClose={() => {setAnchorEl(null);}}
                 >
                   <MenuItem onClick={handleSetting}>Profile</MenuItem>
                   <MenuItem onClick={handleClose}>Log-out</MenuItem>
