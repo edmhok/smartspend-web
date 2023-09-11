@@ -24,9 +24,9 @@
     --font-family: iranyekan, "IRANSans", "Tahoma";
   }
 
-  .dark {
-    --color-bg: 15, 23, 42; /* #0f172a*/
-    --color-bg-side: 30, 41, 59; /* #1e293b*/
+  /* .dark {
+    --color-bg: 15, 23, 42; /* #0f172a
+    --color-bg-side: 30, 41, 59; /* #1e293b
     --digital-category-bgc: #219ebc;
     --fashion-category-bgc: #e29578;
     --beauty-category-bgc: #af4d98;
@@ -34,10 +34,10 @@
     --house-category-bgc: #6b9080;
     --toy-category-bgc: #b77e8f;
 
-    --color-text-base: 226, 232, 240; /*#e2e8f0*/
-    --color-text-muted: 140, 154, 175; /*#8c9aaf*/
-    --color-text-side: 255, 231, 231; /*#ffe7e7*/
-  }
+    --color-text-base: 226, 232, 240; /*#e2e8f0
+    --color-text-muted: 140, 154, 175; /*#8c9aaf
+    --color-text-side: 255, 231, 231; /*#ffe7e7
+  } */
 
   html[dir="ltr"] {
     --font-family: "Poppins", "Roboto", "sans-serif";

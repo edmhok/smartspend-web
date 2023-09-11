@@ -58,15 +58,14 @@ const MProducts = () => {
       <div className="grid gap-4 md:gap-2 grid-cols-6 md:grid-cols-12 max-w-[1700px]">
         <div className="grid grid-cols-1 place-items-center sm:place-items-start sm:grid-cols-2 lg:grid-col-3 xl:grid-cols-4 gap-10 xl:gap-x-10 xl:gap-y-10">
           {productData.map((item: any, index) => (
-            <Link key={index} href={'/merchant/product/detail'} prefetch={false}>
-              <Card
-                img={item.photo}
-                title={item.productName}
-                description={item.description}
-                rating={3}
-                price={item.price}
-              />
-            </Link>
+            <Card
+              link='/merchant/product/detail'
+              img={item.photo}
+              title={item.productName}
+              description={item.description}
+              rating={3}
+              price={item.price}
+            />
           ))}
         </div>
       </div>
