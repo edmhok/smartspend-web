@@ -272,10 +272,9 @@ const DetailsSection: React.FC<Props> = ({ product }) => {
               <br />
               <button
                 className="border-none bg-palette-primary/90 hover:bg-palette-primary/100 transition-colors duration-200 shadow-lg px-3 lg:px-8 py-4 text-palette-side flex items-center rounded-lg cursor-pointer  text-[12px] sm:text-base"
-                onClick={handleClick}
               >
                 <BsCartPlus style={{ fontSize: "1.2rem", margin: "0 0.4rem" }} />
-                Add to Cart
+                Click to Pay
               </button>
             </div>
 

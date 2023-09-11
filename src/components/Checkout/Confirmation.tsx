@@ -110,7 +110,7 @@ const Confirmation = (props: PaymentProps) => {
                   <div className="pb-5 pt-[10px] ">
                     <div className="ps-[70px]">PLEASE SCAN TO PAY</div>
                     <Image
-                      src={props.img}
+                      src={'/gcash.jpg'}
                       alt={props.alt}
                       width={props.width}
                       height={props.height}
