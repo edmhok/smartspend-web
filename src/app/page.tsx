@@ -20,7 +20,6 @@ export default function Home() {
   return (
     <main >
       <HeaderMain />
-      {/* <Navbar /> */}
       <Hero />
       <Bestseller />
       <Category />

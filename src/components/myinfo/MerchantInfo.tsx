@@ -87,13 +87,71 @@ const MyInfo = () => {
             const token = localStorage.getItem('token');
             const userId = localStorage.getItem('userId');
             console.log({info})
+            
+            // await fetch(`${process.env.NEXT_PUBLIC_API_URL}/merchantBanks/clear/${userId}`, {
+            //     method: 'DELETE',
+            //     headers: {
+            //         'Authorization': `Bearer ${token}`
+            //     }}
+            // )
+            info && info.banks?.forEach(async (bank) => {
+
+                if(typeof bank === "string") {
+                    return;
+                }
+                const formdata = new FormData();
+                formdata.append("type", bank.type);
+                formdata.append("name", bank.name);
+                formdata.append("number", bank.number);
+                const fileType = bank.photo.type
+                const fileExt = fileType.split('/')[1];
+                const randomFileName = new Date().valueOf().toString() + '.' + fileExt;
+
+                console.log(
+                    JSON.stringify(bank)
+                )
+
+                formdata.append("photo", 
+                    bank.photo,
+                    randomFileName
+                );
+                userId && formdata.append("merchantId", userId);
+
+                const resp = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/merchantBanks`, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                    },
+                    body: formdata
+                });
+                console.log({resp})
+            })
+            const {
+                address,
+                city,
+                country,
+                first_name,
+                last_name,
+                phone,
+                photo,
+                state
+            } = info
             const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/merchants/${userId}`, {
                 method: 'PATCH',
                 headers: {
                     'Authorization': `Bearer ${token}`,
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(info)
+                body: JSON.stringify({
+                    address,
+                    city,
+                    country,
+                    first_name,
+                    last_name,
+                    phone,
+                    photo,
+                    state
+                })
 
             });
             console.log(response);
@@ -120,11 +178,11 @@ const MyInfo = () => {
     };
 
     const handleBankChangeImage = (event: any, key:number) => {
-        console.log({key})
+        console.log(event.target.files)
         const tmpInfo = {...info}
         tmpInfo.banks = tmpInfo.banks && tmpInfo.banks.map((bank) => {
             if(bank._id === key) {
-                bank[event.target.name] = event.target.files[0]
+                bank.photo = event.target.files[0]
             }
             return bank
         })
@@ -139,6 +197,7 @@ const MyInfo = () => {
             }
             return bank
         })
+        console.log({tmpInfo})
         setInfo(tmpInfo);
     };
 
@@ -306,7 +365,7 @@ const MyInfo = () => {
                                                 />
                                             </TableCell>
                                             <TableCell>
-                                                <div className="text-md pb-5">Upload your ID here</div>
+                                                <div className="text-md pb-5"></div>
                                                 <input
                                                 accept="image/*"
                                                 id="image-upload"
@@ -319,7 +378,7 @@ const MyInfo = () => {
                                                 {item.photo && (
                                                 <div style={{ marginTop: 10 }}>
                                                     <img
-                                                    src={URL.createObjectURL(item.photo)}
+                                                    src={typeof item.photo === 'string' ? item.photo : URL.createObjectURL(item.photo)}
                                                     alt="Selected"
                                                     width={200}
                                                     height={100}
