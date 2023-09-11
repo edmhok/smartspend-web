@@ -1,6 +1,6 @@
 import React from 'react'
 import type { NextPage } from 'next'
-import ViewProduct from '@/components/Merchant/ViewProduct'
+import ViewProduct from '@/components/merchant/ViewProduct'
 import { MerchantLayout } from '@/layout'
 
 const ProductView: NextPage = () => (

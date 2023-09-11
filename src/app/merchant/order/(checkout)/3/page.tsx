@@ -1,6 +1,6 @@
 'use client'
 
-import Confirmation from '@/components/Checkout/Confirmation';
+import Confirmation from '@/components/checkout/Confirmation';
 import { MerchantLayout } from '@/layout';
 import { NextPage } from 'next';
 import Link from 'next/link';

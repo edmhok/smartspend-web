@@ -1,5 +1,5 @@
 
-import CartInfo from '@/components/Checkout/CartInfo';
+import CartInfo from '@/components/checkout/CartInfo';
 import { PatronLayout } from '@/layout';
 import { NextPage } from 'next';
 import Link from "next/link";

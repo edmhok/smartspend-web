@@ -7,9 +7,9 @@ import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { Button, Rating, Stack, TableCell, TableRow, TextField } from "@mui/material";
-import Benefits from "./Benefits";
 import { HiMinusSm, HiOutlinePlusSm } from "react-icons/hi";
 import { BsCartPlus } from "react-icons/bs";
+import Benefits from "./Benefits/benefit";
 
 type IProduct = {
   _id: string;
