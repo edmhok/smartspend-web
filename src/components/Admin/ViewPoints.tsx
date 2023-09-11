@@ -1,202 +1,237 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, IconButton, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField } from "@mui/material";
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  IconButton,
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  TextField,
+} from "@mui/material";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
-import useMediaQuery from '@mui/material/useMediaQuery';
-import { useTheme } from '@mui/material/styles';
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { useTheme } from "@mui/material/styles";
 
 interface Data {
   _id: string;
   username: string;
+  merchant: string;
+  status: string;
   first_name: string;
   last_name: string;
   address: string;
   points: number;
-
 }
 
 export default function ViewPoints() {
-  const [merchantData, setMerchantData] = useState<Data[]>([]);
-  const [selectedMerchant, setSelectedMerchant] = useState<Data | null>(null);
-  const [open, setOpen] = React.useState(false);
-  const theme = useTheme();
-  const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
-
-  const handleClickOpen = (merchant: Data) => {
-    setSelectedMerchant(merchant);
-    setOpen(true);
+  const handleClickOpen = (mpoints: Data) => {
+    console.log({ mpoints });
+    setSelectedMerchant(mpoints);
+    setOpenAccept(true);
+  };
+  const handleClickDecline = (mpoints: Data) => {
+    console.log({ mpoints });
+    setSelectedMerchant(mpoints);
+    setOpenDeclined(true);
   };
 
-  const handleClose = () => {
-    setOpen(false);
-    setSelectedMerchant(null);
+  const [merchantPoints, setMerchantPoints] = useState<Data[]>([]);
+  const [selectedMerchant, setSelectedMerchant] = useState<Data | null>(null);
+  const [openAccept, setOpenAccept] = React.useState(false);
+  const [openDeclined, setOpenDeclined] = React.useState(false);
 
+  const theme = useTheme();
+  const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
+
+  const handleClose = () => {
+    setOpenAccept(false);
+    setOpenDeclined(false);
+    setSelectedMerchant(null);
   };
 
   const fetchData = async () => {
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/merchants`, {
-        headers: {
-          Authorization: `Bearer ${token}`
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/orderpoints`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         }
-      });
+      );
 
       if (response.ok) {
         const jsonData: Data[] = await response.json();
-        setMerchantData(jsonData);
+        const statusDone = jsonData.filter(
+          (pointsStatus) =>
+            pointsStatus.status.trim().toLowerCase() === "pending"
+        );
+        setMerchantPoints(statusDone);
       } else {
         console.error("Failed to fetch data");
       }
     } catch (error) {
       console.error("Error:", error);
     }
-  }
+  };
 
+  const handleStatus = async () => {
+    const _id = selectedMerchant?._id;
+    const token = localStorage.getItem("token");
+    const urlencoded = new URLSearchParams();
+    urlencoded.append("status", "accepted");
+    try {
+      await fetch(`${process.env.NEXT_PUBLIC_API_URL}/orderpoints/${_id}`, {
+        method: "PATCH",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        body: urlencoded,
+      });
+      setOpenAccept(false);
+      fetchData();
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
   useEffect(() => {
     fetchData();
   }, []);
 
-  const handleSave = async () => {
-    if (!selectedMerchant) {
-      return;
-    }
-
+  const handleDeclineStatus = async () => {
+    const _id = selectedMerchant?._id;
+    const token = localStorage.getItem("token");
+    const urlencoded = new URLSearchParams();
+    urlencoded.append("status", "declined");
     try {
-      // const tokenRes = await fetch('http://localhost:4000/auth/login');
-      // const { token } = await tokenRes.json();
-      const token = localStorage.getItem("token");
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/merchants/${selectedMerchant._id}`, {
-        method: 'PATCH',
+      await fetch(`${process.env.NEXT_PUBLIC_API_URL}/orderpoints/${_id}`, {
+        method: "PATCH",
         headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`
-
+          Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({
-          points: selectedMerchant.points
-        })
+        body: urlencoded,
       });
-      if (response.ok) {
-        fetchData();
-        handleClose();
-      } else {
-        throw new Error('Failed to update patron');
-      }
-
-
-    } catch (error) {
-      console.error(error);
-    }
-
-  }
-
-  const deleteMerchant = async (_id: string) => {
-    try {
-      const token = localStorage.getItem("token");
-
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/merchants/${_id}`, {
-        method: 'DELETE',
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      });
-
-      if (!response.ok) {
-        throw new Error('Failed to delete merchant');
-      }
-      // Refetch merchants after delete
+      setOpenDeclined(false);
       fetchData();
-
     } catch (error) {
-      console.error(error);
+      console.error("Error fetching data:", error);
     }
-  }
+  };
 
   return (
-    <div className='p-10'>
+    <div className="p-10">
       <h1 className="text-xl pb-3 text-[#218c20]"> Merchants Points</h1>
       <TableContainer component={Paper}>
-        <Table
-          sx={{ minWidth: 650, minHeight: 100 }}
-          aria-label="simple table"
-        >
+        <Table sx={{ minWidth: 650, minHeight: 100 }} aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell>Merchant_ID</TableCell>
               <TableCell>Username</TableCell>
-              <TableCell>Name</TableCell>
-              <TableCell>Address</TableCell>
+              <TableCell>Status</TableCell>
               <TableCell>Points</TableCell>
-              <TableCell></TableCell>
-              <TableCell></TableCell>
+              <TableCell>Accept</TableCell>
+              <TableCell>Decline</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {merchantData.map(merchant => (
+            {merchantPoints.map((mpoints, index) => (
               <TableRow
-                key={merchant._id}
+                key={index}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
-                <TableCell component="th" scope="row">{merchant._id}</TableCell>
-                <TableCell component="th" scope="row"> {merchant.username}</TableCell>
-                <TableCell>{merchant.last_name}, {merchant.first_name}</TableCell>
-                <TableCell>{merchant.address}</TableCell>
-                <TableCell>{merchant.points}</TableCell>
-                <TableCell>
-                  <Button variant="outlined" color='success' onClick={() => handleClickOpen(merchant)}>
-                    Send Points
-                  </Button>
-                  <Dialog
-                    fullScreen={fullScreen}
-                    open={open}
-                    onClose={handleClose}
-                    aria-labelledby="responsive-dialog-title"
-                  >
-                    <DialogTitle id="responsive-dialog-title">
-                      Manage Points for {selectedMerchant?.first_name}
-                    </DialogTitle>
-                    <DialogContent>
-                      <DialogContentText>
-                        <TextField
-                          margin="dense"
-                          id="name"
-                          label="Points"
-                          fullWidth
-                          variant="standard"
-                          value={selectedMerchant?.points || ''}
-                          onChange={(e) => setSelectedMerchant({ ...selectedMerchant!, points: parseInt(e.target.value) })}
-                        />
-                      </DialogContentText>
-                    </DialogContent>
-                    <DialogActions>
-                      <Button autoFocus variant="outlined" color='info' onClick={handleClose}>
-                        Cancel
-                      </Button>
-                      <Button variant="outlined" color='success' onClick={handleSave} autoFocus>
-                        Save
-                      </Button>
-                    </DialogActions>
-                  </Dialog>
+                <TableCell component="th" scope="row"></TableCell>
+                <TableCell>{mpoints.status} </TableCell>
 
+                <TableCell>{mpoints.points}</TableCell>
+                <TableCell>
+                  <Button
+                    variant="outlined"
+                    color="success"
+                    onClick={() => handleClickOpen(mpoints)}
+                  >
+                    Accept
+                  </Button>
                 </TableCell>
                 <TableCell>
-                  <IconButton
-                    onClick={() => deleteMerchant(merchant._id)}>
-                    <DeleteOutlineIcon fontSize="small" />
-                  </IconButton>
+                  <Button
+                    variant="outlined"
+                    color="success"
+                    onClick={() => handleClickDecline(mpoints)}
+                  >
+                    Declined
+                  </Button>
                 </TableCell>
+                <Dialog
+                  fullScreen={fullScreen}
+                  open={openAccept}
+                  onClose={handleClose}
+                  aria-labelledby="responsive-dialog-title"
+                >
+                  <DialogTitle id="responsive-dialog-title">
+                    Are you sure you want to accept this request?
+                  </DialogTitle>
+                  <DialogActions>
+                    <Button
+                      variant="outlined"
+                      color="success"
+                      onClick={() => handleStatus()}
+                      autoFocus
+                    >
+                      Accept
+                    </Button>
+                    <Button
+                      autoFocus
+                      variant="outlined"
+                      color="info"
+                      onClick={handleClose}
+                    >
+                      Cancel
+                    </Button>
+                  </DialogActions>
+                </Dialog>
+                <Dialog
+                  fullScreen={fullScreen}
+                  open={openDeclined}
+                  onClose={handleClose}
+                  aria-labelledby="responsive-dialog-title"
+                >
+                  <DialogTitle id="responsive-dialog-title">
+                    Are you sure you want to decline this request?
+                  </DialogTitle>
+                  <DialogActions>
+                    <Button
+                      variant="outlined"
+                      color="success"
+                      onClick={() => handleDeclineStatus()}
+                      autoFocus
+                    >
+                      Decline
+                    </Button>
+                    <Button
+                      autoFocus
+                      variant="outlined"
+                      color="info"
+                      onClick={handleClose}
+                    >
+                      Cancel
+                    </Button>
+                  </DialogActions>
+                </Dialog>
               </TableRow>
             ))}
           </TableBody>
         </Table>
       </TableContainer>
-
     </div>
-
   );
 }
-
-
-
