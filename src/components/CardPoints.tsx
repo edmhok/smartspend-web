@@ -47,17 +47,17 @@ const CardPoints = () => {
 
     return (
         <div className='sm:block'>
-            <div className='container align-start font-medium text-[#218c20] text-2xl pt-10 ps-20'>Deals of the Day</div>
-            <div className="container pt-6 relative flex">
+            <div className='container align-start font-medium text-[#218c20] text-2xl pt-10 ps-20'>Choose your Order</div>
+            <div className="container pt-6 relative flex items-center">
                 <div className='container flex direction-row justify-around'>
                     {items.slice(currentIndex, currentIndex + visibleItems).map(item => (
                         <Item key={item.points} item={item} />
                     ))}
                 </div>
-                <Button className='absolute left-5 mt-20' onClick={handlePrev}>
+                <Button className='flex items-center' onClick={handlePrev}>
                     <ArrowBackIosIcon color='success' />
                 </Button>
-                <Button className='absolute right-0 mt-20' onClick={handleNext}>
+                <Button className='flex items-center' onClick={handleNext}>
                     <ArrowForwardIosIcon color='success' />
                 </Button>
             </div>
@@ -69,11 +69,10 @@ const Item = ({ item }: { item: Item }) => {
 
     return (
 
-        <div className='text-center bg-white drop-shadow-md hover:drop-shadow-xl space-y-2 py-5 px-2 border border-gray-200 max-w-[500px] max-h-[530px] pt-5'>
+        <div className='flex-col justify-center flex bg-white drop-shadow-md hover:drop-shadow-xl space-y-2 px-2 py-5 border border-gray-200 rounded-xl max-w-[290px] max-h-[290px] text-center pt-5'>
             <Link href={item.points ? `/merchant/cart/${item.points}` : '/login/adm'} prefetch={false}>
-                <div className='icon_flash right-3 top-4 space-y-2 text-white hover:'>
-                    {item.points}
-                </div>
+
+                {item.points}
             </Link>
         </div>
     )

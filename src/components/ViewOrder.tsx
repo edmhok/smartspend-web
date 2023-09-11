@@ -148,10 +148,10 @@ export default function ViewOrder() {
                                                     sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                                                 >
                                                     <TableCell component="th" scope="row">{ }</TableCell>
-                                                    <TableCell component="th" scope="row">{prod.product.productName}</TableCell>
-                                                    <TableCell component="th" scope="row"> {prod.qty}</TableCell>
+                                                    <TableCell component="th" scope="row">{prod.products.productName}</TableCell>
+                                                    <TableCell component="th" scope="row"> {prod.products.qty}</TableCell>
                                                     <TableCell component="th" scope="row"> { }</TableCell>
-                                                    <TableCell component="th" scope="row"> {prod.product.points}</TableCell>
+                                                    <TableCell component="th" scope="row"> {prod.products.points}</TableCell>
                                                     <TableCell component="th" scope="row"> { }</TableCell>
 
                                                     <TableCell>&nbsp;</TableCell>

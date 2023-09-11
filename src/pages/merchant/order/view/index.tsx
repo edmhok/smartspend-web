@@ -1,14 +1,14 @@
 import React from 'react'
 import type { NextPage } from 'next'
-import { MerchantLayout } from '@/layout'
 import ViewOrder from '@/components/ViewOrder'
+import Menubar from '@/components/patron/Menubar'
 
 const Order: NextPage = () => (
-  <MerchantLayout>
-
+  <>
+    <Menubar />
     <ViewOrder />
 
-  </MerchantLayout>
+  </>
 )
 
 
