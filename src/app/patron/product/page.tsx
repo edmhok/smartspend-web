@@ -1,7 +1,7 @@
 import React from "react";
 import type { NextPage } from "next";
 import { PatronLayout } from "@/layout";
-import ProductBigCard from "@/components/CardDetails";
+import ProductBigCard from "@/components/ProductBigCard";
 
 const ProductID: NextPage = () => (
 

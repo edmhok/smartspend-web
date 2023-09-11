@@ -7,3 +7,12 @@ export const generateRandomString = (length = 10) => {
     }
     return result;
 }
+
+export const truncateString = (str, maxLength = 20) => {
+    if (str.length <= maxLength) {
+      return str;
+    }
+    
+    const truncatedStr = str.slice(0, maxLength - 3); // Leave space for the ellipsis
+    return truncatedStr + '...';
+  }
