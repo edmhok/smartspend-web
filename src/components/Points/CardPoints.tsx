@@ -120,7 +120,7 @@ const Item = ({ item }: { item: Item }) => {
     return (
         <>
             <div className='flex-col justify-center flex bg-white drop-shadow-md hover:drop-shadow-xl space-y-2 px-2 py-5 border border-gray-200 rounded-xl max-w-[290px] max-h-[290px] text-center pt-5'>
-                <Link href={'/merchant/order/points/checkout'} prefetch={false}>
+                <Link href={`/merchant/order/points/checkout?points=${item.points}`} prefetch={false}>
                     {item.points}
                 </Link>
             </div>
