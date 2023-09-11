@@ -7,9 +7,9 @@ import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { Button, Rating, Stack, TableCell, TableRow, TextField } from "@mui/material";
-import Benefits from "./Benefits";
 import { HiMinusSm, HiOutlinePlusSm } from "react-icons/hi";
 import { BsCartPlus } from "react-icons/bs";
+import Benefits from "./Benefits/benefit";
 
 type IProduct = {
   _id: string;
@@ -272,10 +272,9 @@ const DetailsSection: React.FC<Props> = ({ product }) => {
               <br />
               <button
                 className="border-none bg-palette-primary/90 hover:bg-palette-primary/100 transition-colors duration-200 shadow-lg px-3 lg:px-8 py-4 text-palette-side flex items-center rounded-lg cursor-pointer  text-[12px] sm:text-base"
-              // onClick={'addToCartHandler'}
               >
                 <BsCartPlus style={{ fontSize: "1.2rem", margin: "0 0.4rem" }} />
-                Add to Cart
+                Click to Pay
               </button>
             </div>
 
