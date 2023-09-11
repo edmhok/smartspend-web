@@ -25,7 +25,7 @@ import { useTheme } from "@mui/material/styles";
 interface Data {
   _id: string;
   username: string;
-  merchant: string;
+  merchant: any;
   status: string;
   first_name: string;
   last_name: string;
@@ -136,11 +136,10 @@ export default function ViewPoints() {
         <Table sx={{ minWidth: 650, minHeight: 100 }} aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell>Username</TableCell>
+              <TableCell>Merchant</TableCell>
               <TableCell>Status</TableCell>
               <TableCell>Points</TableCell>
-              <TableCell>Accept</TableCell>
-              <TableCell>Decline</TableCell>
+              <TableCell>Action</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -149,7 +148,7 @@ export default function ViewPoints() {
                 key={index}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
-                <TableCell component="th" scope="row"></TableCell>
+                <TableCell component="th" scope="row">{mpoints.merchant.username}</TableCell>
                 <TableCell>{mpoints.status} </TableCell>
 
                 <TableCell>{mpoints.points}</TableCell>
@@ -160,9 +159,7 @@ export default function ViewPoints() {
                     onClick={() => handleClickOpen(mpoints)}
                   >
                     Accept
-                  </Button>
-                </TableCell>
-                <TableCell>
+                  </Button>&nbsp;
                   <Button
                     variant="outlined"
                     color="success"

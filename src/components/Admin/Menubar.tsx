@@ -58,7 +58,7 @@ export default function TemporaryDrawer() {
             <List>
                 {[
                     { text: 'All Products', href: '/admin/products' },
-                    { text: 'Order Points', href: '/admin/statistic' },
+                    { text: 'Order Points', href: '/admin/orderPoints' },
                 ].map((item) => (
                     <ListItem sx={{ textAlign: 'center' }} key={item.text}>
                         <ListItemButton component="a" href={item.href}>
