@@ -91,7 +91,7 @@ export default function ViewProduct() {
                 <TableCell>&nbsp;</TableCell>
                 <TableCell>Name</TableCell>
                 <TableCell>Brand</TableCell>
-                <TableCell> Description</TableCell>
+                <TableCell>Description</TableCell>
                 <TableCell>SKU</TableCell>
                 <TableCell>Price</TableCell>
                 <TableCell>Quantity</TableCell>

@@ -120,13 +120,10 @@
 
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import { NextArrow, PrevArrow } from "./CarouselBoxArrows";
 import Slider from "react-slick";
 
 import { HiOutlineChevronLeft, HiOutlineChevronRight } from "react-icons/hi";
-import CarouselBoxCard from "./Merchant/CarouselBoxCard";
-import ProductCard from "./ProductCard";
-import imagePlaceholder from "./../../public/jacket-1.jpg";
+import ProductCard from "./Card";
 
 interface Props {
   id?: string;
@@ -181,18 +178,17 @@ const DealsofDayBox: React.FC<Props> = ({
     <div className="image-slider-container container">
       <h1>Featured Products</h1>
       <Slider {...settings}>
-        {productData.map((item:any, index) => (
-          <Link key={index} href={`/login/adm`} prefetch={false}>
-            <ProductCard
-              key={index}
-              img={item.photo || imagePlaceholder}
-              title={item.productName}
-              description={item.description}
-              // rating={item.rating}
-              price={item.price}
-              rating={0}
-            />
-          </Link>
+        {productData.map((item: any, index) => (
+          <ProductCard
+            link={'/login/adm'}
+            key={index}
+            img={item.photo}
+            title={item.productName}
+            description={item.description}
+            // rating={item.rating}
+            price={item.price}
+            rating={0}
+          />
         ))}
         {/* Add more slides as needed */}
       </Slider>

@@ -1,6 +1,5 @@
 'use client'
 
-import NewProducts from '@/components/NewProducts'
 import React, {
   PropsWithChildren, useCallback, useEffect, useMemo, useState,
 } from 'react'
@@ -22,8 +21,8 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import { Collapse, Menu, MenuItem, Stack } from '@mui/material';
 import { AccountCircle, ExpandLess, ExpandMore } from '@mui/icons-material';
-import Footer from './Footer';
 import { AuthCheckerInside } from '@/utils/checker-inside';
+import Footer from '@/components/footer/footer';
 
 
 const drawerWidth = 240;
@@ -232,7 +231,7 @@ export default function AdminLayout({ children }: PropsWithChildren) {
                     horizontal: 'right',
                   }}
                   open={Boolean(anchorEl)}
-                  onClose={handleClose}
+                  onClose={() => {setAnchorEl(null);}}
                 >
                   <MenuItem onClick={handleSetting}>Profile</MenuItem>
                   <MenuItem onClick={handleClose}>Log-out</MenuItem>
@@ -267,7 +266,8 @@ export default function AdminLayout({ children }: PropsWithChildren) {
           <List>
             {[
               { text: 'Dashboard', href: '/admin' },
-              { text: 'Leaderboard', href: '/admin/leaderboard' },
+              { text: 'Merchant', href: '/admin/mer' },
+              { text: 'Patron', href: '/admin/pat' },
               { text: 'Merchant Points', href: '/admin/points' },
             ].map((item) => (
               <ListItem sx={{ textAlign: 'center' }} key={item.text}>
@@ -299,22 +299,22 @@ export default function AdminLayout({ children }: PropsWithChildren) {
             ))}
           </List> */}
           <Divider />
-          {/* <List>
-          {[
-            { text: 'Coupon', href: '/admin/coupon' },
-            { text: 'Statistic', href: '/admin/statistic' },
-          ].map((item) => (
-            <ListItem sx={{ textAlign: 'center' }} key={item.text}>
-              <ListItemButton component="a" href={item.href}>
-                <ListItemText sx={{ textAlign: 'center' }} primary={item.text} />
-              </ListItemButton>
-            </ListItem>
-          ))}
-        </List> */}
+          <List>
+            {[
+              { text: 'All Products', href: '/admin/products' },
+              // { text: 'Statistic', href: '/admin/statistic' },
+            ].map((item) => (
+              <ListItem sx={{ textAlign: 'center' }} key={item.text}>
+                <ListItemButton component="a" href={item.href}>
+                  <ListItemText sx={{ textAlign: 'center' }} primary={item.text} />
+                </ListItemButton>
+              </ListItem>
+            ))}
+          </List>
         </Drawer>
-        <Main open={open}>
+        <Main open={open} className="flex-grow  md:mt-40">
           <DrawerHeader />
-          {children}
+          <div>{children}</div>
           <Footer />
         </Main>
       </Box>

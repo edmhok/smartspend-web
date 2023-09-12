@@ -72,7 +72,8 @@ export default function ViewOrder() {
             const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/order/${_id}`, {
                 method: "DELETE",
                 headers: {
-                    Authorization: `Bearer ${token}`
+                    Authorization: `Bearer ${token}`,
+                    'Content-Type': 'application/json',
                 }
             });
             if (!response.ok) {
@@ -139,18 +140,21 @@ export default function ViewOrder() {
                                                     <DeleteOutlineIcon fontSize="small" />
                                                 </IconButton>
                                             </TableCell>
-                                        </TableRow>  
-                                        {item.products.map((prod:any, ind:number) => {
+                                        </TableRow>
+                                        {item.products.map((prod: any, ind: number) => {
+                                            if(!prod.product) {
+                                                return;
+                                            }
                                             return (
                                                 <TableRow
                                                     key={ind}
                                                     sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                                                 >
                                                     <TableCell component="th" scope="row">{ }</TableCell>
-                                                    <TableCell component="th" scope="row">{prod.product.productName}</TableCell>
-                                                    <TableCell component="th" scope="row"> {prod.qty}</TableCell>
+                                                    <TableCell component="th" scope="row">{prod.products.productName}</TableCell>
+                                                    <TableCell component="th" scope="row"> {prod.products.qty}</TableCell>
                                                     <TableCell component="th" scope="row"> { }</TableCell>
-                                                    <TableCell component="th" scope="row"> {prod.product.points}</TableCell>
+                                                    <TableCell component="th" scope="row"> {prod.products.points}</TableCell>
                                                     <TableCell component="th" scope="row"> { }</TableCell>
 
                                                     <TableCell>&nbsp;</TableCell>

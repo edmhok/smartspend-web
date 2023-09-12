@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import Link from "next/link";
@@ -11,15 +11,24 @@ import {
   FormControlLabel,
   FormLabel,
   Grid,
+  IconButton,
   Paper,
   Radio,
   RadioGroup,
   Switch,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
   TextField,
+  Tooltip,
 } from "@mui/material";
 import { AccountCircle } from "@mui/icons-material";
 import Image from "next/image";
 import Swal from "sweetalert2";
+import { init } from "next/dist/compiled/@vercel/og/satori";
 
 interface PaymentProps {
   img: string;
@@ -30,13 +39,14 @@ interface PaymentProps {
 
 const Confirmation = (props: PaymentProps) => {
   const [deliveryMethod, setDeliveryMethod] = useState("");
+  const [info, setInfo] = useState<any>()
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setDeliveryMethod((event.target as HTMLInputElement).value);
   };
 
   const handleClick = async () => {
-    const shop = JSON.parse(localStorage.getItem("shop") || "[]");
+    const shop = JSON.parse(localStorage.getItem("orders") || "[]");
     const token = localStorage.getItem("token");
     const userId = localStorage.getItem("userId");
 
@@ -65,6 +75,27 @@ const Confirmation = (props: PaymentProps) => {
     }, 2000);
   };
 
+  const init = async () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const token = localStorage.getItem("token");
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/order/${urlParams.get("id")}`, {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    });
+    console.log(response);
+
+    if (response.ok) {
+      const jsonData = await response.json();
+      setInfo(jsonData);
+    }
+
+  }
+
+  useEffect(() => {
+    init();
+  }, [])
+
   return (
     <div className=" w-full flex flex-col items-center">
       <div className="w-full justify-center flex flex-row gap-x-[150px] p-[20px] mb-10">
@@ -83,54 +114,41 @@ const Confirmation = (props: PaymentProps) => {
       </div>
       <div className="flex flex-col">
         <div className="bg-white drop-shadow-md w-[600px] h-auto mb-5 pb-5">
-          <div className="text-2xl text-black ps-[150px] py-7">
-            Select your Payment Gateway
+          <div className="text-2xl text-black ps-[50px] py-7">
+            Please pay on the following merchant's gateway:
           </div>
           <div className="space-y-2 flex justify-center">
-            <FormControl className="flex justify-center">
-              <Box sx={{ width: "100%" }}>
-                <RadioGroup
-                  name="payment"
-                  value={deliveryMethod}
-                  onChange={handleChange}
-                >
-                  <FormControlLabel
-                    value="gcash"
-                    control={<Radio />}
-                    label="GCash"
-                  />
-                  <FormControlLabel
-                    value="bank"
-                    control={<Radio />}
-                    label="BPI"
-                  />
-                </RadioGroup>
 
-                {deliveryMethod === "gcash" && (
-                  <div className="pb-5 pt-[10px] ">
-                    <div className="ps-[70px]">PLEASE SCAN TO PAY</div>
-                    <Image
-                      src={props.img}
-                      alt={props.alt}
-                      width={props.width}
-                      height={props.height}
-                    />
-                    <div className=""></div>
-                  </div>
-                )}
+            <TableContainer component={Paper}>
+              <Table aria-label="MuiTableSample">
+                  <TableHead>
+                      <TableRow sx={{ padding: '20px' }}>
+                          <TableCell>Bank Type</TableCell>
+                          <TableCell>Account Name</TableCell>
+                          <TableCell>Account Number</TableCell>
+                          <TableCell>Image (when available)</TableCell>
+                      </TableRow>
+                  </TableHead>
+                  <TableBody >
+                      {info && info.merchant && info.merchant.banks.map((bank:any, index:number) => (
+                          <TableRow key={index}>
+                              <TableCell>bank.type</TableCell>
+                              <TableCell>bank.name</TableCell>
+                              <TableCell>bank.number</TableCell>
+                              <TableCell>
+                                  <Image
+                                      alt={bank.name}
+                                      src={bank.photo}
+                                      width={250}
+                                      height={250}
+                                  />
+                              </TableCell>
+                          </TableRow>
+                      ))}
+                  </TableBody>
+              </Table>
+          </TableContainer>
 
-                {deliveryMethod === "bank" && (
-                  <div className="pb-8 pt-[10px] ">
-                    <Image
-                      src={props.img}
-                      alt={props.alt}
-                      width={props.width}
-                      height={props.height}
-                    />
-                  </div>
-                )}
-              </Box>
-            </FormControl>
           </div>
         </div>
       </div>
