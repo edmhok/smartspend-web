@@ -10,7 +10,7 @@ import Swal from 'sweetalert2';
 const CheckoutB: NextPage = () => {
 
     const handleClick = async () => {
-        const shop = JSON.parse(localStorage.getItem("shop") || "[]");
+        const shop = JSON.parse(localStorage.getItem("orders") || "[]");
         const token = localStorage.getItem("token");
         const userId = localStorage.getItem("userId");
 

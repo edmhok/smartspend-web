@@ -49,7 +49,7 @@ const Delivery = () => {
                                 <FormControlLabel
                                     value="cod"
                                     control={<Radio />}
-                                    label="Cash on Delivery"
+                                    label="Delivery"
                                 />
                                 {/* <FormControlLabel 
                     value="shipping"
@@ -68,7 +68,7 @@ const Delivery = () => {
 
                             {deliveryMethod === 'cod' &&
                                 <div className='px-5 my-5 py-5 w-[600px] bg-white'>
-                                    <h1 className='ps-5 pb-3 text-lg font-semibold'>Billing Information</h1>
+                                    <h1 className='ps-5 pb-3 text-lg font-semibold'>Shipping Information</h1>
                                     <div className='space-y-3 pb-10'>
                                         <div className='flex flex-row space-x-7'>
                                             <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
