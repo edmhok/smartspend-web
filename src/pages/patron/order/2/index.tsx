@@ -31,8 +31,6 @@ const CheckoutB: NextPage = () => {
             Swal.fire(
                 "The merchant doesn't have enought points. Please pick another item."
             );
-        } else {
-            Swal.fire("Thank You for your order.");
         }
         setTimeout(() => {
             window.location.href = "/patron/order/3";

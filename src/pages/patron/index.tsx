@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import ProductCard from "@/components/ProductCard";
 import { Button } from "@mui/material";
 import Link from "next/link";
-import { PatronLayout } from '@/layout'
+// import { PatronLayout } from '@/layout'
 import IntroMember from '@/components/IntroMember'
 
 
@@ -52,7 +52,9 @@ const Patron = () => {
 
 
   return (
-    <PatronLayout>
+    <>
+    
+    {/* // <PatronLayout> */}
       <IntroMember />
 
       <div className="container space-x-1 pt-10 ">
@@ -118,7 +120,8 @@ const Patron = () => {
         </div>
       </div>
 
-    </PatronLayout>
+    {/* // </PatronLayout> */}
+    </>
   )
 }
 
