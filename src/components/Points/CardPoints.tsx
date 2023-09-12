@@ -1,138 +1,70 @@
 'use client'
 
 import React, { useEffect, useState } from 'react';
-import { Container, Typography, Button } from '@mui/material';
-import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
-import FavoriteIcon from '@mui/icons-material/Favorite';
 import Link from 'next/link';
-import Image from 'next/image';
-import image from 'next/image';
-import Slider from "react-slick";
-// import { NextArrow, PrevArrow } from "./CarouselBoxArrows";
 
-interface Item {
-    points: number;
-
-}
-const items = [
-    {
-        points: 100
-    },
-    {
-        points: 300
-    },
-    {
-        points: 600
-    },
-    {
-        points: 800
-    },
-    {
-        points: 1000
-    },
-
-
-];
 
 const CardPoints = () => {
-    // const settings = {
-    //     className: ` px-4 ${full ? "bg-palette-fill" : "bg-[#37bccef9]"}`,
-    //     infinite: true,
-    //     speed: 600,
-    //     centerPadding: "60px",
-    //     slidesToShow: 5,
-    //     slidesToScroll: 5,
-    //     initialSlide: 0,
-    //     swipeToSlide: true,
-    //     rtl: true,
-    //     nextArrow: <NextArrow />,
-    //     prevArrow: <PrevArrow />,
-    //     responsive: [
-    //       {
-    //         breakpoint: 1324,
-    //         settings: {
-    //           slidesToShow: 4,
-    //           slidesToScroll: 4,
-    //         },
-    //       },
-    //       {
-    //         breakpoint: 1024,
-    //         settings: {
-    //           slidesToShow: 3,
-    //           slidesToScroll: 3,
-    //         },
-    //       },
-    //       {
-    //         breakpoint: 768,
-    //         settings: {
-    //           slidesToShow: 2,
-    //           slidesToScroll: 2,
-    //         },
-    //       },
-    //       {
-    //         breakpoint: 640,
-    //         settings: {
-    //           slidesToShow: 1,
-    //           slidesToScroll: 1,
-    //         },
-    //       },
-    //     ],
-    //   };
-    const [currentIndex, setCurrentIndex] = useState(0);
 
-    const visibleItems = 4;
-    const handleNext = () => {
-        setCurrentIndex(prevIndex =>
-            (prevIndex + 1) % items.length
-        );
-    }
-
-    const handlePrev = () => {
-        setCurrentIndex(prevIndex =>
-            (prevIndex - 1 + items.length) % items.length
-        );
-    }
-
-    return (
-        <div className='sm:block'>
-            <div className='container align-start font-medium text-[#218c20] text-2xl pt-10 ps-20'>Choose your Order</div>
-            <div className="container pt-6 relative flex items-center">
-                <div className='container flex direction-row justify-around'>
-                    {items.slice(currentIndex, currentIndex + visibleItems).map(item => (
-                        <Item key={item.points} item={item} />
-                    ))}
-                </div>
-                <Button className='absolute left-0' onClick={handlePrev}>
-                    <ArrowBackIosIcon color='success' />
-                </Button>
-                <Button className='absolute right-0' onClick={handleNext}>
-                    <ArrowForwardIosIcon color='success' />
-                </Button>
-            </div>
-        </div>
-    );
-}
-
-const Item = ({ item }: { item: Item }) => {
-
+    const data = [
+        {
+            points: 100
+        },
+        {
+            points: 200
+        },
+        {
+            points: 300
+        },
+        {
+            points: 400
+        },
+        {
+            points: 500
+        },
+        {
+            points: 600
+        },
+        {
+            points: 700
+        },
+        {
+            points: 800
+        },
+        {
+            points: 900
+        },
+        {
+            points: 1000
+        },
+    ];
     return (
         <>
-            <div className='flex-col justify-center flex bg-white drop-shadow-md hover:drop-shadow-xl space-y-2 px-2 py-5 border border-gray-200 rounded-xl max-w-[290px] max-h-[290px] text-center pt-5'>
-                <Link href={`/merchant/order/points/checkout?points=${item.points}`} prefetch={false}>
-                    {item.points}
-                </Link>
-            </div>
-            <div className="flex flex-col items-center flex-grow sticky top-10 md:top-36 max-w-[350px] mt-8 rtl:mr-auto ltr:ml-auto xl:rtl:ml-2 px-6 py-4 sm:p-4 xl:p-6 border-2 shadow-lg">
-                <div className="flex flex-col w-full ">
-                    <p className="text-lg">Price</p>
+            <div className="my-4 lg:my-3 flex flex-col">
+                <h2 className="mx-auto mt-4 py-8 text-2xl md:text-3xl">
+                    Buy Points
+                </h2>
+                <div className="flex flex-wrap lg:grid  gap-4 grid-rows-12 grid-cols-2 md:grid-cols-9 max-w-[1700px] mx-auto">
+                    {data.map((item) => (
+                        <Link
+                            className=" bg-[#ffad1e] drop-shadow-lg hover:scale-95 transition-transform duration-300 rounded-md"
+                            href={`/merchant/order/points/checkout?points=${item.points}`}
+                            prefetch={false}
+                        >
+                            <div className='flex justify-center items-center md:row-span-6 md:col-span-3 rounded-md shadow-lg px-4 py-2'>
+                                <div className='p-[10px] text-lg font-bold text-[#218c20] flex flex-col'>
+                                    {item.points}
+                                    <div className='text-[#50b94e]'>Points</div>
 
+                                    <div className='text-rose-500'>Click to Buy</div>
+                                </div>
+                            </div>
+                        </Link>
+                    ))}
                 </div>
 
-
-
             </div>
+
         </>
     )
 }
