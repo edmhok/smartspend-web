@@ -1,18 +1,14 @@
-import CartInfo from '@/components/checkout/CartInfo';
-import CartPoints from '@/components/Points/CartPoints';
+import CartPoints from '@/components/pointsgallery/CartPoints';
 import Menubar from '@/components/merchant/Menubar';
 import { NextPage } from 'next';
-import Link from "next/link";
 
 
-const CheckoutPoints: NextPage = () => {
+const CheckoutPoints: NextPage = () => (
 
-    return (
-        <>
-            <Menubar />
-            <CartPoints />
-        </>
-    )
-}
+    <>
+        <Menubar />
+        <CartPoints />
+    </>
+);
 
 export default CheckoutPoints
