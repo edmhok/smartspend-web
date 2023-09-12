@@ -65,15 +65,11 @@ const MyInfo = () => {
     photo: "",
   });
 
-  const searchParams = useSearchParams();
-  const merchantId = searchParams.get("id");
-  if (merchantId !== null) {
-    localStorage.setItem("merchantId", merchantId);
-  } else {
-    console.log("No merchant exists");
-  }
-
+  
   useEffect(() => {
+    
+
+    
     const role = localStorage.getItem("role");
     if (role === "admin") {
       setTextDisable(true);
@@ -85,6 +81,14 @@ const MyInfo = () => {
     const role = localStorage.getItem("role");
     const userId = localStorage.getItem("userId");
     const token = localStorage.getItem("token");
+
+    const urlParams = new URLSearchParams(window.location.search || '');
+    const merchantId = urlParams.get("id");
+    if (merchantId !== null) {
+      localStorage.setItem("merchantId", merchantId);
+    } else {
+      console.log("No merchant exists");
+    }
 
     try {
       if (role === "merchant") {
@@ -556,8 +560,8 @@ const MyInfo = () => {
           </TableHead>
           <TableBody>
             {info.orderPoints &&
-              info.orderPoints.map((item) => (
-                <TableRow>
+              info.orderPoints.map((item, index) => (
+                <TableRow key={index} >
                   <TableCell>{item.points}</TableCell>
                   <TableCell>{item.status}</TableCell>
                 </TableRow>

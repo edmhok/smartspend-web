@@ -1,6 +1,6 @@
 
-import CartInfo from '@/components/checkout/CartInfo';
-import Menubar from '@/components/patron/Menubar';
+import CartInfo from '@/components/Checkout/CartInfo';
+import Menubar from '@/components/Patron/Menubar';
 import { NextPage } from 'next';
 import Link from "next/link";
 import { useEffect } from 'react';
@@ -8,7 +8,7 @@ import Swal from 'sweetalert2';
 
 
 const CheckoutA: NextPage = () => {
-    useEffect(async () => {
+    const init = async () => {
         const orders = JSON.parse(localStorage.getItem("orders") || "[]");
         if(orders.length <= 0) {
             const swalResponse = await Swal.fire(
@@ -18,6 +18,9 @@ const CheckoutA: NextPage = () => {
                 window.location.href = "/patron";
             }
         }
+    }
+    useEffect(() => {
+        init();
     }, [])
     const handleClick = async () => {
         const orders = JSON.parse(localStorage.getItem("orders") || "[]");

@@ -115,7 +115,7 @@ const Confirmation = (props: PaymentProps) => {
       <div className="flex flex-col">
         <div className="bg-white drop-shadow-md w-[600px] h-auto mb-5 pb-5">
           <div className="text-2xl text-black ps-[50px] py-7">
-            Please pay on the following merchant's gateway:
+            Please pay on the following merchant&apos;s gateway:
           </div>
           <div className="space-y-2 flex justify-center">
 

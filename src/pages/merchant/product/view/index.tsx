@@ -1,7 +1,7 @@
 import React from 'react'
 import type { NextPage } from 'next'
-import ViewProduct from '@/components/merchant/ViewProduct'
-import Menubar from '@/components/merchant/Menubar'
+import ViewProduct from '@/components/Merchant/ViewProduct'
+import Menubar from '@/components/Merchant/Menubar'
 
 const ProductView: NextPage = () => (
     <>

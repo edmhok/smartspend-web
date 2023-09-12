@@ -1,7 +1,7 @@
 import React from "react";
 import type { NextPage } from "next";
 import OrderList from "@/components/Admin/OrderList";
-import Menubar from "@/components/patron/Menubar";
+import Menubar from "@/components/Patron/Menubar";
 
 const OrderView: NextPage = () => (
   <>

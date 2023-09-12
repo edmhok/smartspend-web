@@ -1,5 +1,5 @@
 import CartPoints from '@/components/pointsgallery/CartPoints';
-import Menubar from '@/components/merchant/Menubar';
+import Menubar from '@/components/Merchant/Menubar';
 import { NextPage } from 'next';
 
 

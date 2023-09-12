@@ -45,8 +45,9 @@ const CardPoints = () => {
                     Buy Points
                 </h2>
                 <div className="flex flex-wrap lg:grid  gap-4 grid-rows-12 grid-cols-2 md:grid-cols-9 max-w-[1700px] mx-auto">
-                    {data.map((item) => (
+                    {data.map((item, index) => (
                         <Link
+                        key={index} 
                             className=" bg-[#ffad1e] drop-shadow-lg hover:scale-95 transition-transform duration-300 rounded-md"
                             href={`/merchant/order/points/checkout?points=${item.points}`}
                             prefetch={false}

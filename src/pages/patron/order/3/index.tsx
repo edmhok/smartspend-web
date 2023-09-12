@@ -1,7 +1,7 @@
 'use client'
 
-import Confirmation from '@/components/checkout/Confirmation';
-import Menubar from '@/components/patron/Menubar';
+import Confirmation from '@/components/Checkout/Confirmation';
+import Menubar from '@/components/Patron/Menubar';
 import { NextPage } from 'next';
 import Link from 'next/link';
 import Swal from 'sweetalert2';
