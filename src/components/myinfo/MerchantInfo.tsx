@@ -65,11 +65,7 @@ const MyInfo = () => {
     photo: "",
   });
 
-  
   useEffect(() => {
-    
-
-    
     const role = localStorage.getItem("role");
     if (role === "admin") {
       setTextDisable(true);
@@ -82,7 +78,7 @@ const MyInfo = () => {
     const userId = localStorage.getItem("userId");
     const token = localStorage.getItem("token");
 
-    const urlParams = new URLSearchParams(window.location.search || '');
+    const urlParams = new URLSearchParams(window.location.search || "");
     const merchantId = urlParams.get("id");
     if (merchantId !== null) {
       localStorage.setItem("merchantId", merchantId);
@@ -556,14 +552,16 @@ const MyInfo = () => {
             <TableRow>
               <TableCell>Points</TableCell>
               <TableCell>Status</TableCell>
+              <TableCell>Date</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {info.orderPoints &&
               info.orderPoints.map((item, index) => (
-                <TableRow key={index} >
+                <TableRow key={index}>
                   <TableCell>{item.points}</TableCell>
                   <TableCell>{item.status}</TableCell>
+                  <TableCell>{item.createdAt}</TableCell>
                 </TableRow>
               ))}
           </TableBody>
