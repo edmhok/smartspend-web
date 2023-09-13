@@ -89,13 +89,6 @@ const HeaderMain = () => {
             </Link>
           )}
 
-
-          {/* <Link href="/" prefetch={false}>
-            <div className="relative">
-              <ShoppingCartOutlinedIcon className="w-8 h-8 space-x-2" />
-              <div className="shop_notification">0</div>
-            </div>
-          </Link> */}
         </div>
       </div>
     </div>
