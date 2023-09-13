@@ -4,7 +4,6 @@ import React, { useEffect, useState } from "react";
 import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, IconButton, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField } from "@mui/material";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import CheckIcon from '@mui/icons-material/Check';
-
 interface OrderData {
     _id: string;
     products: any;
@@ -88,6 +87,7 @@ export default function ViewOrder() {
     };
 
 
+
     return (
         <div className='p-10'>
             <div className="flex flex-row space-x-4 items-center p-5">
@@ -142,24 +142,26 @@ export default function ViewOrder() {
                                             </TableCell>
                                         </TableRow>
                                         {item.products.map((prod: any, ind: number) => {
-                                            if(!prod.product) {
+                                            if (!prod.product) {
                                                 return;
                                             }
                                             return (
-                                                <TableRow
-                                                    key={ind}
-                                                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                                                >
-                                                    <TableCell component="th" scope="row">{ }</TableCell>
-                                                    <TableCell component="th" scope="row">{prod.product.productName}</TableCell>
-                                                    <TableCell component="th" scope="row"> {prod.product.qty}</TableCell>
-                                                    <TableCell component="th" scope="row"> { }</TableCell>
-                                                    <TableCell component="th" scope="row"> {prod.product.points}</TableCell>
-                                                    <TableCell component="th" scope="row"> { }</TableCell>
+                                                <>
+                                                    <TableRow
+                                                        key={ind}
+                                                        sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                                                    >
+                                                        <TableCell component="th" scope="row">{ }</TableCell>
+                                                        <TableCell component="th" scope="row">{prod.product.productName}</TableCell>
+                                                        <TableCell component="th" scope="row"> {prod.product.qty}</TableCell>
+                                                        <TableCell component="th" scope="row"> { }</TableCell>
+                                                        <TableCell component="th" scope="row"> {prod.product.points}</TableCell>
+                                                        <TableCell component="th" scope="row"> { }</TableCell>
 
-                                                    <TableCell>&nbsp;</TableCell>
-                                                    <TableCell>&nbsp;</TableCell>
-                                                </TableRow>
+                                                        <TableCell>&nbsp;</TableCell>
+                                                        <TableCell>&nbsp;</TableCell>
+                                                    </TableRow>
+                                                </>
                                             )
                                         })}
                                     </>

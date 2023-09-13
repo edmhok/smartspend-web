@@ -1,4 +1,4 @@
-import CartInfo from '@/components/Checkout/CartInfo';
+import CartInfo from '@/components/checkout/CartInfo';
 import Menubar from '@/components/Merchant/Menubar';
 import { NextPage } from 'next';
 import Link from "next/link";

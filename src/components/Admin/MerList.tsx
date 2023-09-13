@@ -3,12 +3,6 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import {
-  Button,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
   IconButton,
   Paper,
   Table,
@@ -20,9 +14,6 @@ import {
   TextField,
 } from "@mui/material";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
-import useMediaQuery from "@mui/material/useMediaQuery";
-import { useTheme } from "@mui/material/styles";
-
 interface Data {
   _id: string;
   username: string;
@@ -53,6 +44,7 @@ export default function MerList() {
       } else {
         console.error("Failed to fetch data");
       }
+
     } catch (error) {
       console.error("Error:", error);
     }
@@ -61,6 +53,7 @@ export default function MerList() {
   useEffect(() => {
     fetchData();
   }, []);
+
 
   const deleteMember = async (_id: string) => {
     try {
@@ -81,6 +74,7 @@ export default function MerList() {
       }
       // Refetch merchants after delete
       fetchData();
+
     } catch (error) {
       console.error(error);
     }

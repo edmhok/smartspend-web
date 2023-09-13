@@ -1,5 +1,5 @@
 
-import CartInfo from '@/components/Checkout/CartInfo';
+import CartInfo from '@/components/checkout/CartInfo';
 import Menubar from '@/components/Patron/Menubar';
 import { NextPage } from 'next';
 import Link from "next/link";
@@ -10,11 +10,11 @@ import Swal from 'sweetalert2';
 const CheckoutA: NextPage = () => {
     const init = async () => {
         const orders = JSON.parse(localStorage.getItem("orders") || "[]");
-        if(orders.length <= 0) {
+        if (orders.length <= 0) {
             const swalResponse = await Swal.fire(
                 "There is currently no item on your basket. Redirecting you back to dashboard"
             );
-            if(swalResponse.isConfirmed) {
+            if (swalResponse.isConfirmed) {
                 window.location.href = "/patron";
             }
         }
@@ -58,7 +58,7 @@ const CheckoutA: NextPage = () => {
             <Menubar />
             <CartInfo />
             <div className='m-7 flex justify-end w-full pe-[200px]'>
-                
+
                 <button className='px-4 py-2 text-white text-lg font-semibold bg-[#38c035]' onClick={handleClick}>Proceed to CheckOut</button>
             </div>
         </>

@@ -1,6 +1,6 @@
 'use client'
 
-import Delivery from '@/components/Checkout/Delivery';
+import Delivery from '@/components/checkout/Delivery';
 import Menubar from '@/components/Patron/Menubar';
 import { NextPage } from 'next';
 import Link from 'next/link';
