@@ -75,7 +75,9 @@ const UserLogin = () => {
                   Patron
                 </div>
               </Link>
+              
             </div>
+              <p className="text-sm text-center text-slate-400">Hi there! <br />Temporary login using <br />Username:admin@smartspend.com <br /> Password:qwertyuiop1201 </p>
             <div className="flex flex-col justify-center py-10 space-y-5">
               <TextField
                 sx={{ m: 1, width: "40ch" }}
@@ -124,6 +126,9 @@ const UserLogin = () => {
 
               <div className="flex justify-center pb-5">
                 <Button
+                  variant="contained"
+                  size="medium"
+                  color='success'
                   type="submit"
                   onClick={handleLogin}
                   className="signin_btn"
@@ -145,9 +150,9 @@ const UserLogin = () => {
           </p>
           <div className="flex justify-center">
             <Link prefetch={false} href={"/register/adm"}>
-              <Button className="regis_btn">
+              <div className="regis_btn">
                 Register
-              </Button>
+              </div>
             </Link>
           </div>
         </div>

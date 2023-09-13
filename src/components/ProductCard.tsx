@@ -48,9 +48,9 @@ const ProductCard: React.FC<propsType> = ({
           <Rating name="half-rating" defaultValue={2.5} precision={0.5} />
         </Stack> */}
         <div className="font-bold flex gap-4 link">
-          ${price}
+        ₱ {price}
           <del className="text-gray-500 font-normal pb-4">
-            ${(price) + 50}.00
+          ₱{(price) + 50}.00
           </del>
         </div>
 

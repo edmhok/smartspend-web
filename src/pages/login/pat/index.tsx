@@ -64,15 +64,15 @@ const PatronLogin = () => {
               {" "}
               Login to your Patron Account
             </p>
-            <p className="text-sm text-center">Login using your social</p>
-            <div className="flex flex-row space-x-10 pt-3 pb-3 justify-center">
+            <p className="text-sm text-center text-slate-400">Hi there! <br />Temporary login using <br />Username:patron@test.com <br /> Password:qwertyuiop1201 </p>
+            {/* <div className="flex flex-row space-x-10 pt-3 pb-3 justify-center">
               <Link href="https://www.google.com">
                 <GoogleIcon />
               </Link>
               <Link href="https://www.facebook.com">
                 <FacebookIcon />
               </Link>
-            </div>
+            </div> */}
             <div className="flex flex-col justify-center py-10 space-y-5">
               <TextField
                 sx={{ m: 1, width: "40ch" }}
@@ -116,6 +116,9 @@ const PatronLogin = () => {
 
               <div className="flex justify-center pb-5">
                 <Button
+                  variant="contained"
+                  size="medium"
+                  color='success'
                   type="submit"
                   onClick={handleLogin}
                   className="signin_btn"
@@ -136,9 +139,9 @@ const PatronLogin = () => {
           </p>
           <div className="flex justify-center">
             <Link href={"/register/pat"}>
-              <Button className="regis_btn">
+            <div className="regis_btn">
                 Register
-              </Button>
+              </div>
             </Link>
           </div>
         </div>

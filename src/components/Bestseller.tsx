@@ -176,7 +176,7 @@ const DealsofDayBox: React.FC<Props> = ({
 
   return (
     <div className="image-slider-container container">
-      <h1>Featured Products</h1>
+      <div className='container align-start font-medium text-[#218c20] text-2xl pt-10 ps-20'>Deals of the Day</div>
       <Slider {...settings}>
         {productData.map((item: any, index) => (
           <ProductCard
@@ -185,9 +185,9 @@ const DealsofDayBox: React.FC<Props> = ({
             img={item.photo}
             title={item.productName}
             description={item.description}
-            // rating={item.rating}
+            rating={item.rating}
             price={item.price}
-            rating={0}
+            // rating={0}
           />
         ))}
         {/* Add more slides as needed */}

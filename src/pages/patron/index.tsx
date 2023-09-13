@@ -1,14 +1,15 @@
+
+
 'use client'
 
 import React, { useState, useEffect } from "react";
 import ProductCard from "@/components/ProductCard";
 import { Button } from "@mui/material";
 import Link from "next/link";
-// import { PatronLayout } from '@/layout'
 import IntroMember from '@/components/IntroMember'
+import Menubar from "@/components/Patron/Menubar";
 
 
-// import imagePlaceholder from "./../../../public/jacket-1.jpg";
 
 interface Data {
   img: string;
@@ -50,55 +51,34 @@ const Patron = () => {
     fetchData();
   }, []);
 
+  const settings = {
+    className: 'slider variable-width',
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    variableWidth: true,
+    infinite: false,
+    arrows: true
+  };
+
 
   return (
     <>
-    
-    {/* // <PatronLayout> */}
+   
+      <Menubar />
       <IntroMember />
-
       <div className="container space-x-1 pt-10 ">
         <div className="grid grid-cols-6 ps-1">
-          {/* <Button
-          className={`font-bold text-fuchsia-400 text-lg rounded-t-lg
+          <Button
+          className={`font-bold text-[#218c20] text-lg rounded-t-lg
         ${tab === "favorites" ? "bg-[#F1F1F1]" : "bg-[#F6F6F6]"}`}
           onMouseEnter={() => setTab("favorites")}
           onClick={() => setTab("favorites")}
         >
           Favorites
-        </Button> */}
+        </Button>
 
-          <Button
-            className={`text-lg font-bold text-[#218c20] rounded-t-lg
-         ${tab === "new" ? "bg-[#F1F1F1]" : "bg-[#F6F6F6]"}`}
-            onMouseEnter={() => setTab("new")}
-            onClick={() => setTab("new")}
-          >
-            New
-          </Button>
         </div>
-        {/* {tab === "favorites" && (
-        <div className="border border-x-[#F1F1F1] border-y-[#F1F1F1] bg-[#F1F1F1]">
-          <div className="container p-10">
-            <div className="grid grid-cols-1 place-items-center sm:place-items-start sm:grid-cols-2 lg:grid-col-3 xl:grid-cols-4 gap-10 xl:gap-x-20 xl:gap-y-10">
-              {productsData.favorites.map((item, index) => (
-                <Link href={`/product/${item.id}`} key={index}>
-                  <ProductCard
-                    key={index}
-                    img={item.img}
-                    title={item.title}
-                    desc={item.desc}
-                    rating={item.rating}
-                    price={item.price}
-                  />
-                </Link>
-              ))}
-            </div>
-          </div>
-        </div>
-      )} */}
-
-        {/* {tab === "new" && ( */}
+   
         <div className="border border-x-[#F1F1F1] border-y-[#F1F1F1] bg-[#F1F1F1]">
           <div className="container p-10">
             <div className="grid grid-cols-1 place-items-center sm:place-items-start sm:grid-cols-2 lg:grid-col-3 xl:grid-cols-4 gap-10 xl:gap-x-20 xl:gap-y-10">
@@ -111,8 +91,8 @@ const Patron = () => {
                     description={item.description}
                     // rating={item.rating}
                     price={item.price}
-                    rating={0}
-                  />
+                    rating={0}       
+                   />
                 </Link>
               ))}
             </div>
@@ -120,7 +100,6 @@ const Patron = () => {
         </div>
       </div>
 
-    {/* // </PatronLayout> */}
     </>
   )
 }

@@ -9,7 +9,7 @@ const Logo = () => {
     <Link href="/" prefetch={false}>
       <div className="block md:flex items-center justify-center w-full flex-grow md:flex-grow-0">
         <Image
-          src="/images/logo.png"
+          src={"/logo.png"}
           alt="logo"
           width={220}
           height={75}

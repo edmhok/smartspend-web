@@ -50,7 +50,7 @@ const Card: React.FC<propsType> = ({
           {/* Discount  */}
           <span className="w-8 sm:w-auto block absolute -top-2 -right-2">
             <Image
-              src="/images/discount-icon/discount.png"
+              src={"/discount.png"}
               width={40}
               height={40}
               alt="discount-icon"

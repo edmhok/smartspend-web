@@ -42,7 +42,8 @@ export default function TemporaryDrawer() {
         >
             <List>
                 {[
-                    { text: 'My Info', href: '/merchant/info' },
+                    { text: 'Dasboard', href: '/patron' },
+                    { text: 'My Info', href: '/patron/info' },
                 ].map((item) => (
                     <ListItem sx={{ textAlign: 'center' }} key={item.text}>
                         <ListItemButton component="a" href={item.href}>
@@ -67,7 +68,6 @@ export default function TemporaryDrawer() {
             <Divider />
             <List>
                 {[
-                    // { text: 'Order Points', href: '/merchant/order/points' },
                     { text: 'View Order', href: '/patron/order/view' }
                 ].map((item) => (
                     <ListItem sx={{ textAlign: 'center' }} key={item.text}>

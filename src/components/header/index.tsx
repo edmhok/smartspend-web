@@ -19,18 +19,7 @@ const Header = () => {
       <div className="flex flex-col md:px-4">
         <div className="flex items-center justify-between md:order-2 md:mt-2">
           <Menu />
-          <div className=" md:hidden">
-            {/* <Image
-              src={'/images/singlelogo.png'}
-              alt="logo"
-              width={20}
-              height={20}
-              objectFit="contain"
-              className="cursor-pointer md:ltr:-mr-3"
-            /> */}
-            {/* <Logo /> */}
-
-          </div>
+         
           {/* <Settings />  */}
           <div className="hidden md:flex md:items-center md:justify-between">
             {/* <Theme /> */}
@@ -38,7 +27,7 @@ const Header = () => {
         </div>
         <hr className="md:hidden" />
         <div className="mb-2 mt-4 md:mt-0 flex  items-center md:order-1">
-          <div className="md:block">
+        <div className=" md:block">
             <Logo />
           </div>
           <div className="flex-grow">

@@ -9,7 +9,7 @@ import Image from "next/image";
 import { Button, Rating, Stack, TableCell, TableRow, TextField } from "@mui/material";
 import { HiMinusSm, HiOutlinePlusSm } from "react-icons/hi";
 import { BsCartPlus } from "react-icons/bs";
-import Benefits from "./Benefits/benefit";
+// import Benefits from "./Benefits/benefit";
 
 type IProduct = {
   _id: string;
@@ -289,7 +289,7 @@ const DetailsSection: React.FC<Props> = ({ product }) => {
       </div>
 
       <div className="border-2 my-8">
-        <Benefits />
+        {/* <Benefits /> */}
       </div>
     </div>
   );

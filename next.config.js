@@ -17,11 +17,10 @@ const nextConfig = {
           's3.amazonaws.com'
         ],
       },
-    trailingSlash: true,
+    trailingSlash: true,  
     future: {
       webpack5: true,
     },
-  
     // output: 'export',
     // experimental: {
     //     appDir: true

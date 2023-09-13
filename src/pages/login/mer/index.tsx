@@ -69,15 +69,15 @@ const MerchantLogin = () => {
             <p className="text-2xl pb-5 text-center">
               Login to your Merchant Account
             </p>
-            <p className="text-sm text-center">Login using your social</p>
-            <div className="flex flex-row space-x-10 pt-3 pb-3 justify-center">
+            <p className="text-sm text-center text-slate-400">Hi there! <br />Temporary login using <br />Username:merchant@test.com <br /> Password:qwertyuiop1201 </p>
+             {/* <div className="flex flex-row space-x-10 pt-3 pb-3 justify-center">
               <Link prefetch={false} href="https://www.google.com">
                 <GoogleIcon />
               </Link>
               <Link prefetch={false} href="https://www.facebook.com">
                 <FacebookIcon />
               </Link>
-            </div>
+            </div>  */}
             <div className="flex flex-col py-10 space-y-3">
               
               <FormControl sx={{ m: 1, width: "40ch" }} variant="outlined">
@@ -121,6 +121,9 @@ const MerchantLogin = () => {
 
               <div className="flex justify-center pb-5">
                 <Button
+                  variant="contained"
+                  size="medium"
+                  color='success'
                   type="submit"
                   onClick={handleLogin}
                   className="signin_btn"
@@ -141,9 +144,9 @@ const MerchantLogin = () => {
           </p>
           <div className="flex justify-center">
             <Link href={"/register/mer"}>
-              <Button className="regis_btn">
+              <div className="regis_btn">
                 Register
-              </Button>
+              </div>
             </Link>
           </div>
         </div>

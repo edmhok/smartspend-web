@@ -1,12 +1,12 @@
 import React from "react";
 import type { NextPage } from "next";
-import OrderList from "@/components/Admin/OrderList";
 import Menubar from "@/components/Patron/Menubar";
+import ViewOrder from "@/components/Patron/ViewOrder";
 
 const OrderView: NextPage = () => (
   <>
     <Menubar />
-    <OrderList />
+    <ViewOrder />
   </>
 );
 
