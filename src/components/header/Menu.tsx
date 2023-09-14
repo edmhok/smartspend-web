@@ -7,7 +7,7 @@ import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
 const Menu = () => {
     return (
         <>
-            <div className="hidden md:block">
+            <div className="md:block">
                 <Link href="/login/usr" prefetch={false}>
                     <MenuRoundedIcon className="text-gray-500 w-8 h-8" />
                 </Link>

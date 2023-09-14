@@ -27,56 +27,58 @@ const User = () => {
         window.location.href = '/'
     }
     return (
-        <div className="w-full">
-            <div className="container flex justify-between items-center">
+        <>
+            <div className="w-full">
+                <div className="container flex justify-between items-center">
 
 
-                <div className="cssright">
-                    {isLoggedIn && (
-                        <div>
-                            <IconButton
-                                size="large"
-                                aria-label="account of current user"
-                                aria-controls="menu-appbar"
-                                aria-haspopup="true"
-                                onClick={handleMenu}
-                                color="secondary"
-                            >
-                                <AccountCircle />
-                            </IconButton>
-                            <Menu
-                                id="menu-appbar"
-                                anchorEl={anchorEl}
-                                anchorOrigin={{
-                                    vertical: 'top',
-                                    horizontal: 'right',
-                                }}
-                                keepMounted
-                                transformOrigin={{
-                                    vertical: 'top',
-                                    horizontal: 'right',
-                                }}
-                                open={Boolean(anchorEl)}
-                                onClose={() => { setAnchorEl(null); }}
-                            >
-                                <MenuItem onClick={handleLogout}>Log-out</MenuItem>
-                            </Menu>
-                        </div>
-                    )}
-                    {!isLoggedIn && (
-                        <Link href="/login/adm" prefetch={false}>
-                            <div className="md:flex items-center rounded-lg  py-1 px-2 ltr:mr-3 rtl:ml-3 border-[1px] border-gray-200 dark:border-gray-200/40 shadow-sm ">
-                                <HiOutlineLogin style={{ fontSize: "1.6rem" }} />
-                                <p className="ltr:ml-2 rtl:mr-2 text-xs">
-                                    Login | SignUp
-                                </p>
+                    <div className="cssright">
+                        {isLoggedIn && (
+                            <div>
+                                <IconButton
+                                    size="large"
+                                    aria-label="account of current user"
+                                    aria-controls="menu-appbar"
+                                    aria-haspopup="true"
+                                    onClick={handleMenu}
+                                    color="secondary"
+                                >
+                                    <AccountCircle />
+                                </IconButton>
+                                <Menu
+                                    id="menu-appbar"
+                                    anchorEl={anchorEl}
+                                    anchorOrigin={{
+                                        vertical: 'top',
+                                        horizontal: 'right',
+                                    }}
+                                    keepMounted
+                                    transformOrigin={{
+                                        vertical: 'top',
+                                        horizontal: 'right',
+                                    }}
+                                    open={Boolean(anchorEl)}
+                                    onClose={() => { setAnchorEl(null); }}
+                                >
+                                    <MenuItem onClick={handleLogout}>Log-out</MenuItem>
+                                </Menu>
                             </div>
-                        </Link>
-                    )}
+                        )}
+                        {!isLoggedIn && (
+                            <Link href="/login/adm" prefetch={false}>
+                                <div className="md:flex items-center rounded-lg  py-1 px-2 ltr:mr-3 rtl:ml-3 border-[1px] border-gray-200 dark:border-gray-200/40 shadow-sm ">
+                                    <HiOutlineLogin style={{ fontSize: "1.6rem" }} />
+                                    <p className="ltr:ml-2 rtl:mr-2 text-xs">
+                                        Login | SignUp
+                                    </p>
+                                </div>
+                            </Link>
+                        )}
 
+                    </div>
                 </div>
             </div>
-        </div>
+        </>
     );
 };
 

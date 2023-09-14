@@ -7,7 +7,7 @@ import React from "react";
 const Logo = () => {
   return (
     <Link href="/" prefetch={false}>
-      <div className="block md:flex items-center justify-center w-full flex-grow md:flex-grow-0">
+      <div className="md:flex items-center justify-center w-full flex-grow md:flex-grow-0">
         <Image
           src={"/logo.png"}
           alt="logo"
