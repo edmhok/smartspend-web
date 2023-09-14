@@ -101,10 +101,10 @@ export default function Product() {
     <div className="flex flex-col max-w-[1300px] mx-auto">
       {/* <Breadcrumb /> */}
 
-      <div className="flex flex-col md:flex-row flex-wrap md:flex-nowrap items-center md:items-start mt-8 relative">
+      <div className="flex justify-center flex-col md:flex-row md:flex-nowrap items-center md:items-start mt-8 relative">
         {/* Image Section */}
         {/* <div className="flex items-start rounded-lg w-full md:w-auto"> */}
-        <div className="flex flex-grow md:ltr:mr-3 md:rtl:ml-3">
+        <div className="flex flex-grow md:ltr:mr-3 ">
           <Image
             src={detail.photo || ''}
             alt="product img"
@@ -115,7 +115,6 @@ export default function Product() {
         </div>
 
         <div className="flex mt-4  md:p-4 w-full max-w-[350px] overflow-auto">
-
           <div className='flex items-center justify-center p-2 md:p-4 rounded-lg  border-none transition-all duration-300 ease-in-out min-w-[80px]'>
             {/* "border-2 border-slate-300/60 shadow-md bg-palette-card/60" */}
 

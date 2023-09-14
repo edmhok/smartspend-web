@@ -247,8 +247,8 @@ export default function Product() {
 
         <div className="flex flex-row md:flex-col flex-wrap md:flex-nowrap items-center md:items-start mt-8 relative">
           {/* Image Section */}
-          <div className="flex items-start rounded-lg w-full md:w-auto">
-            <div className="flex flex-col items-center w-full md:w-auto">
+          <div className="flex items-start rounded-lg md:w-auto">
+            <div className="flex flex-col items-center md:w-auto">
               <div className="flex flex-grow md:ltr:mr-3">
                 <Image
                   src={detail.photo || ''}

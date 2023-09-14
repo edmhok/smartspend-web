@@ -10,7 +10,7 @@ import Image from 'next/image';
 
 interface OrderItem {
     id: number;
-    thumbnail: string;
+    photo: string;
     productName: string;
     description: string;
     qty: number;
@@ -24,25 +24,25 @@ const CartInfo = () => {
     const [orders, setOrders] = useState<OrderItem[]>([]);
     const [updateQty, setUpdateQty] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
-    const images = "/jacket-1.jpg";
+    // const images = "/jacket-1.jpg";
 
     async function fetchData() {
         const lcData = JSON.parse(localStorage.getItem("orders") || "[]");
         const ids = lcData.map((item: any) => item.id).join(",");
         try {
             const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/products/batch?ids=${ids}`);
-            
+
             if (response.ok) {
                 const data = await response.json();
                 const newData = data.map((item: any) => {
                     const qty = lcData.find((i: any) => i.id === item._id).qty
                     return {
-                        ...item,                        
+                        ...item,
                         qty,
                         total: qty * item.price
                     };
                 });
-                
+
                 setOrders(newData);
                 //   console.log(response);
             } else {
@@ -137,7 +137,7 @@ const CartInfo = () => {
                                             <TableCell>
                                                 <Image
                                                     // src={`/api/images/${order.thumbnail}`}
-                                                    src={images}
+                                                    src={order.photo}
                                                     alt={order.productName}
                                                     width={30}
                                                     height={30}
