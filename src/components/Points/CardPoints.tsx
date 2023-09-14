@@ -5,6 +5,34 @@ import Link from 'next/link';
 
 
 const CardPoints = () => {
+    const [details, setDetails] = useState({
+        points: 0
+    })
+    const [points, setPoints] = useState(0)
+
+    const init = async () => {
+        const token = localStorage.getItem('token')
+        const role = localStorage.getItem('role')
+        const userId = localStorage.getItem('userId')
+
+        const api = role === 'patron' ? `${process.env.NEXT_PUBLIC_API_URL}/patrons/${userId}` :
+            role === 'merchant' ? `${process.env.NEXT_PUBLIC_API_URL}/merchants/${userId}` : ''
+
+        if (api !== '') {
+            const response = await fetch(api, {
+                headers: { 'Authorization': `Bearer ${token}` }
+            })
+            const data = await response.json()
+            setDetails(data)
+        }
+        else {
+            setDetails({ points: 0 })
+        }
+
+    }
+    useEffect(() => {
+        init()
+    }, [])
 
     const data = [
         {
@@ -40,6 +68,9 @@ const CardPoints = () => {
     ];
     return (
         <>
+            {details && (
+                <div className="text-lg font-bold text-center">Current Points Balance: {details.points}</div>
+            )}
             <div className="my-4 lg:my-3 flex flex-col">
                 <h2 className="mx-auto mt-4 py-8 text-2xl md:text-3xl">
                     Buy Points
@@ -47,7 +78,7 @@ const CardPoints = () => {
                 <div className="flex flex-wrap lg:grid  gap-4 grid-rows-12 grid-cols-2 md:grid-cols-9 max-w-[1700px] mx-auto">
                     {data.map((item, index) => (
                         <Link
-                        key={index} 
+                            key={index}
                             className=" bg-[#ffad1e] drop-shadow-lg hover:scale-95 transition-transform duration-300 rounded-md"
                             href={`/merchant/order/points/checkout?points=${item.points}`}
                             prefetch={false}

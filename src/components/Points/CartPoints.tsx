@@ -72,8 +72,8 @@ export default function BasicTabs() {
             })
         });
         const swalRes = await Swal.fire("Thank You for your purchase request. We will soon review your order.");
-        if(swalRes.isConfirmed) {
-            window.location.href='/merchant'
+        if (swalRes.isConfirmed) {
+            window.location.href = '/merchant'
         }
     }
 
@@ -82,7 +82,7 @@ export default function BasicTabs() {
         const urlParams = new URLSearchParams(queryString);
         const _points = urlParams.get('points')
         setPoints(parseInt(_points || '0'))
-    },[])
+    }, [])
 
     return (
         <>
@@ -95,90 +95,122 @@ export default function BasicTabs() {
                     </Tabs>
                 </Box>
                 <CustomTabPanel value={value} index={0}>
-                    {/* <div className='p-6 w-[500px] h-[300px] flex flex-col justify-center'> */}
-                    <div className='flex flex-row space-x-5 justify-center'>
-                        <div className="w-[400px]">
-                            <p>You are about to purchase : <strong>₱{points} for {points} Points</strong></p>
+                    <div className='flex flex-row md:flex-col md:flex-nowrap md:items-start space-x-[100px] mt-8'>
+
+                        <div className="mt-8 p-10 sm:p-4 border-2 shadow-lg text-center">
+                            <p>You are about to purchase :<br />
+                                <strong>₱{points} <br /> for {points} Points</strong></p>
                             <br />
-                            <h3>Please send to the following Gcash detail: </h3>
-                            
+                            <h3>Please send to the following GCASH detail: </h3>
+
                             <h4>Number : <strong>09XXXXXXXXX</strong></h4>
                             <h4>Name : <strong>J** D**</strong></h4>
-                        </div>
-                        <div className="w-[200px] flex justify-center">
-                            or
+
                         </div>
 
-                        <div className="w-[400px] text-center">
-                            <h3>SCAN for PAYMENT</h3>
-                            <Image
-                                src={'/gcash.jpg'}
-                                width={400}
-                                height={400}
-                                alt="product img"
-                                className="object-contain"
-                            />
-                        </div>
-                        <div className="w-[200px] flex justify-center">
-                            then
-                        </div>
-                        <div className="w-[400px] text-center">
-                            <h3>HIT THIS BUTTON</h3>
-                            <Button
-                                variant="outlined"
-                                color="success"
+                        <div className='flex flex-col text-center'>
+                            <h3 className='p-5'>SCAN for PAYMENT</h3>
+                            <div className='flex justify-center'>
+                                <Image
+                                    src={'/gcash.jpg'}
+                                    width={200}
+                                    height={200}
+                                    alt="product img"
+                                    className="object-contain"
+                                />
+                            </div>
+                            <p className='p-5 text-center'>If your payment has submitted, <br />
+                                kindly send us confirmation by button below.<br />
+                                Thank you for your purchase.
+                            </p>
+                            <button
+                                className="border-none bg-palette-primary/90 hover:bg-palette-primary/100 transition-colors duration-200 shadow-lg px-3 lg:px-8 py-4 text-palette-side flex justify-center rounded-lg cursor-pointer  text-[16px] sm:text-base"
                                 onClick={() => handleCreateRequest()}
                             >
-                                Send Purchase Request
-                            </Button>
+                                <BsCreditCard2Back style={{ fontSize: "1.2rem", margin: "0 0.4rem" }} />
+                                CONFIRMATION PAYMENT
+                            </button>
                         </div>
+
                     </div>
 
-                    {/* </div> */}
                 </CustomTabPanel>
                 <CustomTabPanel value={value} index={1}>
-                    <div className='flex flex-row items-center space-x-5'>
-                        <div className="w-[300px]">
-                            <h3>Please send to the following Gcash detail: </h3>
-                            <h4><strong>Number</strong> : 09XXXXXXXXX</h4>
-                            <h4><strong>Name</strong> : J** D** </h4>
+                    <div className='flex flex-row md:flex-col md:flex-nowrap md:items-start space-x-[100px] mt-8'>
+                        <div className="mt-8 p-10 sm:p-4 border-2 shadow-lg text-center">
+                            <p>You are about to purchase :<br />
+                                <strong>₱{points} <br /> for {points} Points</strong></p>
+                            <br />
+                            <h3>Please send to the following Credit Card detail: </h3>
+
+                            <h4>Number : <strong>09XXXXXXXXX</strong></h4>
+                            <h4>Name : <strong>J** D**</strong></h4>
+
                         </div>
-                        <Typography>or</Typography>
-                        <Typography>SCAN for PAYMENT</Typography>
-                        <Image
-                            src={'/gcash.jpg'}
-                            width={70}
-                            height={70}
-                            alt="product img"
-                            className="object-contain"
-                        />
-                        <Link href={'/'} prefetch={false}>
+
+                        <div className='flex flex-col text-center'>
+                            <h3 className='p-5'>SCAN for PAYMENT</h3>
+                            <div className='flex justify-center'>
+                                <Image
+                                    src={'/gcash.jpg'}
+                                    width={200}
+                                    height={200}
+                                    alt="product img"
+                                    className="object-contain"
+                                />
+                            </div>
+                            <p className='p-5 text-center'>If your payment has submitted, <br />
+                                kindly send us confirmation by button below.<br />
+                                Thank you for your purchase.
+                            </p>
                             <button
-                                className="border-none bg-palette-primary/90 hover:bg-palette-primary/100 transition-colors duration-200 shadow-lg px-3 lg:px-8 py-4 text-palette-side flex items-center rounded-lg cursor-pointer  text-[12px] sm:text-base"
+                                className="border-none bg-palette-primary/90 hover:bg-palette-primary/100 transition-colors duration-200 shadow-lg px-3 lg:px-8 py-4 text-palette-side flex justify-center rounded-lg cursor-pointer  text-[16px] sm:text-base"
+                                onClick={() => handleCreateRequest()}
                             >
                                 <BsCreditCard2Back style={{ fontSize: "1.2rem", margin: "0 0.4rem" }} />
-                                Click to Pay
+                                CONFIRMATION PAYMENT
                             </button>
-                        </Link>
+                        </div>
                     </div>
                 </CustomTabPanel>
                 <CustomTabPanel value={value} index={2}>
-                    <div className='flex flex-row items-center space-x-5'>
-                        <div className="w-[300px]">
-                            <h3>Please send to the following Gcash detail: </h3>
-                            <h4><strong>Number</strong> : 09XXXXXXXXX</h4>
-                            <h4><strong>Name</strong> : J** D** </h4>
+                    <div className='flex flex-row md:flex-col md:flex-nowrap md:items-start space-x-[100px] mt-8'>
+                        <div className="mt-8 p-10 sm:p-4 border-2 shadow-lg text-center">
+                            <p>You are about to purchase :<br />
+                                <strong>₱{points} <br /> for {points} Points</strong></p>
+                            <br />
+                            <h3>Please send to the following Debit Card detail: </h3>
+
+                            <h4>Number : <strong>09XXXXXXXXX</strong></h4>
+                            <h4>Name : <strong>J** D**</strong></h4>
+
                         </div>
-                        <Typography>or</Typography>
-                        <Typography>SCAN for PAYMENT</Typography>
-                        <Image
-                            src={'/gcash.jpg'}
-                            width={70}
-                            height={70}
-                            alt="product img"
-                            className="object-contain"
-                        />
+
+                        <div className='flex flex-col text-center'>
+                            <h3 className='p-5'>SCAN for PAYMENT</h3>
+                            <div className='flex justify-center'>
+                                <Image
+                                    src={'/gcash.jpg'}
+                                    width={200}
+                                    height={200}
+                                    alt="product img"
+                                    className="object-contain"
+                                />
+                            </div>
+                            <p className='p-5 text-center'>If your payment has submitted, <br />
+                                kindly send us confirmation by button below.<br />
+                                Thank you for your purchase.
+                            </p>
+                            <button
+                                className="border-none bg-palette-primary/90 hover:bg-palette-primary/100 transition-colors duration-200 shadow-lg px-3 lg:px-8 py-4 text-palette-side flex justify-center rounded-lg cursor-pointer  text-[16px] sm:text-base"
+                                onClick={() => handleCreateRequest()}
+                            >
+                                <BsCreditCard2Back style={{ fontSize: "1.2rem", margin: "0 0.4rem" }} />
+                                CONFIRMATION PAYMENT
+                            </button>
+                        </div>
                     </div>
+
                 </CustomTabPanel>
             </Box>
         </>
