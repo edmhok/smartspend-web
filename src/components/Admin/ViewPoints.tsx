@@ -129,6 +129,7 @@ export default function ViewPoints() {
     }
   };
 
+
   return (
     <div className="p-10">
       <h1 className="text-xl pb-3 text-[#218c20]"> Merchants Points</h1>
@@ -137,8 +138,9 @@ export default function ViewPoints() {
           <TableHead>
             <TableRow>
               <TableCell>Merchant</TableCell>
+              <TableCell>Current Points</TableCell>
               <TableCell>Status</TableCell>
-              <TableCell>Points</TableCell>
+              <TableCell>Requested Points</TableCell>
               <TableCell>Action</TableCell>
             </TableRow>
           </TableHead>
@@ -149,6 +151,8 @@ export default function ViewPoints() {
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
                 <TableCell component="th" scope="row">{mpoints.merchant.username}</TableCell>
+                <TableCell component="th" scope="row">{mpoints.merchant.points}</TableCell>
+
                 <TableCell>{mpoints.status} </TableCell>
 
                 <TableCell>{mpoints.points}</TableCell>

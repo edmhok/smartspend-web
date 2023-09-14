@@ -47,7 +47,7 @@ const DealsofDayBox = () => {
       <div className='container align-start font-medium text-[#218c20] text-2xl pt-10 ps-20'>Deals of the Day</div>
       {productData
         .map((item: any, index) => (
-          <Link href={'/login/adm'} prefetch={false}>
+          <Link href={'/login/adm'} prefetch={false} key={index}>
             <ProductCard
               key={index}
               img={item.photo}
