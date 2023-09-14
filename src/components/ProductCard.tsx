@@ -25,7 +25,7 @@ const ProductCard: React.FC<propsType> = ({
 
 
   return (
-    <div className="px-5 py-5 bg-white drop-shadow-md hover:drop-shadow-xl backdrop:px-5 max-w-[212px] max-h-[318px]">
+    <div className="px-5 py-5 bg-white drop-shadow-md hover:drop-shadow-xl backdrop:px-5 w-[200px] h-[300px]">
       <div className="static">
         <div className="absolute top-3 right-2">
           <IconButton aria-label="add to favorites">
@@ -33,24 +33,24 @@ const ProductCard: React.FC<propsType> = ({
           </IconButton>
         </div>
         <Image
-          className="w-full h-auto"
+          className="object-contain"
           src={img}
           width={150}
-          height={200}
+          height={150}
           alt={title}
         />
       </div>
 
       <div className="space-y-1 py-2 ps-4">
         <h2 className="text-[#218c20] font-medium uppercase text-center link">{truncateString(title)}</h2>
-        <p className="text-gray-500 max-w-[150px] text-sm">{description}</p>
-        {/* <Stack spacing={1}>
+        <p className="text-gray-500 max-w-[150px] text-sm">{truncateString(description)}</p>
+        <Stack spacing={1}>
           <Rating name="half-rating" defaultValue={2.5} precision={0.5} />
-        </Stack> */}
+        </Stack>
         <div className="font-bold flex gap-4 link">
-        ₱ {price}
+          ₱ {price}
           <del className="text-gray-500 font-normal pb-4">
-          ₱{(price) + 50}.00
+            ₱{(price) + 50}.00
           </del>
         </div>
 

@@ -57,23 +57,19 @@ const DealsofDayBox: React.FC<Props> = ({
 
 
   return (
-    <div className="image-slider-container container">
+    <div className="flex flex-wrap lg:grid  gap-4 grid-rows-12 grid-cols-2 md:grid-cols-9 max-w-[1700px] mx-auto">
       <div className='container align-start font-medium text-[#218c20] text-2xl pt-10 ps-20'>Deals of the Day</div>
       <Slider {...settings}>
         {productData.map((item: any, index) => (
-          
+
           <ProductCard
-            link={'/login/adm'}
             key={index}
             img={item.photo}
-            title={item.productName}
-            description={item.description}
-            // rating={item.rating}
+            productName={item.productName}
+            rating={item.rating}
             price={item.price}
-            rating={0}
           />
         ))}
-        {/* Add more slides as needed */}
       </Slider>
     </div>
   );

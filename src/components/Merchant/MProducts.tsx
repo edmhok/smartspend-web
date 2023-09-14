@@ -2,7 +2,7 @@
 'use client'
 
 import React, { useState, useEffect } from "react";
-import ProductCard from "@/components/ProductCard";
+import ProductCard from "@/components/Card";
 import { Button } from "@mui/material";
 import Link from "next/link";
 import IntroMember from '@/components/IntroMember'
@@ -62,35 +62,33 @@ const Patron = () => {
 
   return (
     <>
-   
 
-      <div className="container space-x-1 pt-10 ">
-        <div className="grid grid-cols-6 ps-1">
-          <Button
-          className={`font-bold text-[#218c20] text-lg rounded-t-lg
-        ${tab === "new" ? "bg-[#F1F1F1]" : "bg-[#F6F6F6]"}`}
-          onMouseEnter={() => setTab("new")}
-          onClick={() => setTab("new")}
-        >
-          New
-        </Button>
+
+      <div className="space-x-1 pt-10 ">
+        <div className="grid grid-cols-6 ms-1 -mb-1">
+          <button
+            className={`font-bold text-[#218c20] text-lg rounded-t-lg p-2
+        ${tab === "new" ? "bg-[#ffffff]" : "bg-[#F6F6F6]"}`}
+            onMouseEnter={() => setTab("new")}
+            onClick={() => setTab("new")}
+          >
+            NEW
+          </button>
 
         </div>
-   
-        <div className="border border-x-[#F1F1F1] border-y-[#F1F1F1] bg-[#F1F1F1]">
+
+        <div className="border border-x-[#F1F1F1] border-y-[#F1F1F1] bg-[#ffffff]">
           <div className="container p-10">
             <div className="grid grid-cols-1 place-items-center sm:place-items-start sm:grid-cols-2 lg:grid-col-3 xl:grid-cols-4 gap-10 xl:gap-x-20 xl:gap-y-10">
-              {productData.map((item:any, index) => (
+              {productData.map((item: any, index) => (
                 <Link key={index} href={`/merchant/product/view/?id=${item["_id"]}`} prefetch={false}>
                   <ProductCard
                     key={index}
-                    img={item.photo || ''}
-                    title={item.productName}
-                    description={item.description}
-                    // rating={item.rating}
+                    img={item.photo}
+                    productName={item.productName}
+                    rating={item.rating}
                     price={item.price}
-                    rating={0}       
-                   />
+                  />
                 </Link>
               ))}
             </div>
