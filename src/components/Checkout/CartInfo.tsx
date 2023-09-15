@@ -7,6 +7,7 @@ import { Button, IconButton, Paper, Table, TableBody, TableCell, TableContainer,
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Delete, Edit } from '@mui/icons-material';
 import Image from 'next/image';
+import { phpCurrencyFormat } from '@/utils/currencyFormat';
 
 interface OrderItem {
     id: number;
@@ -24,7 +25,6 @@ const CartInfo = () => {
     const [orders, setOrders] = useState<OrderItem[]>([]);
     const [updateQty, setUpdateQty] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
-    // const images = "/jacket-1.jpg";
 
     async function fetchData() {
         const lcData = JSON.parse(localStorage.getItem("orders") || "[]");
@@ -77,25 +77,20 @@ const CartInfo = () => {
         }
     };
 
+
+
+    // Format price as currency 
+    const formatPrice = (price: number) => {
+        return new Intl.NumberFormat('en-US', {
+            style: 'currency',
+            currency: 'PHP'
+        }).format(price);
+    }
+
     const grandTotal = orders.reduce((total, item) => {
         return total + item.qty * item.price;
     }, 0);
 
-    const handleQtyChange = (itemId: number, newQty: number) => {
-
-        const updatedItem = orders.find(item => item.id === itemId);
-        if (updatedItem) {
-            updatedItem.qty = newQty;
-        }
-
-        setOrders([...orders]);
-
-        return {
-            // Return updated item to re-render component
-            ...updatedItem,
-            qty: updateQty
-        }
-    }
     return (
         <div className=" w-full flex flex-col items-center">
             <div className="w-full justify-center flex flex-row gap-x-[150px] p-[20px] mb-10">
@@ -136,7 +131,6 @@ const CartInfo = () => {
                                         <TableRow key={index}>
                                             <TableCell>
                                                 <Image
-                                                    // src={`/api/images/${order.thumbnail}`}
                                                     src={order.photo}
                                                     alt={order.productName}
                                                     width={30}
@@ -147,13 +141,11 @@ const CartInfo = () => {
                                             <TableCell>{order.description}</TableCell>
 
                                             <TableCell>
-                                                {/* <button className="text-white bg-slate-300 w-3 h-5 rounded-l-xl" onClick={() => { handleQtyChange(order.id, order.qty - 1) }}>-</button> */}
                                                 <strong className='px-2 '>{order.qty}</strong>
-                                                {/* <button className="text-white bg-slate-300 w-3 h-5 rounded-r-xl" onClick={() => { handleQtyChange(order.id, order.qty + 1) }}>+</button> */}
                                             </TableCell>
 
-                                            <TableCell>{order.price}</TableCell>
-                                            <TableCell>{order.total}</TableCell>
+                                            <TableCell>{phpCurrencyFormat(order.price)}</TableCell>
+                                            <TableCell>{phpCurrencyFormat(order.total)}</TableCell>
                                             <TableCell>
                                                 <Tooltip title="Delete">
                                                     <IconButton onClick={() => handleDelete(order.id)}>
@@ -169,7 +161,7 @@ const CartInfo = () => {
                     </div>
                 </div>
                 <div className='flex justify-end pe-5 font-semibold'>
-                    Grand Total : ₱{grandTotal}
+                    Grand Total : {phpCurrencyFormat(grandTotal)}
                 </div>
             </div>
 

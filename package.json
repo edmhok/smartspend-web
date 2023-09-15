@@ -24,6 +24,7 @@
     "dayjs": "^1.11.9",
     "eslint": "8.45.0",
     "eslint-config-next": "13.4.12",
+    "intl": "^1.2.5",
     "mui-tel-input": "^3.2.2",
     "next": "^13.4.19",
     "next-themes": "^0.2.1",
@@ -42,6 +43,7 @@
     "url-loader": "^4.1.1"
   },
   "devDependencies": {
+    "@types/intl": "^1.2.0",
     "@types/react-slick": "^0.23.10"
   }
 }

@@ -41,7 +41,7 @@ const User = () => {
                                     aria-controls="menu-appbar"
                                     aria-haspopup="true"
                                     onClick={handleMenu}
-                                    color="secondary"
+                                    color="success"
                                 >
                                     <AccountCircle />
                                 </IconButton>
@@ -60,18 +60,21 @@ const User = () => {
                                     open={Boolean(anchorEl)}
                                     onClose={() => { setAnchorEl(null); }}
                                 >
+                                    {/* <MenuItem onClick={handleLogout}>Dashboard</MenuItem> */}
                                     <MenuItem onClick={handleLogout}>Log-out</MenuItem>
                                 </Menu>
                             </div>
                         )}
                         {!isLoggedIn && (
                             <Link href="/login/adm" prefetch={false}>
-                                <div className="md:flex items-center rounded-lg  py-1 px-2 ltr:mr-3 rtl:ml-3 border-[1px] border-gray-200 dark:border-gray-200/40 shadow-sm ">
-                                    <HiOutlineLogin style={{ fontSize: "1.6rem" }} />
+                                <div className="items-center rounded-lg  py-1 px-2 ltr:mr-3 border-[1px] border-gray-200 dark:border-gray-200/40 shadow-sm ">
                                     <p className="ltr:ml-2 rtl:mr-2 text-xs">
-                                        Login | SignUp
+                                        <HiOutlineLogin style={{ fontSize: "1.6rem" }} />  Login | SignUp
                                     </p>
                                 </div>
+                                {/* <div className="block md:hidden items-center rounded-lg  py-1 px-2 ltr:mr-3 border-[1px] border-gray-200 dark:border-gray-200/40 shadow-sm ">
+                                    <HiOutlineLogin style={{ fontSize: "1.6rem" }} />
+                                </div> */}
                             </Link>
                         )}
 

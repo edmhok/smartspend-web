@@ -4,7 +4,7 @@ import React from "react";
 import Head from "next/head";
 import { ThemeProvider } from "next-themes";
 import Footer from "../footer/footer";
-import HeaderMain from "../HeaderMain";
+// import HeaderMain from "../HeaderMain";
 import Header from "../header";
 
 const Layout: React.FC<{ children?: React.ReactNode }> = ({ children }) => {

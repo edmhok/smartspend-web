@@ -9,6 +9,7 @@ import Image from "next/image";
 import { Button, Rating, Stack, TableCell, TableRow, TextField } from "@mui/material";
 import { HiMinusSm, HiOutlinePlusSm } from "react-icons/hi";
 import { BsCartPlus } from "react-icons/bs";
+import { phpCurrencyFormat } from "@/utils/currencyFormat";
 // import Benefits from "./Benefits/benefit";
 
 type Data = {
@@ -171,7 +172,7 @@ export default function Product() {
               <div className="flex flex-col w-full ">
                 <p className="text-lg">Product Price</p>
                 {/* <ProductPrice price={price} discount={discount} isLargeSize={true} /> */}
-                ₱ {detail.price}
+                {phpCurrencyFormat(detail.price)}
               </div>
               <div className="flex items-center justify-between mt-6 cursor-pointer">
                 <div className="p-2" onClick={() => { handleQtyChange(quantity + 1) }}>
