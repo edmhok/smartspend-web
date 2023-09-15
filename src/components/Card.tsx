@@ -13,6 +13,7 @@ import {
   RiShoppingCart2Line,
 } from "react-icons/ri";
 import { truncateString } from "@/utils/utils";
+import { phpCurrencyFormat } from "@/utils/currencyFormat";
 interface propsType {
   img: string;
   productName: string;
@@ -26,6 +27,9 @@ const Card: React.FC<propsType> = ({
   rating,
   price,
 }) => {
+
+  const formattedCurrency = phpCurrencyFormat(price);
+  const originalPrice = price + 50;
 
   return (
     <div className="col-span-6 sm:col-span-3 md:col-span-4 lg:col-span-3 2xl:col-span-2 shadow-xl my-4 ltr:mr-2 md:mx-6  bg-palette-card rounded-xl flex relative">
@@ -54,20 +58,20 @@ const Card: React.FC<propsType> = ({
 
         <div className="flex flex-col justify-between  flex-grow  w-1/2 md:w-full  px-1 md:px-3 py-2 md:py-4">
           <div className="flex justify-center md:justify-start flex-col  flex-grow overflow-hidden">
-            <div className="self-center">
+            {/* <div className="self-center">
               <Stack spacing={1}>
                 <Rating name="half-rating" defaultValue={2.5} value={rating} precision={0.5} />
               </Stack>
-            </div>
+            </div> */}
             <h4 className="text-sm sm:text-[12px] md:text-sm text-center text-palette-mute  ">
               {truncateString(productName)}
             </h4>
           </div>
           {/* <ProductPrice price={product.price} discount={product.discount} /> */}
           <div className="py-5 font-bold flex flex-col text-md justify-center space-x-5">
-            ₱{price}
+            {formattedCurrency}
             <del className="text-gray-500 font-normal text-xs pb-4">
-              ₱{(price) + 50}.00
+              {phpCurrencyFormat(originalPrice)}
             </del>
           </div>
         </div>

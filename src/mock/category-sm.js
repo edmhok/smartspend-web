@@ -1,44 +1,56 @@
 export const categorySmContent = [
   {
+    bgc: "healthCategory",
+    imgSrc: "health-category.png",
+    categoryTitle: "Health and Wellness",
+    href: "/health",
+  },
+  {
     bgc: "digitalCategory",
     imgSrc: "digital-category.png",
-    categoryTitle: "digitalCategoryTitle",
+    categoryTitle: "Digital Products",
     href: "/digital",
   },
   {
     bgc: "fashionCategory",
     imgSrc: "fashion-category.png",
-    categoryTitle: "fashionCategoryTitle",
+    categoryTitle: "Fashion and Clothes",
     href: "/fashion",
   },
   {
     bgc: "beautyCategory",
     imgSrc: "beauty-category.png",
-    categoryTitle: "beautyCategoryTitle",
+    categoryTitle: "Cosmetic Products",
     href: "/beauty",
+  },
+  {
+    bgc: "travelCategory",
+    imgSrc: "travel-category.png",
+    categoryTitle: "Travel and Tour",
+    href: "/travel",
   },
   {
     bgc: "sportCategory",
     imgSrc: "sport-category.png",
-    categoryTitle: "sportCategoryTitle",
+    categoryTitle: "Sport and Trip",
     href: "/sport",
   },
   {
     bgc: "houseCategory",
     imgSrc: "house-category.png",
-    categoryTitle: "houseCategoryTitle",
+    categoryTitle: "Furniture and kitchen",
     href: "/house",
   },
   {
     bgc: "toyCategory",
     imgSrc: "toy-category.png",
-    categoryTitle: "toyCategoryTitle",
+    categoryTitle: "Toys and Baby",
     href: "/toy",
   },
   {
     bgc: "stationeryCategory",
     imgSrc: "stationery-category.png",
-    categoryTitle: "stationeryCategoryTitle",
+    categoryTitle: "Books, Stationery & Art",
     href: "/stationery",
   },
 ];

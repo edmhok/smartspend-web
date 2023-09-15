@@ -17,23 +17,31 @@
   .container {
     max-width: 768px;
   }
+  .category-large{
+    display: block;
+  }
 }
 @media (min-width: 1024px) {
 
   .container {
     max-width: 1024px;
   }
+ 
 }
 @media (min-width: 1280px) {
 
   .container {
     max-width: 1280px;
   }
+ 
 }
 @media (min-width: 1536px) {
 
   .container {
     max-width: 1536px;
+  }
+  .category-large{
+    display: block;
   }
 }
 .static {
@@ -956,6 +964,9 @@
 
   .container {
     max-width: 640px;
+  }
+  .category-large {
+    display:none;
   }
 }
 @media (min-width: 768px) {

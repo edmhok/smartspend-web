@@ -176,8 +176,6 @@ export default function Product() {
                 <div className="mt-4">
                   <h3 className="text-lg mt-2">Product Details</h3>
                   <div className="flex flex-wrap items-center">
-
-
                     <ul className="ps-1">
                       <li className='text-palette-mute text-sm py-1 my-1'>Brand: <strong>{detail.brand}</strong></li>
                       <li className='text-palette-mute text-sm py-1 my-1'>Size: <strong>{detail.size}</strong></li>

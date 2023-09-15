@@ -7,6 +7,7 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import Rating from "@mui/material/Rating";
 import { Stack } from "@mui/material";
 import { truncateString } from "@/utils/utils";
+import { phpCurrencyFormat } from "@/utils/currencyFormat";
 interface propsType {
   img: string;
   title: string;
@@ -44,13 +45,13 @@ const ProductCard: React.FC<propsType> = ({
       <div className="space-y-1 py-2 ps-4">
         <h2 className="text-[#218c20] font-medium uppercase text-center link">{truncateString(title)}</h2>
         <p className="text-gray-500 max-w-[150px] text-sm">{truncateString(description)}</p>
-        <Stack spacing={1}>
+        {/* <Stack spacing={1}>
           <Rating name="half-rating" defaultValue={2.5} precision={0.5} />
-        </Stack>
+        </Stack> */}
         <div className="font-bold flex gap-4 link">
-          ₱ {price}
+          {phpCurrencyFormat(price)}
           <del className="text-gray-500 font-normal pb-4">
-            ₱{(price) + 50}.00
+            ₱{phpCurrencyFormat(price)} + 50.00
           </del>
         </div>
 

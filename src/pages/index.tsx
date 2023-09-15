@@ -5,6 +5,7 @@ import Hero from '@/components/Hero'
 import { AuthCheckerOutside } from '@/utils/checker-outside'
 import { useMemo } from 'react'
 import Bestseller from '@/components/Bestseller'
+import Category from '@/components/category/Category'
 
 export default function Home() {
 
@@ -17,6 +18,7 @@ export default function Home() {
     return (
         <main >
             <Hero />
+            <Category />
             <Bestseller />
         </main>
     )

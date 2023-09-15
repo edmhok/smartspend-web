@@ -10,7 +10,7 @@ import Image from 'next/image';
 import { phpCurrencyFormat } from '@/utils/currencyFormat';
 
 interface OrderItem {
-    id: number;
+    id: string;
     photo: string;
     productName: string;
     description: string;
@@ -18,7 +18,7 @@ interface OrderItem {
     price: number;
     total: number;
     updateQty: (newQty: number) => void;
-    deleteItem: (id: number) => void;
+    deleteItem: (id: string) => void;
 }
 
 const CartInfo = () => {
@@ -56,7 +56,7 @@ const CartInfo = () => {
         fetchData();
     }, []);
 
-    const handleDelete = async (id: number) => {
+    const handleDelete = async (id: string) => {
         try {
             // Make DELETE request to your API
             await fetch(`${process.env.NEXT_PUBLIC_API_URL}/order/` + id, {
@@ -76,16 +76,6 @@ const CartInfo = () => {
             }, 1000)
         }
     };
-
-
-
-    // Format price as currency 
-    const formatPrice = (price: number) => {
-        return new Intl.NumberFormat('en-US', {
-            style: 'currency',
-            currency: 'PHP'
-        }).format(price);
-    }
 
     const grandTotal = orders.reduce((total, item) => {
         return total + item.qty * item.price;

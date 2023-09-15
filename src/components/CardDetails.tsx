@@ -138,14 +138,14 @@ export default function Product() {
           <hr className="mt-1 hidden md:block" />
           <div className="flex items-start flex-wrap relative">
             <div className="flex-grow mt-6">
-              <div className="flex items-center self-center">
+              {/* <div className="flex items-center self-center">
                 <Stack spacing={1}>
                   <Rating name="half-rating" defaultValue={5} precision={0.5} />
                 </Stack>
                 <p className="text-sm text-palette-mute rtl:mr-2 ltr:ml-2">
                   Reviews
                 </p>
-              </div>
+              </div> */}
               <h3 className="text-lg mt-2">Product Details</h3>
               <div className="mt-4">
                 <div className="flex flex-wrap items-center">
